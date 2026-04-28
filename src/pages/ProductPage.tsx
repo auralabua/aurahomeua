@@ -11,11 +11,13 @@ const ProductPage = () => {
   const product = products.find(p => p.id === id);
   const { addItem } = useCart();
   const [qty, setQty] = useState(1);
+  const [activeImg, setActiveImg] = useState(0);
 
   if (!product) return <Navigate to="/catalog" replace />;
 
   const category = categories.find(c => c.id === product.category);
   const related = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
+  const images = product.images?.length ? product.images : [];
 
   return (
     <div className="container py-10">
@@ -24,14 +26,35 @@ const ProductPage = () => {
       </Link>
 
       <div className="grid lg:grid-cols-2 gap-10">
-        <div className="relative aspect-square rounded-3xl gradient-hero overflow-hidden grid place-items-center shadow-card">
-          <div className="text-[12rem]">{product.emoji}</div>
-          {product.badge && (
-            <span className={`absolute top-5 left-5 px-4 py-1.5 rounded-full text-sm font-semibold shadow-soft ${
-              product.badge === "Хіт продажів" ? "bg-accent text-accent-foreground" : "bg-warning text-white"
-            }`}>
-              {product.badge}
-            </span>
+        <div className="space-y-3">
+          <div className="relative aspect-square rounded-3xl gradient-hero overflow-hidden grid place-items-center shadow-card">
+            {images[activeImg] ? (
+              <img src={images[activeImg]} alt={product.name} className="h-full w-full object-contain p-6" />
+            ) : (
+              <div className="text-muted-foreground">Немає фото</div>
+            )}
+            {product.badge && (
+              <span className={`absolute top-5 left-5 px-4 py-1.5 rounded-full text-sm font-semibold shadow-soft ${
+                product.badge === "Хіт продажів" ? "bg-accent text-accent-foreground" : "bg-warning text-white"
+              }`}>
+                {product.badge}
+              </span>
+            )}
+          </div>
+          {images.length > 1 && (
+            <div className="grid grid-cols-5 gap-2">
+              {images.slice(0, 5).map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveImg(i)}
+                  className={`aspect-square rounded-xl overflow-hidden bg-secondary border-2 transition-smooth ${
+                    activeImg === i ? "border-primary" : "border-transparent"
+                  }`}
+                >
+                  <img src={img} alt="" className="h-full w-full object-contain p-1" loading="lazy" />
+                </button>
+              ))}
+            </div>
           )}
         </div>
 

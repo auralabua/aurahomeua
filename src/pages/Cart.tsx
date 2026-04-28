@@ -79,14 +79,11 @@ const Cart = () => {
             <span className="text-2xl font-bold text-primary">{formatUAH(totalPrice)}</span>
           </div>
           <Button
+            asChild
             size="lg"
             className="w-full rounded-full gradient-primary border-0 shadow-glow hover:opacity-95"
-            onClick={() => {
-              toast({ title: "Замовлення оформлено", description: "Наш менеджер зв'яжеться з вами найближчим часом." });
-              clear();
-            }}
           >
-            Оформити замовлення
+            <Link to="/checkout">Оформити замовлення</Link>
           </Button>
           <button onClick={clear} className="w-full text-xs text-muted-foreground hover:text-destructive mt-3 transition-smooth">
             Очистити кошик

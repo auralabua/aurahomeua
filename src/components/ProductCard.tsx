@@ -9,8 +9,8 @@ export const ProductCard = ({ product }: { product: Product }) => {
   const category = categories.find(c => c.id === product.category);
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-soft hover:shadow-elevated transition-smooth border border-border/50">
-      <Link to={`/product/${product.id}`} className="relative block aspect-square overflow-hidden gradient-hero">
+    <article className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-soft hover:shadow-card transition-smooth">
+      <Link to={`/product/${product.id}`} className="relative block aspect-square overflow-hidden bg-card">
         {product.images?.[0] ? (
           <img
             src={product.images[0]}
@@ -22,22 +22,20 @@ export const ProductCard = ({ product }: { product: Product }) => {
           <div className="absolute inset-0 grid place-items-center text-muted-foreground text-sm">Немає фото</div>
         )}
         {product.badge && (
-          <span className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold shadow-soft ${
-            product.badge === "Хіт продажів" ? "bg-accent text-accent-foreground" : "bg-warning text-white"
-          }`}>
-            {product.badge}
+          <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-medium bg-secondary text-foreground">
+            {product.badge === "Хіт продажів" ? "Хіт" : product.badge}
           </span>
         )}
       </Link>
 
       <div className="flex flex-1 flex-col p-4 gap-3">
         {category && (
-          <span className="text-xs font-medium text-primary bg-primary-soft inline-block w-fit px-2 py-0.5 rounded-full">
+          <span className="text-xs font-light text-muted-foreground">
             {category.name}
           </span>
         )}
 
-        <Link to={`/product/${product.id}`} className="font-medium leading-snug line-clamp-2 hover:text-primary transition-smooth">
+        <Link to={`/product/${product.id}`} className="font-light text-base leading-snug line-clamp-2 text-foreground hover:text-primary transition-smooth">
           {product.name}
         </Link>
 
@@ -45,21 +43,20 @@ export const ProductCard = ({ product }: { product: Product }) => {
           {[1, 2, 3, 4, 5].map(i => (
             <Star
               key={i}
-              className={`h-4 w-4 ${i <= Math.round(product.rating) ? "fill-warning text-warning" : "text-muted"}`}
+              className={`h-3.5 w-3.5 ${i <= Math.round(product.rating) ? "fill-primary text-primary" : "text-muted"}`}
             />
           ))}
-          <span className="text-muted-foreground ml-1">({product.reviews})</span>
+          <span className="text-muted-foreground ml-1 text-xs">({product.reviews})</span>
         </div>
 
-        <div className="mt-auto flex items-center justify-between gap-2 pt-2">
-          <span className="text-xl font-bold text-foreground">{formatUAH(product.price)}</span>
+        <div className="mt-auto pt-2 space-y-3">
+          <span className="block text-xl font-light text-primary">{formatUAH(product.price)}</span>
           <Button
-            size="sm"
             onClick={() => addItem(product)}
-            className="rounded-full gradient-primary border-0 hover:opacity-90 shadow-soft"
+            className="w-full rounded-xl btn-caramel border-0 font-light"
           >
-            <ShoppingCart className="h-4 w-4" />
-            <span className="hidden sm:inline ml-1">В кошик</span>
+            <ShoppingCart className="h-4 w-4 mr-2" />
+            Додати в кошик
           </Button>
         </div>
       </div>

@@ -13,6 +13,13 @@ import Checkout from "./pages/Checkout.tsx";
 import About from "./pages/About.tsx";
 import Contacts from "./pages/Contacts.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import AdminLogin from "./pages/admin/AdminLogin.tsx";
+import AdminLayout from "./pages/admin/AdminLayout.tsx";
+import AdminDashboard from "./pages/admin/AdminDashboard.tsx";
+import AdminOrders from "./pages/admin/AdminOrders.tsx";
+import AdminProducts from "./pages/admin/AdminProducts.tsx";
+import AdminCategories from "./pages/admin/AdminCategories.tsx";
+import AdminCustomers from "./pages/admin/AdminCustomers.tsx";
 
 const queryClient = new QueryClient();
 
@@ -32,8 +39,16 @@ const App = () => (
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/about" element={<About />} />
               <Route path="/contacts" element={<Contacts />} />
-              <Route path="*" element={<NotFound />} />
             </Route>
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="orders" element={<AdminOrders />} />
+              <Route path="products" element={<AdminProducts />} />
+              <Route path="categories" element={<AdminCategories />} />
+              <Route path="customers" element={<AdminCustomers />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </CartProvider>
       </BrowserRouter>

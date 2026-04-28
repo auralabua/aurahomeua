@@ -3,7 +3,7 @@ import { ArrowRight, Truck, ShieldCheck, CreditCard, Headphones, Star } from "lu
 import { Button } from "@/components/ui/button";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
-import { categories, products } from "@/data/products";
+import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 import heroImg from "@/assets/hero.jpg";
 
 const reviews = [
@@ -12,9 +12,11 @@ const reviews = [
   { name: "Марія С.", city: "Одеса", text: "Купила килимок аплікатор — чудовий ефект після 10 хвилин на день. Рекомендую!", rating: 5 },
 ];
 
-const featured = products.filter(p => p.badge === "Хіт продажів").slice(0, 4);
-
 const Index = () => {
+  const { products } = useProductsAsLegacy();
+  const { categories } = useCategoriesAsLegacy();
+  const featured = products.filter(p => p.badge === "Хіт продажів").slice(0, 4);
+
   return (
     <div>
       {/* Hero */}

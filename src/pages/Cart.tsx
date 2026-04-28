@@ -34,8 +34,12 @@ const Cart = () => {
         <div className="space-y-3">
           {items.map(({ product, quantity }) => (
             <div key={product.id} className="flex gap-4 p-4 rounded-2xl bg-card border border-border/60 shadow-soft">
-              <Link to={`/product/${product.id}`} className="grid h-24 w-24 shrink-0 place-items-center rounded-xl gradient-hero text-4xl">
-                {product.emoji}
+              <Link to={`/product/${product.id}`} className="grid h-24 w-24 shrink-0 place-items-center rounded-xl gradient-hero overflow-hidden">
+                {product.images?.[0] ? (
+                  <img src={product.images[0]} alt={product.name} className="h-full w-full object-contain p-2" loading="lazy" />
+                ) : (
+                  <span className="text-xs text-muted-foreground">Фото</span>
+                )}
               </Link>
               <div className="flex-1 min-w-0">
                 <Link to={`/product/${product.id}`} className="font-medium hover:text-primary transition-smooth line-clamp-2">

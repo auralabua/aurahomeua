@@ -66,13 +66,13 @@ const Index = () => {
       </section>
 
       {/* Categories */}
-      <section className="container py-14">
-        <div className="flex items-end justify-between mb-8 gap-4">
+      <section className="container py-16">
+        <div className="flex items-end justify-between mb-10 gap-4">
           <div>
-            <h2 className="text-3xl md:text-4xl">Категорії товарів</h2>
-            <p className="text-muted-foreground mt-2">Оберіть потрібну категорію</p>
+            <h2 className="text-3xl md:text-4xl font-light">Категорії товарів</h2>
+            <p className="text-muted-foreground mt-2 font-light">Оберіть потрібну категорію</p>
           </div>
-          <Link to="/catalog" className="text-primary text-sm font-medium hidden sm:inline-flex items-center gap-1 hover:gap-2 transition-smooth">
+          <Link to="/catalog" className="text-primary text-sm font-light hidden sm:inline-flex items-center gap-1 hover:gap-2 transition-smooth">
             Усі товари <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -82,11 +82,11 @@ const Index = () => {
       </section>
 
       {/* Featured */}
-      <section className="container py-14">
-        <div className="flex items-end justify-between mb-8 gap-4">
+      <section className="container py-16">
+        <div className="flex items-end justify-between mb-10 gap-4">
           <div>
-            <h2 className="text-3xl md:text-4xl">Популярні товари</h2>
-            <p className="text-muted-foreground mt-2">Хіти продажів від OLVI</p>
+            <h2 className="text-3xl md:text-4xl font-light">Популярні товари</h2>
+            <p className="text-muted-foreground mt-2 font-light">Хіти від Aura Home</p>
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
@@ -95,21 +95,21 @@ const Index = () => {
       </section>
 
       {/* Reviews */}
-      <section className="bg-secondary/40 py-16 mt-10">
+      <section className="bg-secondary py-20 mt-10">
         <div className="container">
-          <h2 className="text-3xl md:text-4xl text-center">Відгуки наших клієнтів</h2>
-          <p className="text-muted-foreground text-center mt-2">Тисячі задоволених клієнтів по всій Україні</p>
-          <div className="grid md:grid-cols-3 gap-5 mt-10">
+          <h2 className="text-3xl md:text-4xl text-center font-light">Відгуки наших клієнтів</h2>
+          <p className="text-muted-foreground text-center mt-3 font-light">Тисячі задоволених клієнтів по всій Україні</p>
+          <div className="grid md:grid-cols-3 gap-5 mt-12">
             {reviews.map((r, i) => (
-              <div key={i} className="p-6 rounded-2xl bg-card shadow-soft border border-border/50">
+              <div key={i} className="p-7 rounded-2xl bg-card shadow-soft">
                 <div className="flex gap-1 mb-3">
                   {Array.from({ length: r.rating }).map((_, k) => (
-                    <Star key={k} className="h-4 w-4 fill-warning text-warning" />
+                    <Star key={k} className="h-3.5 w-3.5 fill-primary text-primary" />
                   ))}
                 </div>
-                <p className="text-sm leading-relaxed text-foreground/85">"{r.text}"</p>
-                <div className="mt-4 pt-4 border-t border-border">
-                  <div className="font-semibold text-sm">{r.name}</div>
+                <p className="text-sm leading-relaxed text-foreground/85 font-light">"{r.text}"</p>
+                <div className="mt-5 pt-5 border-t border-border/60">
+                  <div className="font-light text-sm text-foreground">{r.name}</div>
                   <div className="text-xs text-muted-foreground">{r.city}</div>
                 </div>
               </div>
@@ -120,23 +120,23 @@ const Index = () => {
 
       {/* Delivery & Payment */}
       <section className="container py-16 grid md:grid-cols-2 gap-6">
-        <div className="p-8 rounded-3xl gradient-soft border border-border/60 shadow-soft">
-          <Truck className="h-8 w-8 text-primary mb-4" />
-          <h3 className="text-2xl mb-4">Доставка</h3>
-          <ul className="space-y-2 text-sm">
-            <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-accent" /> Нова Пошта — у відділення або кур'єром</li>
-            <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-accent" /> Укрпошта — по всій Україні</li>
-            <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-accent" /> Meest — швидка доставка</li>
+        <div className="p-8 rounded-2xl bg-card shadow-soft">
+          <Truck className="h-7 w-7 text-primary mb-4" strokeWidth={1.5} />
+          <h3 className="text-2xl mb-4 font-light">Доставка</h3>
+          <ul className="space-y-2 text-sm font-light text-muted-foreground">
+            <li className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-primary" /> Нова Пошта — у відділення або кур'єром</li>
+            <li className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-primary" /> Укрпошта — по всій Україні</li>
+            <li className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-primary" /> Meest — швидка доставка</li>
           </ul>
         </div>
-        <div className="p-8 rounded-3xl gradient-soft border border-border/60 shadow-soft">
-          <CreditCard className="h-8 w-8 text-primary mb-4" />
-          <h3 className="text-2xl mb-4">Оплата</h3>
-          <ul className="space-y-2 text-sm">
-            <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-accent" /> Оплата при отриманні</li>
-            <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-accent" /> LiqPay — карткою онлайн</li>
-            <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-accent" /> Monobank — швидка оплата</li>
-            <li className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-accent" /> ПриватБанк — Приват24</li>
+        <div className="p-8 rounded-2xl bg-card shadow-soft">
+          <CreditCard className="h-7 w-7 text-primary mb-4" strokeWidth={1.5} />
+          <h3 className="text-2xl mb-4 font-light">Оплата</h3>
+          <ul className="space-y-2 text-sm font-light text-muted-foreground">
+            <li className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-primary" /> Оплата при отриманні</li>
+            <li className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-primary" /> LiqPay — карткою онлайн</li>
+            <li className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-primary" /> Monobank — швидка оплата</li>
+            <li className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-primary" /> ПриватБанк — Приват24</li>
           </ul>
         </div>
       </section>

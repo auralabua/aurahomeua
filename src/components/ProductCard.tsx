@@ -11,9 +11,16 @@ export const ProductCard = ({ product }: { product: Product }) => {
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-soft hover:shadow-elevated transition-smooth border border-border/50">
       <Link to={`/product/${product.id}`} className="relative block aspect-square overflow-hidden gradient-hero">
-        <div className="absolute inset-0 grid place-items-center text-7xl group-hover:scale-110 transition-smooth">
-          {product.emoji}
-        </div>
+        {product.images?.[0] ? (
+          <img
+            src={product.images[0]}
+            alt={product.name}
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-contain p-4 group-hover:scale-105 transition-smooth"
+          />
+        ) : (
+          <div className="absolute inset-0 grid place-items-center text-muted-foreground text-sm">Немає фото</div>
+        )}
         {product.badge && (
           <span className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold shadow-soft ${
             product.badge === "Хіт продажів" ? "bg-accent text-accent-foreground" : "bg-warning text-white"

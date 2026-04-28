@@ -14,8 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          icon: string | null
+          id: string
+          name: string
+          position: number
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          name: string
+          position?: number
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          name?: string
+          position?: number
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
+          admin_status: string
           amount: number
           created_at: string
           currency: string
@@ -23,15 +57,20 @@ export type Database = {
           customer_name: string
           customer_phone: string
           delivery_address: string | null
+          delivery_branch: string | null
+          delivery_city: string | null
+          delivery_method: string | null
           id: string
           items: Json
           order_reference: string
           paid_at: string | null
+          payment_method: string | null
           status: string
           updated_at: string
           wayforpay_transaction_id: string | null
         }
         Insert: {
+          admin_status?: string
           amount: number
           created_at?: string
           currency?: string
@@ -39,15 +78,20 @@ export type Database = {
           customer_name: string
           customer_phone: string
           delivery_address?: string | null
+          delivery_branch?: string | null
+          delivery_city?: string | null
+          delivery_method?: string | null
           id?: string
           items?: Json
           order_reference: string
           paid_at?: string | null
+          payment_method?: string | null
           status?: string
           updated_at?: string
           wayforpay_transaction_id?: string | null
         }
         Update: {
+          admin_status?: string
           amount?: number
           created_at?: string
           currency?: string
@@ -55,13 +99,106 @@ export type Database = {
           customer_name?: string
           customer_phone?: string
           delivery_address?: string | null
+          delivery_branch?: string | null
+          delivery_city?: string | null
+          delivery_method?: string | null
           id?: string
           items?: Json
           order_reference?: string
           paid_at?: string | null
+          payment_method?: string | null
           status?: string
           updated_at?: string
           wayforpay_transaction_id?: string | null
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          available: boolean
+          badge: string | null
+          category_id: string | null
+          created_at: string
+          description: string | null
+          id: string
+          images: string[]
+          legacy_id: string | null
+          name: string
+          position: number
+          price: number
+          rating: number | null
+          reviews: number
+          stock: number
+          updated_at: string
+          vendor: string | null
+          vendor_code: string | null
+        }
+        Insert: {
+          available?: boolean
+          badge?: string | null
+          category_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: string[]
+          legacy_id?: string | null
+          name: string
+          position?: number
+          price?: number
+          rating?: number | null
+          reviews?: number
+          stock?: number
+          updated_at?: string
+          vendor?: string | null
+          vendor_code?: string | null
+        }
+        Update: {
+          available?: boolean
+          badge?: string | null
+          category_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: string[]
+          legacy_id?: string | null
+          name?: string
+          position?: number
+          price?: number
+          rating?: number | null
+          reviews?: number
+          stock?: number
+          updated_at?: string
+          vendor?: string | null
+          vendor_code?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "products_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
         }
         Relationships: []
       }
@@ -70,10 +207,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -200,6 +343,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const

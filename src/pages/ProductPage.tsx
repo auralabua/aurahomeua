@@ -1,18 +1,22 @@
 import { useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Star, Minus, Plus, ShoppingCart, ArrowLeft, Truck, ShieldCheck, RotateCcw } from "lucide-react";
-import { products, categories, formatUAH } from "@/data/products";
+import { formatUAH } from "@/data/products";
+import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { ProductCard } from "@/components/ProductCard";
 
 const ProductPage = () => {
   const { id } = useParams();
+  const { products, isLoading } = useProductsAsLegacy();
+  const { categories } = useCategoriesAsLegacy();
   const product = products.find(p => p.id === id);
   const { addItem } = useCart();
   const [qty, setQty] = useState(1);
   const [activeImg, setActiveImg] = useState(0);
 
+  if (isLoading) return <div className="container py-20 text-center text-muted-foreground">Завантаження…</div>;
   if (!product) return <Navigate to="/catalog" replace />;
 
   const category = categories.find(c => c.id === product.category);

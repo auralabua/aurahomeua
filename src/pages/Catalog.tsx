@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { categories, products, CategoryId } from "@/data/products";
+import { CategoryId } from "@/data/products";
+import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 import { ProductCard } from "@/components/ProductCard";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -15,6 +16,9 @@ const Catalog = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialCategory = (searchParams.get("category") as CategoryId) || null;
   const initialQuery = searchParams.get("q") || "";
+
+  const { products } = useProductsAsLegacy();
+  const { categories } = useCategoriesAsLegacy();
 
   const [selectedCategories, setSelectedCategories] = useState<CategoryId[]>(initialCategory ? [initialCategory] : []);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, MAX_PRICE]);

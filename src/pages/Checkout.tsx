@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
 
 type DeliveryMethod = "novaposhta" | "mistexpress";
 type PaymentMethod = "wayforpay" | "cod";
@@ -61,7 +62,35 @@ const Checkout = () => {
       const orderRef = `AH-${Date.now()}`;
       const deliveryName = delivery === "novaposhta" ? "Нова Пошта" : "MistExpress";
 
-      // TODO: інтеграція з WayForPay та збереження в БД на наступному кроці
+      const orderItems = items.map(({ product, quantity }) => ({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity,
+      }));
+
+      const { error } = await supabase.from("orders").insert({
+        order_reference: orderRef,
+        amount: totalPrice,
+        currency: "UAH",
+        status: payment === "cod" ? "pending" : "pending",
+        admin_status: "new",
+        customer_name: form.fullName,
+        customer_phone: form.phone,
+        customer_email: form.email,
+        delivery_address: `${form.city}, ${form.branch}`,
+        delivery_method: delivery,
+        delivery_city: form.city,
+        delivery_branch: form.branch,
+        payment_method: payment,
+        items: orderItems,
+      });
+
+      if (error) {
+        toast({ title: "Не вдалося зберегти замовлення", description: error.message, variant: "destructive" });
+        return;
+      }
+
       if (payment === "wayforpay") {
         toast({
           title: "Перехід до оплати",

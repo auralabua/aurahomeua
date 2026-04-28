@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { ShoppingCart, Search, Menu, Heart, X } from "lucide-react";
+import { ShoppingCart, Search, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
@@ -25,13 +25,10 @@ export const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/85 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
       <div className="container flex h-16 items-center gap-4 lg:gap-8">
         <Link to="/" className="flex items-center gap-2 shrink-0">
-          <div className="grid h-10 w-10 place-items-center rounded-xl gradient-primary shadow-glow">
-            <Heart className="h-5 w-5 text-primary-foreground" fill="currentColor" />
-          </div>
-          <span className="text-2xl font-bold tracking-tight text-primary">OLVI</span>
+          <span className="text-2xl font-light tracking-wide text-foreground">Aura Home</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
@@ -41,8 +38,8 @@ export const Navbar = () => {
               to={item.to}
               end={item.to === "/"}
               className={({ isActive }) =>
-                `px-3 py-2 rounded-md text-sm font-medium transition-smooth ${
-                  isActive ? "text-primary bg-primary-soft" : "text-foreground/75 hover:text-primary hover:bg-secondary"
+                `px-3 py-2 text-sm font-light no-underline transition-smooth ${
+                  isActive ? "text-primary" : "text-foreground hover:text-primary"
                 }`
               }
             >
@@ -62,11 +59,11 @@ export const Navbar = () => {
         </form>
 
         <div className="flex items-center gap-2 ml-auto md:ml-0">
-          <Button asChild variant="ghost" size="icon" className="relative rounded-full">
+          <Button asChild variant="ghost" size="icon" className="relative rounded-full text-primary hover:text-primary hover:bg-secondary">
             <Link to="/cart" aria-label="Кошик">
               <ShoppingCart className="h-5 w-5" />
               {totalCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 grid h-5 min-w-5 px-1 place-items-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground shadow-soft">
+                <span className="absolute -top-0.5 -right-0.5 grid h-5 min-w-5 px-1 place-items-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
                   {totalCount}
                 </span>
               )}
@@ -99,7 +96,7 @@ export const Navbar = () => {
                   end={item.to === "/"}
                   onClick={() => setMobileOpen(false)}
                   className={({ isActive }) =>
-                    `px-3 py-3 rounded-md font-medium ${isActive ? "text-primary bg-primary-soft" : "text-foreground/80"}`
+                    `px-3 py-3 font-light ${isActive ? "text-primary" : "text-foreground"}`
                   }
                 >
                   {item.label}

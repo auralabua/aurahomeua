@@ -8,7 +8,6 @@ import {
   Blocks,
   Shield,
 } from "lucide-react";
-import generated from "./products.generated.json";
 
 export type CategoryId =
   | "pillows"
@@ -17,7 +16,8 @@ export type CategoryId =
   | "massagers"
   | "beauty"
   | "toys"
-  | "insoles";
+  | "insoles"
+  | string;
 
 export interface Category {
   id: CategoryId;
@@ -26,6 +26,7 @@ export interface Category {
   description: string;
 }
 
+// Default static categories (used as fallback). Live data comes from DB via useCategoriesAsLegacy().
 export const categories: Category[] = [
   { id: "pillows", name: "Ортопедичні подушки", icon: BedDouble, description: "Здоровий сон і підтримка шиї" },
   { id: "mats", name: "Масажні килимки", icon: Activity, description: "Аплікатори та акупунктурні килимки" },
@@ -43,7 +44,7 @@ export interface Product {
   category: CategoryId;
   rating: number;
   reviews: number;
-  badge?: "Хіт продажів" | "Новинка";
+  badge?: "Хіт продажів" | "Новинка" | string;
   description: string;
   images: string[];
   vendor?: string;
@@ -51,7 +52,8 @@ export interface Product {
   available: boolean;
 }
 
-export const products: Product[] = generated as Product[];
+// Legacy static export removed — products now come from the database (see useProductsAsLegacy).
+export const products: Product[] = [];
 
 export const formatUAH = (price: number) =>
   new Intl.NumberFormat("uk-UA").format(price) + " ₴";

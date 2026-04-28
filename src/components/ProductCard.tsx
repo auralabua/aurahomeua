@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { Star, ShoppingCart } from "lucide-react";
-import { Product, formatUAH, categories } from "@/data/products";
+import { Product, formatUAH } from "@/data/products";
+import { useCategoriesAsLegacy } from "@/hooks/useShopData";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 
 export const ProductCard = ({ product }: { product: Product }) => {
   const { addItem } = useCart();
+  const { categories } = useCategoriesAsLegacy();
   const category = categories.find(c => c.id === product.category);
 
   return (

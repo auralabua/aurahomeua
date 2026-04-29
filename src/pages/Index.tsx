@@ -15,7 +15,9 @@ const reviews = [
 const Index = () => {
   const { products } = useProductsAsLegacy();
   const { categories } = useCategoriesAsLegacy();
-  const featured = products.filter(p => p.badge === "Хіт продажів").slice(0, 4);
+  const hits = products.filter(p => p.badge === "Хіт продажів");
+  const rest = products.filter(p => !p.badge);
+  const featured = [...hits, ...rest].slice(0, 8);
 
   return (
     <div>
@@ -24,14 +26,17 @@ const Index = () => {
         <div className="container py-20 lg:py-28 grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 animate-fade-in">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-light leading-[1.05] text-foreground">
-              Aura Home
+              Комфорт і турбота для всієї родини
             </h1>
             <p className="text-xl md:text-2xl font-light text-muted-foreground max-w-xl leading-relaxed">
-              Турбота про себе починається вдома
+              Масажери, подушки, девайси та товари для краси з доставкою по Україні
             </p>
-            <div className="pt-2">
+            <div className="pt-2 flex flex-wrap gap-4">
               <Button asChild size="lg" className="rounded-full btn-caramel border-0 font-light px-8 h-12">
                 <Link to="/catalog">Переглянути каталог <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="rounded-full font-light px-8 h-12 border-foreground/20 text-foreground hover:bg-secondary">
+                <a href="#featured">Популярні товари</a>
               </Button>
             </div>
           </div>
@@ -84,12 +89,15 @@ const Index = () => {
       </section>
 
       {/* Featured */}
-      <section className="container py-16">
+      <section id="featured" className="container py-16">
         <div className="flex items-end justify-between mb-10 gap-4">
           <div>
             <h2 className="text-3xl md:text-4xl font-light">Популярні товари</h2>
             <p className="text-muted-foreground mt-2 font-light">Хіти від Aura Home</p>
           </div>
+          <Link to="/catalog" className="text-primary text-sm font-light hidden sm:inline-flex items-center gap-1 hover:gap-2 transition-smooth">
+            Всі товари <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {featured.map(p => <ProductCard key={p.id} product={p} />)}

@@ -3,14 +3,15 @@ import { useSearchParams } from "react-router-dom";
 import { CategoryId } from "@/data/products";
 import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 import { ProductCard } from "@/components/ProductCard";
-import { Slider } from "@/components/ui/slider";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { SlidersHorizontal, Star, X } from "lucide-react";
+import { SlidersHorizontal, X } from "lucide-react";
 
-const MAX_PRICE = 1500;
+const MAX_PRICE = 5000;
+
+type SortOption = "default" | "price_asc" | "price_desc" | "name_asc";
 
 const Catalog = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -21,8 +22,9 @@ const Catalog = () => {
   const { categories } = useCategoriesAsLegacy();
 
   const [selectedCategories, setSelectedCategories] = useState<CategoryId[]>(initialCategory ? [initialCategory] : []);
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, MAX_PRICE]);
-  const [minRating, setMinRating] = useState(0);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [sort, setSort] = useState<SortOption>("default");
   const [query, setQuery] = useState(initialQuery);
 
   useEffect(() => { setQuery(searchParams.get("q") || ""); }, [searchParams]);
@@ -30,129 +32,136 @@ const Catalog = () => {
   const toggleCategory = (id: CategoryId) =>
     setSelectedCategories(prev => prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id]);
 
-  const filtered = useMemo(() => products.filter(p => {
-    if (selectedCategories.length && !selectedCategories.includes(p.category)) return false;
-    if (p.price < priceRange[0] || p.price > priceRange[1]) return false;
-    if (p.rating < minRating) return false;
-    if (query && !p.name.toLowerCase().includes(query.toLowerCase())) return false;
-    return true;
-  }), [selectedCategories, priceRange, minRating, query]);
+  const filtered = useMemo(() => {
+    let list = products.filter(p => {
+      if (selectedCategories.length && !selectedCategories.includes(p.category)) return false;
+      if (minPrice && p.price < Number(minPrice)) return false;
+      if (maxPrice && p.price > Number(maxPrice)) return false;
+      if (query && !p.name.toLowerCase().includes(query.toLowerCase())) return false;
+      return true;
+    });
+    if (sort === "price_asc") list = [...list].sort((a, b) => a.price - b.price);
+    if (sort === "price_desc") list = [...list].sort((a, b) => b.price - a.price);
+    if (sort === "name_asc") list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+    return list;
+  }, [selectedCategories, minPrice, maxPrice, query, sort, products]);
 
   const reset = () => {
     setSelectedCategories([]);
-    setPriceRange([0, MAX_PRICE]);
-    setMinRating(0);
+    setMinPrice("");
+    setMaxPrice("");
+    setSort("default");
     setQuery("");
     setSearchParams({});
   };
 
+  const hasFilters = selectedCategories.length > 0 || minPrice || maxPrice || query;
+
   const Filters = () => (
-    <div className="space-y-7">
+    <div className="space-y-8">
       <div>
-        <h3 className="font-semibold mb-3">Категорії</h3>
-        <div className="space-y-2.5">
+        <h3 className="text-xs font-medium text-muted-foreground mb-4 uppercase tracking-widest">Категорії</h3>
+        <div className="flex flex-wrap gap-2">
           {categories.map(c => (
-            <div key={c.id} className="flex items-center gap-2">
-              <Checkbox
-                id={`cat-${c.id}`}
-                checked={selectedCategories.includes(c.id)}
-                onCheckedChange={() => toggleCategory(c.id)}
-              />
-              <Label htmlFor={`cat-${c.id}`} className="text-sm font-normal cursor-pointer flex-1">
-                {c.name}
-              </Label>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <h3 className="font-semibold mb-3">Ціна</h3>
-        <Slider
-          value={priceRange}
-          min={0}
-          max={MAX_PRICE}
-          step={50}
-          onValueChange={(v) => setPriceRange(v as [number, number])}
-          className="my-4"
-        />
-        <div className="flex justify-between text-sm text-muted-foreground">
-          <span>{priceRange[0]} ₴</span>
-          <span>{priceRange[1]} ₴</span>
-        </div>
-      </div>
-
-      <div>
-        <h3 className="font-semibold mb-3">Рейтинг</h3>
-        <div className="space-y-2">
-          {[4.5, 4, 3.5, 0].map(r => (
             <button
-              key={r}
-              onClick={() => setMinRating(r)}
-              className={`w-full flex items-center gap-2 p-2 rounded-lg text-sm transition-smooth ${
-                minRating === r ? "bg-primary-soft text-primary font-medium" : "hover:bg-secondary"
+              key={c.id}
+              onClick={() => toggleCategory(c.id)}
+              className={`px-4 py-2 rounded-full text-sm font-light transition-all duration-200 border ${
+                selectedCategories.includes(c.id)
+                  ? "bg-primary text-white border-primary"
+                  : "bg-transparent text-foreground border-border hover:border-primary/50 hover:text-primary"
               }`}
             >
-              {r === 0 ? "Будь-який" : (
-                <>
-                  <div className="flex">
-                    {[1, 2, 3, 4, 5].map(i => (
-                      <Star key={i} className={`h-3.5 w-3.5 ${i <= Math.round(r) ? "fill-warning text-warning" : "text-muted"}`} />
-                    ))}
-                  </div>
-                  від {r}
-                </>
-              )}
+              {c.name}
             </button>
           ))}
         </div>
       </div>
 
-      <Button variant="outline" onClick={reset} className="w-full rounded-full">
-        <X className="h-4 w-4 mr-1" /> Скинути фільтри
-      </Button>
+      <div>
+        <h3 className="text-xs font-medium text-muted-foreground mb-4 uppercase tracking-widest">Ціна (₴)</h3>
+        <div className="flex items-center gap-3">
+          <Input
+            type="number"
+            placeholder="Від"
+            value={minPrice}
+            onChange={e => setMinPrice(e.target.value)}
+            className="rounded-xl border-border/60 font-light text-sm"
+          />
+          <span className="text-muted-foreground font-light">—</span>
+          <Input
+            type="number"
+            placeholder="До"
+            value={maxPrice}
+            onChange={e => setMaxPrice(e.target.value)}
+            className="rounded-xl border-border/60 font-light text-sm"
+          />
+        </div>
+      </div>
+
+      {hasFilters && (
+        <Button onClick={reset} className="w-full rounded-full btn-caramel border-0 font-light">
+          <X className="h-4 w-4 mr-2" /> Скинути фільтри
+        </Button>
+      )}
     </div>
   );
 
   return (
     <div className="container py-10">
-      <header className="mb-8">
-        <h1 className="text-3xl md:text-4xl">Каталог товарів</h1>
-        <p className="text-muted-foreground mt-2">
-          {query ? `Результати пошуку: "${query}" — ` : ""}{filtered.length} товарів
-        </p>
-      </header>
-
-      <div className="grid lg:grid-cols-[260px_1fr] gap-8">
-        <aside className="hidden lg:block">
-          <div className="sticky top-24 p-6 rounded-2xl bg-card border border-border/60 shadow-soft">
-            <Filters />
-          </div>
-        </aside>
-
+      <header className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
-          <div className="lg:hidden mb-4">
+          <h1 className="text-3xl md:text-4xl font-light">Каталог товарів</h1>
+          <p className="text-muted-foreground mt-2 font-light text-sm">
+            {query ? `Результати пошуку: "${query}" — ` : ""}Знайдено: {filtered.length} товарів
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="lg:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline" className="rounded-full">
+                <Button variant="outline" className="rounded-full font-light">
                   <SlidersHorizontal className="h-4 w-4 mr-2" /> Фільтри
+                  {hasFilters && <span className="ml-2 h-5 w-5 rounded-full bg-primary text-white text-xs grid place-items-center">{selectedCategories.length || "!"}</span>}
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-[320px] overflow-y-auto">
-                <SheetHeader><SheetTitle>Фільтри</SheetTitle></SheetHeader>
+                <SheetHeader><SheetTitle className="font-light">Фільтри</SheetTitle></SheetHeader>
                 <div className="mt-6"><Filters /></div>
               </SheetContent>
             </Sheet>
           </div>
+          <Select value={sort} onValueChange={v => setSort(v as SortOption)}>
+            <SelectTrigger className="w-[220px] rounded-full font-light border-border/60">
+              <SelectValue placeholder="Сортування" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="default" className="font-light">За замовчуванням</SelectItem>
+              <SelectItem value="price_asc" className="font-light">Ціна: від низької</SelectItem>
+              <SelectItem value="price_desc" className="font-light">Ціна: від високої</SelectItem>
+              <SelectItem value="name_asc" className="font-light">Назва А-Я</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </header>
 
+      <div className="grid lg:grid-cols-[280px_1fr] gap-8">
+        <aside className="hidden lg:block">
+          <div className="sticky top-24 p-7 rounded-2xl bg-card border border-border/40 shadow-soft">
+            <Filters />
+          </div>
+        </aside>
+        <div>
           {filtered.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+            <div className="grid grid-cols-2 xl:grid-cols-4 gap-5">
               {filtered.map(p => <ProductCard key={p.id} product={p} />)}
             </div>
           ) : (
             <div className="text-center py-20 rounded-2xl bg-secondary/40">
-              <p className="text-muted-foreground">Товарів не знайдено. Спробуйте змінити фільтри.</p>
-              <Button onClick={reset} className="mt-4 rounded-full">Скинути фільтри</Button>
+              <p className="text-muted-foreground font-light">Товарів не знайдено. Спробуйте змінити фільтри.</p>
+              <Button onClick={reset} className="mt-4 rounded-full btn-caramel border-0 font-light">
+                Скинути фільтри
+              </Button>
             </div>
           )}
         </div>

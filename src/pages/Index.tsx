@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
 import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
-import heroImg from "@/assets/hero.jpg";
+const heroImg = "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200&q=85";
 
 const reviews = [
   { name: "Ірина К.", city: "Київ", text: "Подушка з ефектом пам'яті — найкраща покупка року! Спина перестала боліти, сплю як немовля.", rating: 5 },

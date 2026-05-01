@@ -1,129 +1,122 @@
 import { Link } from "react-router-dom";
 import {
-  BedDouble,
-  Shield,
-  Sparkles,
-  Footprints,
-  Home,
-  Hand,
-  Baby,
-  Dumbbell,
+  BedDouble, Activity, Shield, Zap, Sparkles, Blocks, Footprints,
   type LucideIcon,
 } from "lucide-react";
 import { Category } from "@/data/products";
 
 type CategoryStyle = {
   icon: LucideIcon;
-  gradient: string;
+  image: string;
   accent: string;
-  glow: string;
+  bg: string;
 };
 
 const categoryStyles: Record<string, CategoryStyle> = {
   "ortopedychni-podushky": {
     icon: BedDouble,
-    gradient: "from-[#FBF4E8] via-[#F5E8D0] to-[#E8D4B0]",
+    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&q=80&auto=format&fit=crop",
     accent: "#A8794A",
-    glow: "#C9956A",
+    bg: "from-[#F5EFE6] to-[#E8DDD0]",
   },
   "ortopedychni-masazhni-kylymky": {
-    icon: Dumbbell,
-    gradient: "from-[#F0F5EC] via-[#DDE8D5] to-[#BFD4B5]",
+    icon: Activity,
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80&auto=format&fit=crop",
     accent: "#5C8454",
-    glow: "#7AA870",
+    bg: "from-[#EAF0E8] to-[#D5E5D0]",
   },
   "ortezy-i-bandazhi": {
     icon: Shield,
-    gradient: "from-[#EEF2F8] via-[#D8E0EE] to-[#B8C6DE]",
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80&auto=format&fit=crop",
     accent: "#4A6391",
-    glow: "#6B85B5",
+    bg: "from-[#E8EDF5] to-[#D0DAE8]",
   },
   "masazhery": {
-    icon: Hand,
-    gradient: "from-[#F8ECEC] via-[#EDD2D2] to-[#DDB0B0]",
+    icon: Zap,
+    image: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=400&q=80&auto=format&fit=crop",
     accent: "#8E4A4A",
-    glow: "#B56B6B",
+    bg: "from-[#F5E8E8] to-[#E8D0D0]",
   },
   "tovary-dlia-krasy": {
     icon: Sparkles,
-    gradient: "from-[#F8ECF2] via-[#EED2DF] to-[#E0B5C8]",
+    image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80&auto=format&fit=crop",
     accent: "#8E4A6E",
-    glow: "#B56B92",
+    bg: "from-[#F5EAF0] to-[#E8D0DF]",
   },
   "rozvyvaiuchi-ihrashky": {
-    icon: Baby,
-    gradient: "from-[#FBF6E2] via-[#F2E8B8] to-[#E2D588]",
+    icon: Blocks,
+    image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&q=80&auto=format&fit=crop",
     accent: "#8A7530",
-    glow: "#B89C45",
+    bg: "from-[#F5F0E0] to-[#EDE5CC]",
   },
   "ortopedychni-ustilky": {
     icon: Footprints,
-    gradient: "from-[#E8F4F4] via-[#CFE5E5] to-[#A8CECE]",
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80&auto=format&fit=crop",
     accent: "#3E7C7C",
-    glow: "#5BA3A3",
+    bg: "from-[#E8F5F5] to-[#D0E8E8]",
   },
 };
 
-const fallbackStyle: CategoryStyle = {
-  icon: Home,
-  gradient: "from-[#F5F0EA] via-[#EDE3D5] to-[#DCC9AE]",
-  accent: "#A8794A",
-  glow: "#C9956A",
-};
-
 export const CategoryCard = ({ category }: { category: Category }) => {
-  const style = categoryStyles[category.id] ?? fallbackStyle;
+  const style = categoryStyles[category.id] ?? {
+    icon: BedDouble,
+    image: "",
+    accent: "#C9956A",
+    bg: "from-[#F5F0EA] to-[#EDE3D5]",
+  };
   const Icon = style.icon;
 
   return (
     <Link
       to={`/catalog?category=${category.id}`}
-      className="group relative overflow-hidden rounded-2xl shadow-soft hover:shadow-card transition-all duration-500 hover:-translate-y-2 border border-white/60"
+      className="group relative overflow-hidden rounded-2xl shadow-soft hover:shadow-card transition-all duration-500 hover:-translate-y-2 border border-white/40"
       style={{ aspectRatio: "3/4" }}
     >
-      {/* Premium gradient background */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${style.gradient}`} />
+      {/* Background — фото або градієнт */}
+      {style.image ? (
+        <img
+          src={style.image}
+          alt={category.name}
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          onError={(e) => {
+            e.currentTarget.style.display = "none";
+          }}
+        />
+      ) : null}
 
-      {/* Decorative soft glow */}
-      <div
-        className="absolute -top-16 -right-16 w-48 h-48 rounded-full blur-3xl opacity-50 transition-opacity duration-500 group-hover:opacity-80"
-        style={{ backgroundColor: style.glow }}
-      />
-      <div
-        className="absolute -bottom-20 -left-16 w-56 h-56 rounded-full blur-3xl opacity-30 transition-opacity duration-500 group-hover:opacity-50"
-        style={{ backgroundColor: style.accent }}
-      />
+      {/* Fallback gradient */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${style.bg}`} style={{ zIndex: style.image ? -1 : 0 }} />
 
-      {/* Subtle grain / sheen */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-white/10" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/5" />
+
+      {/* Hover accent glow */}
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{ background: `radial-gradient(circle at 50% 30%, ${style.accent}44, transparent 65%)` }}
+      />
 
       {/* Content */}
-      <div className="relative h-full flex flex-col items-center justify-center p-5 text-center">
-        {/* Icon medallion */}
+      <div className="relative h-full flex flex-col justify-end p-4">
+        {/* Icon */}
         <div
-          className="flex items-center justify-center w-20 h-20 rounded-2xl bg-white/90 backdrop-blur-sm ring-1 ring-white/80 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-3 mb-4"
-          style={{
-            boxShadow: `0 12px 30px -10px ${style.accent}, inset 0 1px 0 0 rgba(255,255,255,0.9)`,
-          }}
+          className="absolute top-4 left-4 flex items-center justify-center w-11 h-11 rounded-xl bg-white/95 backdrop-blur-sm shadow-md transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+          style={{ boxShadow: `0 8px 20px -8px ${style.accent}` }}
         >
-          <Icon size={40} strokeWidth={1.6} color={style.accent} />
+          <Icon size={22} strokeWidth={1.8} color={style.accent} />
         </div>
 
-        <h3
-          className="font-medium text-base leading-tight tracking-wide"
-          style={{ color: style.accent }}
-        >
+        <h3 className="font-medium text-base leading-tight text-white drop-shadow-md">
           {category.name}
         </h3>
         {category.description && (
-          <p className="text-xs mt-1.5 line-clamp-2 font-light text-foreground/65">
+          <p className="text-xs text-white/75 mt-1.5 line-clamp-2 font-light">
             {category.description}
           </p>
         )}
-
-        {/* Hover accent underline */}
         <span
-          className="block mt-3 h-[2px] w-0 group-hover:w-12 transition-all duration-500 rounded-full"
+          className="block mt-2 h-[2px] w-0 group-hover:w-12 transition-all duration-500 rounded-full"
           style={{ backgroundColor: style.accent }}
         />
       </div>

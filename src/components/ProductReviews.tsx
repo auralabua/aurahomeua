@@ -63,10 +63,9 @@ export const ProductReviews = ({ productId }: { productId: string }) => {
       return;
     }
     setSubmitting(true);
-    const { error } = await supabase.from("reviews").insert({
-      product_id: productId,
-      ...parsed.data,
-    });
+    const { error } = await supabase.from("reviews").insert([
+      { product_id: productId, ...parsed.data },
+    ]);
     setSubmitting(false);
     if (error) {
       toast({ title: "Не вдалося опублікувати", description: error.message, variant: "destructive" });

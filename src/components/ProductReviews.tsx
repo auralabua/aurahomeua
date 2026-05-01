@@ -63,8 +63,9 @@ export const ProductReviews = ({ productId }: { productId: string }) => {
       return;
     }
     setSubmitting(true);
+    const { author_name, rating: r, comment: c } = parsed.data;
     const { error } = await supabase.from("reviews").insert([
-      { product_id: productId, ...parsed.data },
+      { product_id: productId, author_name, rating: r, comment: c },
     ]);
     setSubmitting(false);
     if (error) {

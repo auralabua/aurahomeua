@@ -6,6 +6,7 @@ import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData"
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { ProductCard } from "@/components/ProductCard";
+import { ProductReviews } from "@/components/ProductReviews";
 
 const ProductPage = () => {
   const { id } = useParams();

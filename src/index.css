@@ -119,4 +119,30 @@
   .transition-smooth { transition: var(--transition-smooth); }
   .btn-caramel { background-color: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
   .btn-caramel:hover { background-color: hsl(var(--primary-hover)); }
+
+  .category-card {
+    --category-accent: var(--primary);
+    --category-bg-start: var(--accent-soft);
+    --category-bg-end: var(--primary-soft);
+    --category-icon-bg: var(--card);
+    background: linear-gradient(135deg, hsl(var(--category-bg-start)) 0%, hsl(var(--category-bg-end)) 100%);
+    border-color: hsl(var(--border) / 0.7);
+  }
+
+  .category-card-pillow { --category-accent: 28 47% 45%; --category-bg-start: 30 36% 98%; --category-bg-end: 30 34% 91%; --category-icon-bg: 30 42% 94%; }
+  .category-card-mat { --category-accent: 154 30% 35%; --category-bg-start: 144 31% 98%; --category-bg-end: 145 30% 91%; --category-icon-bg: 145 34% 94%; }
+  .category-card-brace { --category-accent: 219 32% 42%; --category-bg-start: 220 36% 98%; --category-bg-end: 220 34% 92%; --category-icon-bg: 220 40% 95%; }
+  .category-card-massager { --category-accent: 358 34% 42%; --category-bg-start: 0 36% 98%; --category-bg-end: 0 34% 92%; --category-icon-bg: 0 42% 95%; }
+  .category-card-beauty { --category-accent: 328 33% 42%; --category-bg-start: 330 40% 98%; --category-bg-end: 330 36% 92%; --category-icon-bg: 330 42% 95%; }
+  .category-card-toy { --category-accent: 42 48% 37%; --category-bg-start: 45 48% 98%; --category-bg-end: 45 42% 91%; --category-icon-bg: 45 52% 94%; }
+  .category-card-insole { --category-accent: 184 35% 34%; --category-bg-start: 184 38% 98%; --category-bg-end: 184 34% 91%; --category-icon-bg: 184 40% 94%; }
+
+  .category-card-accent-line { background-color: hsl(var(--category-accent)); }
+  .category-card-icon-bg {
+    background: hsl(var(--category-icon-bg));
+    box-shadow: inset 0 0 0 1px hsl(var(--category-accent) / 0.14), 0 12px 24px hsl(var(--category-accent) / 0.11);
+  }
+  .category-card-icon, .category-card-action { color: hsl(var(--category-accent)); }
+  .category-card-mark { background-color: hsl(var(--category-accent)); opacity: 0.13; }
+  .category-card:hover .category-card-mark { opacity: 0.21; }
 }

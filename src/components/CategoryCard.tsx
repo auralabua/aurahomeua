@@ -1,51 +1,75 @@
 import { Link } from "react-router-dom";
-import { BedDouble, Activity, Shield, Zap, Sparkles, Blocks, Footprints, type LucideIcon } from "lucide-react";
+import {
+  BedDouble,
+  Grid2X2,
+  Bandage,
+  Vibrate,
+  Gem,
+  ToyBrick,
+  Footprints,
+  Tag,
+  type LucideIcon,
+} from "lucide-react";
 import { Category } from "@/data/products";
 
-type Cfg = { icon: LucideIcon; accent: string; bg: string; iconBg: string };
+type Cfg = { icon: LucideIcon; tone: string };
 
 const categoryConfig: Record<string, Cfg> = {
-  "ortopedychni-podushky":         { icon: BedDouble,  accent: "#A8794A", bg: "from-[#FBF7F2] to-[#EEE4D6]", iconBg: "#F0DECA" },
-  "ortopedychni-masazhni-kylymky": { icon: Activity,   accent: "#5C8454", bg: "from-[#F2F7F2] to-[#D8EDD8]", iconBg: "#C8E8C8" },
-  "ortezy-i-bandazhi":             { icon: Shield,     accent: "#4A6391", bg: "from-[#F2F4FA] to-[#D8E0F0]", iconBg: "#C8D4EC" },
-  "masazhery":                     { icon: Zap,        accent: "#8E4A4A", bg: "from-[#FAF2F2] to-[#EED8D8]", iconBg: "#ECC8C8" },
-  "tovary-dlia-krasy":             { icon: Sparkles,   accent: "#8E4A6E", bg: "from-[#FAF2F6] to-[#EED8EC]", iconBg: "#ECC8E0" },
-  "rozvyvaiuchi-ihrashky":         { icon: Blocks,     accent: "#8A7530", bg: "from-[#FAF8EE] to-[#EEEACC]", iconBg: "#ECE0B0" },
-  "ortopedychni-ustilky":          { icon: Footprints, accent: "#3E7C7C", bg: "from-[#F0F8F8] to-[#CCEAEA]", iconBg: "#B0E0E0" },
+  pillows: { icon: BedDouble, tone: "pillow" },
+  mats: { icon: Grid2X2, tone: "mat" },
+  braces: { icon: Bandage, tone: "brace" },
+  massagers: { icon: Vibrate, tone: "massager" },
+  beauty: { icon: Gem, tone: "beauty" },
+  toys: { icon: ToyBrick, tone: "toy" },
+  insoles: { icon: Footprints, tone: "insole" },
+  "ortopedychni-podushky": { icon: BedDouble, tone: "pillow" },
+  "ortopedychni-masazhni-kylymky": { icon: Grid2X2, tone: "mat" },
+  "ortezy-i-bandazhi": { icon: Bandage, tone: "brace" },
+  "masazhery": { icon: Vibrate, tone: "massager" },
+  "tovary-dlia-krasy": { icon: Gem, tone: "beauty" },
+  "rozvyvaiuchi-ihrashky": { icon: ToyBrick, tone: "toy" },
+  "ortopedychni-ustilky": { icon: Footprints, tone: "insole" },
 };
 
-const fallback: Cfg = { icon: BedDouble, accent: "#C9956A", bg: "from-[#FBF7F2] to-[#EEE4D6]", iconBg: "#F0DECA" };
+const categoryNameConfig: Array<[string, Cfg]> = [
+  ["подуш", { icon: BedDouble, tone: "pillow" }],
+  ["килим", { icon: Grid2X2, tone: "mat" }],
+  ["ортез", { icon: Bandage, tone: "brace" }],
+  ["бандаж", { icon: Bandage, tone: "brace" }],
+  ["масаж", { icon: Vibrate, tone: "massager" }],
+  ["крас", { icon: Gem, tone: "beauty" }],
+  ["іграш", { icon: ToyBrick, tone: "toy" }],
+  ["устіл", { icon: Footprints, tone: "insole" }],
+];
+
+const fallback: Cfg = { icon: Tag, tone: "default" };
+
+const getCategoryConfig = (category: Category) =>
+  categoryConfig[category.id] ??
+  categoryNameConfig.find(([needle]) => category.name.toLowerCase().includes(needle))?.[1] ??
+  fallback;
 
 export const CategoryCard = ({ category }: { category: Category }) => {
-  const cfg = categoryConfig[category.id] ?? fallback;
+  const cfg = getCategoryConfig(category);
   const Icon = cfg.icon;
 
   return (
     <Link
       to={`/catalog?category=${category.id}`}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl bg-gradient-to-br ${cfg.bg} p-5 shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-1.5 border border-white/80`}
+      className={`category-card category-card-${cfg.tone} group relative flex flex-col overflow-hidden rounded-2xl p-5 shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-1.5 border`}
       style={{ aspectRatio: "3/4" }}
     >
       {/* Top accent line */}
-      <div
-        className="w-8 h-0.5 rounded-full mb-4 transition-all duration-300 group-hover:w-14"
-        style={{ backgroundColor: cfg.accent }}
-      />
+      <div className="category-card-accent-line w-8 h-0.5 rounded-full mb-4 transition-all duration-300 group-hover:w-14" />
 
       {/* Icon */}
-      <div
-        className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-        style={{ backgroundColor: cfg.iconBg }}
-      >
-        <Icon size={28} strokeWidth={1.5} style={{ color: cfg.accent }} />
+      <div className="category-card-icon-bg w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110">
+        <Icon className="category-card-icon" size={31} strokeWidth={1.75} absoluteStrokeWidth />
       </div>
 
       {/* Text */}
       <div className="mt-auto pt-4">
-        <p
-          className="text-[10px] font-medium uppercase tracking-widest mb-2"
-          style={{ color: cfg.accent }}
-        >
+        <p className="category-card-action text-[10px] font-medium uppercase tracking-widest mb-2">
           Переглянути →
         </p>
         <h3 className="font-light text-sm leading-snug text-foreground">
@@ -59,10 +83,7 @@ export const CategoryCard = ({ category }: { category: Category }) => {
       </div>
 
       {/* Decorative circle */}
-      <div
-        className="absolute -bottom-10 -right-10 w-28 h-28 rounded-full opacity-15 transition-all duration-500 group-hover:opacity-25 group-hover:scale-110"
-        style={{ backgroundColor: cfg.accent }}
-      />
+      <div className="category-card-mark absolute -bottom-10 -right-10 w-28 h-28 rounded-full transition-all duration-500 group-hover:scale-110" />
     </Link>
   );
 };

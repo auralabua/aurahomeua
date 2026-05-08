@@ -41,7 +41,7 @@ const Checkout = () => {
       <div className="container py-20 text-center">
         <h1 className="text-3xl mb-3">Кошик порожній</h1>
         <p className="text-muted-foreground mb-6">Додайте товари перед оформленням замовлення</p>
-        <Button asChild size="lg" className="rounded-full btn-caramel">
+        <Button asChild size="lg" className="rounded-full btn-aura">
           <Link to="/catalog">До каталогу</Link>
         </Button>
       </div>
@@ -122,7 +122,7 @@ const Checkout = () => {
       <form onSubmit={handleSubmit} className="grid lg:grid-cols-[1fr_380px] gap-8">
         <div className="space-y-8">
           {/* Контактні дані */}
-          <section className="p-6 rounded-2xl bg-card border border-border/60 shadow-soft">
+          <section className="p-6 rounded-2xl aura-card">
             <h2 className="text-xl font-medium mb-5">Контактні дані</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="sm:col-span-2 space-y-1.5">
@@ -164,7 +164,7 @@ const Checkout = () => {
           </section>
 
           {/* Спосіб доставки */}
-          <section className="p-6 rounded-2xl bg-card border border-border/60 shadow-soft">
+          <section className="p-6 rounded-2xl aura-card">
             <h2 className="text-xl font-medium mb-5">Спосіб доставки</h2>
             <div className="grid sm:grid-cols-2 gap-3 mb-5">
               <DeliveryCard
@@ -216,7 +216,7 @@ const Checkout = () => {
           </section>
 
           {/* Спосіб оплати */}
-          <section className="p-6 rounded-2xl bg-card border border-border/60 shadow-soft">
+          <section className="p-6 rounded-2xl aura-card">
             <h2 className="text-xl font-medium mb-5">Спосіб оплати</h2>
             <div className="grid sm:grid-cols-2 gap-3">
               <DeliveryCard
@@ -238,13 +238,13 @@ const Checkout = () => {
         </div>
 
         {/* Підсумок */}
-        <aside className="lg:sticky lg:top-24 h-fit p-6 rounded-2xl bg-card border border-border/60 shadow-card">
+        <aside className="lg:sticky lg:top-24 h-fit p-6 rounded-2xl aura-card">
           <h2 className="text-xl font-medium mb-4">Ваше замовлення</h2>
 
           <ul className="space-y-3 mb-4 max-h-64 overflow-y-auto pr-1">
             {items.map(({ product, quantity }) => (
               <li key={product.id} className="flex gap-3 text-sm">
-                <div className="h-12 w-12 shrink-0 rounded-lg gradient-hero overflow-hidden grid place-items-center">
+                <div className="h-12 w-12 shrink-0 rounded-lg gradient-hero overflow-hidden border border-white/10 grid place-items-center">
                   {product.images?.[0] && (
                     <img src={product.images[0]} alt="" className="h-full w-full object-contain p-1" />
                   )}
@@ -262,7 +262,7 @@ const Checkout = () => {
             ))}
           </ul>
 
-          <div className="border-t border-border my-4" />
+          <div className="border-t border-white/10 my-4" />
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Товарів</span>
@@ -277,7 +277,7 @@ const Checkout = () => {
               <span className="text-right">за тарифами перевізника</span>
             </div>
           </div>
-          <div className="border-t border-border my-4" />
+          <div className="border-t border-white/10 my-4" />
           <div className="flex justify-between items-baseline mb-5">
             <span className="font-medium">До сплати</span>
             <span className="text-2xl font-light text-primary">{formatUAH(totalPrice)}</span>
@@ -287,7 +287,7 @@ const Checkout = () => {
             type="submit"
             size="lg"
             disabled={submitting}
-            className="w-full rounded-full btn-caramel border-0"
+            className="w-full rounded-full btn-aura border-0"
           >
             {submitting ? "Опрацювання…" : "Підтвердити замовлення"}
           </Button>
@@ -313,13 +313,13 @@ const DeliveryCard = ({ active, onClick, icon, title, subtitle }: DeliveryCardPr
       "relative flex items-start gap-3 text-left p-4 rounded-xl border transition-smooth",
       active
         ? "border-primary bg-primary-soft"
-        : "border-border/60 bg-card hover:border-primary/40",
+        : "border-white/10 bg-card hover:border-primary/40",
     )}
   >
     <div
       className={cn(
         "grid h-10 w-10 place-items-center rounded-lg shrink-0",
-        active ? "bg-primary text-primary-foreground" : "bg-secondary text-foreground",
+        active ? "bg-primary text-primary-foreground" : "bg-white/[0.055] text-foreground",
       )}
     >
       {icon}

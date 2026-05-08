@@ -56,8 +56,8 @@ export const CategoryCard = ({ category }: { category: Category }) => {
   return (
     <Link
       to={`/catalog?category=${category.id}`}
-      className={`category-card category-card-${cfg.tone} group relative flex flex-col overflow-hidden rounded-2xl p-5 shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-1.5 border`}
-      style={{ aspectRatio: "3/4" }}
+      className={`category-card category-card-${cfg.tone} group relative flex flex-col overflow-hidden rounded-2xl p-5 shadow-soft backdrop-blur-xl hover:shadow-card transition-all duration-300 hover:-translate-y-1.5 border`}
+      style={{ aspectRatio: "1/1.08" }}
     >
       {/* Top accent line */}
       <div className="category-card-accent-line w-8 h-0.5 rounded-full mb-4 transition-all duration-300 group-hover:w-14" />
@@ -72,7 +72,7 @@ export const CategoryCard = ({ category }: { category: Category }) => {
         <p className="category-card-action text-[10px] font-medium uppercase tracking-widest mb-2">
           Переглянути →
         </p>
-        <h3 className="font-light text-sm leading-snug text-foreground">
+        <h3 className="font-light text-sm leading-snug text-foreground/95">
           {category.name}
         </h3>
         {category.description && (

@@ -32,7 +32,7 @@ const ProductPage = () => {
 
       <div className="grid lg:grid-cols-2 gap-10">
         <div className="space-y-3">
-          <div className="relative aspect-square rounded-3xl gradient-hero overflow-hidden grid place-items-center shadow-card">
+          <div className="relative aspect-square rounded-3xl gradient-hero overflow-hidden border border-white/10 grid place-items-center shadow-card">
             {images[activeImg] ? (
               <img src={images[activeImg]} alt={product.name} className="h-full w-full object-contain p-6" />
             ) : (
@@ -52,7 +52,7 @@ const ProductPage = () => {
                 <button
                   key={i}
                   onClick={() => setActiveImg(i)}
-                  className={`aspect-square rounded-xl overflow-hidden bg-secondary border-2 transition-smooth ${
+                  className={`aspect-square rounded-xl overflow-hidden bg-white/[0.055] border-2 transition-smooth ${
                     activeImg === i ? "border-primary" : "border-transparent"
                   }`}
                 >
@@ -85,7 +85,7 @@ const ProductPage = () => {
           <div className="text-4xl font-bold text-primary">{formatUAH(product.price)}</div>
 
           <div className="flex items-center gap-4">
-            <div className="inline-flex items-center rounded-full bg-secondary p-1">
+            <div className="inline-flex items-center rounded-full bg-white/[0.055] p-1">
               <Button variant="ghost" size="icon" className="rounded-full h-9 w-9" onClick={() => setQty(q => Math.max(1, q - 1))}>
                 <Minus className="h-4 w-4" />
               </Button>
@@ -97,7 +97,7 @@ const ProductPage = () => {
             <Button
               size="lg"
               onClick={() => addItem(product, qty)}
-              className="flex-1 rounded-full gradient-primary border-0 shadow-glow hover:opacity-95"
+              className="flex-1 rounded-full btn-aura border-0 shadow-glow hover:opacity-95"
             >
               <ShoppingCart className="h-5 w-5 mr-2" /> Додати в кошик
             </Button>
@@ -109,7 +109,7 @@ const ProductPage = () => {
               { icon: ShieldCheck, label: "Гарантія якості" },
               { icon: RotateCcw, label: "Повернення 14 днів" },
             ].map((f, i) => (
-              <div key={i} className="flex items-center gap-2 p-3 rounded-xl bg-secondary/60 text-xs">
+              <div key={i} className="flex items-center gap-2 p-3 rounded-xl bg-white/[0.055]/60 text-xs">
                 <f.icon className="h-4 w-4 text-primary shrink-0" />
                 <span>{f.label}</span>
               </div>

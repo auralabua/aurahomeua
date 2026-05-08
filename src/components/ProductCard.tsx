@@ -1,65 +1,34 @@
 import { Link } from "react-router-dom";
-import { Star, ShoppingCart } from "lucide-react";
-import { Product, formatUAH } from "@/data/products";
-import { useCategoriesAsLegacy } from "@/hooks/useShopData";
+import { Star, ShoppingCart, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Product, formatUAH } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import { useCategoriesAsLegacy } from "@/hooks/useShopData";
 
 export const ProductCard = ({ product }: { product: Product }) => {
   const { addItem } = useCart();
   const { categories } = useCategoriesAsLegacy();
   const category = categories.find(c => c.id === product.category);
-
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl bg-card shadow-soft hover:shadow-card transition-smooth">
-      <Link to={`/product/${product.id}`} className="relative block aspect-square overflow-hidden bg-card">
-        {product.images?.[0] ? (
-          <img
-            src={product.images[0]}
-            alt={product.name}
-            loading="lazy"
-            className="absolute inset-0 h-full w-full object-contain p-4 group-hover:scale-105 transition-smooth"
-          />
-        ) : (
-          <div className="absolute inset-0 grid place-items-center text-muted-foreground text-sm">Немає фото</div>
-        )}
-        {product.badge && (
-          <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-medium bg-secondary text-foreground">
-            {product.badge === "Хіт продажів" ? "Хіт" : product.badge}
-          </span>
-        )}
-      </Link>
-
-      <div className="flex flex-1 flex-col p-4 gap-3">
-        {category && (
-          <span className="text-xs font-light text-muted-foreground">
-            {category.name}
-          </span>
-        )}
-
-        <Link to={`/product/${product.id}`} className="font-light text-base leading-snug line-clamp-2 text-foreground hover:text-primary transition-smooth">
-          {product.name}
-        </Link>
-
-        <div className="flex items-center gap-1 text-sm">
-          {[1, 2, 3, 4, 5].map(i => (
-            <Star
-              key={i}
-              className={`h-3.5 w-3.5 ${i <= Math.round(product.rating) ? "fill-primary text-primary" : "text-muted"}`}
-            />
-          ))}
-          <span className="text-muted-foreground ml-1 text-xs">({product.reviews})</span>
+    <article className="group aura-card overflow-hidden transition-smooth hover:-translate-y-1.5 hover:shadow-card">
+      <Link to={`/product/${product.id}`} className="relative block overflow-hidden rounded-b-[1.4rem] bg-white/[0.035]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,hsl(var(--primary)/.18),transparent_42%)] opacity-80" />
+        <div className="relative aspect-[1/1] grid place-items-center p-4">
+          {product.images?.[0] ? <img src={product.images[0]} alt={product.name} className="h-full w-full object-contain drop-shadow-[0_24px_34px_rgba(0,0,0,.45)] transition-transform duration-500 group-hover:scale-105" loading="lazy" /> : <span className="text-xs text-muted-foreground">Фото товару</span>}
         </div>
-
-        <div className="mt-auto pt-2 space-y-3">
-          <span className="block text-xl font-light text-primary">{formatUAH(product.price)}</span>
-          <Button
-            onClick={() => addItem(product)}
-            className="w-full rounded-xl btn-caramel border-0 font-light"
-          >
-            <ShoppingCart className="h-4 w-4 mr-2" />
-            Додати в кошик
-          </Button>
+        {product.badge && <span className="absolute left-3 top-3 rounded-full border border-primary/25 bg-primary/15 px-3 py-1 text-[10px] font-medium uppercase tracking-widest text-primary backdrop-blur">{product.badge === "Хіт продажів" ? "Хіт" : product.badge}</span>}
+        <span className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/10 text-white opacity-0 transition-smooth group-hover:opacity-100"><ArrowUpRight className="h-4 w-4" /></span>
+      </Link>
+      <div className="flex min-h-[190px] flex-col p-4 gap-3">
+        {category && <span className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">{category.name}</span>}
+        <Link to={`/product/${product.id}`} className="line-clamp-2 text-base font-light leading-snug text-foreground transition-smooth hover:text-primary">{product.name}</Link>
+        <div className="flex items-center gap-1 text-sm">
+          {[1,2,3,4,5].map(i => <Star key={i} className={`h-3.5 w-3.5 ${i <= Math.round(product.rating) ? "fill-primary text-primary" : "text-white/12"}`} />)}
+          <span className="ml-1 text-xs text-muted-foreground">({product.reviews})</span>
+        </div>
+        <div className="mt-auto space-y-3 pt-2">
+          <span className="block text-xl font-light text-gradient">{formatUAH(product.price)}</span>
+          <Button onClick={() => addItem(product)} className="w-full rounded-full btn-aura border-0 font-light"><ShoppingCart className="mr-2 h-4 w-4" />Додати</Button>
         </div>
       </div>
     </article>

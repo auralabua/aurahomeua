@@ -16,7 +16,7 @@ const Cart = () => {
         </div>
         <h1 className="text-3xl mb-3">Ваш кошик порожній</h1>
         <p className="text-muted-foreground mb-6">Перегляньте каталог і додайте товари, які вам сподобались</p>
-        <Button asChild size="lg" className="rounded-full gradient-primary border-0">
+        <Button asChild size="lg" className="rounded-full btn-aura border-0">
           <Link to="/catalog">Перейти до каталогу</Link>
         </Button>
       </div>
@@ -33,8 +33,8 @@ const Cart = () => {
       <div className="grid lg:grid-cols-[1fr_360px] gap-8">
         <div className="space-y-3">
           {items.map(({ product, quantity }) => (
-            <div key={product.id} className="flex gap-4 p-4 rounded-2xl bg-card border border-border/60 shadow-soft">
-              <Link to={`/product/${product.id}`} className="grid h-24 w-24 shrink-0 place-items-center rounded-xl gradient-hero overflow-hidden">
+            <div key={product.id} className="flex gap-4 p-4 rounded-2xl aura-card">
+              <Link to={`/product/${product.id}`} className="grid h-24 w-24 shrink-0 place-items-center rounded-xl gradient-hero overflow-hidden border border-white/10">
                 {product.images?.[0] ? (
                   <img src={product.images[0]} alt={product.name} className="h-full w-full object-contain p-2" loading="lazy" />
                 ) : (
@@ -47,7 +47,7 @@ const Cart = () => {
                 </Link>
                 <div className="text-sm text-muted-foreground mt-1">{formatUAH(product.price)} / шт</div>
                 <div className="mt-3 flex items-center justify-between gap-3">
-                  <div className="inline-flex items-center rounded-full bg-secondary p-1">
+                  <div className="inline-flex items-center rounded-full bg-white/[0.055] p-1">
                     <Button variant="ghost" size="icon" className="rounded-full h-7 w-7" onClick={() => updateQuantity(product.id, quantity - 1)}>
                       <Minus className="h-3 w-3" />
                     </Button>
@@ -66,14 +66,14 @@ const Cart = () => {
           ))}
         </div>
 
-        <aside className="lg:sticky lg:top-24 h-fit p-6 rounded-2xl bg-card border border-border/60 shadow-card">
+        <aside className="lg:sticky lg:top-24 h-fit p-6 rounded-2xl aura-card">
           <h2 className="text-xl font-semibold mb-4">Підсумок замовлення</h2>
           <div className="space-y-2.5 text-sm">
             <div className="flex justify-between"><span className="text-muted-foreground">Товарів</span><span>{totalCount} шт</span></div>
             <div className="flex justify-between"><span className="text-muted-foreground">Сума</span><span>{formatUAH(totalPrice)}</span></div>
             <div className="flex justify-between"><span className="text-muted-foreground">Доставка</span><span className="text-success">за тарифами перевізника</span></div>
           </div>
-          <div className="border-t border-border my-4" />
+          <div className="border-t border-white/10 my-4" />
           <div className="flex justify-between items-baseline mb-5">
             <span className="font-semibold">До сплати</span>
             <span className="text-2xl font-bold text-primary">{formatUAH(totalPrice)}</span>
@@ -81,7 +81,7 @@ const Cart = () => {
           <Button
             asChild
             size="lg"
-            className="w-full rounded-full gradient-primary border-0 shadow-glow hover:opacity-95"
+            className="w-full rounded-full btn-aura border-0 shadow-glow hover:opacity-95"
           >
             <Link to="/checkout">Оформити замовлення</Link>
           </Button>

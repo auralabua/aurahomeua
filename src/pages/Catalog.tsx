@@ -69,7 +69,7 @@ const Catalog = () => {
               className={`px-4 py-2 rounded-full text-sm font-light transition-all duration-200 border ${
                 selectedCategories.includes(c.id)
                   ? "bg-primary text-white border-primary"
-                  : "bg-transparent text-foreground border-border hover:border-primary/50 hover:text-primary"
+                  : "bg-transparent text-foreground border-white/10 hover:border-primary/50 hover:text-primary"
               }`}
             >
               {c.name}
@@ -86,7 +86,7 @@ const Catalog = () => {
             placeholder="Від"
             value={minPrice}
             onChange={e => setMinPrice(e.target.value)}
-            className="rounded-xl border-border/60 font-light text-sm"
+            className="rounded-xl border-white/10 font-light text-sm"
           />
           <span className="text-muted-foreground font-light">—</span>
           <Input
@@ -94,13 +94,13 @@ const Catalog = () => {
             placeholder="До"
             value={maxPrice}
             onChange={e => setMaxPrice(e.target.value)}
-            className="rounded-xl border-border/60 font-light text-sm"
+            className="rounded-xl border-white/10 font-light text-sm"
           />
         </div>
       </div>
 
       {hasFilters && (
-        <Button onClick={reset} className="w-full rounded-full btn-caramel border-0 font-light">
+        <Button onClick={reset} className="w-full rounded-full btn-aura border-0 font-light">
           <X className="h-4 w-4 mr-2" /> Скинути фільтри
         </Button>
       )}
@@ -132,7 +132,7 @@ const Catalog = () => {
             </Sheet>
           </div>
           <Select value={sort} onValueChange={v => setSort(v as SortOption)}>
-            <SelectTrigger className="w-[220px] rounded-full font-light border-border/60">
+            <SelectTrigger className="w-[220px] rounded-full font-light border-white/10">
               <SelectValue placeholder="Сортування" />
             </SelectTrigger>
             <SelectContent>
@@ -147,7 +147,7 @@ const Catalog = () => {
 
       <div className="grid lg:grid-cols-[280px_1fr] gap-8">
         <aside className="hidden lg:block">
-          <div className="sticky top-24 p-7 rounded-2xl bg-card border border-border/40 shadow-soft">
+          <div className="sticky top-24 p-7 rounded-2xl aura-card">
             <Filters />
           </div>
         </aside>
@@ -157,9 +157,9 @@ const Catalog = () => {
               {filtered.map(p => <ProductCard key={p.id} product={p} />)}
             </div>
           ) : (
-            <div className="text-center py-20 rounded-2xl bg-secondary/40">
+            <div className="text-center py-20 rounded-2xl bg-white/[0.035] border border-white/10">
               <p className="text-muted-foreground font-light">Товарів не знайдено. Спробуйте змінити фільтри.</p>
-              <Button onClick={reset} className="mt-4 rounded-full btn-caramel border-0 font-light">
+              <Button onClick={reset} className="mt-4 rounded-full btn-aura border-0 font-light">
                 Скинути фільтри
               </Button>
             </div>

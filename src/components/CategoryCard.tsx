@@ -1,89 +1,69 @@
 import { Link } from "react-router-dom";
-import {
-  BedDouble,
-  Grid2X2,
-  Bandage,
-  Vibrate,
-  Gem,
-  ToyBrick,
-  Footprints,
-  Tag,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Category } from "@/data/products";
+import pillows from "@/assets/cat-pillows.jpg";
+import mats from "@/assets/cat-mats.jpg";
+import braces from "@/assets/cat-braces.jpg";
+import massagers from "@/assets/cat-massagers.jpg";
+import beauty from "@/assets/cat-beauty.jpg";
+import toys from "@/assets/cat-toys.jpg";
+import insoles from "@/assets/cat-insoles.jpg";
 
-type Cfg = { icon: LucideIcon; tone: string };
-
-const categoryConfig: Record<string, Cfg> = {
-  pillows: { icon: BedDouble, tone: "pillow" },
-  mats: { icon: Grid2X2, tone: "mat" },
-  braces: { icon: Bandage, tone: "brace" },
-  massagers: { icon: Vibrate, tone: "massager" },
-  beauty: { icon: Gem, tone: "beauty" },
-  toys: { icon: ToyBrick, tone: "toy" },
-  insoles: { icon: Footprints, tone: "insole" },
-  "ortopedychni-podushky": { icon: BedDouble, tone: "pillow" },
-  "ortopedychni-masazhni-kylymky": { icon: Grid2X2, tone: "mat" },
-  "ortezy-i-bandazhi": { icon: Bandage, tone: "brace" },
-  "masazhery": { icon: Vibrate, tone: "massager" },
-  "tovary-dlia-krasy": { icon: Gem, tone: "beauty" },
-  "rozvyvaiuchi-ihrashky": { icon: ToyBrick, tone: "toy" },
-  "ortopedychni-ustilky": { icon: Footprints, tone: "insole" },
+const imageMap: Record<string, string> = {
+  pillows, mats, braces, massagers, beauty, toys, insoles,
+  "ortopedychni-podushky": pillows,
+  "ortopedychni-masazhni-kylymky": mats,
+  "ortezy-i-bandazhi": braces,
+  masazhery: massagers,
+  "tovary-dlia-krasy": beauty,
+  "rozvyvaiuchi-ihrashky": toys,
+  "ortopedychni-ustilky": insoles,
 };
 
-const categoryNameConfig: Array<[string, Cfg]> = [
-  ["подуш", { icon: BedDouble, tone: "pillow" }],
-  ["килим", { icon: Grid2X2, tone: "mat" }],
-  ["ортез", { icon: Bandage, tone: "brace" }],
-  ["бандаж", { icon: Bandage, tone: "brace" }],
-  ["масаж", { icon: Vibrate, tone: "massager" }],
-  ["крас", { icon: Gem, tone: "beauty" }],
-  ["іграш", { icon: ToyBrick, tone: "toy" }],
-  ["устіл", { icon: Footprints, tone: "insole" }],
+const nameMap: Array<[string, string]> = [
+  ["подуш", pillows],
+  ["килим", mats],
+  ["ортез", braces],
+  ["бандаж", braces],
+  ["масаж", massagers],
+  ["крас", beauty],
+  ["іграш", toys],
+  ["устіл", insoles],
 ];
 
-const fallback: Cfg = { icon: Tag, tone: "default" };
-
-const getCategoryConfig = (category: Category) =>
-  categoryConfig[category.id] ??
-  categoryNameConfig.find(([needle]) => category.name.toLowerCase().includes(needle))?.[1] ??
-  fallback;
+const getImage = (c: Category) =>
+  imageMap[c.id] ??
+  nameMap.find(([n]) => c.name.toLowerCase().includes(n))?.[1] ??
+  pillows;
 
 export const CategoryCard = ({ category }: { category: Category }) => {
-  const cfg = getCategoryConfig(category);
-  const Icon = cfg.icon;
-
+  const img = getImage(category);
   return (
     <Link
       to={`/catalog?category=${category.id}`}
-      className={`category-card category-card-${cfg.tone} group relative flex flex-col overflow-hidden rounded-2xl p-5 shadow-soft backdrop-blur-xl hover:shadow-card transition-all duration-300 hover:-translate-y-1.5 border`}
-      style={{ aspectRatio: "1/1.08" }}
+      className="group relative block overflow-hidden rounded-3xl border border-border bg-secondary shadow-soft transition-all duration-500 hover:shadow-elevated hover:-translate-y-1"
+      style={{ aspectRatio: "3/4" }}
     >
-      {/* Top accent line */}
-      <div className="category-card-accent-line w-8 h-0.5 rounded-full mb-4 transition-all duration-300 group-hover:w-14" />
-
-      {/* Icon */}
-      <div className="category-card-icon-bg w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-        <Icon className="category-card-icon" size={31} strokeWidth={1.75} absoluteStrokeWidth />
+      <img
+        src={img}
+        alt={category.name}
+        loading="lazy"
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
+        <div className="text-white">
+          <h3 className="text-lg font-light leading-tight">{category.name}</h3>
+          {category.description && (
+            <p className="mt-1 text-xs font-light text-white/75 line-clamp-1">
+              {category.description}
+            </p>
+          )}
+        </div>
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/95 text-foreground transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+          <ArrowRight className="h-4 w-4" />
+        </span>
       </div>
-
-      {/* Text */}
-      <div className="mt-auto pt-4">
-        <p className="category-card-action text-[10px] font-medium uppercase tracking-widest mb-2">
-          Переглянути →
-        </p>
-        <h3 className="font-light text-sm leading-snug text-foreground/95">
-          {category.name}
-        </h3>
-        {category.description && (
-          <p className="text-xs text-muted-foreground mt-1 line-clamp-2 font-light">
-            {category.description}
-          </p>
-        )}
-      </div>
-
-      {/* Decorative circle */}
-      <div className="category-card-mark absolute -bottom-10 -right-10 w-28 h-28 rounded-full transition-all duration-500 group-hover:scale-110" />
     </Link>
   );
 };

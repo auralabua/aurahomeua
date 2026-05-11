@@ -174,6 +174,7 @@ const Catalog = () => {
         </div>
       </div>
 
+      <div className="grid lg:grid-cols-[280px_1fr] gap-8">
         <aside className="hidden lg:block">
           <div className="sticky top-24 p-7 rounded-2xl aura-card">
             <Filters />

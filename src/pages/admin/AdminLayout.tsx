@@ -33,7 +33,7 @@ const SidebarContent = ({ onNav }: { onNav?: () => void }) => {
   return (
     <div className="flex h-full flex-col">
       <div className="px-6 py-6 border-b border-border/60">
-        <div className="text-lg font-light tracking-tight">Aura Home</div>
+        <div className="text-lg font-light tracking-tight">Aura Well</div>
         <div className="text-xs text-muted-foreground">Адмін-панель</div>
       </div>
       <nav className="flex-1 px-3 py-4 space-y-1">

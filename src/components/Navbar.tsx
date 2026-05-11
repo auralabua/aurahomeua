@@ -73,7 +73,7 @@ export const Navbar = () => {
           <span className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/12 ring-1 ring-primary/25 shadow-glow text-primary">A</span>
           <span className="leading-none">
             <span className="block text-xl font-light tracking-[0.16em] uppercase">Aura</span>
-            <span className="block text-[10px] tracking-[0.34em] text-muted-foreground uppercase">Home</span>
+            <span className="block text-[10px] tracking-[0.34em] text-muted-foreground uppercase">Well</span>
           </span>
         </Link>
 

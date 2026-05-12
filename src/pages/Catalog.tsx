@@ -77,39 +77,55 @@ const Catalog = () => {
   const hasFilters = selectedCategories.length > 0 || minPrice || maxPrice || query;
 
   const Filters = () => (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div>
-        <h3 className="text-xs font-medium text-muted-foreground mb-4 uppercase tracking-widest">Категорії</h3>
-        <div className="flex flex-col gap-2">
+        <h3 className="text-xs font-semibold text-muted-foreground mb-4 uppercase tracking-widest">Категорії</h3>
+        <div className="flex flex-col gap-1">
           {topCategories.map(c => {
             const subs = categories.filter(s => s.parentId === c.id);
             const parentSelected = selectedCategories.includes(c.id);
             const anySubSelected = subs.some(s => selectedCategories.includes(s.id));
+            const isOpen = parentSelected || anySubSelected;
             return (
-              <div key={c.id} className="flex flex-wrap gap-2">
+              <div key={c.id}>
+                {/* Головна категорія */}
                 <button
                   onClick={() => toggleCategory(c.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-light transition-all duration-200 border ${
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-light transition-all duration-200 ${
                     parentSelected
-                      ? "bg-primary text-white border-primary"
-                      : "bg-transparent text-foreground border-white/10 hover:border-primary/50 hover:text-primary"
+                      ? "bg-primary text-white shadow-sm"
+                      : "text-foreground hover:bg-secondary hover:text-primary"
                   }`}
                 >
-                  {c.name}
+                  <span>{c.name}</span>
+                  {subs.length > 0 && (
+                    <span className={`text-xs ml-2 transition-transform duration-200 ${isOpen ? "rotate-90" : ""} ${parentSelected ? "text-white/70" : "text-muted-foreground"}`}>
+                      ›
+                    </span>
+                  )}
                 </button>
-                {(parentSelected || anySubSelected) && subs.map(s => (
-                  <button
-                    key={s.id}
-                    onClick={() => toggleCategory(s.id)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-light transition-all duration-200 border ${
-                      selectedCategories.includes(s.id)
-                        ? "bg-primary text-white border-primary"
-                        : "bg-transparent text-foreground/70 border-white/10 hover:border-primary/50 hover:text-primary"
-                    }`}
-                  >
-                    {s.name}
-                  </button>
-                ))}
+
+                {/* Підкатегорії */}
+                {isOpen && subs.length > 0 && (
+                  <div className="ml-4 mt-1 mb-1 border-l-2 border-primary/20 pl-3 flex flex-col gap-0.5">
+                    {subs.map(s => (
+                      <button
+                        key={s.id}
+                        onClick={() => toggleCategory(s.id)}
+                        className={`w-full text-left px-3 py-2 rounded-lg text-xs font-light transition-all duration-200 ${
+                          selectedCategories.includes(s.id)
+                            ? "bg-primary/10 text-primary font-medium"
+                            : "text-foreground/70 hover:bg-secondary hover:text-primary"
+                        }`}
+                      >
+                        {selectedCategories.includes(s.id) && (
+                          <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary mr-2 mb-0.5" />
+                        )}
+                        {s.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             );
           })}

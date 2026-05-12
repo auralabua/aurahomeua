@@ -80,20 +80,39 @@ const Catalog = () => {
     <div className="space-y-8">
       <div>
         <h3 className="text-xs font-medium text-muted-foreground mb-4 uppercase tracking-widest">Категорії</h3>
-        <div className="flex flex-wrap gap-2">
-          {categories.map(c => (
-            <button
-              key={c.id}
-              onClick={() => toggleCategory(c.id)}
-              className={`px-4 py-2 rounded-full text-sm font-light transition-all duration-200 border ${
-                selectedCategories.includes(c.id)
-                  ? "bg-primary text-white border-primary"
-                  : "bg-transparent text-foreground border-white/10 hover:border-primary/50 hover:text-primary"
-              }`}
-            >
-              {c.name}
-            </button>
-          ))}
+        <div className="flex flex-col gap-2">
+          {topCategories.map(c => {
+            const subs = categories.filter(s => s.parentId === c.id);
+            const parentSelected = selectedCategories.includes(c.id);
+            const anySubSelected = subs.some(s => selectedCategories.includes(s.id));
+            return (
+              <div key={c.id} className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => toggleCategory(c.id)}
+                  className={`px-4 py-2 rounded-full text-sm font-light transition-all duration-200 border ${
+                    parentSelected
+                      ? "bg-primary text-white border-primary"
+                      : "bg-transparent text-foreground border-white/10 hover:border-primary/50 hover:text-primary"
+                  }`}
+                >
+                  {c.name}
+                </button>
+                {(parentSelected || anySubSelected) && subs.map(s => (
+                  <button
+                    key={s.id}
+                    onClick={() => toggleCategory(s.id)}
+                    className={`px-3 py-1.5 rounded-full text-xs font-light transition-all duration-200 border ${
+                      selectedCategories.includes(s.id)
+                        ? "bg-primary text-white border-primary"
+                        : "bg-transparent text-foreground/70 border-white/10 hover:border-primary/50 hover:text-primary"
+                    }`}
+                  >
+                    {s.name}
+                  </button>
+                ))}
+              </div>
+            );
+          })}
         </div>
       </div>
 

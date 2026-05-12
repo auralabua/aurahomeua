@@ -184,33 +184,76 @@ const Catalog = () => {
       </header>
 
       {/* Mobile category quick-switch strip */}
-      <div className="lg:hidden -mx-4 px-4 mb-6 overflow-x-auto scrollbar-none">
-        <div className="flex gap-2 w-max pb-1">
-          <button
-            onClick={() => setSelectedCategories([])}
-            className={`shrink-0 px-4 py-2 rounded-full text-xs font-light border transition-all ${
-              selectedCategories.length === 0
-                ? "bg-primary text-white border-primary"
-                : "bg-white/70 text-foreground/80 border-border hover:border-primary/40"
-            }`}
-          >
-            Усі
-          </button>
-          {categories.map(c => (
-            <button
-              key={c.id}
-              onClick={() => setSelectedCategories([c.id])}
-              className={`shrink-0 px-4 py-2 rounded-full text-xs font-light border transition-all ${
-                selectedCategories.includes(c.id)
-                  ? "bg-primary text-white border-primary"
-                  : "bg-white/70 text-foreground/80 border-border hover:border-primary/40"
-              }`}
-            >
-              {c.name}
-            </button>
-          ))}
-        </div>
-      </div>
+      {(() => {
+        const activeParent = topCategories.find(c =>
+          selectedCategories.includes(c.id) ||
+          categories.some(s => s.parentId === c.id && selectedCategories.includes(s.id))
+        );
+        const subs = activeParent ? categories.filter(s => s.parentId === activeParent.id) : [];
+        return (
+          <div className="lg:hidden -mx-4 px-4 mb-6 space-y-2">
+            <div className="overflow-x-auto scrollbar-none">
+              <div className="flex gap-2 w-max pb-1">
+                <button
+                  onClick={() => setSelectedCategories([])}
+                  className={`shrink-0 px-4 py-2 rounded-full text-xs font-light border transition-all ${
+                    selectedCategories.length === 0
+                      ? "bg-primary text-white border-primary"
+                      : "bg-white/70 text-foreground/80 border-border hover:border-primary/40"
+                  }`}
+                >
+                  Усі
+                </button>
+                {topCategories.map(c => {
+                  const isActive = c.id === activeParent?.id;
+                  return (
+                    <button
+                      key={c.id}
+                      onClick={() => setSelectedCategories([c.id])}
+                      className={`shrink-0 px-4 py-2 rounded-full text-xs font-light border transition-all ${
+                        isActive
+                          ? "bg-primary text-white border-primary"
+                          : "bg-white/70 text-foreground/80 border-border hover:border-primary/40"
+                      }`}
+                    >
+                      {c.name}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+            {subs.length > 0 && (
+              <div className="overflow-x-auto scrollbar-none">
+                <div className="flex gap-2 w-max pb-1">
+                  <button
+                    onClick={() => setSelectedCategories([activeParent!.id])}
+                    className={`shrink-0 px-3 py-1.5 rounded-full text-[11px] font-light border transition-all ${
+                      selectedCategories.includes(activeParent!.id) && !subs.some(s => selectedCategories.includes(s.id))
+                        ? "bg-primary/15 text-primary border-primary/40"
+                        : "bg-white/60 text-foreground/70 border-border hover:border-primary/40"
+                    }`}
+                  >
+                    Усі {activeParent!.name.toLowerCase()}
+                  </button>
+                  {subs.map(s => (
+                    <button
+                      key={s.id}
+                      onClick={() => setSelectedCategories([s.id])}
+                      className={`shrink-0 px-3 py-1.5 rounded-full text-[11px] font-light border transition-all ${
+                        selectedCategories.includes(s.id)
+                          ? "bg-primary text-white border-primary"
+                          : "bg-white/60 text-foreground/70 border-border hover:border-primary/40"
+                      }`}
+                    >
+                      {s.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })()}
 
       <div className="grid lg:grid-cols-[280px_1fr] gap-8">
         <aside className="hidden lg:block">

@@ -30,6 +30,7 @@ export interface DBCategory {
   description: string | null;
   icon: string | null;
   position: number;
+  parent_id: string | null;
 }
 
 export interface DBProduct {

@@ -23,6 +23,17 @@ const iconMap: Record<string, LucideIcon> = {
   Footprints,
 };
 
+// Іконки за slug — надійніше ніж з бази
+const slugIconMap: Record<string, LucideIcon> = {
+  "ortopedychni-podushky": BedDouble,
+  "ortopedychni-masazhni-kylymky": Activity,
+  "ortezy-i-bandazhi": Shield,
+  "masazhery": Zap,
+  "tovary-dlia-krasy": Sparkles,
+  "rozvyvaiuchi-ihrashky": Blocks,
+  "ortopedychni-ustilky": Footprints,
+};
+
 export interface DBCategory {
   id: string;
   slug: string;
@@ -71,7 +82,7 @@ export const useCategoriesAsLegacy = () => {
   const categories: Category[] = data.map((c) => ({
     id: c.slug as CategoryId,
     name: c.name,
-    icon: (c.icon && iconMap[c.icon]) || Tag,
+    icon: slugIconMap[c.slug] || (c.icon && iconMap[c.icon]) || Tag,
     description: c.description ?? "",
     parentId: c.parent_id ? ((slugById.get(c.parent_id) ?? null) as CategoryId | null) : null,
   }));

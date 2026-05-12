@@ -7,7 +7,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { SlidersHorizontal, X } from "lucide-react";
+import { SlidersHorizontal, X, BedDouble, Activity, Shield, Zap, Sparkles, Blocks, Footprints, ChevronRight, ChevronDown, type LucideIcon } from "lucide-react";
+
+const categoryIcons: Record<string, LucideIcon> = {
+  "ortopedychni-podushky": BedDouble,
+  "ortopedychni-masazhni-kylymky": Activity,
+  "ortezy-i-bandazhi": Shield,
+  "masazhery": Zap,
+  "tovary-dlia-krasy": Sparkles,
+  "rozvyvaiuchi-ihrashky": Blocks,
+  "ortopedychni-ustilky": Footprints,
+};
 
 const MAX_PRICE = 5000;
 
@@ -78,52 +88,59 @@ const Catalog = () => {
 
   const Filters = () => (
     <div className="space-y-6">
+      {/* Категорії — акордеон з іконками */}
       <div>
-        <h3 className="text-xs font-semibold text-muted-foreground mb-4 uppercase tracking-widest">Категорії</h3>
+        <h3 className="text-[10px] font-semibold text-muted-foreground mb-3 uppercase tracking-widest">Категорії</h3>
         <div className="flex flex-col gap-1">
           {topCategories.map(c => {
             const subs = categories.filter(s => s.parentId === c.id);
             const parentSelected = selectedCategories.includes(c.id);
             const anySubSelected = subs.some(s => selectedCategories.includes(s.id));
             const isOpen = parentSelected || anySubSelected;
+            const Icon = categoryIcons[c.id] ?? BedDouble;
             return (
               <div key={c.id}>
-                {/* Головна категорія */}
+                {/* Головна категорія з іконкою */}
                 <button
                   onClick={() => toggleCategory(c.id)}
-                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-light transition-all duration-200 ${
+                  className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-light transition-all duration-200 ${
                     parentSelected
                       ? "bg-primary text-white shadow-sm"
                       : "text-foreground hover:bg-secondary hover:text-primary"
                   }`}
                 >
-                  <span>{c.name}</span>
+                  <Icon
+                    className={`h-4 w-4 shrink-0 ${parentSelected ? "text-white/90" : "text-muted-foreground"}`}
+                    strokeWidth={1.5}
+                  />
+                  <span className="flex-1 text-left">{c.name}</span>
                   {subs.length > 0 && (
-                    <span className={`text-xs ml-2 transition-transform duration-200 ${isOpen ? "rotate-90" : ""} ${parentSelected ? "text-white/70" : "text-muted-foreground"}`}>
-                      ›
-                    </span>
+                    isOpen
+                      ? <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform ${parentSelected ? "text-white/70" : "text-muted-foreground"}`} />
+                      : <ChevronRight className={`h-3.5 w-3.5 shrink-0 ${parentSelected ? "text-white/70" : "text-muted-foreground"}`} />
                   )}
                 </button>
 
-                {/* Підкатегорії */}
+                {/* Підкатегорії з відступом і лінією */}
                 {isOpen && subs.length > 0 && (
-                  <div className="ml-4 mt-1 mb-1 border-l-2 border-primary/20 pl-3 flex flex-col gap-0.5">
-                    {subs.map(s => (
-                      <button
-                        key={s.id}
-                        onClick={() => toggleCategory(s.id)}
-                        className={`w-full text-left px-3 py-2 rounded-lg text-xs font-light transition-all duration-200 ${
-                          selectedCategories.includes(s.id)
-                            ? "bg-primary/10 text-primary font-medium"
-                            : "text-foreground/70 hover:bg-secondary hover:text-primary"
-                        }`}
-                      >
-                        {selectedCategories.includes(s.id) && (
-                          <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary mr-2 mb-0.5" />
-                        )}
-                        {s.name}
-                      </button>
-                    ))}
+                  <div className="ml-6 mt-0.5 mb-1 border-l-2 border-primary/25 pl-3 flex flex-col gap-0.5">
+                    {subs.map(s => {
+                      const subSelected = selectedCategories.includes(s.id);
+                      return (
+                        <button
+                          key={s.id}
+                          onClick={() => toggleCategory(s.id)}
+                          className={`w-full flex items-center gap-2 text-left px-2.5 py-1.5 rounded-lg text-xs transition-all duration-200 ${
+                            subSelected
+                              ? "bg-primary/10 text-primary font-medium"
+                              : "text-foreground/65 hover:bg-secondary hover:text-primary font-light"
+                          }`}
+                        >
+                          <span className={`inline-block w-1.5 h-1.5 rounded-full shrink-0 transition-colors ${subSelected ? "bg-primary" : "bg-border"}`} />
+                          {s.name}
+                        </button>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -132,23 +149,24 @@ const Catalog = () => {
         </div>
       </div>
 
-      <div>
-        <h3 className="text-xs font-medium text-muted-foreground mb-4 uppercase tracking-widest">Ціна (₴)</h3>
-        <div className="flex items-center gap-3">
+      {/* Ціна */}
+      <div className="border-t border-border/40 pt-5">
+        <h3 className="text-[10px] font-semibold text-muted-foreground mb-3 uppercase tracking-widest">Ціна (₴)</h3>
+        <div className="flex items-center gap-2">
           <Input
             type="number"
             placeholder="Від"
             value={minPrice}
             onChange={e => setMinPrice(e.target.value)}
-            className="rounded-xl border-white/10 font-light text-sm"
+            className="rounded-xl border-border/60 font-light text-sm"
           />
-          <span className="text-muted-foreground font-light">—</span>
+          <span className="text-muted-foreground font-light shrink-0">—</span>
           <Input
             type="number"
             placeholder="До"
             value={maxPrice}
             onChange={e => setMaxPrice(e.target.value)}
-            className="rounded-xl border-white/10 font-light text-sm"
+            className="rounded-xl border-border/60 font-light text-sm"
           />
         </div>
       </div>

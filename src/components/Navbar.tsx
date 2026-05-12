@@ -97,15 +97,32 @@ export const Navbar = () => {
                   Усі товари
                 </button>
                 <div className="my-1 h-px bg-border" />
-                {categories.map(c => (
-                  <button
-                    key={c.id}
-                    onClick={() => goToCategory(c.id)}
-                    className="w-full text-left rounded-xl px-3 py-2 text-sm font-light text-foreground/80 hover:bg-secondary hover:text-primary"
-                  >
-                    {c.name}
-                  </button>
-                ))}
+                {categories.filter(c => !c.parentId).map(c => {
+                  const subs = categories.filter(s => s.parentId === c.id);
+                  return (
+                    <div key={c.id}>
+                      <button
+                        onClick={() => goToCategory(c.id)}
+                        className="w-full text-left rounded-xl px-3 py-2 text-sm font-light text-foreground/80 hover:bg-secondary hover:text-primary"
+                      >
+                        {c.name}
+                      </button>
+                      {subs.length > 0 && (
+                        <div className="ml-3 border-l border-border/60 pl-2">
+                          {subs.map(s => (
+                            <button
+                              key={s.id}
+                              onClick={() => goToCategory(s.id)}
+                              className="w-full text-left rounded-xl px-3 py-1.5 text-xs font-light text-foreground/65 hover:bg-secondary hover:text-primary"
+                            >
+                              {s.name}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>

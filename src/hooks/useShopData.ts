@@ -66,11 +66,14 @@ export const useDBCategories = () =>
 
 export const useCategoriesAsLegacy = () => {
   const q = useDBCategories();
-  const categories: Category[] = (q.data ?? []).map((c) => ({
+  const data = q.data ?? [];
+  const slugById = new Map(data.map((c) => [c.id, c.slug]));
+  const categories: Category[] = data.map((c) => ({
     id: c.slug as CategoryId,
     name: c.name,
     icon: (c.icon && iconMap[c.icon]) || Tag,
     description: c.description ?? "",
+    parentId: c.parent_id ? ((slugById.get(c.parent_id) ?? null) as CategoryId | null) : null,
   }));
   return { ...q, categories };
 };

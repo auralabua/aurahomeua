@@ -1,69 +1,53 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, type LucideIcon } from "lucide-react";
 import { Category } from "@/data/products";
-import pillows from "@/assets/cat-pillows.jpg";
-import mats from "@/assets/cat-mats.jpg";
-import braces from "@/assets/cat-braces.jpg";
-import massagers from "@/assets/cat-massagers.jpg";
-import beauty from "@/assets/cat-beauty.jpg";
-import toys from "@/assets/cat-toys.jpg";
-import insoles from "@/assets/cat-insoles.jpg";
 
-const imageMap: Record<string, string> = {
-  pillows, mats, braces, massagers, beauty, toys, insoles,
-  "ortopedychni-podushky": pillows,
-  "ortopedychni-masazhni-kylymky": mats,
-  "ortezy-i-bandazhi": braces,
-  masazhery: massagers,
-  "tovary-dlia-krasy": beauty,
-  "rozvyvaiuchi-ihrashky": toys,
-  "ortopedychni-ustilky": insoles,
+const categoryConfig: Record<string, { bg: string; accent: string }> = {
+  "ortopedychni-podushky":         { bg: "from-[#F5EFE6] to-[#EDE3D5]", accent: "#8A6440" },
+  "ortopedychni-masazhni-kylymky": { bg: "from-[#EAF2E8] to-[#D8EAD5]", accent: "#3D7A55" },
+  "ortezy-i-bandazhi":             { bg: "from-[#E8EDF5] to-[#D5DEEA]", accent: "#3D5A8A" },
+  "masazhery":                     { bg: "from-[#F0EAE8] to-[#E5D8D5]", accent: "#8A4040" },
+  "tovary-dlia-krasy":             { bg: "from-[#F0E8F0] to-[#E5D5E5]", accent: "#8A4070" },
+  "rozvyvaiuchi-ihrashky":         { bg: "from-[#F5F0E0] to-[#EAE5CC]", accent: "#7A6A20" },
+  "ortopedychni-ustilky":          { bg: "from-[#E8F2F0] to-[#D5EAE8]", accent: "#2A7070" },
 };
 
-const nameMap: Array<[string, string]> = [
-  ["подуш", pillows],
-  ["килим", mats],
-  ["ортез", braces],
-  ["бандаж", braces],
-  ["масаж", massagers],
-  ["крас", beauty],
-  ["іграш", toys],
-  ["устіл", insoles],
-];
-
-const getImage = (c: Category) =>
-  imageMap[c.id] ??
-  nameMap.find(([n]) => c.name.toLowerCase().includes(n))?.[1] ??
-  pillows;
-
 export const CategoryCard = ({ category }: { category: Category }) => {
-  const img = getImage(category);
+  const cfg = categoryConfig[category.id] ?? { bg: "from-[#F5F0EA] to-[#EDE3D5]", accent: "#3D7A55" };
+  const Icon = category.icon as LucideIcon | undefined;
+
   return (
     <Link
       to={`/catalog?category=${category.id}`}
-      className="group relative block overflow-hidden rounded-3xl border border-border bg-secondary shadow-soft transition-all duration-500 hover:shadow-elevated hover:-translate-y-1"
+      className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br ${cfg.bg} p-5 border border-white/60 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card`}
       style={{ aspectRatio: "3/4" }}
     >
-      <img
-        src={img}
-        alt={category.name}
-        loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
-        <div className="text-white">
-          <h3 className="text-lg font-light leading-tight">{category.name}</h3>
-          {category.description && (
-            <p className="mt-1 text-xs font-light text-white/75 line-clamp-1">
-              {category.description}
-            </p>
-          )}
+      {/* Top accent */}
+      <div className="w-6 h-0.5 rounded-full transition-all duration-300 group-hover:w-10" style={{ backgroundColor: cfg.accent }} />
+
+      {/* Icon */}
+      {Icon && (
+        <div className="mt-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/60 transition-transform duration-300 group-hover:scale-110">
+          <Icon size={26} strokeWidth={1.4} style={{ color: cfg.accent }} />
         </div>
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/95 text-foreground transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
-          <ArrowRight className="h-4 w-4" />
-        </span>
+      )}
+
+      {/* Text */}
+      <div className="mt-auto">
+        <p className="text-[9px] font-medium uppercase tracking-widest mb-1.5 flex items-center gap-1 transition-all duration-300" style={{ color: cfg.accent }}>
+          Переглянути <ArrowRight size={9} />
+        </p>
+        <h3 className="font-light text-[13px] leading-snug text-foreground">{category.name}</h3>
+        {category.description && (
+          <p className="text-[11px] text-muted-foreground mt-1 line-clamp-2 font-light">{category.description}</p>
+        )}
       </div>
+
+      {/* Decorative circle */}
+      <div
+        className="absolute -bottom-8 -right-8 w-24 h-24 rounded-full opacity-10 transition-all duration-500 group-hover:opacity-20 group-hover:scale-110"
+        style={{ backgroundColor: cfg.accent }}
+      />
     </Link>
   );
 };

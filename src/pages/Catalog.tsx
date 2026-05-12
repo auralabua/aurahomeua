@@ -32,9 +32,28 @@ const Catalog = () => {
   const toggleCategory = (id: CategoryId) =>
     setSelectedCategories(prev => prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id]);
 
+  const childrenBySlug = useMemo(() => {
+    const m = new Map<CategoryId, CategoryId[]>();
+    categories.forEach(c => {
+      if (c.parentId) {
+        const arr = m.get(c.parentId) ?? [];
+        arr.push(c.id);
+        m.set(c.parentId, arr);
+      }
+    });
+    return m;
+  }, [categories]);
+
+  const topCategories = useMemo(() => categories.filter(c => !c.parentId), [categories]);
+
   const filtered = useMemo(() => {
+    const expanded = new Set<CategoryId>();
+    selectedCategories.forEach(id => {
+      expanded.add(id);
+      (childrenBySlug.get(id) ?? []).forEach(c => expanded.add(c));
+    });
     let list = products.filter(p => {
-      if (selectedCategories.length && !selectedCategories.includes(p.category)) return false;
+      if (selectedCategories.length && !expanded.has(p.category)) return false;
       if (minPrice && p.price < Number(minPrice)) return false;
       if (maxPrice && p.price > Number(maxPrice)) return false;
       if (query && !p.name.toLowerCase().includes(query.toLowerCase())) return false;
@@ -44,7 +63,7 @@ const Catalog = () => {
     if (sort === "price_desc") list = [...list].sort((a, b) => b.price - a.price);
     if (sort === "name_asc") list = [...list].sort((a, b) => a.name.localeCompare(b.name));
     return list;
-  }, [selectedCategories, minPrice, maxPrice, query, sort, products]);
+  }, [selectedCategories, minPrice, maxPrice, query, sort, products, childrenBySlug]);
 
   const reset = () => {
     setSelectedCategories([]);
@@ -61,20 +80,39 @@ const Catalog = () => {
     <div className="space-y-8">
       <div>
         <h3 className="text-xs font-medium text-muted-foreground mb-4 uppercase tracking-widest">Категорії</h3>
-        <div className="flex flex-wrap gap-2">
-          {categories.map(c => (
-            <button
-              key={c.id}
-              onClick={() => toggleCategory(c.id)}
-              className={`px-4 py-2 rounded-full text-sm font-light transition-all duration-200 border ${
-                selectedCategories.includes(c.id)
-                  ? "bg-primary text-white border-primary"
-                  : "bg-transparent text-foreground border-white/10 hover:border-primary/50 hover:text-primary"
-              }`}
-            >
-              {c.name}
-            </button>
-          ))}
+        <div className="flex flex-col gap-2">
+          {topCategories.map(c => {
+            const subs = categories.filter(s => s.parentId === c.id);
+            const parentSelected = selectedCategories.includes(c.id);
+            const anySubSelected = subs.some(s => selectedCategories.includes(s.id));
+            return (
+              <div key={c.id} className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => toggleCategory(c.id)}
+                  className={`px-4 py-2 rounded-full text-sm font-light transition-all duration-200 border ${
+                    parentSelected
+                      ? "bg-primary text-white border-primary"
+                      : "bg-transparent text-foreground border-white/10 hover:border-primary/50 hover:text-primary"
+                  }`}
+                >
+                  {c.name}
+                </button>
+                {(parentSelected || anySubSelected) && subs.map(s => (
+                  <button
+                    key={s.id}
+                    onClick={() => toggleCategory(s.id)}
+                    className={`px-3 py-1.5 rounded-full text-xs font-light transition-all duration-200 border ${
+                      selectedCategories.includes(s.id)
+                        ? "bg-primary text-white border-primary"
+                        : "bg-transparent text-foreground/70 border-white/10 hover:border-primary/50 hover:text-primary"
+                    }`}
+                  >
+                    {s.name}
+                  </button>
+                ))}
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -146,33 +184,76 @@ const Catalog = () => {
       </header>
 
       {/* Mobile category quick-switch strip */}
-      <div className="lg:hidden -mx-4 px-4 mb-6 overflow-x-auto scrollbar-none">
-        <div className="flex gap-2 w-max pb-1">
-          <button
-            onClick={() => setSelectedCategories([])}
-            className={`shrink-0 px-4 py-2 rounded-full text-xs font-light border transition-all ${
-              selectedCategories.length === 0
-                ? "bg-primary text-white border-primary"
-                : "bg-white/70 text-foreground/80 border-border hover:border-primary/40"
-            }`}
-          >
-            Усі
-          </button>
-          {categories.map(c => (
-            <button
-              key={c.id}
-              onClick={() => setSelectedCategories([c.id])}
-              className={`shrink-0 px-4 py-2 rounded-full text-xs font-light border transition-all ${
-                selectedCategories.includes(c.id)
-                  ? "bg-primary text-white border-primary"
-                  : "bg-white/70 text-foreground/80 border-border hover:border-primary/40"
-              }`}
-            >
-              {c.name}
-            </button>
-          ))}
-        </div>
-      </div>
+      {(() => {
+        const activeParent = topCategories.find(c =>
+          selectedCategories.includes(c.id) ||
+          categories.some(s => s.parentId === c.id && selectedCategories.includes(s.id))
+        );
+        const subs = activeParent ? categories.filter(s => s.parentId === activeParent.id) : [];
+        return (
+          <div className="lg:hidden -mx-4 px-4 mb-6 space-y-2">
+            <div className="overflow-x-auto scrollbar-none">
+              <div className="flex gap-2 w-max pb-1">
+                <button
+                  onClick={() => setSelectedCategories([])}
+                  className={`shrink-0 px-4 py-2 rounded-full text-xs font-light border transition-all ${
+                    selectedCategories.length === 0
+                      ? "bg-primary text-white border-primary"
+                      : "bg-white/70 text-foreground/80 border-border hover:border-primary/40"
+                  }`}
+                >
+                  Усі
+                </button>
+                {topCategories.map(c => {
+                  const isActive = c.id === activeParent?.id;
+                  return (
+                    <button
+                      key={c.id}
+                      onClick={() => setSelectedCategories([c.id])}
+                      className={`shrink-0 px-4 py-2 rounded-full text-xs font-light border transition-all ${
+                        isActive
+                          ? "bg-primary text-white border-primary"
+                          : "bg-white/70 text-foreground/80 border-border hover:border-primary/40"
+                      }`}
+                    >
+                      {c.name}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+            {subs.length > 0 && (
+              <div className="overflow-x-auto scrollbar-none">
+                <div className="flex gap-2 w-max pb-1">
+                  <button
+                    onClick={() => setSelectedCategories([activeParent!.id])}
+                    className={`shrink-0 px-3 py-1.5 rounded-full text-[11px] font-light border transition-all ${
+                      selectedCategories.includes(activeParent!.id) && !subs.some(s => selectedCategories.includes(s.id))
+                        ? "bg-primary/15 text-primary border-primary/40"
+                        : "bg-white/60 text-foreground/70 border-border hover:border-primary/40"
+                    }`}
+                  >
+                    Усі {activeParent!.name.toLowerCase()}
+                  </button>
+                  {subs.map(s => (
+                    <button
+                      key={s.id}
+                      onClick={() => setSelectedCategories([s.id])}
+                      className={`shrink-0 px-3 py-1.5 rounded-full text-[11px] font-light border transition-all ${
+                        selectedCategories.includes(s.id)
+                          ? "bg-primary text-white border-primary"
+                          : "bg-white/60 text-foreground/70 border-border hover:border-primary/40"
+                      }`}
+                    >
+                      {s.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })()}
 
       <div className="grid lg:grid-cols-[280px_1fr] gap-8">
         <aside className="hidden lg:block">

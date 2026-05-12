@@ -24,6 +24,7 @@ export interface Category {
   name: string;
   icon: LucideIcon;
   description: string;
+  parentId?: CategoryId | null;
 }
 
 // Default static categories (used as fallback). Live data comes from DB via useCategoriesAsLegacy().

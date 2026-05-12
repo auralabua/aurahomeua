@@ -57,13 +57,21 @@ const Catalog = () => {
   const topCategories = useMemo(() => categories.filter(c => !c.parentId), [categories]);
 
   const filtered = useMemo(() => {
-    const expanded = new Set<CategoryId>();
-    selectedCategories.forEach(id => {
-      expanded.add(id);
-      (childrenBySlug.get(id) ?? []).forEach(c => expanded.add(c));
-    });
+    // Якщо вибрана батьківська категорія — показуємо тільки її товари (без підкатегорій)
+    // Якщо вибрана підкатегорія — показуємо тільки її товари
+    // Якщо вибрано кілька — OR логіка
     let list = products.filter(p => {
-      if (selectedCategories.length && !expanded.has(p.category)) return false;
+      if (selectedCategories.length) {
+        const match = selectedCategories.some(sel => {
+          if (sel === p.category) return true;
+          // якщо sel — батьківська і немає вибраних підкатегорій з цієї групи — включаємо дочірні
+          const children = childrenBySlug.get(sel) ?? [];
+          const anyChildSelected = children.some(ch => selectedCategories.includes(ch));
+          if (!anyChildSelected && children.includes(p.category)) return true;
+          return false;
+        });
+        if (!match) return false;
+      }
       if (minPrice && p.price < Number(minPrice)) return false;
       if (maxPrice && p.price > Number(maxPrice)) return false;
       if (query && !p.name.toLowerCase().includes(query.toLowerCase())) return false;
@@ -84,6 +92,11 @@ const Catalog = () => {
     setSearchParams({});
   };
 
+  const [openCategories, setOpenCategories] = useState<CategoryId[]>([]);
+
+  const toggleOpen = (id: CategoryId) =>
+    setOpenCategories(prev => prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id]);
+
   const hasFilters = selectedCategories.length > 0 || minPrice || maxPrice || query;
 
   const Filters = () => (
@@ -95,33 +108,40 @@ const Catalog = () => {
           {topCategories.map(c => {
             const subs = categories.filter(s => s.parentId === c.id);
             const parentSelected = selectedCategories.includes(c.id);
-            const anySubSelected = subs.some(s => selectedCategories.includes(s.id));
-            const isOpen = parentSelected || anySubSelected;
+            const isOpen = openCategories.includes(c.id) || subs.some(s => selectedCategories.includes(s.id));
             const Icon = categoryIcons[c.id] ?? BedDouble;
             return (
               <div key={c.id}>
-                {/* Головна категорія з іконкою */}
-                <button
-                  onClick={() => toggleCategory(c.id)}
-                  className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-light transition-all duration-200 ${
-                    parentSelected
-                      ? "bg-primary text-white shadow-sm"
-                      : "text-foreground hover:bg-secondary hover:text-primary"
-                  }`}
-                >
-                  <Icon
-                    className={`h-4 w-4 shrink-0 ${parentSelected ? "text-white/90" : "text-muted-foreground"}`}
-                    strokeWidth={1.5}
-                  />
-                  <span className="flex-1 text-left">{c.name}</span>
+                {/* Рядок категорії: чекбокс + назва + стрілка */}
+                <div className={`flex items-center gap-1 rounded-xl transition-all duration-200 ${
+                  parentSelected ? "bg-primary text-white shadow-sm" : "hover:bg-secondary"
+                }`}>
+                  {/* Кнопка вибору категорії */}
+                  <button
+                    onClick={() => toggleCategory(c.id)}
+                    className="flex items-center gap-2.5 flex-1 px-3 py-2.5 text-sm font-light text-left"
+                  >
+                    <Icon
+                      className={`h-4 w-4 shrink-0 ${parentSelected ? "text-white/90" : "text-muted-foreground"}`}
+                      strokeWidth={1.5}
+                    />
+                    <span className={`flex-1 ${parentSelected ? "text-white" : "text-foreground"}`}>{c.name}</span>
+                  </button>
+                  {/* Кнопка розгортання підкатегорій */}
                   {subs.length > 0 && (
-                    isOpen
-                      ? <ChevronDown className={`h-3.5 w-3.5 shrink-0 transition-transform ${parentSelected ? "text-white/70" : "text-muted-foreground"}`} />
-                      : <ChevronRight className={`h-3.5 w-3.5 shrink-0 ${parentSelected ? "text-white/70" : "text-muted-foreground"}`} />
+                    <button
+                      onClick={() => toggleOpen(c.id)}
+                      className={`px-2 py-2.5 rounded-r-xl transition-colors ${parentSelected ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-primary"}`}
+                    >
+                      {isOpen
+                        ? <ChevronDown className="h-3.5 w-3.5" />
+                        : <ChevronRight className="h-3.5 w-3.5" />
+                      }
+                    </button>
                   )}
-                </button>
+                </div>
 
-                {/* Підкатегорії з відступом і лінією */}
+                {/* Підкатегорії */}
                 {isOpen && subs.length > 0 && (
                   <div className="ml-6 mt-0.5 mb-1 border-l-2 border-primary/25 pl-3 flex flex-col gap-0.5">
                     {subs.map(s => {

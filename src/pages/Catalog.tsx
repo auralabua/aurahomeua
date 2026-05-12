@@ -40,7 +40,9 @@ const Catalog = () => {
   useEffect(() => { setQuery(searchParams.get("q") || ""); }, [searchParams]);
 
   const toggleCategory = (id: CategoryId) =>
-    setSelectedCategories(prev => prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id]);
+    setSelectedCategories(prev =>
+      prev.includes(id) ? [] : [id]
+    );
 
   const childrenBySlug = useMemo(() => {
     const m = new Map<CategoryId, CategoryId[]>();

@@ -1,9 +1,101 @@
-import { Link } from "react-router-dom";
-import { ArrowRight, Truck, ShieldCheck, CreditCard, Headphones, Star, HeartPulse, Moon, Footprints, BadgeCheck, Timer, Stethoscope } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { CategoryCard } from "@/components/CategoryCard";
-import { ProductCard } from "@/components/ProductCard";
-import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
-import heroImg from "@/assets/hero-minimal.jpg";
-const reviews=[{name:"Ірина К.",city:"Київ",text:"Допомогли підібрати ортопедичну подушку і пояснили, на що звернути увагу.",rating:5},{name:"Олександр П.",city:"Львів",text:"Замовляв масажер для спини. Швидко відповіли, без навʼязування найдорожчого.",rating:5},{name:"Марія С.",city:"Одеса",text:"Подобається, що товари зібрані під здоровʼя, комфорт і домашнє відновлення.",rating:5}];
-const Index=()=>{const{products}=useProductsAsLegacy();const{categories:allCats}=useCategoriesAsLegacy();const categories=allCats.filter(c=>!c.parentId);const featured=[...products.filter(p=>p.badge==="Хіт продажів"),...products.filter(p=>p.badge!=="Хіт продажів")].slice(0,8);return <div className="overflow-hidden"><section className="relative"><div className="absolute inset-x-0 top-0 -z-10 h-[720px] gradient-hero"/><div className="container grid min-h-[680px] items-center gap-10 py-16 lg:grid-cols-[1.05fr_.95fr]"><div className="max-w-3xl animate-fade-in"><p className="aura-kicker mb-5">AURA WELL / здоровʼя • ортопедія • комфорт</p><h1 className="text-4xl md:text-6xl lg:text-7xl font-light leading-[1.02]">Товари для здоровʼя, відновлення та комфорту вдома</h1><p className="mt-7 max-w-xl text-lg md:text-xl font-light leading-relaxed text-muted-foreground">Ортопедичні подушки, устілки, бандажі, масажери та корисні товари для щоденного самопочуття — з людською консультацією і зрозумілим вибором.</p><div className="mt-9 flex flex-wrap gap-4"><Button asChild size="lg" className="h-13 rounded-full btn-aura px-8 font-light"><Link to="/catalog">Перейти в каталог <ArrowRight className="ml-2 h-4 w-4"/></Link></Button><Button asChild size="lg" variant="outline" className="h-13 rounded-full border-border bg-white/70 px-8 font-light text-foreground hover:bg-white"><a href="#featured">Популярні товари</a></Button></div>{categories.length>0&&<div className="mt-8 max-w-xl"><p className="aura-kicker mb-3">наші категорії</p><div className="flex flex-wrap gap-2">{categories.map(c=><Link key={c.id} to={`/catalog?category=${c.id}`} className="rounded-full border border-border bg-white/70 px-3.5 py-1.5 text-xs font-light text-foreground/80 transition-smooth hover:border-primary/40 hover:bg-white hover:text-primary">{c.name}</Link>)}</div></div>}<div className="mt-10 grid max-w-xl grid-cols-3 gap-3 text-center"><div className="glass rounded-2xl p-4"><div className="text-2xl font-light text-primary">UA</div><div className="mt-1 text-[11px] text-muted-foreground">доставка</div></div><div className="glass rounded-2xl p-4"><div className="text-2xl font-light text-primary">24/7</div><div className="mt-1 text-[11px] text-muted-foreground">онлайн</div></div><div className="glass rounded-2xl p-4"><div className="text-2xl font-light text-primary">Care</div><div className="mt-1 text-[11px] text-muted-foreground">підбір</div></div></div></div><div className="relative"><div className="absolute -inset-6 rounded-[3rem] bg-primary/10 blur-3xl"/><div className="relative overflow-hidden rounded-[2.2rem] border border-border bg-white p-3 shadow-elevated"><img src={heroImg} alt="Aura Well товари для здоровʼя" className="aspect-[5/4] w-full rounded-[1.7rem] object-cover opacity-95"/><div className="absolute bottom-7 left-7 right-7 glass rounded-3xl p-5"><div className="flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-2xl bg-primary/12 text-primary"><Stethoscope className="h-5 w-5"/></span><div><p className="text-sm font-light">Підбір під вашу потребу</p><p className="text-xs text-muted-foreground">спина, сон, стопи, відновлення, домашній догляд</p></div></div></div></div></div></div></section><section className="container -mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4">{[{icon:Truck,title:"Швидка доставка",desc:"Нова Пошта / Meest"},{icon:ShieldCheck,title:"Гарантія",desc:"Перевірені товари"},{icon:CreditCard,title:"Зручна оплата",desc:"Картка або післяплата"},{icon:Headphones,title:"Консультація",desc:"Допоможемо обрати"}].map((f,i)=><div key={i} className="glass rounded-3xl p-5"><f.icon className="mb-4 h-6 w-6 text-primary" strokeWidth={1.5}/><div className="text-sm font-light">{f.title}</div><div className="mt-1 text-xs text-muted-foreground">{f.desc}</div></div>)}</section><section className="container py-20"><div className="mb-10 flex items-end justify-between gap-4"><div><p className="aura-kicker mb-3">оберіть напрямок</p><h2 className="text-4xl md:text-5xl">Категорії товарів</h2></div><Link to="/catalog" className="hidden items-center gap-2 text-sm text-primary transition-smooth hover:gap-3 sm:flex">Усі товари <ArrowRight className="h-4 w-4"/></Link></div><div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">{categories.map(c=><CategoryCard key={c.id} category={c}/>)}</div></section><section className="container py-12"><div className="mx-auto max-w-3xl text-center"><p className="aura-kicker mb-4">про магазин</p><h2 className="text-3xl md:text-5xl font-light leading-tight">AURA WELL — простір для здоровʼя й щоденного комфорту</h2><p className="mt-6 text-base md:text-lg font-light leading-relaxed text-muted-foreground">Ми зібрали перевірені товари для ортопедії, відновлення та домашнього догляду: подушки, устілки, бандажі, масажери, аплікатори і корисні речі для краси та розвитку. Допомагаємо обрати без зайвого — з турботою про ваше самопочуття.</p></div></section><section id="featured" className="container py-20"><div className="mb-10 flex items-end justify-between gap-4"><div><p className="aura-kicker mb-3">рекомендоване</p><h2 className="text-4xl md:text-5xl">Популярні товари</h2></div><Link to="/catalog" className="hidden items-center gap-2 text-sm text-primary transition-smooth hover:gap-3 sm:flex">Всі товари <ArrowRight className="h-4 w-4"/></Link></div><div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">{featured.map(p=><ProductCard key={p.id} product={p}/>)}</div></section><section className="container py-12"><div className="aura-card p-8 md:p-12"><div className="text-center"><p className="aura-kicker mb-3">довіра</p><h2 className="text-4xl md:text-5xl">Відгуки клієнтів</h2></div><div className="mt-10 grid gap-5 md:grid-cols-3">{reviews.map((r,i)=><div key={i} className="rounded-3xl border border-border bg-white/70 p-6"><div className="mb-4 flex gap-1">{Array.from({length:r.rating}).map((_,k)=><Star key={k} className="h-4 w-4 fill-primary text-primary"/>)}</div><p className="text-sm leading-relaxed text-foreground/86">“{r.text}”</p><div className="mt-6 border-t border-border pt-4"><div className="text-sm font-light">{r.name}</div><div className="text-xs text-muted-foreground">{r.city}</div></div></div>)}</div></div></section></div>};export default Index;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Premium wellness palette */
+    --background: 40 30% 97%;
+    --foreground: 220 20% 16%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 16%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 16%;
+
+    /* Muted sage green — основний */
+    --primary: 155 28% 38%;
+    --primary-foreground: 0 0% 100%;
+    --primary-soft: 155 28% 94%;
+    --primary-hover: 155 32% 30%;
+
+    /* Warm beige accent */
+    --accent: 35 40% 70%;
+    --accent-foreground: 220 20% 16%;
+    --accent-soft: 35 40% 94%;
+
+    --secondary: 38 28% 93%;
+    --secondary-foreground: 220 20% 16%;
+    --muted: 38 22% 91%;
+    --muted-foreground: 220 8% 50%;
+    --destructive: 0 65% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 36 18% 88%;
+    --input: 36 18% 90%;
+    --ring: 155 28% 38%;
+    --radius: 1.25rem;
+
+    --shadow-soft: 0 4px 24px -8px hsl(155 20% 20% / 0.10);
+    --shadow-card: 0 8px 40px -12px hsl(155 20% 20% / 0.14);
+    --shadow-elevated: 0 16px 60px -20px hsl(155 20% 20% / 0.18);
+    --transition-smooth: all 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+    background-color: hsl(40 30% 97%);
+    min-height: 100vh;
+  }
+  #root { position: relative; z-index: 1; }
+  h1, h2, h3, h4 { font-weight: 300; letter-spacing: -0.02em; }
+  h1 { letter-spacing: -0.035em; }
+  ::selection { background: hsl(var(--primary) / .18); color: hsl(var(--foreground)); }
+}
+
+@layer utilities {
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+  .shadow-elevated { box-shadow: var(--shadow-elevated); }
+  .transition-smooth { transition: var(--transition-smooth); }
+
+  .btn-aura {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    box-shadow: 0 4px 20px -6px hsl(var(--primary) / 0.40);
+  }
+  .btn-aura:hover {
+    background: hsl(var(--primary-hover));
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px -6px hsl(var(--primary) / 0.45);
+  }
+
+  .glass {
+    background: hsl(0 0% 100% / 0.82);
+    border: 1px solid hsl(var(--border) / 0.8);
+    backdrop-filter: blur(16px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .aura-card {
+    @apply rounded-2xl border border-border bg-card shadow-soft;
+  }
+
+  .aura-kicker {
+    @apply text-[10px] uppercase tracking-[0.22em] text-primary font-medium;
+  }
+
+  .text-gradient { color: hsl(var(--primary)); }
+
+  /* Hero gradient — warm, minimal */
+  .hero-bg {
+    background: linear-gradient(135deg,
+      hsl(40 35% 95%) 0%,
+      hsl(38 30% 93%) 50%,
+      hsl(155 18% 92%) 100%
+    );
+  }
+}

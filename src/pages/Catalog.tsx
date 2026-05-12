@@ -32,9 +32,28 @@ const Catalog = () => {
   const toggleCategory = (id: CategoryId) =>
     setSelectedCategories(prev => prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id]);
 
+  const childrenBySlug = useMemo(() => {
+    const m = new Map<CategoryId, CategoryId[]>();
+    categories.forEach(c => {
+      if (c.parentId) {
+        const arr = m.get(c.parentId) ?? [];
+        arr.push(c.id);
+        m.set(c.parentId, arr);
+      }
+    });
+    return m;
+  }, [categories]);
+
+  const topCategories = useMemo(() => categories.filter(c => !c.parentId), [categories]);
+
   const filtered = useMemo(() => {
+    const expanded = new Set<CategoryId>();
+    selectedCategories.forEach(id => {
+      expanded.add(id);
+      (childrenBySlug.get(id) ?? []).forEach(c => expanded.add(c));
+    });
     let list = products.filter(p => {
-      if (selectedCategories.length && !selectedCategories.includes(p.category)) return false;
+      if (selectedCategories.length && !expanded.has(p.category)) return false;
       if (minPrice && p.price < Number(minPrice)) return false;
       if (maxPrice && p.price > Number(maxPrice)) return false;
       if (query && !p.name.toLowerCase().includes(query.toLowerCase())) return false;
@@ -44,7 +63,7 @@ const Catalog = () => {
     if (sort === "price_desc") list = [...list].sort((a, b) => b.price - a.price);
     if (sort === "name_asc") list = [...list].sort((a, b) => a.name.localeCompare(b.name));
     return list;
-  }, [selectedCategories, minPrice, maxPrice, query, sort, products]);
+  }, [selectedCategories, minPrice, maxPrice, query, sort, products, childrenBySlug]);
 
   const reset = () => {
     setSelectedCategories([]);

@@ -1,102 +1,234 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+import { Link } from "react-router-dom";
+import { ArrowRight, Truck, ShieldCheck, CreditCard, Headphones, Star, RotateCcw } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { CategoryCard } from "@/components/CategoryCard";
+import { ProductCard } from "@/components/ProductCard";
+import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 
-/* AURA HOME — soft health & orthopedic redesign */
+const HERO_IMG = "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=900&q=85&auto=format&fit=crop";
 
-@layer base {
-  :root {
-    --background: 42 38% 96%;
-    --foreground: 220 22% 18%;
-    --card: 0 0% 100%;
-    --card-foreground: 220 22% 18%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 22% 18%;
-    --primary: 174 38% 36%;
-    --primary-foreground: 0 0% 100%;
-    --primary-soft: 174 34% 92%;
-    --primary-hover: 174 42% 29%;
-    --accent: 32 54% 72%;
-    --accent-foreground: 220 22% 18%;
-    --accent-soft: 34 58% 92%;
-    --secondary: 38 34% 91%;
-    --secondary-foreground: 220 22% 18%;
-    --muted: 40 28% 90%;
-    --muted-foreground: 220 10% 45%;
-    --destructive: 0 70% 54%;
-    --destructive-foreground: 0 0% 100%;
-    --success: 156 50% 38%;
-    --warning: 35 82% 52%;
-    --border: 36 22% 84%;
-    --input: 36 22% 88%;
-    --ring: 174 38% 36%;
-    --radius: 1.25rem;
-    --gradient-hero: radial-gradient(circle at 18% 12%, hsl(174 38% 36% / 0.16), transparent 28%), radial-gradient(circle at 84% 0%, hsl(32 54% 72% / 0.28), transparent 30%), linear-gradient(135deg, hsl(42 38% 97%), hsl(39 45% 93%) 50%, hsl(176 25% 91%));
-    --gradient-primary: linear-gradient(135deg, hsl(174 38% 36%), hsl(165 34% 46%));
-    --gradient-soft: linear-gradient(180deg, hsl(0 0% 100% / 0.94), hsl(42 38% 96% / 0.92));
-    --shadow-soft: 0 16px 50px -34px hsl(28 25% 34% / 0.35);
-    --shadow-card: 0 26px 80px -44px hsl(174 38% 26% / 0.28);
-    --shadow-elevated: 0 36px 110px -54px hsl(28 25% 34% / 0.38);
-    --shadow-glow: 0 16px 42px -28px hsl(174 38% 30% / 0.45);
-    --transition-smooth: all 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 220 22% 18%;
-    --sidebar-primary: 174 38% 36%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 38 34% 91%;
-    --sidebar-accent-foreground: 220 22% 18%;
-    --sidebar-border: 36 22% 84%;
-    --sidebar-ring: 174 38% 36%;
-  }
-}
+const reviews = [
+  { name: "Ірина К.", city: "Київ", text: "Ортопедична подушка змінила якість сну. Спина перестала боліти вже за тиждень.", rating: 5 },
+  { name: "Олександр П.", city: "Львів", text: "Масажер для спини — найкраща інвестиція в себе. Рекомендую всім хто сидить за комп'ютером.", rating: 5 },
+  { name: "Марія С.", city: "Одеса", text: "Аплікатор Кузнєцова допомагає після довгого робочого дня. Ефект відчутний одразу.", rating: 5 },
+];
 
-@layer base {
-  * { @apply border-border; }
-  html { scroll-behavior: smooth; }
-  body {
-    @apply bg-background text-foreground antialiased;
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background-image:
-      radial-gradient(circle at 12% 8%, hsl(174 38% 36% / 0.10), transparent 28rem),
-      radial-gradient(circle at 86% 4%, hsl(32 54% 72% / 0.20), transparent 30rem),
-      linear-gradient(180deg, hsl(var(--background)), hsl(44 42% 95%));
-    min-height: 100vh;
-  }
-  body::before { content: none; }
-  #root { position: relative; z-index: 1; }
-  h1, h2, h3, h4 { @apply tracking-tight; font-weight: 300; }
-  h1 { letter-spacing: -0.035em; }
-  h2 { letter-spacing: -0.03em; }
-  ::selection { background: hsl(var(--primary) / .22); color: hsl(var(--foreground)); }
-}
+const trust = [
+  { icon: Truck, title: "Доставка по Україні", desc: "Нова Пошта, Meest, Укрпошта" },
+  { icon: ShieldCheck, title: "Гарантія якості", desc: "Перевірені товари" },
+  { icon: CreditCard, title: "Зручна оплата", desc: "Картка або накладений платіж" },
+  { icon: Headphones, title: "Підтримка", desc: "Telegram, Viber, телефон" },
+  { icon: RotateCcw, title: "Легке повернення", desc: "Протягом 14 днів" },
+];
 
-@layer utilities {
-  .gradient-hero { background: var(--gradient-hero); }
-  .gradient-primary { background: var(--gradient-primary); }
-  .gradient-soft { background: var(--gradient-soft); }
-  .shadow-soft { box-shadow: var(--shadow-soft); }
-  .shadow-card { box-shadow: var(--shadow-card); }
-  .shadow-elevated { box-shadow: var(--shadow-elevated); }
-  .shadow-glow { box-shadow: var(--shadow-glow); }
-  .transition-smooth { transition: var(--transition-smooth); }
-  .btn-caramel, .btn-aura { background: var(--gradient-primary); color: hsl(var(--primary-foreground)); box-shadow: var(--shadow-glow); }
-  .btn-caramel:hover, .btn-aura:hover { filter: brightness(1.04); transform: translateY(-1px); }
-  .glass { background: linear-gradient(145deg, hsl(0 0% 100% / .86), hsl(0 0% 100% / .56)); border: 1px solid hsl(var(--border) / .9); box-shadow: var(--shadow-soft); backdrop-filter: blur(18px); }
-  .aura-kicker { @apply text-[11px] uppercase tracking-[0.26em] text-primary font-medium; }
-  .aura-card { @apply rounded-[1.6rem] border border-border bg-card/80 shadow-soft backdrop-blur-xl; }
-  .aura-border { border: 1px solid hsl(var(--border)); }
-  .text-gradient { color: hsl(var(--primary)); }
-  .category-card { background: radial-gradient(circle at 28% 12%, hsl(var(--category-accent, var(--primary)) / .16), transparent 42%), linear-gradient(145deg, hsl(0 0% 100% / .94), hsl(40 35% 96% / .86)); border-color: hsl(var(--border)); }
-  .category-card-pillow { --category-accent: 174 38% 36%; }
-  .category-card-mat { --category-accent: 156 44% 40%; }
-  .category-card-brace { --category-accent: 204 34% 42%; }
-  .category-card-massager { --category-accent: 24 44% 50%; }
-  .category-card-beauty { --category-accent: 332 36% 55%; }
-  .category-card-toy { --category-accent: 35 62% 52%; }
-  .category-card-insole { --category-accent: 178 38% 38%; }
-  .category-card-accent-line { background: linear-gradient(90deg, hsl(var(--category-accent)), transparent); }
-  .category-card-icon-bg { background: hsl(var(--category-accent) / .10); box-shadow: inset 0 0 0 1px hsl(var(--category-accent) / .16); }
-  .category-card-icon, .category-card-action { color: hsl(var(--category-accent)); }
-  .category-card-mark { background-color: hsl(var(--category-accent)); opacity: .10; filter: blur(4px); }
-  .category-card:hover .category-card-mark { opacity: .18; }
-}
+const Index = () => {
+  const { products } = useProductsAsLegacy();
+  const { categories: allCats } = useCategoriesAsLegacy();
+  const categories = allCats.filter(c => !c.parentId);
+  const featured = [...products.filter(p => p.badge === "Хіт продажів"), ...products.filter(p => !p.badge)].slice(0, 8);
+
+  return (
+    <div>
+      {/* ── HERO ── */}
+      <section className="hero-bg">
+        <div className="container grid min-h-[620px] items-center gap-12 py-16 lg:grid-cols-2">
+          {/* Left */}
+          <div className="space-y-8 max-w-2xl">
+            <p className="aura-kicker">Wellness для вашого дому</p>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light leading-[1.04] text-foreground">
+              Комфорт.<br />Відновлення.<br />Якість життя.
+            </h1>
+            <p className="text-lg md:text-xl font-light leading-relaxed text-muted-foreground max-w-lg">
+              Ортопедичні товари, масажери та wellness-девайси для щоденного догляду за собою — з доставкою по всій Україні.
+            </p>
+            <div className="flex flex-wrap gap-4 pt-2">
+              <Button asChild size="lg" className="h-12 rounded-full btn-aura border-0 font-light px-8">
+                <Link to="/catalog">Переглянути колекцію <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="h-12 rounded-full font-light px-8 border-border/60 bg-white/60 hover:bg-white text-foreground">
+                <a href="#featured">Популярні товари</a>
+              </Button>
+            </div>
+          </div>
+
+          {/* Right — hero image */}
+          <div className="relative hidden lg:block">
+            <div className="absolute -inset-4 rounded-[2.5rem] bg-primary/8 blur-2xl" />
+            <div className="relative overflow-hidden rounded-[2rem] border border-border/40 bg-white shadow-elevated">
+              <img
+                src={HERO_IMG}
+                alt="Wellness lifestyle"
+                className="aspect-[4/3] w-full object-cover"
+                loading="eager"
+                onError={e => { e.currentTarget.style.display = "none"; }}
+              />
+              {/* Floating badge */}
+              <div className="absolute bottom-5 left-5 right-5 glass rounded-2xl p-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                    <ShieldCheck className="h-5 w-5 text-primary" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-light text-foreground">Перевірені wellness-товари</p>
+                    <p className="text-xs text-muted-foreground">для спини, сну, постави та відновлення</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TRUST BAR ── */}
+      <section className="border-y border-border/60 bg-white/50">
+        <div className="container py-6">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+            {trust.map((t, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/8">
+                  <t.icon className="h-4 w-4 text-primary" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <p className="text-xs font-medium text-foreground">{t.title}</p>
+                  <p className="text-[11px] text-muted-foreground">{t.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CATEGORIES ── */}
+      <section className="container py-20">
+        <div className="mb-10 flex items-end justify-between gap-4">
+          <div>
+            <p className="aura-kicker mb-3">каталог</p>
+            <h2 className="text-4xl md:text-5xl font-light">Категорії товарів</h2>
+            <p className="mt-2 text-muted-foreground font-light">Оберіть потрібний напрямок</p>
+          </div>
+          <Link to="/catalog" className="hidden items-center gap-2 text-sm text-primary font-light transition-smooth hover:gap-3 sm:flex">
+            Усі товари <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
+          {categories.map(c => <CategoryCard key={c.id} category={c} />)}
+        </div>
+      </section>
+
+      {/* ── FEATURED ── */}
+      <section id="featured" className="bg-secondary/40 py-20">
+        <div className="container">
+          <div className="mb-10 flex items-end justify-between gap-4">
+            <div>
+              <p className="aura-kicker mb-3">рекомендовано</p>
+              <h2 className="text-4xl md:text-5xl font-light">Популярні товари</h2>
+            </div>
+            <Link to="/catalog" className="hidden items-center gap-2 text-sm text-primary font-light transition-smooth hover:gap-3 sm:flex">
+              Всі товари <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
+            {featured.map(p => <ProductCard key={p.id} product={p} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHY US ── */}
+      <section className="container py-20">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <p className="aura-kicker mb-4">наш підхід</p>
+            <h2 className="text-4xl md:text-5xl font-light leading-tight">
+              Wellness — це щоденна турбота про себе
+            </h2>
+            <p className="mt-6 text-base font-light leading-relaxed text-muted-foreground">
+              Ми зібрали перевірені ортопедичні товари, масажери та wellness-девайси для тих, хто цінує якість і комфорт. Без зайвого — тільки те, що справді допомагає.
+            </p>
+            <div className="mt-8 space-y-4">
+              {[
+                "Товари від перевірених виробників",
+                "Консультація щодо вибору",
+                "Швидка доставка по всій Україні",
+                "Легке повернення протягом 14 днів",
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/12">
+                    <div className="h-2 w-2 rounded-full bg-primary" />
+                  </div>
+                  <p className="text-sm font-light text-foreground">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { num: "715+", label: "товарів в каталозі" },
+              { num: "UA", label: "доставка по Україні" },
+              { num: "14", label: "днів на повернення" },
+              { num: "7/7", label: "дні підтримки" },
+            ].map((s, i) => (
+              <div key={i} className="rounded-2xl border border-border/60 bg-white/70 p-6 text-center">
+                <p className="text-4xl font-light text-primary">{s.num}</p>
+                <p className="mt-2 text-xs text-muted-foreground font-light">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── REVIEWS ── */}
+      <section className="bg-secondary/40 py-20">
+        <div className="container">
+          <div className="mb-12 text-center">
+            <p className="aura-kicker mb-3">відгуки</p>
+            <h2 className="text-4xl md:text-5xl font-light">Клієнти про нас</h2>
+          </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {reviews.map((r, i) => (
+              <div key={i} className="rounded-2xl border border-border/40 bg-white p-7">
+                <div className="flex gap-1 mb-5">
+                  {Array.from({ length: r.rating }).map((_, k) => (
+                    <Star key={k} className="h-4 w-4 fill-primary text-primary" />
+                  ))}
+                </div>
+                <p className="text-sm leading-relaxed text-foreground/80 font-light">"{r.text}"</p>
+                <div className="mt-6 pt-5 border-t border-border/40">
+                  <p className="text-sm font-light text-foreground">{r.name}</p>
+                  <p className="text-xs text-muted-foreground">{r.city}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── DELIVERY + PAYMENT ── */}
+      <section className="container py-16 grid md:grid-cols-2 gap-5">
+        <div className="rounded-2xl border border-border/40 bg-white p-8">
+          <Truck className="h-6 w-6 text-primary mb-5" strokeWidth={1.5} />
+          <h3 className="text-xl font-light mb-4">Доставка</h3>
+          <ul className="space-y-2.5 text-sm font-light text-muted-foreground">
+            {["Нова Пошта — відділення або кур'єром", "Meest Express — по Україні", "Укрпошта — по всій Україні"].map((item, i) => (
+              <li key={i} className="flex items-center gap-2.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary/60 shrink-0" />{item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="rounded-2xl border border-border/40 bg-white p-8">
+          <CreditCard className="h-6 w-6 text-primary mb-5" strokeWidth={1.5} />
+          <h3 className="text-xl font-light mb-4">Оплата</h3>
+          <ul className="space-y-2.5 text-sm font-light text-muted-foreground">
+            {["Накладений платіж — оплата при отриманні", "LiqPay — карткою онлайн", "Monobank та ПриватБанк"].map((item, i) => (
+              <li key={i} className="flex items-center gap-2.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary/60 shrink-0" />{item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Index;

@@ -23,7 +23,6 @@ const iconMap: Record<string, LucideIcon> = {
   Footprints,
 };
 
-// Іконки за slug — надійніше ніж з бази
 const slugIconMap: Record<string, LucideIcon> = {
   "ortopedychni-podushky": BedDouble,
   "ortopedychni-masazhni-kylymky": Activity,
@@ -106,9 +105,7 @@ export const useDBProducts = () =>
 export const useProductsAsLegacy = () => {
   const productsQ = useDBProducts();
   const catsQ = useDBCategories();
-
   const slugById = new Map((catsQ.data ?? []).map((c) => [c.id, c.slug]));
-
   const products: Product[] = (productsQ.data ?? []).map((p) => ({
     id: p.legacy_id ?? p.id,
     name: p.name,
@@ -123,7 +120,6 @@ export const useProductsAsLegacy = () => {
     vendorCode: p.vendor_code ?? undefined,
     available: p.available,
   }));
-
   return {
     products,
     isLoading: productsQ.isLoading || catsQ.isLoading,

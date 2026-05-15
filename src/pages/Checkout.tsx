@@ -14,10 +14,6 @@ import { supabase } from "@/integrations/supabase/client";
 type DeliveryMethod = "novaposhta" | "mistexpress";
 type PaymentMethod = "wayforpay" | "cod";
 
-const MERCHANT_ACCOUNT = "aurahomeua_com";
-const MERCHANT_DOMAIN = "aurahomeua.lovable.app";
-const MERCHANT_SECRET = "4122f3c7c6aa3d8627fb436a2fc76885a87ae1e1";
-
 const checkoutSchema = z.object({
   fullName: z.string().trim().min(2, "Вкажіть ім'я та прізвище").max(100),
   phone: z.string().trim().min(10, "Невірний номер телефону").max(20),

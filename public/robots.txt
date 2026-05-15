@@ -1,13 +1,15 @@
 User-agent: *
 Allow: /
 Allow: /catalog
+Allow: /catalog?category=*
 Allow: /product/*
-Allow: /admin/login
+Allow: /about
+Allow: /contacts
 
 Disallow: /admin
+Disallow: /admin/*
 Disallow: /cart
 Disallow: /checkout
 Disallow: /*.json$
-Disallow: /*.php$
 
-Sitemap: https://aura-home.ua/sitemap.xml
+Sitemap: https://aurahomeua.lovable.app/sitemap.xml

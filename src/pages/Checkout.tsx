@@ -91,32 +91,31 @@ const Checkout = () => {
         clear(); navigate("/"); return;
       }
 
-      // WayForPay підпис
-      const orderDate = Math.floor(Date.now() / 1000);
-      const productNames = orderItems.map(i => i.name);
-      const productCounts = orderItems.map(i => i.quantity);
-      const productPrices = orderItems.map(i => i.price);
-
-      const signString = [
-        MERCHANT_ACCOUNT, MERCHANT_DOMAIN, orderRef, orderDate,
-        totalPrice, "UAH",
-        ...productNames, ...productCounts, ...productPrices,
-      ].join(";");
-
-      const signature = hmacMd5(MERCHANT_SECRET, signString);
+      // WayForPay підпис генерується на сервері
+      const { data: signed, error: signErr } = await supabase.functions.invoke("wayforpay-sign", {
+        body: {
+          orderReference: orderRef,
+          amount: totalPrice,
+          items: orderItems.map(i => ({ name: i.name, price: i.price, quantity: i.quantity })),
+        },
+      });
+      if (signErr || !signed?.merchantSignature) {
+        toast({ title: "Помилка платежу", description: signErr?.message || "Не вдалося сформувати підпис", variant: "destructive" });
+        return;
+      }
 
       clear();
       submitWayForPay({
-        merchantAccount: MERCHANT_ACCOUNT,
-        merchantDomain: MERCHANT_DOMAIN,
-        merchantSignature: signature,
-        orderReference: orderRef,
-        orderDate,
-        amount: totalPrice,
-        currency: "UAH",
-        "productName[]": productNames,
-        "productCount[]": productCounts,
-        "productPrice[]": productPrices,
+        merchantAccount: signed.merchantAccount,
+        merchantDomain: signed.merchantDomain,
+        merchantSignature: signed.merchantSignature,
+        orderReference: signed.orderReference,
+        orderDate: signed.orderDate,
+        amount: signed.amount,
+        currency: signed.currency,
+        "productName[]": signed.productName,
+        "productCount[]": signed.productCount,
+        "productPrice[]": signed.productPrice,
         clientFirstName: form.fullName.split(" ")[0] || form.fullName,
         clientLastName: form.fullName.split(" ")[1] || "",
         clientPhone: form.phone,

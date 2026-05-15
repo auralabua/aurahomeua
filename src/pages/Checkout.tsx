@@ -22,56 +22,6 @@ const checkoutSchema = z.object({
   branch: z.string().trim().min(1, "Вкажіть відділення").max(100),
 });
 
-// MD5 для підпису WayForPay
-function md5(input: string): string {
-  const msg = new TextEncoder().encode(input);
-  let [a, b, c, d] = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476];
-  const S = [7,12,17,22,7,12,17,22,7,12,17,22,7,12,17,22,5,9,14,20,5,9,14,20,5,9,14,20,5,9,14,20,4,11,16,23,4,11,16,23,4,11,16,23,4,11,16,23,6,10,15,21,6,10,15,21,6,10,15,21,6,10,15,21];
-  const K = Array.from({length:64},(_,i)=>Math.floor(Math.abs(Math.sin(i+1))*2**32)>>>0);
-  const padded = new Uint8Array(Math.ceil((msg.length+9)/64)*64);
-  padded.set(msg); padded[msg.length]=0x80;
-  const view = new DataView(padded.buffer);
-  view.setUint32(padded.length-8,msg.length*8,true);
-  const add=(x:number,y:number)=>((x+y)&0xFFFFFFFF)>>>0;
-  const rotl=(x:number,n:number)=>((x<<n)|(x>>>(32-n)))>>>0;
-  for(let i=0;i<padded.length;i+=64){
-    const W=Array.from({length:16},(_,j)=>view.getUint32(i+j*4,true));
-    let[A,B,C,D]=[a,b,c,d];
-    for(let j=0;j<64;j++){
-      let[F,g]=[0,0];
-      if(j<16){F=((B&C)|(~B&D))>>>0;g=j;}
-      else if(j<32){F=((D&B)|(~D&C))>>>0;g=(5*j+1)%16;}
-      else if(j<48){F=(B^C^D)>>>0;g=(3*j+5)%16;}
-      else{F=(C^(B|(~D>>>0)))>>>0;g=(7*j)%16;}
-      const tmp=D;D=C;C=B;
-      B=add(B,rotl(add(add(A,F),add(K[j],W[g])),S[j]));
-      A=tmp;
-    }
-    a=add(a,A);b=add(b,B);c=add(c,C);d=add(d,D);
-  }
-  const result=new Uint8Array(16);
-  [a,b,c,d].forEach((v,i)=>{const dv=new DataView(result.buffer,i*4);dv.setUint32(0,v,true);});
-  return Array.from(result).map(b=>b.toString(16).padStart(2,"0")).join("");
-}
-
-function hmacMd5(key: string, data: string): string {
-  const enc = new TextEncoder();
-  let keyBytes = enc.encode(key);
-  if (keyBytes.length > 64) keyBytes = enc.encode(md5(key));
-  const padded = new Uint8Array(64);
-  padded.set(keyBytes);
-  const iPad = padded.map(b => b ^ 0x36);
-  const oPad = padded.map(b => b ^ 0x5c);
-  const dataBytes = enc.encode(data);
-  const inner = new Uint8Array(iPad.length + dataBytes.length);
-  inner.set(iPad); inner.set(dataBytes, iPad.length);
-  const innerHex = md5(String.fromCharCode(...inner));
-  const innerBytes = new Uint8Array(innerHex.match(/../g)!.map(h => parseInt(h, 16)));
-  const outer = new Uint8Array(oPad.length + innerBytes.length);
-  outer.set(oPad); outer.set(innerBytes, oPad.length);
-  return md5(String.fromCharCode(...outer));
-}
-
 function submitWayForPay(params: Record<string, any>) {
   const form = document.createElement("form");
   form.method = "POST";

@@ -7,16 +7,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { SlidersHorizontal, X, BedDouble, Activity, Shield, Zap, Sparkles, Blocks, Footprints, ChevronRight, ChevronDown, type LucideIcon } from "lucide-react";
+import { SlidersHorizontal, X, BedDouble, Hand, Shield, Zap, Sparkles, Baby, Footprints, Grip, Plug, ChevronRight, ChevronDown, type LucideIcon } from "lucide-react";
 
 const categoryIcons: Record<string, LucideIcon> = {
-  "ortopedychni-podushky": BedDouble,
-  "ortopedychni-masazhni-kylymky": Activity,
-  "ortezy-i-bandazhi": Shield,
-  "masazhery": Zap,
-  "tovary-dlia-krasy": Sparkles,
-  "rozvyvaiuchi-ihrashky": Blocks,
-  "ortopedychni-ustilky": Footprints,
+  pillows: BedDouble,
+  mats: Grip,
+  braces: Shield,
+  massagers: Zap,
+  "massagers-electric": Plug,
+  "massagers-manual": Hand,
+  beauty: Sparkles,
+  toys: Baby,
+  insoles: Footprints,
 };
 
 const MAX_PRICE = 5000;

@@ -26,6 +26,8 @@ function submitWayForPay(params: Record<string, any>) {
   const form = document.createElement("form");
   form.method = "POST";
   form.action = "https://secure.wayforpay.com/pay";
+  form.target = "_top";
+  form.acceptCharset = "utf-8";
   form.style.display = "none";
   const add = (name: string, value: string | number | string[] | number[]) => {
     (Array.isArray(value) ? value : [value]).forEach(v => {

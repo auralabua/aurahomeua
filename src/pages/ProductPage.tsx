@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductReviews } from "@/components/ProductReviews";
+import { useSEO } from "@/hooks/useSEO";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -21,6 +22,17 @@ const ProductPage = () => {
   if (!product) return <Navigate to="/catalog" replace />;
 
   const category = categories.find(c => c.id === product.category);
+  useSEO({
+    title: product.name,
+    description: product.description?.slice(0, 160) || product.name,
+    image: product.images?.[0],
+    url: `/product/${product.id}`,
+    type: "product",
+    price: product.price,
+    availability: product.available,
+    keywords: `${product.name}, купити, ціна, Україна, ${category?.name ?? ""}`,
+  });
+
   const related = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
   const images = product.images?.length ? product.images : [];
 

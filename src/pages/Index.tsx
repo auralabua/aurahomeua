@@ -25,7 +25,9 @@ const Index = () => {
   const { products } = useProductsAsLegacy();
   const { categories: allCats } = useCategoriesAsLegacy();
   const categories = allCats.filter(c => !c.parentId);
-  const featured = [...products.filter(p => p.badge === "Хіт продажів"), ...products.filter(p => !p.badge)].slice(0, 8);
+  const hits = products.filter(p => p.badge === "Хіт продажів").slice(0, 4);
+  const others = products.filter(p => !p.badge).slice(0, 4);
+  const featured = [...hits, ...others].slice(0, 8);
 
   return (
     <div>

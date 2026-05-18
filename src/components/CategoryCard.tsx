@@ -19,32 +19,38 @@ export const CategoryCard = ({ category }: { category: Category }) => {
   return (
     <Link
       to={`/catalog?category=${category.id}`}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl bg-gradient-to-br ${cfg.bg} border border-white/60 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card`}
+      className={`group relative flex flex-col overflow-hidden rounded-2xl bg-gradient-to-br ${cfg.bg} border border-white/60 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card active:scale-95`}
     >
       {/* Icon area */}
-      <div className="flex items-center justify-center pt-6 pb-4 px-4">
-        <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/70 shadow-soft transition-transform duration-300 group-hover:scale-110">
+      <div className="flex items-center justify-center pt-4 pb-3 px-3 sm:pt-6 sm:pb-4 sm:px-4">
+        <div className="flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-white/70 shadow-soft transition-transform duration-300 group-hover:scale-110">
           {Icon
-            ? <Icon size={28} strokeWidth={1.4} style={{ color: cfg.accent }} />
-            : <span className="text-2xl">{cfg.emoji}</span>
+            ? <Icon size={22} strokeWidth={1.4} style={{ color: cfg.accent }} className="sm:hidden" />
+            : <span className="text-xl sm:hidden">{cfg.emoji}</span>
+          }
+          {Icon
+            ? <Icon size={28} strokeWidth={1.4} style={{ color: cfg.accent }} className="hidden sm:block" />
+            : <span className="text-2xl hidden sm:block">{cfg.emoji}</span>
           }
         </div>
       </div>
 
-      {/* Text — завжди видно */}
-      <div className="flex flex-col flex-1 px-4 pb-5 text-center">
-        <h3 className="font-medium text-sm leading-snug text-foreground">{category.name}</h3>
+      {/* Text */}
+      <div className="flex flex-col flex-1 px-2 pb-4 sm:px-4 sm:pb-5 text-center">
+        <h3 className="font-medium text-[11px] sm:text-sm leading-snug text-foreground line-clamp-2">{category.name}</h3>
         {category.description && (
-          <p className="text-[11px] text-muted-foreground mt-1 line-clamp-2 font-light">{category.description}</p>
+          <p className="hidden sm:block text-[11px] text-muted-foreground mt-1 line-clamp-2 font-light">{category.description}</p>
         )}
-        <div className="mt-3 flex items-center justify-center gap-1 text-[10px] font-medium uppercase tracking-wider transition-all duration-300" style={{ color: cfg.accent }}>
-          Переглянути <ArrowRight size={10} className="transition-transform group-hover:translate-x-0.5" />
+        <div className="mt-2 sm:mt-3 flex items-center justify-center gap-1 text-[9px] sm:text-[10px] font-medium uppercase tracking-wider transition-all duration-300" style={{ color: cfg.accent }}>
+          Перейти <ArrowRight size={8} className="transition-transform group-hover:translate-x-0.5 sm:hidden" />
+          <span className="hidden sm:inline">Переглянути</span>
+          <ArrowRight size={10} className="hidden sm:block transition-transform group-hover:translate-x-0.5" />
         </div>
       </div>
 
       {/* Decorative circle */}
       <div
-        className="absolute -bottom-6 -right-6 w-20 h-20 rounded-full opacity-10 transition-all duration-500 group-hover:opacity-20 group-hover:scale-110"
+        className="absolute -bottom-6 -right-6 w-16 h-16 sm:w-20 sm:h-20 rounded-full opacity-10 transition-all duration-500 group-hover:opacity-20 group-hover:scale-110"
         style={{ backgroundColor: cfg.accent }}
       />
     </Link>

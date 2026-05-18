@@ -20,6 +20,9 @@ import AdminOrders from "./pages/admin/AdminOrders.tsx";
 import AdminProducts from "./pages/admin/AdminProducts.tsx";
 import AdminCategories from "./pages/admin/AdminCategories.tsx";
 import AdminCustomers from "./pages/admin/AdminCustomers.tsx";
+import Delivery from "./pages/Delivery.tsx";
+import Privacy from "./pages/Privacy.tsx";
+import PublicOffer from "./pages/PublicOffer.tsx";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +42,9 @@ const App = () => (
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/about" element={<About />} />
               <Route path="/contacts" element={<Contacts />} />
+              <Route path="/delivery" element={<Delivery />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/public-offer" element={<PublicOffer />} />
             </Route>
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>

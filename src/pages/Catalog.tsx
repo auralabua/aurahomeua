@@ -204,15 +204,15 @@ const Catalog = () => {
   );
 
   return (
-    <div className="container py-10">
-      <header className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+    <div className="container py-6 sm:py-10">
+      <header className="mb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-3xl md:text-4xl font-light">Каталог товарів</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-light">Каталог товарів</h1>
           <p className="text-muted-foreground mt-2 font-light text-sm">
             {query ? `Результати пошуку: "${query}" — ` : ""}Знайдено: {filtered.length} товарів
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
           <div className="lg:hidden">
             <Sheet>
               <SheetTrigger asChild>
@@ -228,7 +228,7 @@ const Catalog = () => {
             </Sheet>
           </div>
           <Select value={sort} onValueChange={v => setSort(v as SortOption)}>
-            <SelectTrigger className="w-[220px] rounded-full font-light border-white/10">
+            <SelectTrigger className="w-full sm:w-[180px] rounded-full font-light border-white/10">
               <SelectValue placeholder="Сортування" />
             </SelectTrigger>
             <SelectContent>

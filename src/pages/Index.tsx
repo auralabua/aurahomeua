@@ -33,21 +33,21 @@ const Index = () => {
     <div>
       {/* ── HERO ── */}
       <section className="hero-bg">
-        <div className="container grid min-h-[620px] items-center gap-12 py-16 lg:grid-cols-2">
+        <div className="container grid min-h-[auto] items-center gap-8 py-10 sm:py-14 lg:py-16 lg:min-h-[620px] lg:gap-12 lg:grid-cols-2">
           {/* Left */}
           <div className="space-y-8 max-w-2xl">
             <p className="aura-kicker">Wellness для вашого дому</p>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light leading-[1.04] text-foreground">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[1.04] text-foreground">
               Комфорт.<br />Відновлення.<br />Якість життя.
             </h1>
             <p className="text-lg md:text-xl font-light leading-relaxed text-muted-foreground max-w-lg">
               Ортопедичні товари, масажери та wellness-девайси для щоденного догляду за собою — з доставкою по всій Україні.
             </p>
-            <div className="flex flex-wrap gap-4 pt-2">
-              <Button asChild size="lg" className="h-12 rounded-full btn-aura border-0 font-light px-8">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-2">
+              <Button asChild size="lg" className="h-12 w-full sm:w-auto rounded-full btn-aura border-0 font-light px-8">
                 <Link to="/catalog">Переглянути колекцію <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="h-12 rounded-full font-light px-8 border-border/60 bg-white/60 hover:bg-white text-foreground">
+              <Button asChild size="lg" variant="outline" className="h-12 w-full sm:w-auto rounded-full font-light px-8 border-border/60 bg-white/60 hover:bg-white text-foreground">
                 <a href="#featured">Популярні товари</a>
               </Button>
             </div>
@@ -84,7 +84,7 @@ const Index = () => {
       {/* ── TRUST BAR ── */}
       <section className="border-y border-border/60 bg-white/50">
         <div className="container py-6">
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-5">
             {trust.map((t, i) => (
               <div key={i} className="flex items-center gap-3">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/8">
@@ -101,8 +101,8 @@ const Index = () => {
       </section>
 
       {/* ── CATEGORIES ── */}
-      <section className="container py-20">
-        <div className="mb-10 flex items-end justify-between gap-4">
+      <section className="container py-12 sm:py-20">
+        <div className="mb-6 sm:mb-10 flex items-end justify-between gap-4">
           <div>
             <p className="aura-kicker mb-3">каталог</p>
             <h2 className="text-4xl md:text-5xl font-light">Категорії товарів</h2>
@@ -112,13 +112,13 @@ const Index = () => {
             Усі товари <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7">
           {categories.map(c => <CategoryCard key={c.id} category={c} />)}
         </div>
       </section>
 
       {/* ── FEATURED ── */}
-      <section id="featured" className="bg-secondary/40 py-20">
+      <section id="featured" className="bg-secondary/40 py-12 sm:py-20">
         <div className="container">
           <div className="mb-10 flex items-end justify-between gap-4">
             <div>
@@ -129,14 +129,14 @@ const Index = () => {
               Всі товари <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
             {featured.map(p => <ProductCard key={p.id} product={p} />)}
           </div>
         </div>
       </section>
 
       {/* ── WHY US ── */}
-      <section className="container py-20">
+      <section className="container py-12 sm:py-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <p className="aura-kicker mb-4">наш підхід</p>
@@ -162,7 +162,7 @@ const Index = () => {
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {[
               { num: "715+", label: "товарів в каталозі" },
               { num: "UA", label: "доставка по Україні" },
@@ -179,13 +179,13 @@ const Index = () => {
       </section>
 
       {/* ── REVIEWS ── */}
-      <section className="bg-secondary/40 py-20">
+      <section className="bg-secondary/40 py-12 sm:py-20">
         <div className="container">
-          <div className="mb-12 text-center">
+          <div className="mb-8 sm:mb-12 text-center">
             <p className="aura-kicker mb-3">відгуки</p>
             <h2 className="text-4xl md:text-5xl font-light">Клієнти про нас</h2>
           </div>
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
             {reviews.map((r, i) => (
               <div key={i} className="rounded-2xl border border-border/40 bg-white p-7">
                 <div className="flex gap-1 mb-5">
@@ -205,7 +205,7 @@ const Index = () => {
       </section>
 
       {/* ── DELIVERY + PAYMENT ── */}
-      <section className="container py-16 grid md:grid-cols-2 gap-5">
+      <section className="container py-10 sm:py-16 grid md:grid-cols-2 gap-4 sm:gap-5">
         <div className="rounded-2xl border border-border/40 bg-white p-8">
           <Truck className="h-6 w-6 text-primary mb-5" strokeWidth={1.5} />
           <h3 className="text-xl font-light mb-4">Доставка</h3>

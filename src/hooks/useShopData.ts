@@ -74,17 +74,29 @@ export const useDBCategories = () =>
     },
   });
 
+const categoryNameOverrides: Record<string, string> = {
+  "tovary-dlia-krasy": "Домашні девайси",
+};
+
+const categoryOrder = ["tovary-dlia-krasy"];
+
 export const useCategoriesAsLegacy = () => {
   const q = useDBCategories();
   const data = q.data ?? [];
   const slugById = new Map(data.map((c) => [c.id, c.slug]));
   const categories: Category[] = data.map((c) => ({
     id: c.slug as CategoryId,
-    name: c.name,
+    name: categoryNameOverrides[c.slug] ?? c.name,
     icon: slugIconMap[c.slug] || (c.icon && iconMap[c.icon]) || Tag,
     description: c.description ?? "",
     parentId: c.parent_id ? ((slugById.get(c.parent_id) ?? null) as CategoryId | null) : null,
-  }));
+  })).sort((a, b) => {
+    const ai = categoryOrder.indexOf(a.id);
+    const bi = categoryOrder.indexOf(b.id);
+    if (ai !== -1 && bi === -1) return -1;
+    if (bi !== -1 && ai === -1) return 1;
+    return 0;
+  });
   return { ...q, categories };
 };
 

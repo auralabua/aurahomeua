@@ -49,6 +49,15 @@ const articles = [
     bg: "from-[#E8EDF5] to-[#D5DEEA]",
     accent: "#3D5A8A",
   },
+  {
+    tag: "Дитяча ортопедія",
+    title: "Ортопедія для дітей: коли починати та що обирати",
+    text: "Дитячий хребет і стопи формуються до 12 років. Правильні устілки, ортопедичні подушки та розвиваючі масажні килимки допомагають запобігти плоскостопості та порушенням постави.",
+    link: "/catalog?category=rozvyvaiuchi-ihrashky",
+    emoji: "🧸",
+    bg: "from-[#F5F0E0] to-[#EAE5CC]",
+    accent: "#7A6A20",
+  },
 ];
 
 const needs = [
@@ -193,7 +202,7 @@ const Index = () => {
               <p className="mt-2 text-muted-foreground font-light">Поради щодо догляду за тілом і відновлення</p>
             </div>
           </div>
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {articles.map((a, i) => (
               <Link key={i} to={a.link}
                 className={`group flex flex-col overflow-hidden rounded-2xl bg-gradient-to-br ${a.bg} border border-white/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-card`}>

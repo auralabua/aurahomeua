@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Truck, ShieldCheck, CreditCard, Headphones, Star, RotateCcw, Spine, Brain, Moon, Activity, Instagram } from "lucide-react";
+import { useRef } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight, Truck, ShieldCheck, CreditCard, Headphones, Star, RotateCcw, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
@@ -68,6 +69,76 @@ const needs = [
   { icon: "🦵", label: "Реабілітація", link: "/catalog?category=ortezy-i-bandazhi", color: "bg-[#F0E8F0] hover:bg-[#E5D5E5]" },
   { icon: "🧘", label: "Активність і фітнес", link: "/catalog?category=ortopedychni-masazhni-kylymky", color: "bg-[#F5F0E0] hover:bg-[#EAE5CC]" },
 ];
+
+
+const FeaturedCarousel = ({ products }: { products: any[] }) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (dir: "left" | "right") => {
+    if (!scrollRef.current) return;
+    const card = scrollRef.current.querySelector("article");
+    const w = card ? card.offsetWidth + 16 : 240;
+    scrollRef.current.scrollBy({ left: dir === "right" ? w * 2 : -w * 2, behavior: "smooth" });
+  };
+
+  return (
+    <section id="featured" className="bg-secondary/40 py-12 sm:py-20">
+      <div className="container">
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <p className="aura-kicker mb-3">рекомендовано</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light">Популярні товари</h2>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex gap-2">
+              <button onClick={() => scroll("left")}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-white hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button onClick={() => scroll("right")}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-white hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+            <Link to="/catalog" className="hidden items-center gap-2 text-sm text-primary font-light transition-smooth hover:gap-3 sm:flex shrink-0">
+              Всі товари <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative">
+        {/* Mobile arrows */}
+        <button onClick={() => scroll("left")}
+          className="sm:hidden absolute left-1 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-md border border-border/40">
+          <ChevronLeft className="h-4 w-4 text-foreground" />
+        </button>
+        <button onClick={() => scroll("right")}
+          className="sm:hidden absolute right-1 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-md border border-border/40">
+          <ChevronRight className="h-4 w-4 text-foreground" />
+        </button>
+
+        <div
+          ref={scrollRef}
+          className="flex gap-3 sm:gap-4 overflow-x-auto pb-3 px-4 sm:px-6 lg:px-8"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {products.map(p => (
+            <div key={p.id} className="shrink-0 w-[calc(25%-12px)] min-w-[180px] max-w-[260px]">
+              <ProductCard product={p} compact />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="container mt-3">
+        <Link to="/catalog" className="flex items-center gap-2 text-sm text-primary font-light sm:hidden">
+          Всі товари <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
+    </section>
+  );
+};
 
 const Index = () => {
   const { products } = useProductsAsLegacy();
@@ -163,37 +234,7 @@ const Index = () => {
       </section>
 
       {/* ── FEATURED CAROUSEL ── */}
-      <section id="featured" className="bg-secondary/40 py-12 sm:py-20 overflow-hidden">
-        <div className="container">
-          <div className="mb-8 flex items-end justify-between gap-4">
-            <div>
-              <p className="aura-kicker mb-3">рекомендовано</p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-light">Популярні товари</h2>
-            </div>
-            <Link to="/catalog" className="hidden items-center gap-2 text-sm text-primary font-light transition-smooth hover:gap-3 sm:flex shrink-0">
-              Всі товари <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-        {/* Scrollable row */}
-        <div className="relative">
-          <div
-            className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 px-4 sm:px-6 lg:px-8 scroll-smooth"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {featured.map(p => (
-              <div key={p.id} className="shrink-0 w-[160px] sm:w-[200px] md:w-[220px]">
-                <ProductCard product={p} compact />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="container mt-4">
-          <Link to="/catalog" className="flex items-center gap-2 text-sm text-primary font-light sm:hidden">
-            Всі товари <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </section>
+      <FeaturedCarousel products={featured} />
 
       {/* ── ПІДБІР ЗА ЗАДАЧЕЮ ── */}
       <section className="container py-12 sm:py-20">

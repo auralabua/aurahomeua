@@ -6,7 +6,7 @@ import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
 import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 
-const HERO_IMG = "https://images.unsplash.com/photo-1616279969856-759f316a5ac1?w=1400&q=90&auto=format&fit=crop";
+const HERO_IMG = "https://images.unsplash.com/photo-1519824145371-296894a0daa9?w=1400&q=90&auto=format&fit=crop";
 
 const reviews = [
   { name: "Ірина К.", city: "Київ", text: "Ортопедична подушка змінила якість сну. Спина перестала боліти вже за тиждень.", rating: 5 },
@@ -148,44 +148,46 @@ const Index = () => {
     <div>
       {/* ── HERO ── */}
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden min-h-[480px] sm:min-h-[580px] lg:min-h-[640px] flex items-center">
-        {/* Background image */}
-        <img
-          src={HERO_IMG}
-          alt="Wellness lifestyle"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          loading="eager"
-        />
-        {/* Gradient overlay — темніший зліва для читабельності тексту */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-black/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+      <section className="hero-bg relative overflow-hidden min-h-[520px] sm:min-h-[600px] lg:min-h-[660px] flex items-center">
+        {/* Photo — права половина */}
+        <div className="absolute inset-y-0 right-0 w-full sm:w-[65%] lg:w-[58%]">
+          <img
+            src={HERO_IMG}
+            alt="Домашній wellness догляд"
+            className="h-full w-full object-cover object-center"
+            loading="eager"
+          />
+          {/* Градієнт зліва від фото → в бежевий фон */}
+          <div className="absolute inset-y-0 left-0 w-2/3 bg-gradient-to-r from-[#F5F0EA] via-[#F5F0EA]/80 to-transparent" />
+          {/* Знизу затемнення */}
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#F5F0EA]/60 to-transparent" />
+        </div>
 
-        {/* Content */}
-        <div className="relative z-10 container py-16 sm:py-20 lg:py-24">
-          <div className="max-w-xl lg:max-w-2xl space-y-5 sm:space-y-7">
-            <p className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.28em] text-white/70 font-medium">
-              <span className="h-px w-6 bg-white/50" /> Wellness для вашого дому
+        {/* Content — ліва сторона на оригінальному фоні */}
+        <div className="relative z-10 container py-14 sm:py-20 lg:py-24">
+          <div className="max-w-lg space-y-5 sm:space-y-7">
+            <p className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.28em] text-primary/70 font-medium">
+              <span className="h-px w-6 bg-primary/40" /> Wellness для вашого дому
             </p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[1.04] text-white">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[1.04] text-foreground">
               Комфорт.<br />Відновлення.<br />Якість життя.
             </h1>
-            <p className="text-base sm:text-lg font-light leading-relaxed text-white/75 max-w-md">
-              Ортопедичні товари, масажери та wellness-девайси для щоденного догляду — доставка по всій Україні.
+            <p className="text-base sm:text-lg font-light leading-relaxed text-muted-foreground max-w-md">
+              Ортопедичні товари, масажери та wellness-девайси для щоденного догляду за собою — з доставкою по всій Україні.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <Button asChild size="lg" className="h-12 rounded-full bg-white text-foreground hover:bg-white/90 border-0 font-light px-8 shadow-lg">
+              <Button asChild size="lg" className="h-12 w-full sm:w-auto rounded-full btn-aura border-0 font-light px-8">
                 <Link to="/catalog">Переглянути колекцію <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="h-12 rounded-full font-light px-8 border-white/40 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm">
+              <Button asChild size="lg" variant="outline" className="h-12 w-full sm:w-auto rounded-full font-light px-8 border-border/60 bg-white/60 hover:bg-white text-foreground">
                 <a href="#featured">Популярні товари</a>
               </Button>
             </div>
-
             {/* Trust pills */}
-            <div className="flex flex-wrap gap-2 pt-2">
+            <div className="flex flex-wrap gap-2 pt-1">
               {["Нова Пошта", "Оплата при отриманні", "14 днів повернення"].map((t, i) => (
-                <span key={i} className="inline-flex items-center gap-1.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 px-3 py-1 text-xs text-white/85 font-light">
-                  <ShieldCheck className="h-3 w-3 text-white/60" strokeWidth={1.5} />
+                <span key={i} className="inline-flex items-center gap-1.5 rounded-full bg-white/80 border border-border/50 px-3 py-1 text-xs text-foreground/70 font-light">
+                  <ShieldCheck className="h-3 w-3 text-primary" strokeWidth={1.5} />
                   {t}
                 </span>
               ))}

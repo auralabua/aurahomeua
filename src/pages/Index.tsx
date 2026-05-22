@@ -73,9 +73,15 @@ const Index = () => {
   const { products } = useProductsAsLegacy();
   const { categories: allCats } = useCategoriesAsLegacy();
   const categories = allCats.filter(c => !c.parentId);
-  const hits = products.filter(p => p.badge === "Хіт продажів").slice(0, 4);
-  const others = products.filter(p => !p.badge).slice(0, 4);
-  const featured = [...hits, ...others].slice(0, 8);
+  // 2-3 товари з кожної категорії (топ-категорії)
+  const featuredCatSlugs = [
+    "tovary-dlia-krasy", "ortopedychni-podushky", "masazhery",
+    "ortopedychni-masazhni-kylymky", "ortezy-i-bandazhi",
+    "rozvyvaiuchi-ihrashky", "ortopedychni-ustilky",
+  ];
+  const featured = featuredCatSlugs.flatMap(slug =>
+    products.filter(p => p.category === slug).slice(0, 3)
+  ).slice(0, 20);
 
   return (
     <div>
@@ -156,21 +162,36 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ── FEATURED ── */}
-      <section id="featured" className="bg-secondary/40 py-12 sm:py-20">
+      {/* ── FEATURED CAROUSEL ── */}
+      <section id="featured" className="bg-secondary/40 py-12 sm:py-20 overflow-hidden">
         <div className="container">
-          <div className="mb-10 flex items-end justify-between gap-4">
+          <div className="mb-8 flex items-end justify-between gap-4">
             <div>
               <p className="aura-kicker mb-3">рекомендовано</p>
-              <h2 className="text-4xl md:text-5xl font-light">Популярні товари</h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-light">Популярні товари</h2>
             </div>
-            <Link to="/catalog" className="hidden items-center gap-2 text-sm text-primary font-light transition-smooth hover:gap-3 sm:flex">
+            <Link to="/catalog" className="hidden items-center gap-2 text-sm text-primary font-light transition-smooth hover:gap-3 sm:flex shrink-0">
               Всі товари <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
-            {featured.map(p => <ProductCard key={p.id} product={p} />)}
+        </div>
+        {/* Scrollable row */}
+        <div className="relative">
+          <div
+            className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 px-4 sm:px-6 lg:px-8 scroll-smooth"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {featured.map(p => (
+              <div key={p.id} className="shrink-0 w-[160px] sm:w-[200px] md:w-[220px]">
+                <ProductCard product={p} compact />
+              </div>
+            ))}
           </div>
+        </div>
+        <div className="container mt-4">
+          <Link to="/catalog" className="flex items-center gap-2 text-sm text-primary font-light sm:hidden">
+            Всі товари <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
 

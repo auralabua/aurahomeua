@@ -105,16 +105,15 @@ export const useCategoriesAsLegacy = () => {
 };
 
 export const useAllProductsAsLegacy = () => {
-  const q = useDBProducts();
-  const { categories } = useCategoriesAsLegacy();
-  const data = q.data ?? [];
-  const slugById = new Map((q.data ?? []).map(p => [p.id, p]));
-  const products: Product[] = data.map(p => ({
-    id: p.id,
+  const productsQ = useDBProducts();
+  const catsQ = useDBCategories();
+  const slugById = new Map((catsQ.data ?? []).map((c) => [c.id, c.slug]));
+  const products: Product[] = (productsQ.data ?? []).map(p => ({
+    id: p.legacy_id ?? p.id,
     name: p.name,
     price: Number(p.price),
-    category: (categories.find(c => c.id === p.category_id)?.id ?? p.category_id) as any,
-    rating: Number(p.rating ?? 4),
+    category: (slugById.get(p.category_id ?? "") ?? "massagers") as CategoryId,
+    rating: Number(p.rating ?? 5),
     reviews: p.reviews ?? 0,
     badge: (p.badge as Product["badge"]) || undefined,
     description: p.description ?? "",
@@ -127,7 +126,7 @@ export const useAllProductsAsLegacy = () => {
     variantLabel: p.variant_label ?? undefined,
     isParent: p.is_parent ?? false,
   }));
-  return { ...q, products };
+  return { products, isLoading: productsQ.isLoading || catsQ.isLoading, isError: productsQ.isError || catsQ.isError };
 };
 
 export const useDBProducts = () =>
@@ -148,7 +147,11 @@ export const useProductsAsLegacy = () => {
   const productsQ = useDBProducts();
   const catsQ = useDBCategories();
   const slugById = new Map((catsQ.data ?? []).map((c) => [c.id, c.slug]));
-  const products: Product[] = (productsQ.data ?? []).map((p) => ({
+  // Фільтруємо: показуємо тільки батьківські товари + самостійні (без варіантів)
+  const filteredData = (productsQ.data ?? []).filter(p =>
+    !p.parent_product_id || p.is_parent === true
+  );
+  const products: Product[] = filteredData.map((p) => ({
     id: p.legacy_id ?? p.id,
     name: p.name,
     price: Number(p.price),

@@ -89,42 +89,32 @@ const FeaturedCarousel = ({ products }: { products: any[] }) => {
             <p className="aura-kicker mb-3">рекомендовано</p>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-light">Популярні товари</h2>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="hidden sm:flex gap-2">
-              <button onClick={() => scroll("left")}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-white hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button onClick={() => scroll("right")}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-white hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
-            <Link to="/catalog" className="hidden items-center gap-2 text-sm text-primary font-light transition-smooth hover:gap-3 sm:flex shrink-0">
-              Всі товари <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+          <Link to="/catalog" className="hidden items-center gap-2 text-sm text-primary font-light transition-smooth hover:gap-3 sm:flex shrink-0">
+            Всі товари <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
 
-      <div className="relative">
-        {/* Mobile arrows */}
+      {/* Carousel with side arrows */}
+      <div className="relative px-4 sm:px-6 lg:px-8">
+        {/* Left arrow */}
         <button onClick={() => scroll("left")}
-          className="sm:hidden absolute left-1 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-md border border-border/40">
-          <ChevronLeft className="h-4 w-4 text-foreground" />
+          className="absolute left-0 sm:left-1 top-1/2 -translate-y-8 z-10 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
+          <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
         </button>
+        {/* Right arrow */}
         <button onClick={() => scroll("right")}
-          className="sm:hidden absolute right-1 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-md border border-border/40">
-          <ChevronRight className="h-4 w-4 text-foreground" />
+          className="absolute right-0 sm:right-1 top-1/2 -translate-y-8 z-10 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
+          <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
         </button>
 
         <div
           ref={scrollRef}
-          className="flex gap-3 sm:gap-4 overflow-x-auto pb-3 px-4 sm:px-6 lg:px-8"
+          className="flex gap-3 overflow-x-auto pb-3 mx-6 sm:mx-8"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {products.map(p => (
-            <div key={p.id} className="shrink-0 w-[calc(25%-12px)] min-w-[180px] max-w-[260px]">
+            <div key={p.id} className="shrink-0 w-[calc(25%-10px)] min-w-[160px] max-w-[240px]">
               <ProductCard product={p} compact />
             </div>
           ))}

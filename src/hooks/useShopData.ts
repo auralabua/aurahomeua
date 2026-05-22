@@ -59,6 +59,7 @@ export interface DBProduct {
   vendor: string | null;
   vendor_code: string | null;
   position: number;
+  original_price: number | null;
 }
 
 export const useDBCategories = () =>
@@ -131,6 +132,7 @@ export const useProductsAsLegacy = () => {
     vendor: p.vendor ?? undefined,
     vendorCode: p.vendor_code ?? undefined,
     available: p.available,
+    originalPrice: p.original_price ? Number(p.original_price) : undefined,
   }));
   return {
     products,

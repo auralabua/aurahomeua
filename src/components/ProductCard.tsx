@@ -10,22 +10,51 @@ interface ProductCardProps {
   compact?: boolean;
 }
 
-const DiscountBadge = ({ price, originalPrice }: { price: number; originalPrice: number }) => {
-  const pct = Math.round((1 - price / originalPrice) * 100);
+const Stars = ({ rating, reviews, size = "sm" }: { rating: number; reviews?: number; size?: "xs" | "sm" }) => {
+  const sz = size === "xs" ? "h-2.5 w-2.5" : "h-3 w-3";
   return (
-    <span className="rounded-full bg-red-500 px-1.5 py-0.5 text-[9px] font-semibold text-white">
-      -{pct}%
-    </span>
+    <div className="flex items-center gap-1">
+      <div className="flex items-center gap-0.5">
+        {[1,2,3,4,5].map(i => (
+          <Star key={i} className={`${sz} ${i <= Math.round(rating) ? "fill-amber-400 text-amber-400" : "fill-muted text-muted"}`} />
+        ))}
+      </div>
+      {reviews !== undefined && reviews > 0 && (
+        <span className="text-[10px] text-muted-foreground font-normal">({reviews})</span>
+      )}
+    </div>
   );
 };
 
-const Stars = ({ rating, size = "sm" }: { rating: number; size?: "xs" | "sm" }) => {
-  const sz = size === "xs" ? "h-2 w-2" : "h-2.5 w-2.5 sm:h-3 sm:w-3";
+const PriceBlock = ({ price, originalPrice, compact = false }: { price: number; originalPrice?: number; compact?: boolean }) => {
+  const hasDiscount = originalPrice && originalPrice > price;
+  const pct = hasDiscount ? Math.round((1 - price / originalPrice) * 100) : 0;
+
+  if (compact) {
+    return (
+      <div className="flex items-center justify-between gap-2">
+        <div>
+          <p className="text-sm font-semibold text-foreground">{formatUAH(price)}</p>
+          {hasDiscount && <p className="text-[10px] text-muted-foreground line-through leading-none mt-0.5">{formatUAH(originalPrice)}</p>}
+        </div>
+        {hasDiscount && (
+          <span className="shrink-0 rounded-md bg-red-500 px-1.5 py-0.5 text-[9px] font-bold text-white">-{pct}%</span>
+        )}
+      </div>
+    );
+  }
+
   return (
-    <div className="flex items-center gap-0.5">
-      {[1,2,3,4,5].map(i => (
-        <Star key={i} className={`${sz} ${i <= Math.round(rating) ? "fill-amber-400 text-amber-400" : "fill-muted text-muted"}`} />
-      ))}
+    <div>
+      <div className="flex items-center gap-2">
+        <p className="text-xl font-semibold text-foreground">{formatUAH(price)}</p>
+        {hasDiscount && (
+          <span className="rounded-md bg-red-500 px-2 py-0.5 text-xs font-bold text-white">-{pct}%</span>
+        )}
+      </div>
+      {hasDiscount && (
+        <p className="text-sm text-muted-foreground line-through mt-0.5">{formatUAH(originalPrice)}</p>
+      )}
     </div>
   );
 };
@@ -46,34 +75,26 @@ export const ProductCard = ({ product, compact = false }: ProductCardProps) => {
               : <div className="h-full w-full rounded-lg bg-secondary/60" />
             }
           </div>
-          <div className="absolute left-2 top-2 flex gap-1">
+          <div className="absolute left-2 top-2 flex flex-col gap-1">
             {product.badge && (
-              <span className="rounded-full bg-primary/90 px-2 py-0.5 text-[9px] font-medium uppercase tracking-wider text-white">
+              <span className="rounded-md bg-primary/90 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-white">
                 {product.badge === "Хіт продажів" ? "Хіт" : product.badge}
               </span>
             )}
-            {hasDiscount && <DiscountBadge price={product.price} originalPrice={product.originalPrice!} />}
           </div>
         </Link>
-        <div className="flex flex-col flex-1 gap-1 p-3">
+        <div className="flex flex-col flex-1 gap-1.5 p-3">
           {category && <span className="text-[9px] uppercase tracking-[0.15em] text-primary/60 font-medium line-clamp-1">{category.name}</span>}
-          <Link to={`/product/${product.id}`} className="line-clamp-2 text-xs font-light leading-snug text-foreground hover:text-primary transition-colors">
+          <Link to={`/product/${product.id}`} className="line-clamp-2 text-xs font-medium leading-snug text-foreground hover:text-primary transition-colors">
             {product.name}
           </Link>
-          <div className="flex items-center gap-1.5">
-            <Stars rating={product.rating} size="xs" />
-            {product.reviews > 0 && <span className="text-[10px] text-muted-foreground">({product.reviews})</span>}
-          </div>
-          <div className="mt-auto pt-2 flex items-center justify-between gap-2">
-            <div>
-              <p className="text-sm font-medium text-primary">{formatUAH(product.price)}</p>
-              {hasDiscount && <p className="text-[10px] text-muted-foreground line-through">{formatUAH(product.originalPrice!)}</p>}
-            </div>
+          <Stars rating={product.rating} reviews={product.reviews} size="xs" />
+          <div className="mt-auto pt-2 space-y-2">
+            <PriceBlock price={product.price} originalPrice={product.originalPrice} compact />
             <Button onClick={() => addItem(product)} size="sm"
-              className="h-8 rounded-full btn-aura border-0 text-[10px] font-light gap-1 touch-manipulation px-3 shrink-0">
+              className="w-full h-8 rounded-full btn-aura border-0 text-[10px] font-medium gap-1 touch-manipulation">
               <ShoppingCart className="h-3 w-3 shrink-0" />
-              <span className="hidden sm:inline">До кошика</span>
-              <span className="sm:hidden">+</span>
+              До кошика
             </Button>
           </div>
         </div>
@@ -82,41 +103,40 @@ export const ProductCard = ({ product, compact = false }: ProductCardProps) => {
   }
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-border/50 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-card">
-      <Link to={`/product/${product.id}`} className="relative overflow-hidden bg-secondary/30">
-        <div className="aspect-square grid place-items-center p-3 sm:p-6">
+    <article className="group flex flex-col overflow-hidden rounded-2xl border border-border/40 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-card">
+      <Link to={`/product/${product.id}`} className="relative overflow-hidden bg-secondary/20">
+        <div className="aspect-square grid place-items-center p-4 sm:p-6">
           {product.images?.[0]
             ? <img src={product.images[0]} alt={product.name} className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy" />
             : <div className="h-full w-full rounded-xl bg-secondary/60" />
           }
         </div>
-        <div className="absolute left-2 top-2 sm:left-3 sm:top-3 flex gap-1.5">
+        <div className="absolute left-2.5 top-2.5 flex flex-col gap-1.5">
           {product.badge && (
-            <span className="rounded-full bg-primary/90 px-2 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-[10px] font-medium uppercase tracking-wider text-white">
+            <span className="rounded-md bg-primary/90 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm">
               {product.badge === "Хіт продажів" ? "Хіт" : product.badge}
             </span>
           )}
-          {hasDiscount && <DiscountBadge price={product.price} originalPrice={product.originalPrice!} />}
+          {hasDiscount && (() => {
+            const pct = Math.round((1 - product.price / product.originalPrice!) * 100);
+            return (
+              <span className="rounded-md bg-red-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-sm">-{pct}%</span>
+            );
+          })()}
         </div>
       </Link>
-      <div className="flex flex-1 flex-col gap-1.5 sm:gap-2 p-3 sm:p-4">
-        {category && <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-primary/70 font-medium line-clamp-1">{category.name}</span>}
-        <Link to={`/product/${product.id}`} className="line-clamp-2 text-xs sm:text-sm font-light leading-snug text-foreground hover:text-primary transition-colors">
+      <div className="flex flex-1 flex-col gap-2 p-3 sm:p-4">
+        {category && (
+          <span className="text-[10px] uppercase tracking-[0.18em] text-primary/70 font-medium line-clamp-1">{category.name}</span>
+        )}
+        <Link to={`/product/${product.id}`} className="line-clamp-2 text-sm font-medium leading-snug text-foreground hover:text-primary transition-colors">
           {product.name}
         </Link>
-        <div className="flex items-center gap-1.5">
-          <Stars rating={product.rating} />
-          {product.reviews > 0 && <span className="text-[10px] sm:text-xs text-muted-foreground">({product.reviews})</span>}
-        </div>
-        <div className="mt-auto pt-1.5 sm:pt-2 space-y-1.5 sm:space-y-2">
-          <div className="flex items-baseline gap-2">
-            <p className="text-base sm:text-xl font-light text-primary">{formatUAH(product.price)}</p>
-            {hasDiscount && (
-              <p className="text-xs sm:text-sm text-muted-foreground line-through">{formatUAH(product.originalPrice!)}</p>
-            )}
-          </div>
+        <Stars rating={product.rating} reviews={product.reviews} />
+        <div className="mt-auto pt-2 space-y-2.5">
+          <PriceBlock price={product.price} originalPrice={product.originalPrice} />
           <Button onClick={() => addItem(product)}
-            className="w-full h-10 rounded-full btn-aura border-0 text-[11px] sm:text-xs font-light gap-1.5 touch-manipulation">
+            className="w-full h-10 rounded-full btn-aura border-0 text-xs font-medium gap-1.5 touch-manipulation">
             <ShoppingCart className="h-3.5 w-3.5 shrink-0" />
             До кошика
           </Button>

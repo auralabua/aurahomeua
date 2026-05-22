@@ -109,7 +109,7 @@ export const useAllProductsAsLegacy = () => {
   const catsQ = useDBCategories();
   const slugById = new Map((catsQ.data ?? []).map((c) => [c.id, c.slug]));
   const products: Product[] = (productsQ.data ?? []).map(p => ({
-    id: p.legacy_id ?? p.id,
+    id: p.id, // Use raw UUID for variant matching
     name: p.name,
     price: Number(p.price),
     category: (slugById.get(p.category_id ?? "") ?? "massagers") as CategoryId,

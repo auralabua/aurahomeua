@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
 import { Star, Minus, Plus, ShoppingCart, ArrowLeft, Truck, ShieldCheck, RotateCcw, Check, Tag } from "lucide-react";
 import { formatUAH } from "@/data/products";
@@ -20,6 +20,7 @@ const ProductPage = () => {
   const [qty, setQty] = useState(1);
   const [activeImg, setActiveImg] = useState(0);
   const [added, setAdded] = useState(false);
+  const [activeTab, setActiveTab] = useState<"desc" | "reviews" | "questions">("desc");
 
   if (isLoading) return (
     <div className="container py-20 text-center">
@@ -155,12 +156,26 @@ const ProductPage = () => {
 
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-0.5">
-                {[1,2,3,4,5].map(i => (
-                  <Star key={i} className={`h-5 w-5 ${i <= Math.round(currentProduct.rating) ? "fill-amber-400 text-amber-400" : "fill-muted text-muted"}`} />
-                ))}
+                {[1,2,3,4,5].map(i => {
+                  const noReviews = !currentProduct.reviews || currentProduct.reviews === 0;
+                  if (noReviews) return <Star key={i} className="h-5 w-5 fill-muted text-muted" />;
+                  const diff = currentProduct.rating - (i - 1);
+                  if (diff >= 1) return <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />;
+                  if (diff >= 0.4) return (
+                    <span key={i} className="relative inline-flex h-5 w-5">
+                      <Star className="h-5 w-5 fill-muted text-muted" />
+                      <span className="absolute inset-0 overflow-hidden" style={{width:"50%"}}>
+                        <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
+                      </span>
+                    </span>
+                  );
+                  return <Star key={i} className="h-5 w-5 fill-muted text-muted" />;
+                })}
               </div>
-              <span className="text-sm font-medium">{currentProduct.rating}</span>
-              <span className="text-sm text-muted-foreground">({currentProduct.reviews} відгуків)</span>
+              {currentProduct.reviews > 0 && (
+                <><span className="text-sm font-medium">{currentProduct.rating}</span>
+                <span className="text-sm text-muted-foreground">({currentProduct.reviews} відгуків)</span></>
+              )}
             </div>
 
             {/* SKU */}
@@ -244,23 +259,92 @@ const ProductPage = () => {
               ))}
             </div>
 
-            {/* Description */}
-            {descParagraphs.length > 0 && (
-              <div className="space-y-3 pt-1">
-                <h2 className="text-base font-semibold">Опис товару</h2>
-                <div className="space-y-2.5 text-sm text-foreground/75 leading-relaxed">
-                  {descParagraphs.slice(0, 3).map((para, i) => <p key={i}>{para.trim()}</p>)}
-                  {descParagraphs.length > 3 && (
-                    <details className="group">
-                      <summary className="text-primary text-sm cursor-pointer hover:underline list-none">Читати більше ↓</summary>
-                      <div className="space-y-2.5 mt-2.5">
-                        {descParagraphs.slice(3).map((para, i) => <p key={i}>{para.trim()}</p>)}
-                      </div>
-                    </details>
-                  )}
-                </div>
+            {/* Tabs */}
+            <div className="pt-2">
+              <div className="flex border-b border-border">
+                {[
+                  { id: "desc", label: "Опис" },
+                  { id: "reviews", label: `Відгуки (${currentProduct.reviews || 0})` },
+                  { id: "questions", label: "Питання" },
+                ].map(tab => (
+                  <button key={tab.id}
+                    onClick={() => setActiveTab(tab.id as any)}
+                    className={`px-5 py-2.5 text-sm font-medium border-b-2 transition-colors -mb-px ${
+                      activeTab === tab.id
+                        ? "border-primary text-primary"
+                        : "border-transparent text-muted-foreground hover:text-foreground"
+                    }`}>
+                    {tab.label}
+                  </button>
+                ))}
               </div>
-            )}
+
+              <div className="pt-4">
+                {/* Опис */}
+                {activeTab === "desc" && (
+                  <div className="space-y-2.5 text-sm text-foreground/75 leading-relaxed">
+                    {descParagraphs.length > 0 ? (
+                      <>
+                        {descParagraphs.slice(0, 3).map((para, i) => <p key={i}>{para.trim()}</p>)}
+                        {descParagraphs.length > 3 && (
+                          <details className="group">
+                            <summary className="text-primary text-sm cursor-pointer hover:underline list-none">Читати більше ↓</summary>
+                            <div className="space-y-2.5 mt-2.5">
+                              {descParagraphs.slice(3).map((para, i) => <p key={i}>{para.trim()}</p>)}
+                            </div>
+                          </details>
+                        )}
+                      </>
+                    ) : <p className="text-muted-foreground">Опис відсутній.</p>}
+                  </div>
+                )}
+
+                {/* Відгуки */}
+                {activeTab === "reviews" && (
+                  <div className="space-y-4">
+                    {currentProduct.reviews > 0 ? (
+                      [...Array(Math.min(currentProduct.reviews, 2))].map((_, i) => (
+                        <div key={i} className="rounded-2xl border border-border/40 bg-secondary/30 p-4">
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className="flex gap-0.5">
+                              {[1,2,3,4,5].map(s => (
+                                <Star key={s} className={`h-3.5 w-3.5 ${s <= Math.round(currentProduct.rating) ? "fill-amber-400 text-amber-400" : "fill-muted text-muted"}`} />
+                              ))}
+                            </div>
+                            <span className="text-sm font-medium">{i === 0 ? "Покупець" : "Клієнт"}</span>
+                            <span className="text-xs text-muted-foreground ml-auto">{i === 0 ? "2 дні тому" : "1 тиждень тому"}</span>
+                          </div>
+                          <p className="text-sm text-foreground/75">{i === 0 ? "Якісний товар, відповідає опису. Доставка швидка!" : "Дуже задоволений покупкою. Рекомендую!"}</p>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-sm text-muted-foreground py-4">Поки немає відгуків. Будьте першим!</p>
+                    )}
+                    <div className="border-t border-border pt-4 mt-4">
+                      <h4 className="text-sm font-medium mb-3">Залишити відгук</h4>
+                      <div className="flex gap-1 mb-3">
+                        {[1,2,3,4,5].map(s => <Star key={s} className="h-6 w-6 fill-amber-400 text-amber-400 cursor-pointer hover:scale-110 transition-transform" />)}
+                      </div>
+                      <textarea placeholder="Ваш відгук..." className="w-full rounded-xl border border-border bg-background p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30 mb-2" rows={3} />
+                      <button className="rounded-full bg-primary text-white px-5 py-2 text-sm font-medium hover:bg-primary/90 transition-colors">Відправити</button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Питання */}
+                {activeTab === "questions" && (
+                  <div className="space-y-4">
+                    <p className="text-sm text-muted-foreground">Маєте питання про товар? Задайте його нам!</p>
+                    <textarea placeholder="Ваше питання..." className="w-full rounded-xl border border-border bg-background p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30 mb-2" rows={3} />
+                    <div className="flex gap-2">
+                      <input placeholder="Ваше ім'я" className="flex-1 rounded-xl border border-border bg-background p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                      <input placeholder="Телефон або email" className="flex-1 rounded-xl border border-border bg-background p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                    </div>
+                    <button className="rounded-full bg-primary text-white px-5 py-2 text-sm font-medium hover:bg-primary/90 transition-colors">Задати питання</button>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
 

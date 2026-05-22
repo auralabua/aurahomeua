@@ -6,7 +6,13 @@ import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
 import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 
-const HERO_IMG = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=85&auto=format&fit=crop";
+const HERO_IMGS = [
+  "https://images.unsplash.com/photo-1544991936-9464fa57a94f?w=600&q=85&auto=format&fit=crop",  // масаж спини
+  "https://images.unsplash.com/photo-1616279969856-759f316a5ac1?w=600&q=85&auto=format&fit=crop",  // foam roller
+  "https://images.unsplash.com/photo-1601925228154-d944af3e4754?w=600&q=85&auto=format&fit=crop",  // wellness/relax
+  "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=85&auto=format&fit=crop",  // масаж
+];
+const HERO_IMG = HERO_IMGS[0];
 
 const reviews = [
   { name: "Ірина К.", city: "Київ", text: "Ортопедична подушка змінила якість сну. Спина перестала боліти вже за тиждень.", rating: 5 },

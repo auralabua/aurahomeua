@@ -10,15 +10,13 @@ import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/co
 import { SlidersHorizontal, X, BedDouble, Hand, Shield, Zap, Sparkles, Baby, Footprints, Grip, Plug, ChevronRight, ChevronDown, type LucideIcon } from "lucide-react";
 
 const categoryIcons: Record<string, LucideIcon> = {
-  pillows: BedDouble,
-  mats: Grip,
-  braces: Shield,
-  massagers: Zap,
-  "massagers-electric": Plug,
-  "massagers-manual": Hand,
-  beauty: Sparkles,
-  toys: Baby,
-  insoles: Footprints,
+  "ortopedychni-podushky": BedDouble,
+  "ortopedychni-masazhni-kylymky": Grip,
+  "ortezy-i-bandazhi": Shield,
+  "masazhery": Zap,
+  "tovary-dlia-krasy": Sparkles,
+  "rozvyvaiuchi-ihrashky": Baby,
+  "ortopedychni-ustilky": Footprints,
 };
 
 const MAX_PRICE = 5000;

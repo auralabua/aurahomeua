@@ -6,7 +6,7 @@ import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
 import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 
-const HERO_IMG = "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1400&q=90&auto=format&fit=crop";
+const HERO_IMG = "https://images.unsplash.com/photo-1552693673-1bf958298935?w=1400&q=90&auto=format&fit=crop";
 
 const reviews = [
   { name: "Ірина К.", city: "Київ", text: "Ортопедична подушка змінила якість сну. Спина перестала боліти вже за тиждень.", rating: 5 },

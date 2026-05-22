@@ -60,6 +60,9 @@ export interface DBProduct {
   vendor_code: string | null;
   position: number;
   original_price: number | null;
+  parent_product_id: string | null;
+  variant_label: string | null;
+  is_parent: boolean | null;
 }
 
 export const useDBCategories = () =>
@@ -101,6 +104,32 @@ export const useCategoriesAsLegacy = () => {
   return { ...q, categories };
 };
 
+export const useAllProductsAsLegacy = () => {
+  const q = useDBProducts();
+  const { categories } = useCategoriesAsLegacy();
+  const data = q.data ?? [];
+  const slugById = new Map((q.data ?? []).map(p => [p.id, p]));
+  const products: Product[] = data.map(p => ({
+    id: p.id,
+    name: p.name,
+    price: Number(p.price),
+    category: (categories.find(c => c.id === p.category_id)?.id ?? p.category_id) as any,
+    rating: Number(p.rating ?? 4),
+    reviews: p.reviews ?? 0,
+    badge: (p.badge as Product["badge"]) || undefined,
+    description: p.description ?? "",
+    images: p.images ?? [],
+    vendor: p.vendor ?? undefined,
+    vendorCode: p.vendor_code ?? undefined,
+    available: p.available,
+    originalPrice: p.original_price ? Number(p.original_price) : undefined,
+    parentProductId: p.parent_product_id ?? undefined,
+    variantLabel: p.variant_label ?? undefined,
+    isParent: p.is_parent ?? false,
+  }));
+  return { ...q, products };
+};
+
 export const useDBProducts = () =>
   useQuery({
     queryKey: ["products"],
@@ -133,6 +162,9 @@ export const useProductsAsLegacy = () => {
     vendorCode: p.vendor_code ?? undefined,
     available: p.available,
     originalPrice: p.original_price ? Number(p.original_price) : undefined,
+    parentProductId: p.parent_product_id ?? undefined,
+    variantLabel: p.variant_label ?? undefined,
+    isParent: p.is_parent ?? false,
   }));
   return {
     products,

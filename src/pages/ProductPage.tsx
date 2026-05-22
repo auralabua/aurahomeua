@@ -31,16 +31,16 @@ const ProductPage = () => {
   const product = allProducts.find(p => p.id === id) || products.find(p => p.id === id);
   if (!product) return <Navigate to="/catalog" replace />;
 
-  // Find parent product
+  // Find parent product — parentProductId stores the UUID, but our ids might be legacy_id
   const parentId = product.parentProductId || (product.isParent ? product.id : null);
-  const parent = parentId ? allProducts.find(p => p.id === parentId) : null;
+  const parent = parentId ? allProducts.find(p => p.id === parentId || p.id === parentId) : null;
   const displayProduct = parent || product;
 
   // Get all variants for this product group
   const variants = useMemo(() => {
     if (!parentId) return [];
     return allProducts
-      .filter(p => p.parentProductId === parentId || p.id === parentId)
+      .filter(p => p.parentProductId === parentId || p.id === parentId || p.parentProductId === product.id || p.id === product.id)
       .sort((a, b) => {
         const ai = SIZE_ORDER.indexOf(a.variantLabel ?? "");
         const bi = SIZE_ORDER.indexOf(b.variantLabel ?? "");

@@ -51,6 +51,7 @@ export interface Product {
   vendor?: string;
   vendorCode?: string;
   available: boolean;
+  originalPrice?: number;
 }
 
 // Legacy static export removed — products now come from the database (see useProductsAsLegacy).

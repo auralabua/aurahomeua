@@ -27,32 +27,41 @@ const ProductPage = () => {
     </div>
   );
 
-  // Find product — could be parent or any variant
-  const product = allProducts.find(p => p.id === id) || products.find(p => p.id === id);
-  if (!product) return <Navigate to="/catalog" replace />;
+  // Find product in allProducts (uses raw UUID)
+  const product = allProducts.find(p => p.id === id);
+  // Also check catalog products (uses legacy_id)
+  const catalogProduct = products.find(p => p.id === id);
+  const foundProduct = product || catalogProduct;
+  if (!foundProduct) return <Navigate to="/catalog" replace />;
 
-  // Find parent product — parentProductId stores the UUID, but our ids might be legacy_id
-  const parentId = product.parentProductId || (product.isParent ? product.id : null);
-  const parent = parentId ? allProducts.find(p => p.id === parentId || p.id === parentId) : null;
-  const displayProduct = parent || product;
+  // Determine parent UUID
+  const parentId = foundProduct.parentProductId || (foundProduct.isParent ? foundProduct.id : null);
+  // Find parent in allProducts
+  const parent = parentId ? allProducts.find(p => p.id === parentId) : null;
+  const displayProduct = parent || foundProduct;
 
-  // Get all variants for this product group
+  // Get all variants for this product group (parent + all children)
   const variants = useMemo(() => {
     if (!parentId) return [];
-    return allProducts
-      .filter(p => p.parentProductId === parentId || p.id === parentId || p.parentProductId === product.id || p.id === product.id)
-      .sort((a, b) => {
-        const ai = SIZE_ORDER.indexOf(a.variantLabel ?? "");
-        const bi = SIZE_ORDER.indexOf(b.variantLabel ?? "");
-        if (ai !== -1 && bi !== -1) return ai - bi;
-        if (ai !== -1) return -1;
-        if (bi !== -1) return 1;
-        return (a.variantLabel ?? "").localeCompare(b.variantLabel ?? "");
-      });
+    const all = allProducts.filter(p =>
+      p.parentProductId === parentId || p.id === parentId
+    );
+    return all.sort((a, b) => {
+      const ai = SIZE_ORDER.indexOf(a.variantLabel ?? "");
+      const bi = SIZE_ORDER.indexOf(b.variantLabel ?? "");
+      if (ai !== -1 && bi !== -1) return ai - bi;
+      if (ai !== -1) return -1;
+      if (bi !== -1) return 1;
+      // Try numeric sort
+      const na = parseFloat(a.variantLabel ?? "");
+      const nb = parseFloat(b.variantLabel ?? "");
+      if (!isNaN(na) && !isNaN(nb)) return na - nb;
+      return (a.variantLabel ?? "").localeCompare(b.variantLabel ?? "");
+    });
   }, [allProducts, parentId]);
 
   const selectedVariant = variants.find(v => v.id === id) || (variants.length > 0 ? variants[0] : null);
-  const currentProduct = selectedVariant || product;
+  const currentProduct = selectedVariant || foundProduct;
 
   const category = categories.find(c => c.id === displayProduct.category);
   useSEO({
@@ -163,7 +172,7 @@ const ProductPage = () => {
                   {variants.map(v => (
                     <button
                       key={v.id}
-                      onClick={() => navigate(`/product/${v.id}`)}
+                      onClick={() => navigate(`/product/${v.id}`)} // v.id is raw UUID
                       className={`min-w-[44px] h-10 px-3 rounded-xl border-2 text-sm font-medium transition-all ${
                         v.id === (selectedVariant?.id || variants[0]?.id)
                           ? "border-primary bg-primary text-white"

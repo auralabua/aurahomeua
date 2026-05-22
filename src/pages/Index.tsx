@@ -6,7 +6,7 @@ import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
 import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 
-const HERO_IMG = "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=900&q=85&auto=format&fit=crop";
+const HERO_IMG = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=85&auto=format&fit=crop";
 
 const reviews = [
   { name: "Ірина К.", city: "Київ", text: "Ортопедична подушка змінила якість сну. Спина перестала боліти вже за тиждень.", rating: 5 },
@@ -147,43 +147,63 @@ const Index = () => {
   return (
     <div>
       {/* ── HERO ── */}
-      <section className="hero-bg">
-        <div className="container grid min-h-[auto] items-center gap-8 py-10 sm:py-14 lg:py-16 lg:min-h-[620px] lg:gap-12 lg:grid-cols-2">
-          <div className="space-y-8 max-w-2xl">
+      <section className="hero-bg overflow-hidden">
+        <div className="container grid items-center gap-6 py-8 sm:py-12 lg:py-16 lg:min-h-[600px] lg:gap-12 lg:grid-cols-2">
+          {/* Left */}
+          <div className="space-y-5 sm:space-y-7 max-w-2xl">
             <p className="aura-kicker">Wellness для вашого дому</p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[1.04] text-foreground">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[1.06] text-foreground">
               Комфорт.<br />Відновлення.<br />Якість життя.
             </h1>
-            <p className="text-lg md:text-xl font-light leading-relaxed text-muted-foreground max-w-lg">
+            <p className="text-base sm:text-lg md:text-xl font-light leading-relaxed text-muted-foreground max-w-lg">
               Ортопедичні товари, масажери та wellness-девайси для щоденного догляду за собою — з доставкою по всій Україні.
             </p>
-            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-2">
-              <Button asChild size="lg" className="h-12 w-full sm:w-auto rounded-full btn-aura border-0 font-light px-8">
+            <div className="flex flex-col sm:flex-row gap-3 pt-1">
+              <Button asChild size="lg" className="h-11 sm:h-12 rounded-full btn-aura border-0 font-light px-6 sm:px-8">
                 <Link to="/catalog">Переглянути колекцію <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="h-12 w-full sm:w-auto rounded-full font-light px-8 border-border/60 bg-white/60 hover:bg-white text-foreground">
+              <Button asChild size="lg" variant="outline" className="h-11 sm:h-12 rounded-full font-light px-6 sm:px-8 border-border/60 bg-white/60 hover:bg-white text-foreground">
                 <a href="#featured">Популярні товари</a>
               </Button>
             </div>
           </div>
 
-          <div className="relative hidden lg:block">
+          {/* Right — показується на sm+ */}
+          <div className="relative hidden sm:block">
             <div className="absolute -inset-4 rounded-[2.5rem] bg-primary/8 blur-2xl" />
             <div className="relative overflow-hidden rounded-[2rem] border border-border/40 bg-white shadow-elevated">
-              <img src={HERO_IMG} alt="Wellness lifestyle" className="aspect-[4/3] w-full object-cover" loading="eager" onError={e => { e.currentTarget.style.display = "none"; }} />
-              <div className="absolute bottom-5 left-5 right-5 glass rounded-2xl p-4">
+              <img
+                src={HERO_IMG}
+                alt="Wellness lifestyle"
+                className="aspect-[4/3] w-full object-cover object-center"
+                loading="eager"
+                onError={e => { e.currentTarget.style.display = "none"; }}
+              />
+              <div className="absolute bottom-4 left-4 right-4 glass rounded-2xl p-3 sm:p-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                    <ShieldCheck className="h-5 w-5 text-primary" strokeWidth={1.5} />
+                  <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                    <ShieldCheck className="h-4 w-4 sm:h-5 sm:w-5 text-primary" strokeWidth={1.5} />
                   </div>
                   <div>
-                    <p className="text-sm font-light text-foreground">Перевірені wellness-товари</p>
-                    <p className="text-xs text-muted-foreground">для спини, сну, постави та відновлення</p>
+                    <p className="text-xs sm:text-sm font-light text-foreground">Перевірені wellness-товари</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground">для спини, сну, постави та відновлення</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Mobile — мала смужка з зображенням знизу тексту */}
+        <div className="sm:hidden w-full overflow-hidden" style={{height: "200px"}}>
+          <img
+            src={HERO_IMG}
+            alt="Wellness"
+            className="w-full h-full object-cover object-top"
+            loading="eager"
+            onError={e => { e.currentTarget.style.display = "none"; }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent pointer-events-none" />
         </div>
       </section>
 

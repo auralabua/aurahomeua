@@ -5,10 +5,65 @@ import { Product, formatUAH } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import { useCategoriesAsLegacy } from "@/hooks/useShopData";
 
-export const ProductCard = ({ product }: { product: Product }) => {
+interface ProductCardProps {
+  product: Product;
+  compact?: boolean;
+}
+
+export const ProductCard = ({ product, compact = false }: ProductCardProps) => {
   const { addItem } = useCart();
   const { categories } = useCategoriesAsLegacy();
   const category = categories.find(c => c.id === product.category);
+
+  if (compact) {
+    return (
+      <article className="group flex flex-col overflow-hidden rounded-xl border border-border/50 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-card h-full">
+        {/* Image */}
+        <Link to={`/product/${product.id}`} className="relative overflow-hidden bg-secondary/30">
+          <div className="aspect-square grid place-items-center p-2">
+            {product.images?.[0]
+              ? <img src={product.images[0]} alt={product.name}
+                  className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy" />
+              : <div className="h-full w-full rounded-lg bg-secondary/60" />
+            }
+          </div>
+          {product.badge && (
+            <span className="absolute left-1.5 top-1.5 rounded-full bg-primary/90 px-1.5 py-0.5 text-[8px] font-medium uppercase tracking-wider text-white">
+              {product.badge === "Хіт продажів" ? "Хіт" : product.badge}
+            </span>
+          )}
+        </Link>
+        {/* Info */}
+        <div className="flex flex-col flex-1 gap-1.5 p-2.5">
+          {category && (
+            <span className="text-[8px] uppercase tracking-[0.15em] text-primary/70 font-medium line-clamp-1">
+              {category.name}
+            </span>
+          )}
+          <Link to={`/product/${product.id}`}
+            className="line-clamp-2 text-[11px] font-light leading-snug text-foreground hover:text-primary transition-colors">
+            {product.name}
+          </Link>
+          <div className="flex items-center gap-0.5">
+            {[1,2,3,4,5].map(i => (
+              <Star key={i} className={`h-2 w-2 ${i <= Math.round(product.rating) ? "fill-primary text-primary" : "fill-muted text-muted"}`} />
+            ))}
+          </div>
+          <div className="mt-auto pt-1.5 space-y-1.5">
+            <p className="text-sm font-light text-primary">{formatUAH(product.price)}</p>
+            <Button
+              onClick={() => addItem(product)}
+              className="w-full h-8 rounded-full btn-aura border-0 text-[10px] font-light gap-1 touch-manipulation"
+            >
+              <ShoppingCart className="h-3 w-3 shrink-0" />
+              До кошика
+            </Button>
+          </div>
+        </div>
+      </article>
+    );
+  }
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-border/50 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-card">
@@ -28,7 +83,6 @@ export const ProductCard = ({ product }: { product: Product }) => {
           </span>
         )}
       </Link>
-
       {/* Info */}
       <div className="flex flex-1 flex-col gap-1.5 sm:gap-2.5 p-3 sm:p-4">
         {category && (
@@ -40,18 +94,14 @@ export const ProductCard = ({ product }: { product: Product }) => {
           className="line-clamp-2 text-xs sm:text-sm font-light leading-snug text-foreground hover:text-primary transition-colors">
           {product.name}
         </Link>
-
-        {/* Rating */}
         <div className="flex items-center gap-0.5 sm:gap-1">
-          {[1, 2, 3, 4, 5].map(i => (
+          {[1,2,3,4,5].map(i => (
             <Star key={i} className={`h-2.5 w-2.5 sm:h-3 sm:w-3 ${i <= Math.round(product.rating) ? "fill-primary text-primary" : "fill-muted text-muted"}`} />
           ))}
           {product.reviews > 0 && (
             <span className="ml-1 text-[10px] text-muted-foreground">({product.reviews})</span>
           )}
         </div>
-
-        {/* Price + CTA */}
         <div className="mt-auto pt-1.5 sm:pt-2 space-y-2 sm:space-y-3">
           <p className="text-base sm:text-xl font-light text-primary">{formatUAH(product.price)}</p>
           <Button

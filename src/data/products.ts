@@ -55,6 +55,7 @@ export interface Product {
   parentProductId?: string;
   variantLabel?: string;
   isParent?: boolean;
+  xmlGroupId?: string;
 }
 
 // Legacy static export removed — products now come from the database (see useProductsAsLegacy).

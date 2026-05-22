@@ -10,14 +10,29 @@ interface ProductCardProps {
   compact?: boolean;
 }
 
+const StarIcon = ({ fill, size }: { fill: "full" | "half" | "empty"; size: string }) => (
+  <span className={`relative inline-flex ${size}`}>
+    <Star className={`${size} fill-muted text-muted`} />
+    {fill !== "empty" && (
+      <span className="absolute inset-0 overflow-hidden" style={{ width: fill === "half" ? "50%" : "100%" }}>
+        <Star className={`${size} fill-amber-400 text-amber-400`} />
+      </span>
+    )}
+  </span>
+);
+
 const Stars = ({ rating, reviews, size = "sm" }: { rating: number; reviews?: number; size?: "xs" | "sm" }) => {
   const sz = size === "xs" ? "h-2.5 w-2.5" : "h-3 w-3";
+  const noReviews = !reviews || reviews === 0;
   return (
     <div className="flex items-center gap-1">
       <div className="flex items-center gap-0.5">
-        {[1,2,3,4,5].map(i => (
-          <Star key={i} className={`${sz} ${i <= Math.round(rating) ? "fill-amber-400 text-amber-400" : "fill-muted text-muted"}`} />
-        ))}
+        {[1,2,3,4,5].map(i => {
+          if (noReviews) return <Star key={i} className={`${sz} fill-muted text-muted`} />;
+          const diff = rating - (i - 1);
+          const fill = diff >= 1 ? "full" : diff >= 0.4 ? "half" : "empty";
+          return <StarIcon key={i} fill={fill} size={sz} />;
+        })}
       </div>
       {reviews !== undefined && reviews > 0 && (
         <span className="text-[10px] text-muted-foreground font-normal">({reviews})</span>

@@ -6,13 +6,7 @@ import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
 import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 
-const HERO_IMGS = [
-  "https://images.unsplash.com/photo-1544991936-9464fa57a94f?w=600&q=85&auto=format&fit=crop",  // масаж спини
-  "https://images.unsplash.com/photo-1616279969856-759f316a5ac1?w=600&q=85&auto=format&fit=crop",  // foam roller
-  "https://images.unsplash.com/photo-1601925228154-d944af3e4754?w=600&q=85&auto=format&fit=crop",  // wellness/relax
-  "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=85&auto=format&fit=crop",  // масаж
-];
-const HERO_IMG = HERO_IMGS[0];
+const HERO_IMG = "https://images.unsplash.com/photo-1616279969856-759f316a5ac1?w=1400&q=90&auto=format&fit=crop";
 
 const reviews = [
   { name: "Ірина К.", city: "Київ", text: "Ортопедична подушка змінила якість сну. Спина перестала боліти вже за тиждень.", rating: 5 },
@@ -153,63 +147,50 @@ const Index = () => {
   return (
     <div>
       {/* ── HERO ── */}
-      <section className="hero-bg overflow-hidden">
-        <div className="container grid items-center gap-6 py-8 sm:py-12 lg:py-16 lg:min-h-[600px] lg:gap-12 lg:grid-cols-2">
-          {/* Left */}
-          <div className="space-y-5 sm:space-y-7 max-w-2xl">
-            <p className="aura-kicker">Wellness для вашого дому</p>
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[1.06] text-foreground">
+      {/* ── HERO ── */}
+      <section className="relative overflow-hidden min-h-[480px] sm:min-h-[580px] lg:min-h-[640px] flex items-center">
+        {/* Background image */}
+        <img
+          src={HERO_IMG}
+          alt="Wellness lifestyle"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          loading="eager"
+        />
+        {/* Gradient overlay — темніший зліва для читабельності тексту */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+
+        {/* Content */}
+        <div className="relative z-10 container py-16 sm:py-20 lg:py-24">
+          <div className="max-w-xl lg:max-w-2xl space-y-5 sm:space-y-7">
+            <p className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.28em] text-white/70 font-medium">
+              <span className="h-px w-6 bg-white/50" /> Wellness для вашого дому
+            </p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[1.04] text-white">
               Комфорт.<br />Відновлення.<br />Якість життя.
             </h1>
-            <p className="text-base sm:text-lg md:text-xl font-light leading-relaxed text-muted-foreground max-w-lg">
-              Ортопедичні товари, масажери та wellness-девайси для щоденного догляду за собою — з доставкою по всій Україні.
+            <p className="text-base sm:text-lg font-light leading-relaxed text-white/75 max-w-md">
+              Ортопедичні товари, масажери та wellness-девайси для щоденного догляду — доставка по всій Україні.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 pt-1">
-              <Button asChild size="lg" className="h-11 sm:h-12 rounded-full btn-aura border-0 font-light px-6 sm:px-8">
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <Button asChild size="lg" className="h-12 rounded-full bg-white text-foreground hover:bg-white/90 border-0 font-light px-8 shadow-lg">
                 <Link to="/catalog">Переглянути колекцію <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="h-11 sm:h-12 rounded-full font-light px-6 sm:px-8 border-border/60 bg-white/60 hover:bg-white text-foreground">
+              <Button asChild size="lg" variant="outline" className="h-12 rounded-full font-light px-8 border-white/40 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm">
                 <a href="#featured">Популярні товари</a>
               </Button>
             </div>
-          </div>
 
-          {/* Right — показується на sm+ */}
-          <div className="relative hidden sm:block">
-            <div className="absolute -inset-4 rounded-[2.5rem] bg-primary/8 blur-2xl" />
-            <div className="relative overflow-hidden rounded-[2rem] border border-border/40 bg-white shadow-elevated">
-              <img
-                src={HERO_IMG}
-                alt="Wellness lifestyle"
-                className="aspect-[4/3] w-full object-cover object-center"
-                loading="eager"
-                onError={e => { e.currentTarget.style.display = "none"; }}
-              />
-              <div className="absolute bottom-4 left-4 right-4 glass rounded-2xl p-3 sm:p-4">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                    <ShieldCheck className="h-4 w-4 sm:h-5 sm:w-5 text-primary" strokeWidth={1.5} />
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm font-light text-foreground">Перевірені wellness-товари</p>
-                    <p className="text-[10px] sm:text-xs text-muted-foreground">для спини, сну, постави та відновлення</p>
-                  </div>
-                </div>
-              </div>
+            {/* Trust pills */}
+            <div className="flex flex-wrap gap-2 pt-2">
+              {["Нова Пошта", "Оплата при отриманні", "14 днів повернення"].map((t, i) => (
+                <span key={i} className="inline-flex items-center gap-1.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/20 px-3 py-1 text-xs text-white/85 font-light">
+                  <ShieldCheck className="h-3 w-3 text-white/60" strokeWidth={1.5} />
+                  {t}
+                </span>
+              ))}
             </div>
           </div>
-        </div>
-
-        {/* Mobile — мала смужка з зображенням знизу тексту */}
-        <div className="sm:hidden w-full overflow-hidden" style={{height: "200px"}}>
-          <img
-            src={HERO_IMG}
-            alt="Wellness"
-            className="w-full h-full object-cover object-top"
-            loading="eager"
-            onError={e => { e.currentTarget.style.display = "none"; }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent pointer-events-none" />
         </div>
       </section>
 

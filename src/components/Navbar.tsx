@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
-import { ShoppingCart, Search, Menu, X, Phone, Sparkles, ChevronDown } from "lucide-react";
+import { ShoppingCart, Search, Menu, X, Phone, Sparkles, ChevronDown, BookOpen, Bone, Waves, Moon, Baby } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import { useCategoriesAsLegacy } from "@/hooks/useShopData";
@@ -9,10 +9,12 @@ import { Input } from "@/components/ui/input";
 const PHONE = "+380956981124";
 const TELEGRAM = "https://t.me/aurahomeua";
 const VIBER = "viber://chat?number=%2B380956981124";
-const navItems = [
-  { to: "/", label: "Головна" },
-  { to: "/about", label: "Бренд" },
-  { to: "/contacts", label: "Контакти" },
+
+const blogItems = [
+  { icon: Bone, label: "Чому болить спина", link: "/catalog?category=ortopedychni-podushky", tag: "Здоров'я спини" },
+  { icon: Waves, label: "Масаж вдома: відновлення після дня", link: "/catalog?category=masazhery", tag: "Відновлення" },
+  { icon: Moon, label: "Як подушка впливає на сон", link: "/catalog?category=ortopedychni-podushky", tag: "Якість сну" },
+  { icon: Baby, label: "Ортопедія для дітей", link: "/catalog?category=rozvyvaiuchi-ihrashky", tag: "Дитяча ортопедія" },
 ];
 
 const TelegramIcon = () => (
@@ -30,16 +32,23 @@ export const Navbar = () => {
   const [query, setQuery] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [catOpen, setCatOpen] = useState(false);
+  const [blogOpen, setBlogOpen] = useState(false);
   const [mobileCatOpen, setMobileCatOpen] = useState(false);
+  const [mobileBlogOpen, setMobileBlogOpen] = useState(false);
   const catRef = useRef<HTMLDivElement>(null);
+  const blogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
       if (catRef.current && !catRef.current.contains(e.target as Node)) setCatOpen(false);
+      if (blogRef.current && !blogRef.current.contains(e.target as Node)) setBlogOpen(false);
     };
     document.addEventListener("mousedown", onClick);
     return () => document.removeEventListener("mousedown", onClick);
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => { setMobileOpen(false); }, [location.pathname]);
 
   const onSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,42 +67,46 @@ export const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/82 backdrop-blur-2xl">
+      {/* Top bar */}
       <div className="hidden lg:block border-b border-border bg-white/55">
         <div className="container flex h-9 items-center justify-between text-[11px] text-muted-foreground">
-          <span className="inline-flex items-center gap-2 uppercase tracking-[0.24em]"><Sparkles className="h-3.5 w-3.5 text-primary"/>товари для здоровʼя та ортопедії</span>
+          <span className="inline-flex items-center gap-2 uppercase tracking-[0.24em]">
+            <Sparkles className="h-3.5 w-3.5 text-primary"/>товари для здоровʼя та ортопедії
+          </span>
           <div className="flex items-center gap-4">
-            <a href={`tel:${PHONE}`} className="flex items-center gap-1.5 hover:text-primary"><Phone className="h-3 w-3"/>{PHONE}</a>
-            <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary"><TelegramIcon/>Telegram</a>
-            <a href={VIBER} className="flex items-center gap-1.5 hover:text-primary"><ViberIcon/>Viber</a>
+            <a href={`tel:${PHONE}`} className="flex items-center gap-1.5 hover:text-primary transition-colors"><Phone className="h-3 w-3"/>{PHONE}</a>
+            <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary transition-colors"><TelegramIcon/>Telegram</a>
+            <a href={VIBER} className="flex items-center gap-1.5 hover:text-primary transition-colors"><ViberIcon/>Viber</a>
           </div>
         </div>
       </div>
-      <div className="container flex h-16 items-center gap-4 lg:gap-8">
+
+      {/* Main nav */}
+      <div className="container flex h-16 items-center gap-4 lg:gap-6">
+        {/* Logo */}
         <Link to="/" className="flex items-center gap-3 shrink-0">
-          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/12 ring-1 ring-primary/25 shadow-glow text-primary">A</span>
+          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/12 ring-1 ring-primary/25 shadow-glow text-primary font-light text-lg">A</span>
           <span className="leading-none">
             <span className="block text-xl font-light tracking-[0.16em] uppercase">Aura</span>
             <span className="block text-[10px] tracking-[0.34em] text-muted-foreground uppercase">Well</span>
           </span>
         </Link>
 
-        <nav className="hidden lg:flex items-center rounded-full border border-border bg-white/70 p-1">
-          <NavLink to="/" end className={({isActive})=>`rounded-full px-4 py-2 text-sm font-light transition-smooth ${isActive?"bg-secondary text-primary":"text-foreground/78 hover:bg-secondary hover:text-primary"}`}>Головна</NavLink>
+        {/* Desktop nav */}
+        <nav className="hidden lg:flex items-center rounded-full border border-border bg-white/70 p-1 gap-0.5">
+          <NavLink to="/" end className={({isActive}) => `rounded-full px-4 py-2 text-sm font-light transition-smooth ${isActive ? "bg-secondary text-primary" : "text-foreground/78 hover:bg-secondary hover:text-primary"}`}>
+            Головна
+          </NavLink>
 
+          {/* Каталог dropdown */}
           <div className="relative" ref={catRef}>
-            <button
-              type="button"
-              onClick={() => setCatOpen(o => !o)}
-              className={`inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-light transition-smooth ${isCatalogActive || catOpen ? "bg-secondary text-primary" : "text-foreground/78 hover:bg-secondary hover:text-primary"}`}
-            >
-              Каталог <ChevronDown className={`h-3.5 w-3.5 transition-transform ${catOpen ? "rotate-180" : ""}`} />
+            <button type="button" onClick={() => { setCatOpen(o => !o); setBlogOpen(false); }}
+              className={`inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-light transition-smooth ${isCatalogActive || catOpen ? "bg-secondary text-primary" : "text-foreground/78 hover:bg-secondary hover:text-primary"}`}>
+              Каталог <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${catOpen ? "rotate-180" : ""}`} />
             </button>
             {catOpen && (
-              <div className="absolute left-0 top-full mt-2 w-72 rounded-2xl border border-border bg-white/95 backdrop-blur-xl shadow-elevated p-2 animate-fade-in z-50">
-                <button
-                  onClick={() => goToCategory()}
-                  className="w-full text-left rounded-xl px-3 py-2 text-sm font-light text-foreground/80 hover:bg-secondary hover:text-primary"
-                >
+              <div className="absolute left-0 top-full mt-2 w-72 rounded-2xl border border-border bg-white/95 backdrop-blur-xl shadow-elevated p-2 z-50">
+                <button onClick={() => goToCategory()} className="w-full text-left rounded-xl px-3 py-2 text-sm font-light text-foreground/80 hover:bg-secondary hover:text-primary">
                   Усі товари
                 </button>
                 <div className="my-1 h-px bg-border" />
@@ -101,20 +114,13 @@ export const Navbar = () => {
                   const subs = categories.filter(s => s.parentId === c.id);
                   return (
                     <div key={c.id}>
-                      <button
-                        onClick={() => goToCategory(c.id)}
-                        className="w-full text-left rounded-xl px-3 py-2 text-sm font-light text-foreground/80 hover:bg-secondary hover:text-primary"
-                      >
+                      <button onClick={() => goToCategory(c.id)} className="w-full text-left rounded-xl px-3 py-2 text-sm font-light text-foreground/80 hover:bg-secondary hover:text-primary">
                         {c.name}
                       </button>
                       {subs.length > 0 && (
-                        <div className="ml-3 border-l border-border/60 pl-2">
+                        <div className="ml-3 border-l border-border/60 pl-2 mb-1">
                           {subs.map(s => (
-                            <button
-                              key={s.id}
-                              onClick={() => goToCategory(s.id)}
-                              className="w-full text-left rounded-xl px-3 py-1.5 text-xs font-light text-foreground/65 hover:bg-secondary hover:text-primary"
-                            >
+                            <button key={s.id} onClick={() => goToCategory(s.id)} className="w-full text-left rounded-xl px-3 py-1.5 text-xs font-light text-foreground/65 hover:bg-secondary hover:text-primary">
                               {s.name}
                             </button>
                           ))}
@@ -127,50 +133,84 @@ export const Navbar = () => {
             )}
           </div>
 
-          {navItems.filter(i => i.to !== "/").map(item => (
-            <NavLink key={item.to} to={item.to} className={({isActive})=>`rounded-full px-4 py-2 text-sm font-light transition-smooth ${isActive?"bg-secondary text-primary":"text-foreground/78 hover:bg-secondary hover:text-primary"}`}>{item.label}</NavLink>
-          ))}
+          {/* Блог dropdown */}
+          <div className="relative" ref={blogRef}>
+            <button type="button" onClick={() => { setBlogOpen(o => !o); setCatOpen(false); }}
+              className={`inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-light transition-smooth ${blogOpen ? "bg-secondary text-primary" : "text-foreground/78 hover:bg-secondary hover:text-primary"}`}>
+              <BookOpen className="h-3.5 w-3.5" /> Блог <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${blogOpen ? "rotate-180" : ""}`} />
+            </button>
+            {blogOpen && (
+              <div className="absolute left-0 top-full mt-2 w-80 rounded-2xl border border-border bg-white/95 backdrop-blur-xl shadow-elevated p-2 z-50">
+                <p className="px-3 py-1.5 text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-medium">Корисні статті</p>
+                <div className="my-1 h-px bg-border" />
+                {blogItems.map((item, i) => (
+                  <Link key={i} to={item.link} onClick={() => setBlogOpen(false)}
+                    className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-secondary group transition-colors">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-primary/8 group-hover:bg-primary/15 transition-colors">
+                      <item.icon className="h-4 w-4 text-primary" strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-primary/60 uppercase tracking-wider">{item.tag}</p>
+                      <p className="text-sm font-light text-foreground leading-snug">{item.label}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <NavLink to="/contacts" className={({isActive}) => `rounded-full px-4 py-2 text-sm font-light transition-smooth ${isActive ? "bg-secondary text-primary" : "text-foreground/78 hover:bg-secondary hover:text-primary"}`}>
+            Контакти
+          </NavLink>
         </nav>
 
+        {/* Search */}
         <form onSubmit={onSearch} className="hidden md:flex relative flex-1 max-w-md ml-auto">
-          <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"/>
-          <Input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Пошук подушок, устілок, масажерів..." className="h-11 rounded-full border-border bg-white/75 pl-10 text-sm"/>
+          <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground pointer-events-none"/>
+          <Input value={query} onChange={e => setQuery(e.target.value)} placeholder="Пошук подушок, устілок, масажерів..." className="h-11 rounded-full border-border bg-white/75 pl-10 text-sm focus:bg-white transition-colors"/>
         </form>
 
+        {/* Cart + burger */}
         <div className="flex items-center gap-2 ml-auto md:ml-0">
           <Button asChild variant="ghost" size="icon" className="relative rounded-full bg-white/75 text-primary hover:bg-secondary hover:text-primary">
             <Link to="/cart" aria-label="Кошик">
               <ShoppingCart className="h-5 w-5"/>
-              {totalCount>0&&<span className="absolute -top-1 -right-1 grid h-5 min-w-5 px-1 place-items-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">{totalCount}</span>}
+              {totalCount > 0 && (
+                <span className="absolute -top-1 -right-1 grid h-5 min-w-5 px-1 place-items-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">
+                  {totalCount}
+                </span>
+              )}
             </Link>
           </Button>
-          <Button variant="ghost" size="icon" className="lg:hidden rounded-full bg-white/75" onClick={()=>setMobileOpen(o=>!o)}>
+          <Button variant="ghost" size="icon" className="lg:hidden rounded-full bg-white/75" onClick={() => setMobileOpen(o => !o)}>
             {mobileOpen ? <X className="h-5 w-5"/> : <Menu className="h-5 w-5"/>}
           </Button>
         </div>
       </div>
 
+      {/* Mobile menu */}
       {mobileOpen && (
         <div className="lg:hidden border-t border-border bg-background/95 animate-fade-in">
-          <div className="container py-4 space-y-4">
-            <form onSubmit={onSearch} className="relative md:hidden">
-              <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"/>
-              <Input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Пошук товарів..." className="rounded-full bg-white/75 border-border pl-10"/>
+          <div className="container py-4 space-y-3">
+            <form onSubmit={onSearch} className="relative">
+              <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground pointer-events-none"/>
+              <Input value={query} onChange={e => setQuery(e.target.value)} placeholder="Пошук товарів..." className="rounded-full bg-white/75 border-border pl-10"/>
             </form>
-            <nav className="grid gap-2">
-              <NavLink to="/" end onClick={()=>setMobileOpen(false)} className={({isActive})=>`rounded-2xl px-4 py-3 font-light ${isActive?"bg-secondary text-primary":"text-foreground"}`}>Головна</NavLink>
 
-              <div className="rounded-2xl overflow-hidden">
-                <button
-                  type="button"
-                  onClick={() => setMobileCatOpen(o => !o)}
-                  className={`w-full flex items-center justify-between px-4 py-3 font-light ${isCatalogActive ? "bg-secondary text-primary" : "text-foreground"}`}
-                >
+            <nav className="grid gap-1">
+              <NavLink to="/" end onClick={() => setMobileOpen(false)} className={({isActive}) => `rounded-2xl px-4 py-3 text-sm font-light ${isActive ? "bg-secondary text-primary" : "text-foreground"}`}>
+                Головна
+              </NavLink>
+
+              {/* Mobile Каталог */}
+              <div className="rounded-2xl overflow-hidden border border-border/30">
+                <button type="button" onClick={() => setMobileCatOpen(o => !o)}
+                  className={`w-full flex items-center justify-between px-4 py-3 text-sm font-light ${isCatalogActive ? "bg-secondary text-primary" : "text-foreground"}`}>
                   <span>Каталог</span>
                   <ChevronDown className={`h-4 w-4 transition-transform ${mobileCatOpen ? "rotate-180" : ""}`} />
                 </button>
                 {mobileCatOpen && (
-                  <div className="bg-white/60 pl-2 pr-2 pb-2 pt-1 grid gap-1">
+                  <div className="bg-white/60 px-2 pb-2 pt-1 grid gap-0.5">
                     <button onClick={() => goToCategory()} className="text-left rounded-xl px-4 py-2.5 text-sm font-light text-foreground/85 hover:bg-secondary hover:text-primary">
                       Усі товари
                     </button>
@@ -193,12 +233,33 @@ export const Navbar = () => {
                 )}
               </div>
 
-              {navItems.filter(i => i.to !== "/").map(item => (
-                <NavLink key={item.to} to={item.to} onClick={()=>setMobileOpen(false)} className={({isActive})=>`rounded-2xl px-4 py-3 font-light ${isActive?"bg-secondary text-primary":"text-foreground"}`}>{item.label}</NavLink>
-              ))}
+              {/* Mobile Блог */}
+              <div className="rounded-2xl overflow-hidden border border-border/30">
+                <button type="button" onClick={() => setMobileBlogOpen(o => !o)}
+                  className="w-full flex items-center justify-between px-4 py-3 text-sm font-light text-foreground">
+                  <span className="flex items-center gap-2"><BookOpen className="h-4 w-4 text-primary"/>Блог</span>
+                  <ChevronDown className={`h-4 w-4 transition-transform ${mobileBlogOpen ? "rotate-180" : ""}`} />
+                </button>
+                {mobileBlogOpen && (
+                  <div className="bg-white/60 px-2 pb-2 pt-1 grid gap-0.5">
+                    {blogItems.map((item, i) => (
+                      <Link key={i} to={item.link} onClick={() => setMobileOpen(false)}
+                        className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-secondary transition-colors">
+                        <item.icon className="h-4 w-4 text-primary shrink-0" strokeWidth={1.5} />
+                        <span className="text-sm font-light text-foreground">{item.label}</span>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <NavLink to="/contacts" onClick={() => setMobileOpen(false)} className={({isActive}) => `rounded-2xl px-4 py-3 text-sm font-light ${isActive ? "bg-secondary text-primary" : "text-foreground"}`}>
+                Контакти
+              </NavLink>
             </nav>
-            <div className="flex flex-wrap gap-3 border-t border-border pt-4 text-sm text-muted-foreground">
-              <a href={`tel:${PHONE}`} className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary"/>{PHONE}</a>
+
+            <div className="flex flex-wrap gap-3 border-t border-border pt-3 text-sm text-muted-foreground">
+              <a href={`tel:${PHONE}`} className="flex items-center gap-2 hover:text-primary"><Phone className="h-4 w-4 text-primary"/>{PHONE}</a>
               <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary"><TelegramIcon/>Telegram</a>
               <a href={VIBER} className="flex items-center gap-2 text-primary"><ViberIcon/>Viber</a>
             </div>

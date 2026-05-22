@@ -163,6 +163,13 @@ const ProductPage = () => {
               <span className="text-sm text-muted-foreground">({currentProduct.reviews} відгуків)</span>
             </div>
 
+            {/* SKU */}
+            {currentProduct.vendorCode && (
+              <div className="text-sm text-muted-foreground">
+                Артикул: <span className="font-medium text-foreground">{currentProduct.vendorCode}</span>
+              </div>
+            )}
+
             {/* ── Variant selector ── */}
             {variants.length > 1 && (
               <div className="space-y-2">

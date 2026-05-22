@@ -40,11 +40,13 @@ const ProductPage = () => {
   const parent = parentId ? allProducts.find(p => p.id === parentId) : null;
   const displayProduct = parent || foundProduct;
 
-  // Get all variants for this product group (parent + all children)
+  // Get all variants — use xmlGroupId for reliable grouping
+  const groupId = foundProduct.xmlGroupId || (parent?.xmlGroupId);
   const variants = useMemo(() => {
-    if (!parentId) return [];
+    if (!groupId && !parentId) return [];
     const all = allProducts.filter(p =>
-      p.parentProductId === parentId || p.id === parentId
+      (groupId && p.xmlGroupId === groupId) ||
+      (!groupId && (p.parentProductId === parentId || p.id === parentId))
     );
     return all.sort((a, b) => {
       const ai = SIZE_ORDER.indexOf(a.variantLabel ?? "");
@@ -52,13 +54,12 @@ const ProductPage = () => {
       if (ai !== -1 && bi !== -1) return ai - bi;
       if (ai !== -1) return -1;
       if (bi !== -1) return 1;
-      // Try numeric sort
       const na = parseFloat(a.variantLabel ?? "");
       const nb = parseFloat(b.variantLabel ?? "");
       if (!isNaN(na) && !isNaN(nb)) return na - nb;
       return (a.variantLabel ?? "").localeCompare(b.variantLabel ?? "");
     });
-  }, [allProducts, parentId]);
+  }, [allProducts, groupId, parentId]);
 
   const selectedVariant = variants.find(v => v.id === id) || (variants.length > 0 ? variants[0] : null);
   const currentProduct = selectedVariant || foundProduct;

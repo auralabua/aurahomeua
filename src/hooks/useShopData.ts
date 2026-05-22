@@ -63,6 +63,7 @@ export interface DBProduct {
   parent_product_id: string | null;
   variant_label: string | null;
   is_parent: boolean | null;
+  xml_group_id: string | null;
 }
 
 export const useDBCategories = () =>
@@ -125,6 +126,7 @@ export const useAllProductsAsLegacy = () => {
     parentProductId: p.parent_product_id ?? undefined,
     variantLabel: p.variant_label ?? undefined,
     isParent: p.is_parent ?? false,
+    xmlGroupId: p.xml_group_id ?? undefined,
   }));
   return { products, isLoading: productsQ.isLoading || catsQ.isLoading, isError: productsQ.isError || catsQ.isError };
 };
@@ -168,6 +170,7 @@ export const useProductsAsLegacy = () => {
     parentProductId: p.parent_product_id ?? undefined,
     variantLabel: p.variant_label ?? undefined,
     isParent: p.is_parent ?? false,
+    xmlGroupId: p.xml_group_id ?? undefined,
   }));
   return {
     products,

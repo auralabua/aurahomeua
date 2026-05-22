@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Truck, ShieldCheck, CreditCard, Headphones, Star, RotateCcw } from "lucide-react";
+import { ArrowRight, Truck, ShieldCheck, CreditCard, Headphones, Star, RotateCcw, Spine, Brain, Moon, Activity, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
@@ -21,6 +21,45 @@ const trust = [
   { icon: RotateCcw, title: "Легке повернення", desc: "Протягом 14 днів" },
 ];
 
+const articles = [
+  {
+    tag: "Здоров'я спини",
+    title: "Чому болить спина і як допомагає ортопедія",
+    text: "Сидяча робота, неправильна постава, відсутність руху — все це призводить до болю в спині. Ортопедичні подушки та масажери допомагають зняти напругу і відновити природне положення хребта.",
+    link: "/catalog?category=ortopedychni-podushky",
+    emoji: "🦴",
+    bg: "from-[#F5EFE6] to-[#EDE3D5]",
+    accent: "#8A6440",
+  },
+  {
+    tag: "Відновлення",
+    title: "Масаж вдома: як відновитись після важкого дня",
+    text: "Регулярний самомасаж покращує кровообіг, знімає м'язову напругу і допомагає тілу відновитись. Масажні мати та ролики — прості інструменти для щоденного догляду.",
+    link: "/catalog?category=masazhery",
+    emoji: "💆",
+    bg: "from-[#EAF2E8] to-[#D8EAD5]",
+    accent: "#3D7A55",
+  },
+  {
+    tag: "Якість сну",
+    title: "Як правильна подушка впливає на якість сну",
+    text: "Під час сну хребет має зберігати природне положення. Ортопедична подушка підтримує шийний відділ і запобігає ранковому болю. Правильний вибір — інвестиція в здоров'я.",
+    link: "/catalog?category=ortopedychni-podushky",
+    emoji: "🌙",
+    bg: "from-[#E8EDF5] to-[#D5DEEA]",
+    accent: "#3D5A8A",
+  },
+];
+
+const needs = [
+  { icon: "🦴", label: "Болить спина", link: "/catalog?category=ortopedychni-podushky", color: "bg-[#F5EFE6] hover:bg-[#EDE3D5]" },
+  { icon: "🦶", label: "Втомлюються ноги", link: "/catalog?category=ortopedychni-ustilky", color: "bg-[#EAF2E8] hover:bg-[#D8EAD5]" },
+  { icon: "🌙", label: "Поганий сон", link: "/catalog?category=ortopedychni-podushky", color: "bg-[#E8EDF5] hover:bg-[#D5DEEA]" },
+  { icon: "💆", label: "Стрес і напруга", link: "/catalog?category=masazhery", color: "bg-[#F0EAE8] hover:bg-[#E5D8D5]" },
+  { icon: "🦵", label: "Реабілітація", link: "/catalog?category=ortezy-i-bandazhi", color: "bg-[#F0E8F0] hover:bg-[#E5D5E5]" },
+  { icon: "🧘", label: "Активність і фітнес", link: "/catalog?category=ortopedychni-masazhni-kylymky", color: "bg-[#F5F0E0] hover:bg-[#EAE5CC]" },
+];
+
 const Index = () => {
   const { products } = useProductsAsLegacy();
   const { categories: allCats } = useCategoriesAsLegacy();
@@ -34,7 +73,6 @@ const Index = () => {
       {/* ── HERO ── */}
       <section className="hero-bg">
         <div className="container grid min-h-[auto] items-center gap-8 py-10 sm:py-14 lg:py-16 lg:min-h-[620px] lg:gap-12 lg:grid-cols-2">
-          {/* Left */}
           <div className="space-y-8 max-w-2xl">
             <p className="aura-kicker">Wellness для вашого дому</p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[1.04] text-foreground">
@@ -53,18 +91,10 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Right — hero image */}
           <div className="relative hidden lg:block">
             <div className="absolute -inset-4 rounded-[2.5rem] bg-primary/8 blur-2xl" />
             <div className="relative overflow-hidden rounded-[2rem] border border-border/40 bg-white shadow-elevated">
-              <img
-                src={HERO_IMG}
-                alt="Wellness lifestyle"
-                className="aspect-[4/3] w-full object-cover"
-                loading="eager"
-                onError={e => { e.currentTarget.style.display = "none"; }}
-              />
-              {/* Floating badge */}
+              <img src={HERO_IMG} alt="Wellness lifestyle" className="aspect-[4/3] w-full object-cover" loading="eager" onError={e => { e.currentTarget.style.display = "none"; }} />
               <div className="absolute bottom-5 left-5 right-5 glass rounded-2xl p-4">
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
@@ -135,6 +165,55 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ── ПІДБІР ЗА ЗАДАЧЕЮ ── */}
+      <section className="container py-12 sm:py-20">
+        <div className="mb-8 sm:mb-12 text-center">
+          <p className="aura-kicker mb-3">підбір</p>
+          <h2 className="text-4xl md:text-5xl font-light">Що вас турбує?</h2>
+          <p className="mt-3 text-muted-foreground font-light">Оберіть запит — підберемо відповідні товари</p>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          {needs.map((n, i) => (
+            <Link key={i} to={n.link}
+              className={`${n.color} rounded-2xl p-4 sm:p-6 flex flex-col items-center gap-3 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95`}>
+              <span className="text-3xl sm:text-4xl">{n.icon}</span>
+              <span className="text-xs sm:text-sm font-medium text-foreground leading-snug">{n.label}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ── БЛОГ / СТАТТІ ── */}
+      <section className="bg-secondary/40 py-12 sm:py-20">
+        <div className="container">
+          <div className="mb-8 sm:mb-12 flex items-end justify-between gap-4">
+            <div>
+              <p className="aura-kicker mb-3">корисно знати</p>
+              <h2 className="text-4xl md:text-5xl font-light">Здоров'я починається вдома</h2>
+              <p className="mt-2 text-muted-foreground font-light">Поради щодо догляду за тілом і відновлення</p>
+            </div>
+          </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {articles.map((a, i) => (
+              <Link key={i} to={a.link}
+                className={`group flex flex-col overflow-hidden rounded-2xl bg-gradient-to-br ${a.bg} border border-white/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-card`}>
+                <div className="flex items-center justify-center py-8 sm:py-10">
+                  <span className="text-5xl sm:text-6xl">{a.emoji}</span>
+                </div>
+                <div className="flex flex-col flex-1 bg-white/70 p-5 sm:p-6">
+                  <span className="text-[10px] uppercase tracking-[0.2em] font-medium mb-2" style={{ color: a.accent }}>{a.tag}</span>
+                  <h3 className="text-base sm:text-lg font-light leading-snug text-foreground mb-3">{a.title}</h3>
+                  <p className="text-xs sm:text-sm font-light leading-relaxed text-muted-foreground flex-1">{a.text}</p>
+                  <div className="mt-4 flex items-center gap-1 text-xs font-medium transition-all duration-200 group-hover:gap-2" style={{ color: a.accent }}>
+                    Дізнатись більше <ArrowRight size={12} />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── WHY US ── */}
       <section className="container py-12 sm:py-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -201,6 +280,24 @@ const Index = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── INSTAGRAM CTA ── */}
+      <section className="container py-12 sm:py-16">
+        <div className="rounded-3xl bg-gradient-to-br from-[#F5EFE6] via-[#EDE3D5] to-[#E8EDF5] border border-white/60 p-8 sm:p-12 flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
+          <div className="flex h-16 w-16 sm:h-20 sm:w-20 shrink-0 items-center justify-center rounded-3xl bg-white/80 shadow-soft">
+            <Instagram className="h-8 w-8 sm:h-10 sm:w-10 text-primary" strokeWidth={1.4} />
+          </div>
+          <div className="flex-1 text-center sm:text-left">
+            <h3 className="text-2xl sm:text-3xl font-light text-foreground">Ми в Instagram</h3>
+            <p className="mt-2 text-sm sm:text-base font-light text-muted-foreground">Поради з догляду за тілом, огляди товарів та wellness-лайфхаки щодня</p>
+          </div>
+          <Button asChild size="lg" className="h-12 rounded-full btn-aura border-0 font-light px-8 shrink-0 w-full sm:w-auto">
+            <a href="https://instagram.com/aurahomeua" target="_blank" rel="noopener noreferrer">
+              Підписатись <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
+          </Button>
         </div>
       </section>
 

@@ -33,6 +33,7 @@ export const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [catOpen, setCatOpen] = useState(false);
   const [blogOpen, setBlogOpen] = useState(false);
+  const [hoveredCat, setHoveredCat] = useState<string | null>(null);
   const [mobileCatOpen, setMobileCatOpen] = useState(false);
   const [mobileBlogOpen, setMobileBlogOpen] = useState(false);
   const catRef = useRef<HTMLDivElement>(null);
@@ -105,30 +106,55 @@ export const Navbar = () => {
               Каталог <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${catOpen ? "rotate-180" : ""}`} />
             </button>
             {catOpen && (
-              <div className="absolute left-0 top-full mt-2 w-72 rounded-2xl border border-border bg-white/95 backdrop-blur-xl shadow-elevated p-2 z-50">
-                <button onClick={() => goToCategory()} className="w-full text-left rounded-xl px-3 py-2 text-sm font-light text-foreground/80 hover:bg-secondary hover:text-primary">
-                  Усі товари
-                </button>
-                <div className="my-1 h-px bg-border" />
-                {categories.filter(c => !c.parentId).map(c => {
-                  const subs = categories.filter(s => s.parentId === c.id);
-                  return (
-                    <div key={c.id}>
-                      <button onClick={() => goToCategory(c.id)} className="w-full text-left rounded-xl px-3 py-2 text-sm font-light text-foreground/80 hover:bg-secondary hover:text-primary">
-                        {c.name}
-                      </button>
-                      {subs.length > 0 && (
-                        <div className="ml-3 border-l border-border/60 pl-2 mb-1">
-                          {subs.map(s => (
-                            <button key={s.id} onClick={() => goToCategory(s.id)} className="w-full text-left rounded-xl px-3 py-1.5 text-xs font-light text-foreground/65 hover:bg-secondary hover:text-primary">
-                              {s.name}
-                            </button>
-                          ))}
-                        </div>
-                      )}
+              <div className="absolute left-0 top-full mt-2 flex rounded-2xl border border-border bg-white/95 backdrop-blur-xl shadow-elevated z-50 overflow-hidden">
+                {/* Ліва колонка — батьківські категорії */}
+                <div className="w-56 p-2 border-r border-border/50">
+                  <button onClick={() => goToCategory()}
+                    className="w-full text-left rounded-xl px-3 py-2 text-sm font-light text-foreground/80 hover:bg-secondary hover:text-primary mb-1">
+                    Усі товари
+                  </button>
+                  <div className="h-px bg-border mb-1" />
+                  {categories.filter(c => !c.parentId).map(c => {
+                    const subs = categories.filter(s => s.parentId === c.id);
+                    const isHovered = hoveredCat === c.id;
+                    return (
+                      <div key={c.id}
+                        onMouseEnter={() => subs.length > 0 ? setHoveredCat(c.id) : setHoveredCat(null)}
+                        onMouseLeave={() => setHoveredCat(null)}
+                        className="relative">
+                        <button
+                          onClick={() => goToCategory(c.id)}
+                          className={`w-full text-left rounded-xl px-3 py-2 text-sm font-light flex items-center justify-between transition-colors ${
+                            isHovered ? "bg-secondary text-primary" : "text-foreground/80 hover:bg-secondary hover:text-primary"
+                          }`}>
+                          <span>{c.name}</span>
+                          {subs.length > 0 && <ChevronRight className="h-3.5 w-3.5 shrink-0 opacity-50" />}
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Права колонка — підкатегорії */}
+                {hoveredCat && (() => {
+                  const subs = categories.filter(s => s.parentId === hoveredCat);
+                  return subs.length > 0 ? (
+                    <div
+                      className="w-52 p-2"
+                      onMouseEnter={() => setHoveredCat(hoveredCat)}
+                      onMouseLeave={() => setHoveredCat(null)}>
+                      <p className="px-3 py-1 text-[10px] uppercase tracking-widest text-muted-foreground font-medium mb-1">
+                        {categories.find(c => c.id === hoveredCat)?.name}
+                      </p>
+                      <div className="h-px bg-border mb-1" />
+                      {subs.map(s => (
+                        <button key={s.id} onClick={() => goToCategory(s.id)}
+                          className="w-full text-left rounded-xl px-3 py-2 text-sm font-light text-foreground/70 hover:bg-secondary hover:text-primary transition-colors">
+                          {s.name}
+                        </button>
+                      ))}
                     </div>
-                  );
-                })}
+                  ) : null;
+                })()}
               </div>
             )}
           </div>

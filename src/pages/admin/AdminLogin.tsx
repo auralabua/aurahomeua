@@ -58,7 +58,7 @@ const AdminLogin = () => {
             <Lock className="h-5 w-5" />
           </div>
         </div>
-        <h1 className="text-2xl text-center mb-2">BodyHome — Адмін</h1>
+        <h1 className="text-2xl text-center mb-2">BodyHumm — Адмін</h1>
         <p className="text-sm text-muted-foreground text-center mb-6">
           {mode === "signin" ? "Увійдіть до панелі керування" : "Створіть обліковий запис"}
         </p>

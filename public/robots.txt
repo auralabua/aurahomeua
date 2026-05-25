@@ -4,4 +4,4 @@ Disallow: /admin
 Disallow: /admin/*
 Disallow: /cart
 
-Sitemap: https://bodyhome.com.ua/sitemap.xml
+Sitemap: https://aurahomeua.vercel.app/sitemap.xml

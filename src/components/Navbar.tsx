@@ -72,7 +72,7 @@ export const Navbar = () => {
       <div className="hidden lg:block border-b border-border bg-white/55">
         <div className="container flex h-9 items-center justify-between text-[11px] text-muted-foreground">
           <span className="inline-flex items-center gap-2 uppercase tracking-[0.24em]">
-            <Sparkles className="h-3.5 w-3.5 text-primary"/>товари для здоровʼя та ортопедії
+            <Sparkles className="h-3.5 w-3.5 text-primary"/>BodyHumm — товари для здоровʼя та ортопедії
           </span>
           <div className="flex items-center gap-4">
             <a href={`tel:${PHONE}`} className="flex items-center gap-1.5 hover:text-primary transition-colors"><Phone className="h-3 w-3"/>{PHONE}</a>
@@ -86,7 +86,7 @@ export const Navbar = () => {
       <div className="container flex h-16 items-center gap-4 lg:gap-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 shrink-0">
-          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/12 ring-1 ring-primary/25 shadow-glow text-primary font-light text-lg">A</span>
+          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/12 ring-1 ring-primary/25 shadow-glow text-primary font-light text-lg">B</span>
           <span className="leading-none">
             <span className="block text-xl font-light tracking-[0.16em] uppercase">Aura</span>
             <span className="block text-[10px] tracking-[0.34em] text-muted-foreground uppercase">Well</span>

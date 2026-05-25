@@ -14,7 +14,8 @@ const blogItems = [
   { icon: Bone, label: "Чому болить спина і як допомагає ортопедія", link: "/blog/chomu-bolyt-spyna-i-yak-dopomahaie-ortopediia", tag: "Здоров'я спини" },
   { icon: Waves, label: "Масаж вдома: як відновитися після важкого дня", link: "/blog/masazh-vdoma-yak-vidnovytysia-pislia-vazhkoho-dnia", tag: "Відновлення" },
   { icon: Moon, label: "Як правильна подушка впливає на якість сну", link: "/blog/yak-pravylna-podushka-vplyvaie-na-yakist-snu", tag: "Якість сну" },
-  { icon: Baby, label: "Ортопедія для дітей: коли починати", link: "/blog/ortopediia-dlia-ditei-koly-pochynaty-ta-shcho-obuyraty", tag: "Дитяча ортопедія" },
+  { icon: Baby, label: "Ортопедія для дітей: коли починати та що обирати", link: "/blog/ortopediia-dlia-ditei-koly-pochynaty-ta-shcho-obuyraty", tag: "Дитяча ортопедія" },
+  { icon: BookOpen, label: "Як вибрати ортопедичні устілки", link: "/blog/yak-vybraty-ortopedychni-ustilky", tag: "Ортопедія" },
 ];
 
 const TelegramIcon = () => (
@@ -159,6 +160,12 @@ export const Navbar = () => {
                     </div>
                   </Link>
                 ))}
+                <div className="my-1 h-px bg-border" />
+                <Link to="/blog" onClick={() => setBlogOpen(false)}
+                  className="flex items-center justify-between rounded-xl px-3 py-2 hover:bg-secondary group transition-colors">
+                  <span className="text-sm font-medium text-primary">Всі статті</span>
+                  <ArrowRight className="h-3.5 w-3.5 text-primary group-hover:translate-x-0.5 transition-transform" />
+                </Link>
               </div>
             )}
           </div>

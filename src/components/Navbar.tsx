@@ -11,10 +11,10 @@ const TELEGRAM = "https://t.me/bodyhomeua";
 const VIBER = "viber://chat?number=%2B380956981124";
 
 const blogItems = [
-  { icon: Bone, label: "Чому болить спина", link: "/catalog?category=ortopedychni-podushky", tag: "Здоров'я спини" },
-  { icon: Waves, label: "Масаж вдома: відновлення після дня", link: "/catalog?category=masazhery", tag: "Відновлення" },
-  { icon: Moon, label: "Як подушка впливає на сон", link: "/catalog?category=ortopedychni-podushky", tag: "Якість сну" },
-  { icon: Baby, label: "Ортопедія для дітей", link: "/catalog?category=rozvyvaiuchi-ihrashky", tag: "Дитяча ортопедія" },
+  { icon: Bone, label: "Чому болить спина і як допомагає ортопедія", link: "/blog/chomu-bolyt-spyna-i-yak-dopomahaie-ortopediia", tag: "Здоров'я спини" },
+  { icon: Waves, label: "Масаж вдома: як відновитися після важкого дня", link: "/blog/masazh-vdoma-yak-vidnovytysia-pislia-vazhkoho-dnia", tag: "Відновлення" },
+  { icon: Moon, label: "Як правильна подушка впливає на якість сну", link: "/blog/yak-pravylna-podushka-vplyvaie-na-yakist-snu", tag: "Якість сну" },
+  { icon: Baby, label: "Ортопедія для дітей: коли починати", link: "/blog/ortopediia-dlia-ditei-koly-pochynaty-ta-shcho-obuyraty", tag: "Дитяча ортопедія" },
 ];
 
 const TelegramIcon = () => (

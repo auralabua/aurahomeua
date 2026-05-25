@@ -14,6 +14,8 @@ const categoryIcons: Record<string, LucideIcon> = {
   "ortopedychni-masazhni-kylymky": Grip,
   "ortezy-i-bandazhi": Shield,
   "masazhery": Zap,
+  "elektrichni-masazhery": Plug,
+  "ruchni-masazhery": Hand,
   "tovary-dlia-krasy": Sparkles,
   "rozvyvaiuchi-ihrashky": Baby,
   "ortopedychni-ustilky": Footprints,
@@ -111,7 +113,7 @@ const Catalog = () => {
             const subs = categories.filter(s => s.parentId === c.id);
             const parentSelected = selectedCategories.includes(c.id);
             const isOpen = openCategories.includes(c.id) || subs.some(s => selectedCategories.includes(s.id));
-            const Icon = categoryIcons[c.id] ?? BedDouble;
+            const Icon = categoryIcons[c.id] ?? categoryIcons[c.slug] ?? BedDouble;
             return (
               <div key={c.id}>
                 {/* Рядок категорії: чекбокс + назва + стрілка */}

@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 const PHONE = "+380956981124";
-const TELEGRAM = "https://t.me/aurahomeua";
+const TELEGRAM = "https://t.me/bodyhomeua";
 const VIBER = "viber://chat?number=%2B380956981124";
 
 const blogItems = [

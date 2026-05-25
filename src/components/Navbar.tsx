@@ -24,6 +24,36 @@ const ViberIcon = () => (
   <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor"><path d="M11.4 0C6.37.03 2.33 2.4.64 6.37c-.97 2.3-1.03 4.74-.97 7.18.06 2.44.13 4.88 1.36 7.07 1.23 2.2 3.34 3.8 5.7 4.5.3.09.62.12.94.07l-.01-4.97c-.3-.1-.58-.24-.84-.42a5.3 5.3 0 01-2.02-3.73c-.1-2.52.26-5.18 1.84-7.22C8.27 6.5 10.73 5.7 13.1 5.7c2.37 0 4.72.97 6.2 2.8 1.48 1.85 1.8 4.38 1.72 6.7-.08 2.3-.48 4.73-1.97 6.54-1.5 1.8-3.9 2.7-6.2 2.57-.6-.03-1.18-.15-1.74-.33l-.01 4.97c.55.12 1.1.14 1.65.1 3.28-.22 6.36-1.84 8.3-4.43 1.94-2.6 2.46-5.9 2.46-9.08 0-3.18-.52-6.48-2.46-9.08C18.98 1.9 15.26.22 11.4 0z"/></svg>
 );
 
+
+const CatSubs = ({ hoveredCat, categories, setHoveredCat, goToCategory }: {
+  hoveredCat: string | null;
+  categories: any[];
+  setHoveredCat: (id: string | null) => void;
+  goToCategory: (id?: string) => void;
+}) => {
+  if (!hoveredCat) return null;
+  const subs = categories.filter(s => s.parentId === hoveredCat);
+  if (subs.length === 0) return null;
+  const parent = categories.find(c => c.id === hoveredCat);
+  return (
+    <div
+      className="w-52 p-2 border-l border-border/50"
+      onMouseEnter={() => setHoveredCat(hoveredCat)}
+      onMouseLeave={() => setHoveredCat(null)}>
+      <p className="px-3 py-1 text-[10px] uppercase tracking-widest text-muted-foreground font-medium mb-1">
+        {parent?.name}
+      </p>
+      <div className="h-px bg-border mb-1" />
+      {subs.map(s => (
+        <button key={s.id} onClick={() => goToCategory(s.id)}
+          className="w-full text-left rounded-xl px-3 py-2 text-sm font-light text-foreground/70 hover:bg-secondary hover:text-primary transition-colors">
+          {s.name}
+        </button>
+      ))}
+    </div>
+  );
+};
+
 export const Navbar = () => {
   const { totalCount } = useCart();
   const { categories } = useCategoriesAsLegacy();
@@ -135,26 +165,12 @@ export const Navbar = () => {
                   })}
                 </div>
                 {/* Права колонка — підкатегорії */}
-                {hoveredCat && (() => {
-                  const subs = categories.filter(s => s.parentId === hoveredCat);
-                  return subs.length > 0 ? (
-                    <div
-                      className="w-52 p-2"
-                      onMouseEnter={() => setHoveredCat(hoveredCat)}
-                      onMouseLeave={() => setHoveredCat(null)}>
-                      <p className="px-3 py-1 text-[10px] uppercase tracking-widest text-muted-foreground font-medium mb-1">
-                        {categories.find(c => c.id === hoveredCat)?.name}
-                      </p>
-                      <div className="h-px bg-border mb-1" />
-                      {subs.map(s => (
-                        <button key={s.id} onClick={() => goToCategory(s.id)}
-                          className="w-full text-left rounded-xl px-3 py-2 text-sm font-light text-foreground/70 hover:bg-secondary hover:text-primary transition-colors">
-                          {s.name}
-                        </button>
-                      ))}
-                    </div>
-                  ) : null;
-                })()}
+                <CatSubs
+                  hoveredCat={hoveredCat}
+                  categories={categories}
+                  setHoveredCat={setHoveredCat}
+                  goToCategory={goToCategory}
+                />
               </div>
             )}
           </div>

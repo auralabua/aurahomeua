@@ -7,40 +7,47 @@ const categoryConfig: Record<string, {
   accent: string;
   img: string;
 }> = {
+  // Ортопедична подушка на білому тлі — мінімалістично
   "ortopedychni-podushky": {
     bg: "from-[#F5EFE6]/80 to-[#EDE3D5]/80",
     accent: "#8A6440",
-    img: "https://images.pexels.com/photos/3771069/pexels-photo-3771069.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+    img: "https://images.pexels.com/photos/6707628/pexels-photo-6707628.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
   },
+  // Масажний килимок з шипами — продуктово
   "ortopedychni-masazhni-kylymky": {
     bg: "from-[#EAF2E8]/80 to-[#D8EAD5]/80",
     accent: "#3D7A55",
-    img: "https://images.pexels.com/photos/6787202/pexels-photo-6787202.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+    img: "https://images.pexels.com/photos/4056535/pexels-photo-4056535.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
   },
+  // Бандаж на коліні — чітко по темі
   "ortezy-i-bandazhi": {
     bg: "from-[#E8EDF5]/80 to-[#D5DEEA]/80",
     accent: "#3D5A8A",
-    img: "https://images.pexels.com/photos/5473182/pexels-photo-5473182.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+    img: "https://images.pexels.com/photos/7298880/pexels-photo-7298880.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
   },
+  // Ручний масажний ролик — мінімалістично
   "masazhery": {
     bg: "from-[#F0EAE8]/80 to-[#E5D8D5]/80",
     accent: "#8A4040",
-    img: "https://images.pexels.com/photos/3865557/pexels-photo-3865557.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+    img: "https://images.pexels.com/photos/3997993/pexels-photo-3997993.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
   },
+  // Краса і догляд — косметичний девайс
   "tovary-dlia-krasy": {
     bg: "from-[#F0E8F0]/80 to-[#E5D5E5]/80",
     accent: "#8A4070",
-    img: "https://images.pexels.com/photos/3762879/pexels-photo-3762879.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+    img: "https://images.pexels.com/photos/3785147/pexels-photo-3785147.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
   },
+  // Дитячі сенсорні іграшки на підлозі
   "rozvyvaiuchi-ihrashky": {
     bg: "from-[#F5F0E0]/80 to-[#EAE5CC]/80",
     accent: "#7A6A20",
-    img: "https://images.pexels.com/photos/3661353/pexels-photo-3661353.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+    img: "https://images.pexels.com/photos/3662667/pexels-photo-3662667.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
   },
+  // Ортопедична устілка — предметне фото
   "ortopedychni-ustilky": {
     bg: "from-[#E8F2F0]/80 to-[#D5EAE8]/80",
     accent: "#2A7070",
-    img: "https://images.pexels.com/photos/4498482/pexels-photo-4498482.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+    img: "https://images.pexels.com/photos/6111616/pexels-photo-6111616.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
   },
 };
 

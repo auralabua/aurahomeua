@@ -5,14 +5,11 @@ import { Button } from "@/components/ui/button";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
 import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
+import { ReviewsSection } from "@/components/ReviewsSection";
 
 const HERO_IMG = "https://images.pexels.com/photos/11372613/pexels-photo-11372613.jpeg?auto=compress&cs=tinysrgb&w=1400&fit=crop";
 
-const reviews = [
-  { name: "Ірина К.", city: "Київ", text: "Ортопедична подушка змінила якість сну. Спина перестала боліти вже за тиждень.", rating: 5 },
-  { name: "Олександр П.", city: "Львів", text: "Масажер для спини — найкраща інвестиція в себе. Рекомендую всім хто сидить за комп'ютером.", rating: 5 },
-  { name: "Марія С.", city: "Одеса", text: "Аплікатор Кузнєцова допомагає після довгого робочого дня. Ефект відчутний одразу.", rating: 5 },
-];
+
 
 const trust = [
   { icon: Truck, title: "Доставка по Україні", desc: "Нова Пошта, Meest, Укрпошта" },
@@ -335,31 +332,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ── REVIEWS ── */}
-      <section className="bg-secondary/40 py-12 sm:py-20">
-        <div className="container">
-          <div className="mb-8 sm:mb-12 text-center">
-            <p className="aura-kicker mb-3">відгуки</p>
-            <h2 className="text-4xl md:text-5xl font-light">Клієнти про нас</h2>
-          </div>
-          <div className="grid gap-4 sm:gap-5 md:grid-cols-3">
-            {reviews.map((r, i) => (
-              <div key={i} className="rounded-2xl border border-border/40 bg-white p-7">
-                <div className="flex gap-1 mb-5">
-                  {Array.from({ length: r.rating }).map((_, k) => (
-                    <Star key={k} className="h-4 w-4 fill-primary text-primary" />
-                  ))}
-                </div>
-                <p className="text-sm leading-relaxed text-foreground/80 font-light">"{r.text}"</p>
-                <div className="mt-6 pt-5 border-t border-border/40">
-                  <p className="text-sm font-light text-foreground">{r.name}</p>
-                  <p className="text-xs text-muted-foreground">{r.city}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ReviewsSection />
 
       {/* ── INSTAGRAM CTA ── */}
       <section className="container py-12 sm:py-16">

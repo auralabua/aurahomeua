@@ -167,7 +167,7 @@ const Index = () => {
         <div className="relative z-10 container py-14 sm:py-20 lg:py-24">
           <div className="max-w-lg space-y-5 sm:space-y-7">
             <p className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.28em] text-primary/70 font-medium">
-              <span className="h-px w-6 bg-primary/40" /> Wellness для вашого дому
+              <span className="h-px w-6 bg-primary/40" /> Здоров'я та комфорт для вашого дому
             </p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[1.04] text-foreground">
               Комфорт.<br />Відновлення.<br />Якість життя.
@@ -290,7 +290,7 @@ const Index = () => {
           <div>
             <p className="aura-kicker mb-4">наш підхід</p>
             <h2 className="text-4xl md:text-5xl font-light leading-tight">
-              Wellness — це щоденна турбота про себе
+              Здоров'я — це щоденна турбота про себе
             </h2>
             <p className="mt-6 text-base font-light leading-relaxed text-muted-foreground">
               Ми зібрали перевірені ортопедичні товари, масажери та wellness-девайси для тих, хто цінує якість і комфорт. Без зайвого — тільки те, що справді допомагає.
@@ -364,7 +364,7 @@ const Index = () => {
             <p className="mt-2 text-sm sm:text-base font-light text-muted-foreground">Поради з догляду за тілом, огляди товарів та wellness-лайфхаки щодня</p>
           </div>
           <Button asChild size="lg" className="h-12 rounded-full btn-aura border-0 font-light px-8 shrink-0 w-full sm:w-auto">
-            <a href="https://instagram.com/aurahomeua" target="_blank" rel="noopener noreferrer">
+            <a href="https://instagram.com/bodyhomeua" target="_blank" rel="noopener noreferrer">
               Підписатись <ArrowRight className="ml-2 h-4 w-4" />
             </a>
           </Button>

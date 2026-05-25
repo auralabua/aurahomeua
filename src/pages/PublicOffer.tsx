@@ -7,7 +7,7 @@ const PublicOffer = () => (
     <div className="space-y-8 font-light text-foreground/80 leading-relaxed text-sm">
       <section>
         <h2 className="text-xl font-light text-foreground mb-3">1. Загальні положення</h2>
-        <p>Цей документ є публічною офертою інтернет-магазину <strong className="font-medium">Aura Well</strong> (далі — Продавець) та визначає умови продажу товарів через сайт aurahomeua.lovable.app.</p>
+        <p>Цей документ є публічною офертою інтернет-магазину <strong className="font-medium">BodyHumm</strong> (далі — Продавець) та визначає умови продажу товарів через сайт bodyhumm.com.ua.</p>
         <p className="mt-2">Оформлення замовлення на сайті означає повне та беззастережне прийняття покупцем умов цього договору відповідно до ст. 642 Цивільного кодексу України.</p>
       </section>
 
@@ -123,8 +123,8 @@ const PublicOffer = () => (
       <section>
         <h2 className="text-xl font-light text-foreground mb-3">9. Контактна інформація</h2>
         <ul className="space-y-1 list-none">
-          <li>Назва: Aura Well</li>
-          <li>Email: <a href="mailto:aurahomeua@gmail.com" className="text-primary hover:underline">aurahomeua@gmail.com</a></li>
+          <li>Назва: BodyHumm</li>
+          <li>Email: <a href="mailto:bodyhumm@gmail.com" className="text-primary hover:underline">bodyhumm@gmail.com</a></li>
           <li>Телефон: <a href="tel:+380956981124" className="text-primary hover:underline">+380956981124</a></li>
           <li>Telegram: <a href="https://t.me/aurahomeua" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">@aurahomeua</a></li>
         </ul>

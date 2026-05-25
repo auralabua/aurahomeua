@@ -262,6 +262,9 @@ const Index = () => {
               <h2 className="text-4xl md:text-5xl font-light">Здоров'я починається вдома</h2>
               <p className="mt-2 text-muted-foreground font-light">Поради щодо догляду за тілом і відновлення</p>
             </div>
+            <Link to="/blog" className="hidden sm:flex items-center gap-2 text-sm text-primary font-light transition-smooth hover:gap-3 shrink-0">
+              Всі статті <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {articles.map((a, i) => (
@@ -280,6 +283,11 @@ const Index = () => {
                 </div>
               </Link>
             ))}
+          </div>
+          <div className="mt-6 flex justify-center sm:hidden">
+            <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-primary font-light">
+              Всі статті <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>

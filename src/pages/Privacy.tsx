@@ -7,7 +7,7 @@ const Privacy = () => (
     <div className="prose prose-sm max-w-none space-y-8 font-light text-foreground/80 leading-relaxed">
       <section>
         <h2 className="text-xl font-light text-foreground mb-3">1. Загальні положення</h2>
-        <p>Ця Політика конфіденційності регулює порядок збору, використання та захисту персональних даних користувачів інтернет-магазину Aura Well (aurahomeua.lovable.app).</p>
+        <p>Ця Політика конфіденційності регулює порядок збору, використання та захисту персональних даних користувачів інтернет-магазину BodyHumm (bodyhumm.com.ua).</p>
         <p className="mt-2">Використовуючи наш сайт, ви погоджуєтесь з умовами цієї політики. Якщо ви не погоджуєтесь — будь ласка, не використовуйте наш сайт.</p>
       </section>
 
@@ -97,7 +97,7 @@ const Privacy = () => (
             </li>
           ))}
         </ul>
-        <p className="mt-3 text-sm">Для реалізації ваших прав зверніться до нас: <a href="mailto:aurahomeua@gmail.com" className="text-primary hover:underline">aurahomeua@gmail.com</a></p>
+        <p className="mt-3 text-sm">Для реалізації ваших прав зверніться до нас: <a href="mailto:bodyhumm@gmail.com" className="text-primary hover:underline">bodyhumm@gmail.com</a></p>
       </section>
 
       <section>
@@ -109,7 +109,7 @@ const Privacy = () => (
         <h2 className="text-xl font-light text-foreground mb-3">8. Контакти</h2>
         <p>З питань конфіденційності звертайтесь:</p>
         <ul className="mt-2 space-y-1 text-sm list-none">
-          <li>Email: <a href="mailto:aurahomeua@gmail.com" className="text-primary hover:underline">aurahomeua@gmail.com</a></li>
+          <li>Email: <a href="mailto:bodyhumm@gmail.com" className="text-primary hover:underline">bodyhumm@gmail.com</a></li>
           <li>Телефон: <a href="tel:+380956981124" className="text-primary hover:underline">+380956981124</a></li>
           <li>Telegram: <a href="https://t.me/aurahomeua" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">@aurahomeua</a></li>
         </ul>

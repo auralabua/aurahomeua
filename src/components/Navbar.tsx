@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
-import { ShoppingCart, Search, Menu, X, Phone, Sparkles, ChevronDown, ChevronRight, BookOpen, Bone, Waves, Moon, Baby } from "lucide-react";
+import { ShoppingCart, Search, Menu, X, Phone, Sparkles, ChevronDown, ChevronRight, ArrowRight, BookOpen, Bone, Waves, Moon, Baby } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import { useCategoriesAsLegacy } from "@/hooks/useShopData";

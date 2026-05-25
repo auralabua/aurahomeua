@@ -4,4 +4,4 @@ Disallow: /admin
 Disallow: /admin/*
 Disallow: /cart
 
-Sitemap: https://bodyhome.ua/sitemap.xml
+Sitemap: https://bodyhome.com.ua/sitemap.xml

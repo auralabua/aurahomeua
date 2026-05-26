@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
+import { useSEO } from "@/hooks/useSEO";
+import { useSEO } from "@/hooks/useSEO";
 import { ArrowRight, Clock } from "lucide-react";
 import { blogPosts } from "./blogData";
 
-const BlogList = () => (
+const BlogList = () => {
+  useSEO({
+    title: "Корисні статті про здоров'я та ортопедію",
+    description: "Блог BodyHumm — практичні поради щодо вибору ортопедичних товарів, догляду за тілом, здорового сну та відновлення. Читайте статті українською.",
+    keywords: "ортопедія статті, як вибрати масажер, ортопедична подушка вибір, здоров'я спини, блог",
+    url: "/blog",
+  });
+  return (
   <div className="min-h-screen bg-background">
     <div className="container py-10 sm:py-16">
       <div className="mb-10">
@@ -43,6 +52,9 @@ const BlogList = () => (
       </div>
     </div>
   </div>
-);
+  );
+};
 
 export default BlogList;
+
+};

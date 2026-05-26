@@ -36,6 +36,7 @@ export const Navbar = () => {
   const [catOpen, setCatOpen] = useState(false);
   const [blogOpen, setBlogOpen] = useState(false);
   const [mobileCatOpen, setMobileCatOpen] = useState(false);
+  const [expandedCat, setExpandedCat] = useState<string | null>(null);
   const [mobileBlogOpen, setMobileBlogOpen] = useState(false);
   const catRef = useRef<HTMLDivElement>(null);
   const blogRef = useRef<HTMLDivElement>(null);
@@ -220,28 +221,44 @@ export const Navbar = () => {
                   <span>Каталог</span>
                   <ChevronDown className={`h-4 w-4 transition-transform ${mobileCatOpen ? "rotate-180" : ""}`} />
                 </button>
-                {mobileCatOpen && (
+                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${mobileCatOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}`}>
                   <div className="bg-white/60 px-2 pb-2 pt-1 grid gap-0.5">
-                    <button onClick={() => goToCategory()} className="text-left rounded-xl px-4 py-2.5 text-sm font-light text-foreground/85 hover:bg-secondary hover:text-primary">
+                    <button onClick={() => goToCategory()} className="text-left rounded-xl px-4 py-2.5 text-sm font-light text-foreground/85 hover:bg-secondary hover:text-primary transition-colors">
                       Усі товари
                     </button>
                     {categories.filter(c => !c.parentId).map(c => {
                       const subs = categories.filter(s => s.parentId === c.id);
+                      const isExpanded = expandedCat === c.id;
                       return (
                         <div key={c.id}>
-                          <button onClick={() => goToCategory(c.id)} className="w-full text-left rounded-xl px-4 py-2.5 text-sm font-light text-foreground/85 hover:bg-secondary hover:text-primary">
-                            {c.name}
+                          <button
+                            onClick={() => subs.length > 0 ? setExpandedCat(isExpanded ? null : c.id) : goToCategory(c.id)}
+                            className={`w-full flex items-center justify-between rounded-xl px-4 py-2.5 text-sm font-light transition-colors ${isExpanded ? "bg-secondary text-primary" : "text-foreground/85 hover:bg-secondary hover:text-primary"}`}>
+                            <span>{c.name}</span>
+                            {subs.length > 0 && (
+                              <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
+                            )}
                           </button>
-                          {subs.map(s => (
-                            <button key={s.id} onClick={() => goToCategory(s.id)} className="w-full text-left rounded-xl px-7 py-2 text-xs font-light text-foreground/65 hover:bg-secondary hover:text-primary">
-                              {s.name}
-                            </button>
-                          ))}
+                          {/* Підкатегорії з анімацією */}
+                          <div className={`overflow-hidden transition-all duration-250 ease-in-out ${isExpanded ? "max-h-64 opacity-100" : "max-h-0 opacity-0"}`}>
+                            <div className="pl-3 pr-1 pb-1 grid gap-0.5 border-l-2 border-primary/20 ml-4 mt-1 mb-1">
+                              <button onClick={() => goToCategory(c.id)}
+                                className="w-full text-left rounded-xl px-3 py-2 text-xs font-medium text-primary/80 hover:bg-primary/5 transition-colors">
+                                Всі в категорії →
+                              </button>
+                              {subs.map(s => (
+                                <button key={s.id} onClick={() => goToCategory(s.id)}
+                                  className="w-full text-left rounded-xl px-3 py-2 text-xs font-light text-foreground/65 hover:bg-secondary hover:text-primary transition-colors">
+                                  {s.name}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       );
                     })}
                   </div>
-                )}
+                </div>
               </div>
 
               {/* Mobile Блог */}

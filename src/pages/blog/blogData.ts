@@ -17,7 +17,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "chomu-bolyt-spyna-i-yak-dopomahaie-ortopediia",
     title: "Чому болить спина і як допомагає ортопедія",
-    metaTitle: "Чому болить спина — причини і рішення | BodyHumm",
+    metaTitle: "Чому болить спина — причини і рішення | BodyHome",
     metaDescription: "Дізнайтесь чому болить спина при сидячій роботі і як ортопедичні подушки та масажери допомагають зняти напругу і відновити поставу.",
     tag: "Здоров'я спини",
     tagColor: "#8A6440",
@@ -48,7 +48,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "masazh-vdoma-yak-vidnovytysia-pislia-vazhkoho-dnia",
     title: "Масаж вдома: як відновитися після важкого дня",
-    metaTitle: "Самомасаж вдома — як відновитися після роботи | BodyHumm",
+    metaTitle: "Самомасаж вдома — як відновитися після роботи | BodyHome",
     metaDescription: "Прості техніки самомасажу та огляд масажних девайсів для домашнього використання. Як зняти напругу зі спини, ніг і шиї за 15 хвилин.",
     tag: "Відновлення",
     tagColor: "#3D7A55",
@@ -79,7 +79,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "yak-pravylna-podushka-vplyvaie-na-yakist-snu",
     title: "Як правильна подушка впливає на якість сну",
-    metaTitle: "Як вибрати ортопедичну подушку для сну | BodyHumm",
+    metaTitle: "Як вибрати ортопедичну подушку для сну | BodyHome",
     metaDescription: "Розбираємось як вибрати ортопедичну подушку: матеріал, висота, форма. Що таке ефект пам'яті і кому підходить подушка-антистрес.",
     tag: "Якість сну",
     tagColor: "#3D5A8A",
@@ -110,7 +110,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "ortopediia-dlia-ditei-koly-pochynaty-ta-shcho-obuyraty",
     title: "Ортопедія для дітей: коли починати та що обирати",
-    metaTitle: "Ортопедичні товари для дітей — коли і що купувати | BodyHumm",
+    metaTitle: "Ортопедичні товари для дітей — коли і що купувати | BodyHome",
     metaDescription: "Коли дитині потрібні ортопедичні устілки і подушки? Як вибрати і що каже лікар. Практичний гід для батьків.",
     tag: "Дитяча ортопедія",
     tagColor: "#7A6A20",
@@ -141,7 +141,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "yak-vybraty-ortopedychni-ustilky",
     title: "Як вибрати ортопедичні устілки: повний гід",
-    metaTitle: "Як вибрати ортопедичні устілки — гід покупця | BodyHumm",
+    metaTitle: "Як вибрати ортопедичні устілки — гід покупця | BodyHome",
     metaDescription: "Порівняння видів ортопедичних устілок: шкіряні, гелеві, каркасні. Для кого підходять і як правильно вибрати розмір.",
     tag: "Ортопедія",
     tagColor: "#2A7070",

@@ -4,51 +4,77 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ffffff" />
+    <meta name="robots" content="index, follow" />
 
-    <title>BodyHumm — Ортопедичні товари, масажери та товари для здоров'я</title>
-    <meta name="description" content="BodyHumm — інтернет-магазин товарів для здоров'я: ортопедичні подушки, устілки, бандажі, масажери та аплікатори. Консультація, доставка по Україні." />
-    <meta name="keywords" content="ортопедичні подушки, устілки, бандажі, масажери, аплікатори, товари для здоров'я, BodyHumm, ортопедія" />
+    <title>BodyHumm — Ортопедичні товари, масажери та устілки | Доставка по Україні</title>
+    <meta name="description" content="BodyHumm — інтернет-магазин ортопедичних товарів: подушки, устілки, бандажі, масажери. Перевірена якість, доставка Новою Поштою по всій Україні, оплата при отриманні." />
+    <meta name="keywords" content="ортопедичні подушки, устілки ортопедичні, бандаж, масажер для спини, масажний килимок, купити ортопедичні товари, BodyHumm" />
     <meta name="author" content="BodyHumm" />
     <link rel="canonical" href="https://aurahomeua.vercel.app/" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- Preconnect для швидшого завантаження шрифтів -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <!-- Шрифт з display=swap щоб не блокувати рендер -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/></noscript>
 
+    <!-- OpenGraph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="BodyHumm" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:url" content="https://aurahomeua.vercel.app/" />
-    <meta property="og:title" content="BodyHumm — Ортопедичні товари, масажери та товари для здоров'я" />
-    <meta property="og:description" content="Ортопедичні подушки, устілки, бандажі, масажери та корисні товари для щоденного самопочуття. Консультація і доставка по Україні." />
+    <meta property="og:title" content="BodyHumm — Ортопедичні товари та масажери | Доставка по Україні" />
+    <meta property="og:description" content="Ортопедичні подушки, устілки, бандажі, масажери — перевірена якість за доступною ціною. Доставка Новою Поштою, оплата при отриманні." />
+    <meta property="og:image" content="https://aurahomeua.vercel.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="BodyHumm — товари для здоров'я" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="BodyHumm — Ортопедичні товари, масажери та товари для здоров'я" />
-    <meta name="twitter:description" content="Ортопедичні подушки, устілки, бандажі, масажери та корисні товари для щоденного самопочуття. Консультація і доставка по Україні." />
+    <meta name="twitter:title" content="BodyHumm — Ортопедичні товари та масажери" />
+    <meta name="twitter:description" content="Ортопедичні подушки, устілки, бандажі, масажери. Доставка по Україні." />
+    <meta name="twitter:image" content="https://aurahomeua.vercel.app/og-image.jpg" />
 
+    <!-- Schema.org Organization -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "OnlineStore",
+      "@id": "https://aurahomeua.vercel.app/#organization",
       "name": "BodyHumm",
       "url": "https://aurahomeua.vercel.app",
+      "logo": "https://aurahomeua.vercel.app/logo.png",
       "description": "Інтернет-магазин ортопедичних товарів, масажерів та товарів для здоров'я",
       "telephone": "+380956981124",
+      "email": "bodyhumm@gmail.com",
       "address": {
         "@type": "PostalAddress",
-        "addressCountry": "UA"
+        "addressCountry": "UA",
+        "addressLocality": "Україна"
       },
+      "priceRange": "₴₴",
+      "currenciesAccepted": "UAH",
+      "paymentAccepted": "Cash, Credit Card",
+      "openingHours": "Mo-Su 09:00-21:00",
       "sameAs": [
         "https://t.me/bodyhummua",
         "https://instagram.com/bodyhummua"
       ],
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://aurahomeua.vercel.app/catalog?q={search_term_string}",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://aurahomeua.vercel.app/catalog?q={search_term_string}"
+        },
         "query-input": "required name=search_term_string"
       }
     }
     </script>
+
+    <!-- Preload критичних ресурсів -->
+    <link rel="dns-prefetch" href="https://gpaeevehxwrczhdozifd.supabase.co" />
   </head>
   <body>
     <div id="root"></div>

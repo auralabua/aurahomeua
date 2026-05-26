@@ -9,7 +9,7 @@ const BlogPost = () => {
   const post = blogPosts.find(p => p.slug === slug);
 
   useSEO(post ? {
-    title: post.metaTitle.replace(" | BodyHumm", ""),
+    title: post.metaTitle.replace(" | BodyHome", ""),
     description: post.metaDescription,
     url: `/blog/${post.slug}`,
     type: "article",

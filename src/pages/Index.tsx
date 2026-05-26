@@ -6,6 +6,7 @@ import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
 import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 import { ReviewsSection } from "@/components/ReviewsSection";
+import { useSEO } from "@/hooks/useSEO";
 
 const HERO_IMG = "https://images.pexels.com/photos/11372613/pexels-photo-11372613.jpeg?auto=compress&cs=tinysrgb&w=1400&fit=crop";
 
@@ -128,6 +129,13 @@ const FeaturedCarousel = ({ products }: { products: any[] }) => {
 };
 
 const Index = () => {
+  useSEO({
+    title: "Ортопедичні товари, масажери та товари для здоров'я",
+    description: "BodyHome — інтернет-магазин товарів для здоров'я. Ортопедичні подушки, устілки, бандажі, масажери, аплікатори. Доставка по Україні. Оплата при отриманні.",
+    keywords: "ортопедичні подушки, масажери, устілки, бандажі, товари для здоров'я, ортопедія Україна",
+    url: "/",
+    type: "website",
+  });
   const { products } = useProductsAsLegacy();
   const { categories: allCats } = useCategoriesAsLegacy();
   const categories = allCats.filter(c => !c.parentId);
@@ -289,68 +297,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ── WHY US ── */}
-      <section className="container py-12 sm:py-20">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <p className="aura-kicker mb-4">наш підхід</p>
-            <h2 className="text-4xl md:text-5xl font-light leading-tight">
-              Здоров'я — це щоденна турбота про себе
-            </h2>
-            <p className="mt-6 text-base font-light leading-relaxed text-muted-foreground">
-              Ми зібрали перевірені ортопедичні товари, масажери та wellness-девайси для тих, хто цінує якість і комфорт. Без зайвого — тільки те, що справді допомагає.
-            </p>
-            <div className="mt-8 space-y-4">
-              {[
-                "Товари від перевірених виробників",
-                "Консультація щодо вибору",
-                "Швидка доставка по всій Україні",
-                "Легке повернення протягом 14 днів",
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/12">
-                    <div className="h-2 w-2 rounded-full bg-primary" />
-                  </div>
-                  <p className="text-sm font-light text-foreground">{item}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4">
-            {[
-              { num: "715+", label: "товарів в каталозі" },
-              { num: "UA", label: "доставка по Україні" },
-              { num: "14", label: "днів на повернення" },
-              { num: "7/7", label: "дні підтримки" },
-            ].map((s, i) => (
-              <div key={i} className="rounded-2xl border border-border/60 bg-white/70 p-6 text-center">
-                <p className="text-4xl font-light text-primary">{s.num}</p>
-                <p className="mt-2 text-xs text-muted-foreground font-light">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <ReviewsSection />
-
-      {/* ── INSTAGRAM CTA ── */}
-      <section className="container py-12 sm:py-16">
-        <div className="rounded-3xl bg-gradient-to-br from-[#F5EFE6] via-[#EDE3D5] to-[#E8EDF5] border border-white/60 p-8 sm:p-12 flex flex-col sm:flex-row items-center gap-6 sm:gap-10">
-          <div className="flex h-16 w-16 sm:h-20 sm:w-20 shrink-0 items-center justify-center rounded-3xl bg-white/80 shadow-soft">
-            <Instagram className="h-8 w-8 sm:h-10 sm:w-10 text-primary" strokeWidth={1.4} />
-          </div>
-          <div className="flex-1 text-center sm:text-left">
-            <h3 className="text-2xl sm:text-3xl font-light text-foreground">Ми в Instagram</h3>
-            <p className="mt-2 text-sm sm:text-base font-light text-muted-foreground">Поради з догляду за тілом, огляди товарів та wellness-лайфхаки щодня</p>
-          </div>
-          <Button asChild size="lg" className="h-12 rounded-full btn-aura border-0 font-light px-8 shrink-0 w-full sm:w-auto">
-            <a href="https://instagram.com/bodyhomeua" target="_blank" rel="noopener noreferrer">
-              Підписатись <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
-          </Button>
-        </div>
-      </section>
 
       {/* ── DELIVERY + PAYMENT ── */}
       <section className="container py-10 sm:py-16 grid md:grid-cols-2 gap-4 sm:gap-5">

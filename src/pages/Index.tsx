@@ -8,7 +8,8 @@ import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData"
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { useSEO } from "@/hooks/useSEO";
 
-const HERO_IMG = "https://images.pexels.com/photos/11372613/pexels-photo-11372613.jpeg?auto=compress&cs=tinysrgb&w=1400&fit=crop";
+// Жінка з масажером вдома — домашній комфорт
+const HERO_IMG = "https://images.pexels.com/photos/6787202/pexels-photo-6787202.jpeg?auto=compress&cs=tinysrgb&w=1400&fit=crop";
 
 
 
@@ -152,48 +153,62 @@ const Index = () => {
   return (
     <div>
       {/* ── HERO ── */}
-      {/* ── HERO ── */}
-      <section className="hero-bg relative overflow-hidden min-h-[520px] sm:min-h-[600px] lg:min-h-[660px] flex items-center">
+      <section className="hero-bg relative overflow-hidden min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] flex items-center">
         {/* Photo — права половина */}
-        <div className="absolute inset-y-0 right-0 w-full sm:w-[65%] lg:w-[58%]">
+        <div className="absolute inset-y-0 right-0 w-full sm:w-[62%] lg:w-[55%]">
           <img
             src={HERO_IMG}
-            alt="Домашній wellness догляд"
+            alt="Масажний килимок для здоров'я стоп вдома"
             className="h-full w-full object-cover object-center"
             loading="eager"
           />
-          {/* Градієнт зліва від фото → в бежевий фон */}
-          <div className="absolute inset-y-0 left-0 w-2/3 bg-gradient-to-r from-[#F5F0EA] via-[#F5F0EA]/80 to-transparent" />
-          {/* Знизу затемнення */}
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#F5F0EA]/60 to-transparent" />
+          <div className="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-[#F5F0EA] via-[#F5F0EA]/85 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#F5F0EA]/50 to-transparent" />
         </div>
 
-        {/* Content — ліва сторона на оригінальному фоні */}
-        <div className="relative z-10 container py-14 sm:py-20 lg:py-24">
-          <div className="max-w-lg space-y-5 sm:space-y-7">
-            <p className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.28em] text-primary/70 font-medium">
-              <span className="h-px w-6 bg-primary/40" /> Здоров'я та комфорт для вашого дому
-            </p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[1.04] text-foreground">
-              Комфорт.<br />Відновлення.<br />Якість життя.
+        {/* Content */}
+        <div className="relative z-10 container py-12 sm:py-16 lg:py-20">
+          <div className="max-w-[520px] space-y-4 sm:space-y-6">
+
+            {/* Kicker */}
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-3 py-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="text-[11px] uppercase tracking-[0.2em] text-primary font-medium">
+                Доставка по всій Україні
+              </span>
+            </div>
+
+            {/* H1 — чіткий і зрозумілий */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.1] text-foreground">
+              Корисні товари для здоров'я та комфорту вдома
             </h1>
-            <p className="text-base sm:text-lg font-light leading-relaxed text-muted-foreground max-w-md">
-              Ортопедичні товари, масажери та wellness-девайси для щоденного догляду за собою — з доставкою по всій Україні.
+
+            {/* Підзаголовок — пояснює що продаємо */}
+            <p className="text-base sm:text-lg font-light leading-relaxed text-foreground/70 max-w-md">
+              Масажери, ортопедичні подушки, устілки та бандажі — все для щоденного комфорту. Без переплат, з доставкою Новою Поштою.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
-              <Button asChild size="lg" className="h-12 w-full sm:w-auto rounded-full btn-aura border-0 font-light px-8">
-                <Link to="/catalog">Переглянути колекцію <ArrowRight className="ml-2 h-4 w-4" /></Link>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-3 pt-1">
+              <Button asChild size="lg" className="h-12 w-full sm:w-auto rounded-full btn-aura border-0 font-medium px-8">
+                <Link to="/catalog">Переглянути каталог <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="h-12 w-full sm:w-auto rounded-full font-light px-8 border-border/60 bg-white/60 hover:bg-white text-foreground">
+              <Button asChild size="lg" variant="outline" className="h-12 w-full sm:w-auto rounded-full font-light px-8 border-border/60 bg-white/70 hover:bg-white text-foreground">
                 <a href="#featured">Популярні товари</a>
               </Button>
             </div>
-            {/* Trust pills */}
+
+            {/* Trust badges */}
             <div className="flex flex-wrap gap-2 pt-1">
-              {["Нова Пошта", "Оплата при отриманні", "14 днів повернення"].map((t, i) => (
-                <span key={i} className="inline-flex items-center gap-1.5 rounded-full bg-white/80 border border-border/50 px-3 py-1 text-xs text-foreground/70 font-light">
-                  <ShieldCheck className="h-3 w-3 text-primary" strokeWidth={1.5} />
-                  {t}
+              {[
+                { icon: "✓", text: "Нова Пошта" },
+                { icon: "✓", text: "Оплата при отриманні" },
+                { icon: "✓", text: "14 днів повернення" },
+                { icon: "✓", text: "Перевірка перед оплатою" },
+              ].map((t, i) => (
+                <span key={i} className="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-border/40 shadow-sm px-3 py-1 text-xs text-foreground/75 font-medium">
+                  <span className="text-primary text-[10px] font-bold">{t.icon}</span>
+                  {t.text}
                 </span>
               ))}
             </div>

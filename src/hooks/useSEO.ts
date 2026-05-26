@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
 const BASE_URL = import.meta.env.VITE_SITE_URL || "https://aurahomeua.vercel.app";
-const SITE_NAME = "BodyHumm";
-const DEFAULT_DESC = "BodyHumm — інтернет-магазин ортопедичних товарів: подушки, устілки, бандажі, масажери. Перевірена якість, доставка Новою Поштою по всій Україні.";
+const SITE_NAME = "BodyHome";
+const DEFAULT_DESC = "BodyHome — інтернет-магазин ортопедичних товарів: подушки, устілки, бандажі, масажери. Перевірена якість, доставка Новою Поштою по всій Україні.";
 const DEFAULT_IMG = `${BASE_URL}/og-image.jpg`;
 
 const setMeta = (name: string, content: string, attr = "name") => {

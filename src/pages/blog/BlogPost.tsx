@@ -1,26 +1,24 @@
 import { useParams, Link, Navigate } from "react-router-dom";
+import { useSEO } from "@/hooks/useSEO";
 import { ArrowLeft, Clock, ArrowRight } from "lucide-react";
 import { blogPosts } from "./blogData";
-import { useEffect } from "react";
+
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = blogPosts.find(p => p.slug === slug);
 
-  useEffect(() => {
-    if (!post) return;
-    document.title = post.metaTitle;
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute("content", post.metaDescription);
-    // canonical
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.setAttribute("rel", "canonical");
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute("href", `https://aurahomeua.vercel.app/blog/${post.slug}`);
-  }, [post]);
+  useSEO(post ? {
+    title: post.metaTitle.replace(" | BodyHumm", ""),
+    description: post.metaDescription,
+    url: `/blog/${post.slug}`,
+    type: "article",
+    articleDate: post.date,
+    breadcrumbs: [
+      { name: "Блог", url: "/blog" },
+      { name: post.title, url: `/blog/${post.slug}` },
+    ],
+  } : {});
 
   if (!post) return <Navigate to="/blog" replace />;
 

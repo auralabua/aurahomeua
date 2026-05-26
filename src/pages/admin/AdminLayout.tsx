@@ -1,131 +1,107 @@
-import { NavLink, Navigate, Outlet, useNavigate } from "react-router-dom";
-import { useAdminAuth } from "@/hooks/useAdminAuth";
+import { useState, FormEvent, useEffect } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import {
-  LayoutDashboard,
-  ShoppingBag,
-  Package,
-  Tag,
-  Users,
-  LogOut,
-  Loader2,
-  Menu,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { toast } from "@/hooks/use-toast";
+import { Lock } from "lucide-react";
 
-const navItems = [
-  { to: "/admin", end: true, label: "Дашборд", icon: LayoutDashboard },
-  { to: "/admin/orders", label: "Замовлення", icon: ShoppingBag },
-  { to: "/admin/products", label: "Товари", icon: Package },
-  { to: "/admin/categories", label: "Категорії", icon: Tag },
-  { to: "/admin/customers", label: "Клієнти", icon: Users },
-];
-
-const SidebarContent = ({ onNav }: { onNav?: () => void }) => {
+const AdminLogin = () => {
   const navigate = useNavigate();
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate("/admin/login", { replace: true });
+  const { session, isAdmin, loading } = useAdminAuth();
+  const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    if (!loading && session && isAdmin) navigate("/admin", { replace: true });
+  }, [loading, session, isAdmin, navigate]);
+
+  if (!loading && session && isAdmin) return <Navigate to="/admin" replace />;
+
+  const handle = async (e: FormEvent) => {
+    e.preventDefault();
+    setBusy(true);
+    try {
+      if (mode === "signin") {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        toast({ title: "Вхід виконано" });
+      } else {
+        const redirectUrl = `${window.location.origin}/admin`;
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: { emailRedirectTo: redirectUrl },
+        });
+        if (error) throw error;
+        toast({
+          title: "Акаунт створено",
+          description: "Перевірте пошту для підтвердження. Після підтвердження зверніться до власника сайту, щоб призначити роль адміністратора.",
+        });
+      }
+    } catch (err: any) {
+      toast({ title: "Помилка", description: err.message, variant: "destructive" });
+    } finally {
+      setBusy(false);
+    }
   };
+
   return (
-    <div className="flex h-full flex-col">
-      <div className="px-6 py-6 border-b border-border/60">
-        <div className="text-lg font-light tracking-tight">BodyHumm</div>
-        <div className="text-xs text-muted-foreground">Адмін-панель</div>
-      </div>
-      <nav className="flex-1 px-3 py-4 space-y-1">
-        {navItems.map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            end={item.end}
-            onClick={onNav}
-            className={({ isActive }) =>
-              cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-smooth",
-                isActive
-                  ? "bg-primary text-primary-foreground shadow-soft"
-                  : "text-foreground/80 hover:bg-secondary",
-              )
-            }
-          >
-            <item.icon className="h-4 w-4" strokeWidth={1.6} />
-            {item.label}
-          </NavLink>
-        ))}
-      </nav>
-      <div className="p-3 border-t border-border/60">
+    <div className="min-h-screen grid place-items-center bg-secondary px-4">
+      <div className="w-full max-w-md p-8 rounded-2xl bg-card shadow-card border border-border/60">
+        <div className="grid place-items-center mb-6">
+          <div className="h-12 w-12 grid place-items-center rounded-full bg-primary text-primary-foreground">
+            <Lock className="h-5 w-5" />
+          </div>
+        </div>
+        <h1 className="text-2xl text-center mb-2">BodyHome — Адмін</h1>
+        <p className="text-sm text-muted-foreground text-center mb-6">
+          {mode === "signin" ? "Увійдіть до панелі керування" : "Створіть обліковий запис"}
+        </p>
+        <form onSubmit={handle} className="space-y-4">
+          <div className="space-y-1.5">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="rounded-xl h-11"
+              autoComplete="email"
+            />
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="password">Пароль</Label>
+            <Input
+              id="password"
+              type="password"
+              required
+              minLength={6}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="rounded-xl h-11"
+              autoComplete={mode === "signin" ? "current-password" : "new-password"}
+            />
+          </div>
+          <Button type="submit" disabled={busy} className="w-full rounded-full btn-caramel border-0 h-11">
+            {busy ? "..." : mode === "signin" ? "Увійти" : "Створити акаунт"}
+          </Button>
+        </form>
         <button
-          onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-foreground/80 hover:bg-secondary transition-smooth"
+          type="button"
+          onClick={() => setMode((m) => (m === "signin" ? "signup" : "signin"))}
+          className="mt-5 w-full text-sm text-muted-foreground hover:text-primary transition-smooth"
         >
-          <LogOut className="h-4 w-4" strokeWidth={1.6} />
-          Вийти
+          {mode === "signin" ? "Немає акаунту? Зареєструватись" : "Вже маєте акаунт? Увійти"}
         </button>
       </div>
     </div>
   );
 };
 
-const AdminLayout = () => {
-  const { session, isAdmin, loading } = useAdminAuth();
-  const [open, setOpen] = useState(false);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen grid place-items-center bg-background">
-        <Loader2 className="h-6 w-6 animate-spin text-primary" />
-      </div>
-    );
-  }
-  if (!session) return <Navigate to="/admin/login" replace />;
-  if (!isAdmin) {
-    return (
-      <div className="min-h-screen grid place-items-center bg-background px-4">
-        <div className="max-w-md text-center space-y-4">
-          <h1 className="text-2xl">Доступ обмежено</h1>
-          <p className="text-muted-foreground">
-            Ваш акаунт не має ролі адміністратора. Зверніться до власника сайту.
-          </p>
-          <Button onClick={() => supabase.auth.signOut()} variant="outline" className="rounded-full">
-            Вийти
-          </Button>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen flex bg-background">
-      {/* Desktop sidebar */}
-      <aside className="hidden md:flex w-64 shrink-0 flex-col bg-secondary/60 border-r border-border/60">
-        <SidebarContent />
-      </aside>
-
-      {/* Mobile sidebar */}
-      <div className="md:hidden fixed top-3 left-3 z-40">
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild>
-            <Button size="icon" variant="outline" className="rounded-full bg-card shadow-soft">
-              <Menu className="h-4 w-4" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="p-0 w-64">
-            <SidebarContent onNav={() => setOpen(false)} />
-          </SheetContent>
-        </Sheet>
-      </div>
-
-      <main className="flex-1 min-w-0">
-        <div className="p-4 md:p-8 pt-16 md:pt-8 max-w-7xl mx-auto">
-          <Outlet />
-        </div>
-      </main>
-    </div>
-  );
-};
-
-export default AdminLayout;
+export default AdminLogin;

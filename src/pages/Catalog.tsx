@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { CategoryId } from "@/data/products";
 import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { SlidersHorizontal, X, BedDouble, Hand, Shield, Zap, Sparkles, Baby, Footprints, Grip, Plug, ChevronRight, ChevronDown, type LucideIcon } from "lucide-react";
+import { SlidersHorizontal, X, BedDouble, Hand, Shield, Zap, Sparkles, Baby, Footprints, Grip, Plug, ChevronRight, ChevronDown, ChevronLeft, type LucideIcon } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 
 const categoryIcons: Record<string, LucideIcon> = {
   "ortopedychni-podushky": BedDouble,
@@ -21,7 +22,7 @@ const categoryIcons: Record<string, LucideIcon> = {
   "ortopedychni-ustilky": Footprints,
 };
 
-const MAX_PRICE = 5000;
+const PAGE_SIZE = 24;
 
 type SortOption = "default" | "price_asc" | "price_desc" | "name_asc";
 
@@ -38,13 +39,24 @@ const Catalog = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const [sort, setSort] = useState<SortOption>("default");
   const [query, setQuery] = useState(initialQuery);
+  const [page, setPage] = useState(1);
 
-  useEffect(() => { setQuery(searchParams.get("q") || ""); }, [searchParams]);
+  // Build category name lookup once
+  const categoryNameById = useMemo(() => {
+    const m = new Map<string, string>();
+    categories.forEach(c => m.set(c.id, c.name));
+    return m;
+  }, [categories]);
 
-  const toggleCategory = (id: CategoryId) =>
-    setSelectedCategories(prev =>
-      prev.includes(id) ? [] : [id]
-    );
+  useEffect(() => {
+    setQuery(searchParams.get("q") || "");
+    setPage(1);
+  }, [searchParams]);
+
+  const toggleCategory = useCallback((id: CategoryId) => {
+    setPage(1);
+    setSelectedCategories(prev => prev.includes(id) ? [] : [id]);
+  }, []);
 
   const childrenBySlug = useMemo(() => {
     const m = new Map<CategoryId, CategoryId[]>();
@@ -61,14 +73,10 @@ const Catalog = () => {
   const topCategories = useMemo(() => categories.filter(c => !c.parentId), [categories]);
 
   const filtered = useMemo(() => {
-    // Якщо вибрана батьківська категорія — показуємо тільки її товари (без підкатегорій)
-    // Якщо вибрана підкатегорія — показуємо тільки її товари
-    // Якщо вибрано кілька — OR логіка
     let list = products.filter(p => {
       if (selectedCategories.length) {
         const match = selectedCategories.some(sel => {
           if (sel === p.category) return true;
-          // якщо sel — батьківська і немає вибраних підкатегорій з цієї групи — включаємо дочірні
           const children = childrenBySlug.get(sel) ?? [];
           const anyChildSelected = children.some(ch => selectedCategories.includes(ch));
           if (!anyChildSelected && children.includes(p.category)) return true;
@@ -87,21 +95,44 @@ const Catalog = () => {
     return list;
   }, [selectedCategories, minPrice, maxPrice, query, sort, products, childrenBySlug]);
 
-  const reset = () => {
+  // Pagination
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const paginated = useMemo(() =>
+    filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE),
+    [filtered, safePage]
+  );
+
+  const reset = useCallback(() => {
     setSelectedCategories([]);
     setMinPrice("");
     setMaxPrice("");
     setSort("default");
     setQuery("");
+    setPage(1);
     setSearchParams({});
-  };
+  }, [setSearchParams]);
 
   const [openCategories, setOpenCategories] = useState<CategoryId[]>([]);
-
   const toggleOpen = (id: CategoryId) =>
     setOpenCategories(prev => prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id]);
 
   const hasFilters = selectedCategories.length > 0 || minPrice || maxPrice || query;
+
+  // Active category label for SEO
+  const activeCatName = selectedCategories.length === 1
+    ? categoryNameById.get(selectedCategories[0])
+    : undefined;
+
+  useSEO({
+    title: activeCatName
+      ? `${activeCatName} — купити в Україні`
+      : "Каталог товарів для здоров'я та ортопедії",
+    description: activeCatName
+      ? `${activeCatName} в інтернет-магазині BodyHome. Доставка Новою Поштою по Україні, оплата при отриманні.`
+      : "Каталог ортопедичних товарів BodyHome: подушки, устілки, бандажі, масажери. Доставка по Україні.",
+    url: "/catalog",
+  });
 
   const Filters = () => (
     <div className="space-y-6">
@@ -113,14 +144,12 @@ const Catalog = () => {
             const subs = categories.filter(s => s.parentId === c.id);
             const parentSelected = selectedCategories.includes(c.id);
             const isOpen = openCategories.includes(c.id) || subs.some(s => selectedCategories.includes(s.id));
-            const Icon = categoryIcons[c.id] ?? categoryIcons[c.slug] ?? BedDouble;
+            const Icon = categoryIcons[c.id] ?? categoryIcons[c.slug as string] ?? BedDouble;
             return (
               <div key={c.id}>
-                {/* Рядок категорії: чекбокс + назва + стрілка */}
                 <div className={`flex items-center gap-1 rounded-xl transition-all duration-200 ${
                   parentSelected ? "bg-primary text-white shadow-sm" : "hover:bg-secondary"
                 }`}>
-                  {/* Кнопка вибору категорії */}
                   <button
                     onClick={() => toggleCategory(c.id)}
                     className="flex items-center gap-2.5 flex-1 px-3 py-2.5 text-sm font-light text-left"
@@ -131,21 +160,16 @@ const Catalog = () => {
                     />
                     <span className={`flex-1 ${parentSelected ? "text-white" : "text-foreground"}`}>{c.name}</span>
                   </button>
-                  {/* Кнопка розгортання підкатегорій */}
                   {subs.length > 0 && (
                     <button
                       onClick={() => toggleOpen(c.id)}
                       className={`px-2 py-2.5 rounded-r-xl transition-colors ${parentSelected ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-primary"}`}
                     >
-                      {isOpen
-                        ? <ChevronDown className="h-3.5 w-3.5" />
-                        : <ChevronRight className="h-3.5 w-3.5" />
-                      }
+                      {isOpen ? <ChevronDown className="h-3.5 w-3.5" /> : <ChevronRight className="h-3.5 w-3.5" />}
                     </button>
                   )}
                 </div>
 
-                {/* Підкатегорії */}
                 {isOpen && subs.length > 0 && (
                   <div className="ml-6 mt-0.5 mb-1 border-l-2 border-primary/25 pl-3 flex flex-col gap-0.5">
                     {subs.map(s => {
@@ -181,7 +205,7 @@ const Catalog = () => {
             type="number"
             placeholder="Від"
             value={minPrice}
-            onChange={e => setMinPrice(e.target.value)}
+            onChange={e => { setMinPrice(e.target.value); setPage(1); }}
             className="rounded-xl border-border/60 font-light text-sm"
           />
           <span className="text-muted-foreground font-light shrink-0">—</span>
@@ -189,7 +213,7 @@ const Catalog = () => {
             type="number"
             placeholder="До"
             value={maxPrice}
-            onChange={e => setMaxPrice(e.target.value)}
+            onChange={e => { setMaxPrice(e.target.value); setPage(1); }}
             className="rounded-xl border-border/60 font-light text-sm"
           />
         </div>
@@ -227,7 +251,7 @@ const Catalog = () => {
               </SheetContent>
             </Sheet>
           </div>
-          <Select value={sort} onValueChange={v => setSort(v as SortOption)}>
+          <Select value={sort} onValueChange={v => { setSort(v as SortOption); setPage(1); }}>
             <SelectTrigger className="w-full sm:w-[180px] rounded-full font-light border-white/10">
               <SelectValue placeholder="Сортування" />
             </SelectTrigger>
@@ -253,7 +277,7 @@ const Catalog = () => {
             <div className="overflow-x-auto scrollbar-none">
               <div className="flex gap-2 w-max pb-1">
                 <button
-                  onClick={() => setSelectedCategories([])}
+                  onClick={() => { setSelectedCategories([]); setPage(1); }}
                   className={`shrink-0 px-4 py-2 rounded-full text-xs font-light border transition-all ${
                     selectedCategories.length === 0
                       ? "bg-primary text-white border-primary"
@@ -267,7 +291,7 @@ const Catalog = () => {
                   return (
                     <button
                       key={c.id}
-                      onClick={() => setSelectedCategories([c.id])}
+                      onClick={() => { setSelectedCategories([c.id]); setPage(1); }}
                       className={`shrink-0 px-4 py-2 rounded-full text-xs font-light border transition-all ${
                         isActive
                           ? "bg-primary text-white border-primary"
@@ -284,7 +308,7 @@ const Catalog = () => {
               <div className="overflow-x-auto scrollbar-none">
                 <div className="flex gap-2 w-max pb-1">
                   <button
-                    onClick={() => setSelectedCategories([activeParent!.id])}
+                    onClick={() => { setSelectedCategories([activeParent!.id]); setPage(1); }}
                     className={`shrink-0 px-3 py-1.5 rounded-full text-[11px] font-light border transition-all ${
                       selectedCategories.includes(activeParent!.id) && !subs.some(s => selectedCategories.includes(s.id))
                         ? "bg-primary/15 text-primary border-primary/40"
@@ -296,7 +320,7 @@ const Catalog = () => {
                   {subs.map(s => (
                     <button
                       key={s.id}
-                      onClick={() => setSelectedCategories([s.id])}
+                      onClick={() => { setSelectedCategories([s.id]); setPage(1); }}
                       className={`shrink-0 px-3 py-1.5 rounded-full text-[11px] font-light border transition-all ${
                         selectedCategories.includes(s.id)
                           ? "bg-primary text-white border-primary"
@@ -320,10 +344,67 @@ const Catalog = () => {
           </div>
         </aside>
         <div>
-          {filtered.length > 0 ? (
-            <div className="grid grid-cols-2 xl:grid-cols-4 gap-5">
-              {filtered.map(p => <ProductCard key={p.id} product={p} />)}
-            </div>
+          {paginated.length > 0 ? (
+            <>
+              <div className="grid grid-cols-2 xl:grid-cols-4 gap-5">
+                {paginated.map(p => (
+                  <ProductCard
+                    key={p.id}
+                    product={p}
+                    categoryName={categoryNameById.get(p.category)}
+                  />
+                ))}
+              </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="mt-10 flex items-center justify-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="rounded-full"
+                    disabled={safePage === 1}
+                    onClick={() => { setPage(p => Math.max(1, p - 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+
+                  {Array.from({ length: totalPages }, (_, i) => i + 1)
+                    .filter(p => p === 1 || p === totalPages || Math.abs(p - safePage) <= 1)
+                    .reduce<(number | "...")[]>((acc, p, i, arr) => {
+                      if (i > 0 && (arr[i - 1] as number) + 1 < p) acc.push("...");
+                      acc.push(p);
+                      return acc;
+                    }, [])
+                    .map((p, i) =>
+                      p === "..." ? (
+                        <span key={`ellipsis-${i}`} className="px-2 text-muted-foreground text-sm">…</span>
+                      ) : (
+                        <Button
+                          key={p}
+                          variant={p === safePage ? "default" : "outline"}
+                          size="sm"
+                          className={`rounded-full min-w-[2.25rem] ${p === safePage ? "btn-aura border-0" : ""}`}
+                          onClick={() => { setPage(p as number); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                        >
+                          {p}
+                        </Button>
+                      )
+                    )
+                  }
+
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="rounded-full"
+                    disabled={safePage === totalPages}
+                    onClick={() => { setPage(p => Math.min(totalPages, p + 1)); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
+            </>
           ) : (
             <div className="text-center py-20 rounded-2xl bg-white/[0.035] border border-white/10">
               <p className="text-muted-foreground font-light">Товарів не знайдено. Спробуйте змінити фільтри.</p>

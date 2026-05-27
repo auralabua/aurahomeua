@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useRef } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Truck, ShieldCheck, CreditCard, Headphones, Star, RotateCcw, Instagram } from "lucide-react";
+import { useRef, useMemo } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight, Truck, ShieldCheck, CreditCard, Headphones, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
@@ -70,7 +70,7 @@ const needs = [
 ];
 
 
-const FeaturedCarousel = ({ products }: { products: any[] }) => {
+const FeaturedCarousel = ({ products, categoryNames }: { products: any[]; categoryNames: Map<string, string> }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (dir: "left" | "right") => {
@@ -114,7 +114,7 @@ const FeaturedCarousel = ({ products }: { products: any[] }) => {
         >
           {products.map(p => (
             <div key={p.id} className="shrink-0 w-[calc(25%-10px)] min-w-[160px] max-w-[240px]">
-              <ProductCard product={p} compact />
+              <ProductCard product={p} compact categoryName={categoryNames.get(p.category)} />
             </div>
           ))}
         </div>
@@ -140,15 +140,25 @@ const Index = () => {
   const { products } = useProductsAsLegacy();
   const { categories: allCats } = useCategoriesAsLegacy();
   const categories = allCats.filter(c => !c.parentId);
+
+  // Build category name map once (passed down to avoid per-card hooks)
+  const categoryNames = useMemo(
+    () => new Map(allCats.map(c => [c.id, c.name])),
+    [allCats]
+  );
+
   // 2-3 товари з кожної категорії (топ-категорії)
   const featuredCatSlugs = [
     "tovary-dlia-krasy", "ortopedychni-podushky", "masazhery",
     "ortopedychni-masazhni-kylymky", "ortezy-i-bandazhi",
     "rozvyvaiuchi-ihrashky", "ortopedychni-ustilky",
   ];
-  const featured = featuredCatSlugs.flatMap(slug =>
-    products.filter(p => p.category === slug).slice(0, 3)
-  ).slice(0, 20);
+  const featured = useMemo(() =>
+    featuredCatSlugs.flatMap(slug =>
+      products.filter(p => p.category === slug).slice(0, 3)
+    ).slice(0, 20),
+    [products]
+  );
 
   return (
     <div>
@@ -253,7 +263,7 @@ const Index = () => {
       </section>
 
       {/* ── FEATURED CAROUSEL ── */}
-      <FeaturedCarousel products={featured} />
+      <FeaturedCarousel products={featured} categoryNames={categoryNames} />
 
       {/* ── ПІДБІР ЗА ЗАДАЧЕЮ ── */}
       <section className="container py-12 sm:py-20">

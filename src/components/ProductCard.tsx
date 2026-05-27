@@ -3,11 +3,12 @@ import { Star, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Product, formatUAH } from "@/data/products";
 import { useCart } from "@/context/CartContext";
-import { useCategoriesAsLegacy } from "@/hooks/useShopData";
 
 interface ProductCardProps {
   product: Product;
   compact?: boolean;
+  /** Optional: resolved category name — pass from parent to avoid per-card hook calls */
+  categoryName?: string;
 }
 
 const StarIcon = ({ fill, size }: { fill: "full" | "half" | "empty"; size: string }) => (
@@ -74,10 +75,8 @@ const PriceBlock = ({ price, originalPrice, compact = false }: { price: number; 
   );
 };
 
-export const ProductCard = ({ product, compact = false }: ProductCardProps) => {
+export const ProductCard = ({ product, compact = false, categoryName }: ProductCardProps) => {
   const { addItem } = useCart();
-  const { categories } = useCategoriesAsLegacy();
-  const category = categories.find(c => c.id === product.category);
   const hasDiscount = product.originalPrice && product.originalPrice > product.price;
 
   if (compact) {
@@ -99,7 +98,7 @@ export const ProductCard = ({ product, compact = false }: ProductCardProps) => {
           </div>
         </Link>
         <div className="flex flex-col flex-1 gap-1.5 p-3">
-          {category && <span className="text-[9px] uppercase tracking-[0.15em] text-primary/60 font-medium line-clamp-1">{category.name}</span>}
+          {categoryName && <span className="text-[9px] uppercase tracking-[0.15em] text-primary/60 font-medium line-clamp-1">{categoryName}</span>}
           <Link to={`/product/${product.id}`} className="line-clamp-2 text-xs font-medium leading-snug text-foreground hover:text-primary transition-colors">
             {product.name}
           </Link>
@@ -141,8 +140,8 @@ export const ProductCard = ({ product, compact = false }: ProductCardProps) => {
         </div>
       </Link>
       <div className="flex flex-1 flex-col gap-2 p-3 sm:p-4">
-        {category && (
-          <span className="text-[10px] uppercase tracking-[0.18em] text-primary/70 font-medium line-clamp-1">{category.name}</span>
+        {categoryName && (
+          <span className="text-[10px] uppercase tracking-[0.18em] text-primary/70 font-medium line-clamp-1">{categoryName}</span>
         )}
         <Link to={`/product/${product.id}`} className="line-clamp-2 text-sm font-medium leading-snug text-foreground hover:text-primary transition-colors">
           {product.name}

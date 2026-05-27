@@ -69,9 +69,13 @@ const Checkout = () => {
     setSubmitting(true);
     try {
       const orderRef = `AH-${Date.now()}`;
-      const orderItems = items.map(({ product, quantity }) => ({
-        id: product.id, name: product.name, price: product.price, quantity,
+      const orderItems = items.map(({ product, quantity, selectedVariant }) => ({
+        id: product.id,
+        name: selectedVariant ? `${product.name} (${selectedVariant.label})` : product.name,
+        price: selectedVariant?.price ?? product.price,
+        quantity,
         image: product.images?.[0] ?? null,
+        variant: selectedVariant?.label ?? null,
       }));
 
       // Зберегти замовлення в Supabase
@@ -198,18 +202,23 @@ const Checkout = () => {
         <aside className="lg:sticky lg:top-24 h-fit p-6 rounded-2xl aura-card">
           <h2 className="text-xl font-medium mb-4">Ваше замовлення</h2>
           <ul className="space-y-3 mb-4 max-h-64 overflow-y-auto pr-1">
-            {items.map(({ product, quantity }) => (
-              <li key={product.id} className="flex gap-3 text-sm">
+            {items.map(({ product, quantity, selectedVariant }) => {
+              const itemPrice = selectedVariant?.price ?? product.price;
+              const varLabel = selectedVariant?.label;
+              return (
+              <li key={product.id + (varLabel ?? "")} className="flex gap-3 text-sm">
                 <div className="h-12 w-12 shrink-0 rounded-lg bg-secondary overflow-hidden grid place-items-center">
                   {product.images?.[0] && <img src={product.images[0]} alt="" className="h-full w-full object-contain p-1" />}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="line-clamp-2">{product.name}</div>
-                  <div className="text-muted-foreground text-xs mt-0.5">{quantity} × {formatUAH(product.price)}</div>
+                  {varLabel && <div className="text-primary text-[11px] font-medium">Розмір: {varLabel}</div>}
+                  <div className="text-muted-foreground text-xs mt-0.5">{quantity} × {formatUAH(itemPrice)}</div>
                 </div>
-                <div className="font-medium whitespace-nowrap">{formatUAH(product.price * quantity)}</div>
+                <div className="font-medium whitespace-nowrap">{formatUAH(itemPrice * quantity)}</div>
               </li>
-            ))}
+              );
+            })}
           </ul>
           <div className="border-t border-border my-4" />
           <div className="space-y-2 text-sm">

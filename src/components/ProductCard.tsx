@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Star, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Product, formatUAH } from "@/data/products";
+import { Product, ProductVariant, formatUAH } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import { OptimizedImage } from "@/components/OptimizedImage";
 
@@ -11,6 +12,42 @@ interface ProductCardProps {
   /** Optional: resolved category name — pass from parent to avoid per-card hook calls */
   categoryName?: string;
 }
+
+const VariantChips = ({
+  variants,
+  selectedIdx,
+  onSelect,
+  max = 6,
+}: {
+  variants: ProductVariant[];
+  selectedIdx: number;
+  onSelect: (i: number) => void;
+  max?: number;
+}) => {
+  if (!variants.length) return null;
+  const visible = variants.slice(0, max);
+  const extra = variants.length - max;
+  return (
+    <div className="flex flex-wrap gap-1">
+      {visible.map((v, i) => (
+        <button
+          key={v.label}
+          onClick={(e) => { e.preventDefault(); e.stopPropagation(); onSelect(i); }}
+          className={`text-[10px] leading-none px-1.5 py-1 rounded-md border transition-colors ${
+            i === selectedIdx
+              ? "border-primary bg-primary/10 text-primary font-semibold"
+              : "border-border text-muted-foreground hover:border-primary/40"
+          }`}
+        >
+          {v.label}
+        </button>
+      ))}
+      {extra > 0 && (
+        <span className="text-[10px] leading-none text-muted-foreground px-1 py-1">+{extra}</span>
+      )}
+    </div>
+  );
+};
 
 const StarIcon = ({ fill, size }: { fill: "full" | "half" | "empty"; size: string }) => (
   <span className={`relative inline-flex ${size}`}>
@@ -78,7 +115,12 @@ const PriceBlock = ({ price, originalPrice, compact = false }: { price: number; 
 
 export const ProductCard = ({ product, compact = false, categoryName }: ProductCardProps) => {
   const { addItem } = useCart();
-  const hasDiscount = product.originalPrice && product.originalPrice > product.price;
+  const [selectedVarIdx, setSelectedVarIdx] = useState(0);
+
+  const variants = product.variants ?? [];
+  const selectedVar = variants[selectedVarIdx] as ProductVariant | undefined;
+  const displayPrice = selectedVar?.price ?? product.price;
+  const hasDiscount = product.originalPrice && product.originalPrice > displayPrice;
 
   if (compact) {
     return (
@@ -111,9 +153,12 @@ export const ProductCard = ({ product, compact = false, categoryName }: ProductC
             {product.name}
           </Link>
           <Stars rating={product.rating} reviews={product.reviews} size="xs" />
+          {variants.length > 1 && (
+            <VariantChips variants={variants} selectedIdx={selectedVarIdx} onSelect={setSelectedVarIdx} max={4} />
+          )}
           <div className="mt-auto pt-2 space-y-2">
-            <PriceBlock price={product.price} originalPrice={product.originalPrice} compact />
-            <Button onClick={() => addItem(product)} size="sm"
+            <PriceBlock price={displayPrice} originalPrice={product.originalPrice} compact />
+            <Button onClick={() => addItem(product, 1, selectedVar)} size="sm"
               className="w-full h-8 rounded-full btn-aura border-0 text-[10px] font-medium gap-1 touch-manipulation">
               <ShoppingCart className="h-3 w-3 shrink-0" />
               До кошика
@@ -162,9 +207,12 @@ export const ProductCard = ({ product, compact = false, categoryName }: ProductC
           {product.name}
         </Link>
         <Stars rating={product.rating} reviews={product.reviews} />
+        {variants.length > 1 && (
+          <VariantChips variants={variants} selectedIdx={selectedVarIdx} onSelect={setSelectedVarIdx} max={6} />
+        )}
         <div className="mt-auto pt-2 space-y-2.5">
-          <PriceBlock price={product.price} originalPrice={product.originalPrice} />
-          <Button onClick={() => addItem(product)}
+          <PriceBlock price={displayPrice} originalPrice={product.originalPrice} />
+          <Button onClick={() => addItem(product, 1, selectedVar)}
             className="w-full h-10 rounded-full btn-aura border-0 text-xs font-medium gap-1.5 touch-manipulation">
             <ShoppingCart className="h-3.5 w-3.5 shrink-0" />
             До кошика

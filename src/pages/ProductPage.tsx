@@ -1,8 +1,8 @@
-import { useState, useMemo, useCallback } from "react";
-import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
+import { useState, useMemo } from "react";
+import { useParams, Link, Navigate } from "react-router-dom";
 import { Star, Minus, Plus, ShoppingCart, ArrowLeft, Truck, ShieldCheck, RotateCcw, Check, Tag } from "lucide-react";
 import { formatUAH } from "@/data/products";
-import { useProductsAsLegacy, useAllProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
+import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { ProductCard } from "@/components/ProductCard";
@@ -174,9 +174,7 @@ const ReviewsTab = ({ product }: { product: Product }) => {
 
 const ProductPage = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const { products, isLoading } = useProductsAsLegacy();
-  const { products: allProducts } = useAllProductsAsLegacy();
   const { categories } = useCategoriesAsLegacy();
   const { addItem } = useCart();
 
@@ -184,42 +182,18 @@ const ProductPage = () => {
   const [activeImg, setActiveImg] = useState(0);
   const [added, setAdded] = useState(false);
   const [activeTab, setActiveTab] = useState<"desc" | "reviews" | "questions">("desc");
+  const [selectedVarIdx, setSelectedVarIdx] = useState(0);
 
   // ── Resolve product data (before any conditional returns so hooks stay stable) ──
-  const product      = allProducts.find(p => p.id === id);
-  const catalogProd  = products.find(p => p.id === id);
-  const foundProduct = product || catalogProd;
+  const foundProduct   = products.find(p => p.id === id) ?? allProducts.find(p => p.id === id);
+  const displayProduct = foundProduct;
 
-  const parentId      = foundProduct?.parentProductId ?? (foundProduct?.isParent ? foundProduct.id : null);
-  const parent        = parentId ? allProducts.find(p => p.id === parentId) : null;
-  const displayProduct = parent ?? foundProduct;
+  // JSONB variants from the product itself
+  const variants = useMemo(() => foundProduct?.variants ?? [], [foundProduct]);
 
-  const groupId = foundProduct?.xmlGroupId ?? parent?.xmlGroupId;
-
-  // useMemo must be unconditional — always called, guarded internally
-  const variants = useMemo(() => {
-    if (!groupId && !parentId) return [];
-    return allProducts
-      .filter(p =>
-        (groupId && p.xmlGroupId === groupId) ||
-        (!groupId && (p.parentProductId === parentId || p.id === parentId))
-      )
-      .sort((a, b) => {
-        const ai = SIZE_ORDER.indexOf(a.variantLabel ?? "");
-        const bi = SIZE_ORDER.indexOf(b.variantLabel ?? "");
-        if (ai !== -1 && bi !== -1) return ai - bi;
-        if (ai !== -1) return -1;
-        if (bi !== -1) return 1;
-        const na = parseFloat(a.variantLabel ?? "");
-        const nb = parseFloat(b.variantLabel ?? "");
-        if (!isNaN(na) && !isNaN(nb)) return na - nb;
-        return (a.variantLabel ?? "").localeCompare(b.variantLabel ?? "");
-      });
-  }, [allProducts, groupId, parentId]);
-
-  const selectedVariant  = variants.find(v => v.id === id) ?? (variants.length > 0 ? variants[0] : null);
-  const currentProduct   = selectedVariant ?? foundProduct;
-  const category         = displayProduct ? categories.find(c => c.id === displayProduct.category) : null;
+  const selectedVariant = variants[selectedVarIdx] ?? null;
+  const currentProduct  = foundProduct;
+  const category        = displayProduct ? categories.find(c => c.id === displayProduct.category) : null;
   const categoryName     = category?.name;
 
   // Category name lookup for related cards
@@ -286,14 +260,16 @@ const ProductPage = () => {
     .filter(p => p.category === displayProduct!.category && p.id !== displayProduct!.id)
     .slice(0, 4);
 
-  const images      = displayProduct!.images?.length ? displayProduct!.images : [];
-  const hasDiscount = currentProduct!.originalPrice && currentProduct!.originalPrice > currentProduct!.price;
-  const discountPct = hasDiscount
-    ? Math.round((1 - currentProduct!.price / currentProduct!.originalPrice!) * 100)
+  const images        = displayProduct!.images?.length ? displayProduct!.images : [];
+  const activePrice   = selectedVariant?.price ?? currentProduct!.price;
+  const hasDiscount   = currentProduct!.originalPrice && currentProduct!.originalPrice > activePrice;
+  const discountPct   = hasDiscount
+    ? Math.round((1 - activePrice / currentProduct!.originalPrice!) * 100)
     : 0;
+  const activeVendorCode = selectedVariant?.vendor_code || currentProduct!.vendorCode;
 
   const handleAddToCart = () => {
-    addItem(currentProduct!, qty);
+    addItem(currentProduct!, qty, selectedVariant ?? undefined);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
@@ -418,9 +394,9 @@ const ProductPage = () => {
             </div>
 
             {/* SKU */}
-            {currentProduct!.vendorCode && (
+            {activeVendorCode && (
               <div className="text-sm text-muted-foreground">
-                Артикул: <span className="font-medium text-foreground">{currentProduct!.vendorCode}</span>
+                Артикул: <span className="font-medium text-foreground">{activeVendorCode}</span>
               </div>
             )}
 
@@ -428,21 +404,24 @@ const ProductPage = () => {
             {variants.length > 1 && (
               <div className="space-y-2">
                 <p className="text-sm font-medium text-foreground">
-                  Розмір: <span className="text-primary">{selectedVariant?.variantLabel ?? variants[0]?.variantLabel}</span>
+                  Розмір: <span className="text-primary">{selectedVariant?.label ?? variants[0]?.label}</span>
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {variants.map(v => (
+                  {variants.map((v, i) => (
                     <button
-                      key={v.id}
-                      onClick={() => navigate(`/product/${v.id}`)}
-                      aria-label={`Розмір ${v.variantLabel}`}
+                      key={v.label}
+                      onClick={() => setSelectedVarIdx(i)}
+                      aria-label={`Розмір ${v.label}`}
+                      disabled={!v.available}
                       className={`min-w-[44px] h-10 px-3 rounded-xl border-2 text-sm font-medium transition-all ${
-                        v.id === (selectedVariant?.id ?? variants[0]?.id)
+                        i === selectedVarIdx
                           ? "border-primary bg-primary text-white"
-                          : "border-border bg-white hover:border-primary/60 text-foreground"
+                          : v.available
+                            ? "border-border bg-white hover:border-primary/60 text-foreground"
+                            : "border-border bg-secondary/50 text-muted-foreground opacity-50 cursor-not-allowed"
                       }`}
                     >
-                      {v.variantLabel}
+                      {v.label}
                     </button>
                   ))}
                 </div>
@@ -453,7 +432,7 @@ const ProductPage = () => {
             <div className="rounded-2xl border border-border/50 bg-white p-4 sm:p-5 space-y-3">
               <div className="flex items-end gap-3 flex-wrap">
                 <span className="text-3xl sm:text-4xl font-bold text-foreground">
-                  {formatUAH(currentProduct!.price)}
+                  {formatUAH(activePrice)}
                 </span>
                 {hasDiscount && (
                   <div className="flex items-center gap-2 mb-1">
@@ -468,7 +447,7 @@ const ProductPage = () => {
               </div>
               {hasDiscount && (
                 <p className="text-sm text-green-600 font-medium">
-                  ✓ Ви економите {formatUAH(currentProduct!.originalPrice! - currentProduct!.price)}
+                  ✓ Ви економите {formatUAH(currentProduct!.originalPrice! - activePrice)}
                 </p>
               )}
 

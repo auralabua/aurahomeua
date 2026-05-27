@@ -32,8 +32,12 @@ const Cart = () => {
 
       <div className="grid lg:grid-cols-[1fr_360px] gap-8">
         <div className="space-y-3">
-          {items.map(({ product, quantity }) => (
-            <div key={product.id} className="flex gap-4 p-4 rounded-2xl aura-card">
+          {items.map(({ product, quantity, selectedVariant }) => {
+            const itemPrice = selectedVariant?.price ?? product.price;
+            const varLabel = selectedVariant?.label;
+            const itemKey = product.id + (varLabel ? `__${varLabel}` : "");
+            return (
+            <div key={itemKey} className="flex gap-4 p-4 rounded-2xl aura-card">
               <Link to={`/product/${product.id}`} className="grid h-24 w-24 shrink-0 place-items-center rounded-xl gradient-hero overflow-hidden border border-white/10">
                 {product.images?.[0] ? (
                   <img src={product.images[0]} alt={product.name} className="h-full w-full object-contain p-2" loading="lazy" />
@@ -45,25 +49,29 @@ const Cart = () => {
                 <Link to={`/product/${product.id}`} className="font-medium hover:text-primary transition-smooth line-clamp-2">
                   {product.name}
                 </Link>
-                <div className="text-sm text-muted-foreground mt-1">{formatUAH(product.price)} / шт</div>
+                {varLabel && (
+                  <div className="text-xs text-primary font-medium mt-0.5">Розмір: {varLabel}</div>
+                )}
+                <div className="text-sm text-muted-foreground mt-1">{formatUAH(itemPrice)} / шт</div>
                 <div className="mt-3 flex items-center justify-between gap-3">
                   <div className="inline-flex items-center rounded-full bg-white/[0.055] p-1">
-                    <Button variant="ghost" size="icon" className="rounded-full h-7 w-7" onClick={() => updateQuantity(product.id, quantity - 1)}>
+                    <Button variant="ghost" size="icon" className="rounded-full h-7 w-7" onClick={() => updateQuantity(product.id, quantity - 1, varLabel)}>
                       <Minus className="h-3 w-3" />
                     </Button>
                     <span className="w-8 text-center font-semibold text-sm">{quantity}</span>
-                    <Button variant="ghost" size="icon" className="rounded-full h-7 w-7" onClick={() => updateQuantity(product.id, quantity + 1)}>
+                    <Button variant="ghost" size="icon" className="rounded-full h-7 w-7" onClick={() => updateQuantity(product.id, quantity + 1, varLabel)}>
                       <Plus className="h-3 w-3" />
                     </Button>
                   </div>
-                  <div className="font-bold">{formatUAH(product.price * quantity)}</div>
+                  <div className="font-bold">{formatUAH(itemPrice * quantity)}</div>
                 </div>
               </div>
-              <Button variant="ghost" size="icon" className="rounded-full text-muted-foreground hover:text-destructive shrink-0" onClick={() => removeItem(product.id)}>
+              <Button variant="ghost" size="icon" className="rounded-full text-muted-foreground hover:text-destructive shrink-0" onClick={() => removeItem(product.id, varLabel)}>
                 <Trash2 className="h-4 w-4" />
               </Button>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         <aside className="lg:sticky lg:top-24 h-fit p-6 rounded-2xl aura-card">

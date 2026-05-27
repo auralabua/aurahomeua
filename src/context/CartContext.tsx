@@ -1,17 +1,18 @@
 import { createContext, useContext, useEffect, useMemo, useState, ReactNode } from "react";
-import { Product } from "@/data/products";
+import { Product, ProductVariant } from "@/data/products";
 import { toast } from "@/hooks/use-toast";
 
 export interface CartItem {
   product: Product;
   quantity: number;
+  selectedVariant?: ProductVariant;
 }
 
 interface CartContextValue {
   items: CartItem[];
-  addItem: (product: Product, quantity?: number) => void;
-  removeItem: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  addItem: (product: Product, quantity?: number, selectedVariant?: ProductVariant) => void;
+  removeItem: (productId: string, variantLabel?: string) => void;
+  updateQuantity: (productId: string, quantity: number, variantLabel?: string) => void;
   clear: () => void;
   totalCount: number;
   totalPrice: number;
@@ -34,30 +35,40 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items]);
 
-  const addItem = (product: Product, quantity = 1) => {
+  const itemKey = (productId: string, variantLabel?: string) =>
+    productId + (variantLabel ? `__${variantLabel}` : "");
+
+  const addItem = (product: Product, quantity = 1, selectedVariant?: ProductVariant) => {
+    const key = itemKey(product.id, selectedVariant?.label);
     setItems(prev => {
-      const existing = prev.find(i => i.product.id === product.id);
+      const existing = prev.find(i => itemKey(i.product.id, i.selectedVariant?.label) === key);
       if (existing) {
-        return prev.map(i => i.product.id === product.id ? { ...i, quantity: i.quantity + quantity } : i);
+        return prev.map(i => itemKey(i.product.id, i.selectedVariant?.label) === key
+          ? { ...i, quantity: i.quantity + quantity } : i);
       }
-      return [...prev, { product, quantity }];
+      return [...prev, { product, quantity, selectedVariant }];
     });
-    toast({ title: "Додано до кошика", description: product.name });
+    const label = selectedVariant ? ` (${selectedVariant.label})` : "";
+    toast({ title: "Додано до кошика", description: product.name + label });
   };
 
-  const removeItem = (productId: string) =>
-    setItems(prev => prev.filter(i => i.product.id !== productId));
+  const removeItem = (productId: string, variantLabel?: string) => {
+    const key = itemKey(productId, variantLabel);
+    setItems(prev => prev.filter(i => itemKey(i.product.id, i.selectedVariant?.label) !== key));
+  };
 
-  const updateQuantity = (productId: string, quantity: number) => {
-    if (quantity <= 0) return removeItem(productId);
-    setItems(prev => prev.map(i => i.product.id === productId ? { ...i, quantity } : i));
+  const updateQuantity = (productId: string, quantity: number, variantLabel?: string) => {
+    if (quantity <= 0) return removeItem(productId, variantLabel);
+    const key = itemKey(productId, variantLabel);
+    setItems(prev => prev.map(i => itemKey(i.product.id, i.selectedVariant?.label) === key
+      ? { ...i, quantity } : i));
   };
 
   const clear = () => setItems([]);
 
   const { totalCount, totalPrice } = useMemo(() => ({
     totalCount: items.reduce((s, i) => s + i.quantity, 0),
-    totalPrice: items.reduce((s, i) => s + i.quantity * i.product.price, 0),
+    totalPrice: items.reduce((s, i) => s + i.quantity * (i.selectedVariant?.price ?? i.product.price), 0),
   }), [items]);
 
   return (

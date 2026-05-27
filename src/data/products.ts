@@ -38,6 +38,13 @@ export const categories: Category[] = [
   { id: "insoles", name: "Ортопедичні устілки", icon: Footprints, description: "Комфорт для ваших ніг" },
 ];
 
+export interface ProductVariant {
+  label: string;
+  vendor_code: string;
+  price: number;
+  available: boolean;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -56,6 +63,7 @@ export interface Product {
   variantLabel?: string;
   isParent?: boolean;
   xmlGroupId?: string;
+  variants?: ProductVariant[];
 }
 
 // Legacy static export removed — products now come from the database (see useProductsAsLegacy).

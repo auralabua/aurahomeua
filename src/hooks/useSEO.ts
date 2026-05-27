@@ -15,6 +15,10 @@ const setMeta = (name: string, content: string, attr = "name") => {
   el.setAttribute("content", content);
 };
 
+const removeMeta = (name: string, attr = "name") => {
+  document.querySelector(`meta[${attr}="${name}"]`)?.remove();
+};
+
 const setLink = (rel: string, href: string) => {
   let el = document.querySelector(`link[rel="${rel}"]`);
   if (!el) {
@@ -41,15 +45,20 @@ interface SEOProps {
   description?: string;
   keywords?: string;
   image?: string;
+  images?: string[];           // Multiple product images for schema
   url?: string;
   type?: "website" | "product" | "article";
   price?: number;
   originalPrice?: number;
   availability?: boolean;
+  sku?: string;                // Vendor code / article number
+  aggregateRating?: {          // Product rating for rich snippets
+    ratingValue: number;
+    reviewCount: number;
+  };
   breadcrumbs?: { name: string; url: string }[];
   faq?: { q: string; a: string }[];
   articleDate?: string;
-  keywords_extra?: string;
 }
 
 export const useSEO = ({
@@ -57,11 +66,14 @@ export const useSEO = ({
   description,
   keywords,
   image = DEFAULT_IMG,
+  images,
   url = "/",
   type = "website",
   price,
   originalPrice,
   availability = true,
+  sku,
+  aggregateRating,
   breadcrumbs,
   faq,
   articleDate,
@@ -89,6 +101,19 @@ export const useSEO = ({
     setMeta("og:site_name", SITE_NAME, "property");
     setMeta("og:locale", "uk_UA", "property");
 
+    // Product-specific OG tags (used by Facebook Shops, Pinterest, etc.)
+    if (type === "product" && price !== undefined) {
+      setMeta("product:price:amount", String(price), "property");
+      setMeta("product:price:currency", "UAH", "property");
+      setMeta("product:availability", availability ? "in stock" : "out of stock", "property");
+      if (sku) setMeta("product:retailer_item_id", sku, "property");
+    } else {
+      removeMeta("product:price:amount", "property");
+      removeMeta("product:price:currency", "property");
+      removeMeta("product:availability", "property");
+      removeMeta("product:retailer_item_id", "property");
+    }
+
     // Twitter
     setMeta("twitter:title", fullTitle);
     setMeta("twitter:description", fullDesc);
@@ -112,25 +137,90 @@ export const useSEO = ({
       });
     }
 
-    // Product schema
+    // Product schema (rich snippet with rating)
     if (type === "product" && price !== undefined) {
+      // Collect all product images for schema
+      const schemaImages = images?.length
+        ? images.map(img => img.startsWith("http") ? img : `${BASE_URL}${img}`)
+        : [fullImg];
+
+      const priceValidUntil = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+        .toISOString()
+        .split("T")[0];
+
       setSchema("product", {
         "@context": "https://schema.org",
         "@type": "Product",
         "name": title,
         "description": fullDesc,
-        "image": fullImg,
+        "image": schemaImages.length === 1 ? schemaImages[0] : schemaImages,
         "url": fullUrl,
+        ...(sku ? { "sku": sku, "mpn": sku } : {}),
         "brand": { "@type": "Brand", "name": SITE_NAME },
+        // AggregateRating — enables gold stars in Google search results
+        ...(aggregateRating && aggregateRating.reviewCount > 0
+          ? {
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": aggregateRating.ratingValue.toFixed(1),
+                "reviewCount": aggregateRating.reviewCount,
+                "bestRating": "5",
+                "worstRating": "1",
+              },
+            }
+          : {}),
         "offers": {
           "@type": "Offer",
           "url": fullUrl,
           "priceCurrency": "UAH",
           "price": price,
-          ...(originalPrice ? { "priceValidUntil": new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0] } : {}),
+          "priceValidUntil": priceValidUntil,
+          ...(originalPrice && originalPrice > price
+            ? {
+                "priceSpecification": {
+                  "@type": "UnitPriceSpecification",
+                  "price": price,
+                  "priceCurrency": "UAH",
+                },
+              }
+            : {}),
           "availability": availability
             ? "https://schema.org/InStock"
             : "https://schema.org/OutOfStock",
+          "shippingDetails": {
+            "@type": "OfferShippingDetails",
+            "shippingRate": {
+              "@type": "MonetaryAmount",
+              "currency": "UAH",
+            },
+            "shippingDestination": {
+              "@type": "DefinedRegion",
+              "addressCountry": "UA",
+            },
+            "deliveryTime": {
+              "@type": "ShippingDeliveryTime",
+              "handlingTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 0,
+                "maxValue": 1,
+                "unitCode": "DAY",
+              },
+              "transitTime": {
+                "@type": "QuantitativeValue",
+                "minValue": 1,
+                "maxValue": 3,
+                "unitCode": "DAY",
+              },
+            },
+          },
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "UA",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 14,
+            "returnMethod": "https://schema.org/ReturnByMail",
+            "returnFees": "https://schema.org/FreeReturn",
+          },
           "seller": { "@type": "Organization", "name": SITE_NAME },
         },
       });
@@ -172,5 +262,5 @@ export const useSEO = ({
         document.querySelector(`script[data-schema="${id}"]`)?.remove();
       });
     };
-  }, [title, description, keywords, image, url, type, price, originalPrice, availability]);
+  }, [title, description, keywords, image, images, url, type, price, originalPrice, availability, sku, aggregateRating, breadcrumbs, faq, articleDate]);
 };

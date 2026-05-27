@@ -1,5 +1,11 @@
 {
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  ],
+  "images": {
+    "sizes": [320, 480, 640, 960, 1200, 1920],
+    "domains": ["images.prom.ua", "images.pexels.com"],
+    "formats": ["image/avif", "image/webp"],
+    "minimumCacheTTL": 2592000
+  }
 }

@@ -3,6 +3,7 @@ import { Star, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Product, formatUAH } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 interface ProductCardProps {
   product: Product;
@@ -84,10 +85,17 @@ export const ProductCard = ({ product, compact = false, categoryName }: ProductC
       <article className="group flex flex-col overflow-hidden rounded-2xl border border-border/40 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-card h-full">
         <Link to={`/product/${product.id}`} className="relative overflow-hidden bg-secondary/20">
           <div className="aspect-[4/3] grid place-items-center p-3">
-            {product.images?.[0]
-              ? <img src={product.images[0]} alt={product.name} className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-              : <div className="h-full w-full rounded-lg bg-secondary/60" />
-            }
+            {product.images?.[0] ? (
+              <OptimizedImage
+                src={product.images[0]}
+                alt={product.name}
+                className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 640px) 40vw, (max-width: 1024px) 25vw, 200px"
+                quality={75}
+              />
+            ) : (
+              <div className="h-full w-full rounded-lg bg-secondary/60" />
+            )}
           </div>
           <div className="absolute left-2 top-2 flex flex-col gap-1">
             {product.badge && (
@@ -120,10 +128,17 @@ export const ProductCard = ({ product, compact = false, categoryName }: ProductC
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-border/40 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-card">
       <Link to={`/product/${product.id}`} className="relative overflow-hidden bg-secondary/20">
         <div className="aspect-square grid place-items-center p-4 sm:p-6">
-          {product.images?.[0]
-            ? <img src={product.images[0]} alt={product.name} className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            : <div className="h-full w-full rounded-xl bg-secondary/60" />
-          }
+          {product.images?.[0] ? (
+            <OptimizedImage
+              src={product.images[0]}
+              alt={product.name}
+              className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 640px) 45vw, (max-width: 1280px) 23vw, 280px"
+              quality={80}
+            />
+          ) : (
+            <div className="h-full w-full rounded-xl bg-secondary/60" />
+          )}
         </div>
         <div className="absolute left-2.5 top-2.5 flex flex-col gap-1.5">
           {product.badge && (

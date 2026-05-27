@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CartProvider } from "@/context/CartContext";
 import { Layout } from "@/components/Layout";
+import { PWAInstallPrompt } from "@/components/PWAInstallPrompt";
 
 // Eager-load for critical above-the-fold pages
 import Index from "./pages/Index.tsx";
@@ -87,6 +88,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
+          <PWAInstallPrompt />
         </CartProvider>
       </BrowserRouter>
     </TooltipProvider>

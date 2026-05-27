@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { ProductCard } from "@/components/ProductCard";
 import { useSEO } from "@/hooks/useSEO";
+import { OptimizedImage, vercelImg } from "@/components/OptimizedImage";
 import type { Product } from "@/data/products";
 
 const SIZE_ORDER = ["XS", "S", "M", "L", "XL", "XXL", "XXXL", "XXXXL"];
@@ -329,19 +330,19 @@ const ProductPage = () => {
           {/* ── Images ── */}
           <div className="space-y-3">
             <div className="relative aspect-square rounded-3xl bg-secondary/30 overflow-hidden border border-border/40 grid place-items-center">
-              {images[activeImg]
-                ? (
-                  <img
-                    src={images[activeImg]}
-                    alt={`${displayProduct!.name} — фото ${activeImg + 1}`}
-                    className="h-full w-full object-contain p-6 sm:p-10"
-                    // First image eager, rest lazy
-                    loading={activeImg === 0 ? "eager" : "lazy"}
-                    fetchPriority={activeImg === 0 ? "high" : "auto"}
-                  />
-                )
-                : <div className="text-muted-foreground text-sm">Немає фото</div>
-              }
+              {images[activeImg] ? (
+                <OptimizedImage
+                  src={images[activeImg]}
+                  alt={`${displayProduct!.name} — фото ${activeImg + 1}`}
+                  className="h-full w-full object-contain p-6 sm:p-10"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  quality={85}
+                  loading={activeImg === 0 ? "eager" : "lazy"}
+                  fetchPriority={activeImg === 0 ? "high" : "auto"}
+                />
+              ) : (
+                <div className="text-muted-foreground text-sm">Немає фото</div>
+              )}
               <div className="absolute top-4 left-4 flex flex-col gap-2">
                 {displayProduct!.badge && (
                   <span className="rounded-lg bg-primary/90 px-3 py-1 text-xs font-semibold text-white shadow">
@@ -367,7 +368,7 @@ const ProductPage = () => {
                       activeImg === i ? "border-primary" : "border-border/40 hover:border-primary/40"
                     }`}
                   >
-                    <img src={img} alt="" aria-hidden className="h-full w-full object-contain p-1" loading="lazy" />
+                    <OptimizedImage src={img} alt="" aria-hidden className="h-full w-full object-contain p-1" sizes="80px" quality={70} />
                   </button>
                 ))}
               </div>

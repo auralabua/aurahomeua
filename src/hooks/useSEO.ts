@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { vercelImg } from "@/components/OptimizedImage";
 
 const BASE_URL = import.meta.env.VITE_SITE_URL || "https://aurahomeua.vercel.app";
 const SITE_NAME = "BodyHome";
@@ -91,6 +92,22 @@ export const useSEO = ({
     setMeta("description", fullDesc);
     if (keywords) setMeta("keywords", keywords);
     setLink("canonical", fullUrl);
+
+    // Preload product hero image for LCP
+    if (type === "product" && image && image !== DEFAULT_IMG) {
+      const preloadHref = vercelImg(image, 960, 85);
+      let preload = document.querySelector(`link[rel="preload"][data-product-img]`) as HTMLLinkElement | null;
+      if (!preload) {
+        preload = document.createElement("link") as HTMLLinkElement;
+        preload.rel = "preload";
+        preload.setAttribute("as", "image");
+        preload.setAttribute("data-product-img", "1");
+        document.head.appendChild(preload);
+      }
+      preload.href = preloadHref;
+    } else {
+      document.querySelector(`link[rel="preload"][data-product-img]`)?.remove();
+    }
 
     // OG
     setMeta("og:title", fullTitle, "property");
@@ -261,6 +278,7 @@ export const useSEO = ({
       ["breadcrumb", "product", "article", "faq"].forEach(id => {
         document.querySelector(`script[data-schema="${id}"]`)?.remove();
       });
+      document.querySelector(`link[rel="preload"][data-product-img]`)?.remove();
     };
   }, [title, description, keywords, image, images, url, type, price, originalPrice, availability, sku, aggregateRating, breadcrumbs, faq, articleDate]);
 };

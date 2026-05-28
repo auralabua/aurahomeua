@@ -185,11 +185,24 @@ const ProductPage = () => {
   const [selectedVarIdx, setSelectedVarIdx] = useState(0);
 
   // ── Resolve product data (before any conditional returns so hooks stay stable) ──
-  const foundProduct   = products.find(p => p.id === id) ?? allProducts.find(p => p.id === id);
+  const foundProduct   = products.find(p => p.id === id);
   const displayProduct = foundProduct;
 
-  // JSONB variants from the product itself
-  const variants = useMemo(() => foundProduct?.variants ?? [], [foundProduct]);
+  // JSONB variants from the product itself, sorted by size
+  const variants = useMemo(() => {
+    const raw = foundProduct?.variants ?? [];
+    return [...raw].sort((a, b) => {
+      const ai = SIZE_ORDER.indexOf(a.label);
+      const bi = SIZE_ORDER.indexOf(b.label);
+      if (ai !== -1 && bi !== -1) return ai - bi;
+      if (ai !== -1) return -1;
+      if (bi !== -1) return 1;
+      const na = parseFloat(a.label);
+      const nb = parseFloat(b.label);
+      if (!isNaN(na) && !isNaN(nb)) return na - nb;
+      return a.label.localeCompare(b.label);
+    });
+  }, [foundProduct]);
 
   const selectedVariant = variants[selectedVarIdx] ?? null;
   const currentProduct  = foundProduct;
@@ -269,7 +282,18 @@ const ProductPage = () => {
   const activeVendorCode = selectedVariant?.vendor_code || currentProduct!.vendorCode;
 
   const handleAddToCart = () => {
-    addItem(currentProduct!, qty, selectedVariant ?? undefined);
+    if (selectedVariant) {
+      addItem({
+        ...currentProduct!,
+        id: `${currentProduct!.id}__${selectedVariant.label}`,
+        name: `${displayProduct!.name} (${selectedVariant.label})`,
+        price: selectedVariant.price,
+        variantLabel: selectedVariant.label,
+        vendorCode: selectedVariant.vendor_code || currentProduct!.vendorCode,
+      }, qty);
+    } else {
+      addItem(currentProduct!, qty);
+    }
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };

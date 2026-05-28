@@ -3,11 +3,10 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { VitePWA } from "vite-plugin-pwa";
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   server: {
     host: "::",
     port: 8080,
-    hmr: { overlay: false },
   },
   plugins: [
     react(),
@@ -159,7 +158,6 @@ export default defineConfig(({ mode }) => ({
           if (id.includes("node_modules/@tanstack/")) return "vendor-query";
           if (id.includes("node_modules/@supabase/")) return "vendor-supabase";
           if (id.includes("node_modules/@radix-ui/")) return "vendor-radix";
-          // recharts/d3 are admin-only — bundle them with pages-admin to avoid circular chunks
           if (id.includes("node_modules/recharts") || id.includes("node_modules/d3-"))
             return "pages-admin";
           if (id.includes("node_modules/lucide-react/")) return "vendor-icons";

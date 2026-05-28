@@ -178,7 +178,7 @@ const Index = () => {
 
         {/* Content */}
         <div className="relative z-10 container py-12 sm:py-16 lg:py-20">
-          <div className="max-w-[520px] space-y-4 sm:space-y-6">
+          <div className="max-w-[520px] space-y-4 sm:space-y-5">
 
             {/* Kicker */}
             <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-3 py-1.5">
@@ -208,36 +208,23 @@ const Index = () => {
               </Button>
             </div>
 
-            {/* Trust badges */}
-            <div className="flex flex-wrap gap-2 pt-1">
-              {[
-                { icon: "✓", text: "Нова Пошта" },
-                { icon: "✓", text: "Оплата при отриманні" },
-                { icon: "✓", text: "14 днів повернення" },
-                { icon: "✓", text: "Перевірка перед оплатою" },
-              ].map((t, i) => (
-                <span key={i} className="inline-flex items-center gap-1.5 rounded-full bg-white/90 border border-border/40 shadow-sm px-3 py-1 text-xs text-foreground/75 font-medium">
-                  <span className="text-primary text-[10px] font-bold">{t.icon}</span>
-                  {t.text}
-                </span>
-              ))}
-            </div>
+
           </div>
         </div>
       </section>
 
       {/* ── TRUST BAR ── */}
-      <section className="border-y border-border/60 bg-white/50">
-        <div className="container py-6">
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-5">
+      <section className="border-b border-border/50 bg-white">
+        <div className="container py-4 sm:py-5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-3">
             {trust.map((t, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/8">
-                  <t.icon className="h-4 w-4 text-primary" strokeWidth={1.5} />
+              <div key={i} className="flex items-center gap-2.5">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/8">
+                  <t.icon className="h-3.5 w-3.5 text-primary" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-foreground">{t.title}</p>
-                  <p className="text-[11px] text-muted-foreground">{t.desc}</p>
+                  <p className="text-xs font-medium text-foreground leading-tight">{t.title}</p>
+                  <p className="text-[10px] text-muted-foreground leading-tight">{t.desc}</p>
                 </div>
               </div>
             ))}
@@ -261,27 +248,8 @@ const Index = () => {
           {categories.map(c => <CategoryCard key={c.id} category={c} />)}
         </div>
       </section>
-
       {/* ── FEATURED CAROUSEL ── */}
       <FeaturedCarousel products={featured} categoryNames={categoryNames} />
-
-      {/* ── ПІДБІР ЗА ЗАДАЧЕЮ ── */}
-      <section className="container py-12 sm:py-20">
-        <div className="mb-8 sm:mb-12 text-center">
-          <p className="aura-kicker mb-3">підбір</p>
-          <h2 className="text-4xl md:text-5xl font-light">Що вас турбує?</h2>
-          <p className="mt-3 text-muted-foreground font-light">Оберіть запит — підберемо відповідні товари</p>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          {needs.map((n, i) => (
-            <Link key={i} to={n.link}
-              className={`${n.color} rounded-2xl p-4 sm:p-6 flex flex-col items-center gap-3 text-center transition-all duration-200 hover:-translate-y-1 hover:shadow-md active:scale-95`}>
-              <span className="text-3xl sm:text-4xl">{n.icon}</span>
-              <span className="text-xs sm:text-sm font-medium text-foreground leading-snug">{n.label}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
 
       {/* ── БЛОГ / СТАТТІ ── */}
       <section className="bg-secondary/40 py-12 sm:py-20">

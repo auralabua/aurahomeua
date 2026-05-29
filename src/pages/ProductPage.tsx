@@ -8,16 +8,10 @@ import { useCart } from "@/context/CartContext";
 import { ProductCard } from "@/components/ProductCard";
 import { useSEO } from "@/hooks/useSEO";
 import { OptimizedImage, vercelImg } from "@/components/OptimizedImage";
+import { ProductReviews } from "@/components/ProductReviews";
 import type { Product } from "@/data/products";
 
 const SIZE_ORDER = ["XS", "S", "M", "L", "XL", "XXL", "XXXL", "XXXXL"];
-
-const SAMPLE_REVIEWS = [
-  { name: "Ольга Ткаченко", date: "3 дні тому", text: "Якісний товар, повністю відповідає опису. Доставка швидка, пакування надійне. Вже користуюсь другий тиждень — дуже задоволена!", rating: 5 },
-  { name: "Андрій Мельник", date: "1 тиждень тому", text: "Гарна якість за свої гроші. Замовляв для батьків — вони задоволені. Єдине — доставка трохи затрималась, але товар прийшов в цілості.", rating: 4 },
-  { name: "Марія Коваль", date: "2 тижні тому", text: "Беру вже вдруге. Перший раз подарувала мамі — вона дуже рада. Тепер собі замовила. Рекомендую!", rating: 5 },
-  { name: "Василь Гончаренко", date: "3 тижні тому", text: "Все відповідає опису, якість хороша. Швидко надіслали. Буду ще купувати.", rating: 5 },
-];
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -90,86 +84,6 @@ const buildProductFAQ = (
     : [{ q: "Чи є товар в наявності?", a: "Наразі товар тимчасово відсутній. Залиште заявку — повідомимо про надходження." }]),
 ];
 
-// ── Reviews tab ──────────────────────────────────────────────────────────────
-
-const ReviewsTab = ({ product }: { product: Product }) => {
-  const [hovered, setHovered] = useState(0);
-  const [selected, setSelected] = useState(0);
-  const [text, setText] = useState("");
-  const [name, setName] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const reviews = SAMPLE_REVIEWS.slice(0, Math.min(product.reviews || 0, 2));
-
-  const handleSubmit = () => {
-    if (selected > 0 && text.trim()) setSubmitted(true);
-  };
-
-  return (
-    <div className="space-y-4">
-      {reviews.length > 0 ? reviews.map((r, i) => (
-        <div key={i} className="rounded-2xl border border-border/40 bg-secondary/30 p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="h-8 w-8 rounded-full bg-primary/15 flex items-center justify-center text-primary text-sm font-semibold shrink-0">
-              {r.name[0]}
-            </div>
-            <div>
-              <p className="text-sm font-medium text-foreground">{r.name}</p>
-              <p className="text-xs text-muted-foreground">{r.date}</p>
-            </div>
-            <div className="flex gap-0.5 ml-auto">
-              {[1, 2, 3, 4, 5].map(s => (
-                <Star key={s} className={`h-3.5 w-3.5 ${s <= r.rating ? "fill-amber-400 text-amber-400" : "fill-muted text-muted"}`} />
-              ))}
-            </div>
-          </div>
-          <p className="text-sm text-foreground/75 leading-relaxed">{r.text}</p>
-        </div>
-      )) : (
-        <p className="text-sm text-muted-foreground py-2">Поки немає відгуків. Будьте першим!</p>
-      )}
-
-      <div className="border-t border-border pt-4 mt-2">
-        <h4 className="text-sm font-medium mb-3">Залишити відгук</h4>
-        {submitted ? (
-          <div className="rounded-2xl bg-green-50 border border-green-200 p-4 text-center">
-            <p className="text-sm text-green-700 font-medium">✓ Дякуємо за відгук!</p>
-            <p className="text-xs text-green-600 mt-1">Він з'явиться після перевірки</p>
-          </div>
-        ) : (
-          <div className="space-y-3">
-            <div>
-              <p className="text-xs text-muted-foreground mb-1.5">Ваша оцінка:</p>
-              <div className="flex gap-1">
-                {[1, 2, 3, 4, 5].map(s => (
-                  <button key={s}
-                    onMouseEnter={() => setHovered(s)}
-                    onMouseLeave={() => setHovered(0)}
-                    onClick={() => setSelected(s)}
-                    className="transition-transform hover:scale-110 active:scale-95">
-                    <Star className={`h-7 w-7 transition-colors ${s <= (hovered || selected) ? "fill-amber-400 text-amber-400" : "fill-muted text-muted"}`} />
-                  </button>
-                ))}
-              </div>
-            </div>
-            <input value={name} onChange={e => setName(e.target.value)}
-              placeholder="Ваше ім'я"
-              className="w-full rounded-xl border border-border bg-background p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
-            <textarea value={text} onChange={e => setText(e.target.value)}
-              placeholder="Напишіть відгук про товар..."
-              className="w-full rounded-xl border border-border bg-background p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30"
-              rows={3} />
-            <button onClick={handleSubmit} disabled={!selected || !text.trim()}
-              className="rounded-full bg-primary text-white px-5 py-2 text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-              Відправити відгук
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
 // ── Main component ───────────────────────────────────────────────────────────
 
 const ProductPage = () => {
@@ -182,7 +96,7 @@ const ProductPage = () => {
   const [activeImg, setActiveImg] = useState(0);
   const [added, setAdded] = useState(false);
   const [activeTab, setActiveTab] = useState<"desc" | "reviews" | "questions">("desc");
-  const [selectedVarIdx, setSelectedVarIdx] = useState(0);
+  const [selectedVarIdx, setSelectedVarIdx] = useState(-1);
 
   // ── Resolve product data (before any conditional returns so hooks stay stable) ──
   const foundProduct   = products.find(p => p.id === id);
@@ -417,6 +331,19 @@ const ProductPage = () => {
               )}
             </div>
 
+            {/* Availability badge */}
+            <div>
+              {currentProduct!.available ? (
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-green-500/15 px-3 py-1 text-xs font-semibold text-green-600">
+                  <span className="h-1.5 w-1.5 rounded-full bg-green-500" />В наявності
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-red-500/10 px-3 py-1 text-xs font-semibold text-red-500">
+                  <span className="h-1.5 w-1.5 rounded-full bg-red-500" />Немає в наявності
+                </span>
+              )}
+            </div>
+
             {/* SKU */}
             {activeVendorCode && (
               <div className="text-sm text-muted-foreground">
@@ -428,7 +355,11 @@ const ProductPage = () => {
             {variants.length > 1 && (
               <div className="space-y-2">
                 <p className="text-sm font-medium text-foreground">
-                  Розмір: <span className="text-primary">{selectedVariant?.label ?? variants[0]?.label}</span>
+                  Розмір:{" "}
+                  {selectedVarIdx >= 0
+                    ? <span className="text-primary font-semibold">{selectedVariant?.label}</span>
+                    : <span className="text-orange-500 font-medium">оберіть ↓</span>
+                  }
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {variants.map((v, i) => (
@@ -439,16 +370,21 @@ const ProductPage = () => {
                       disabled={!v.available}
                       className={`min-w-[44px] h-10 px-3 rounded-xl border-2 text-sm font-medium transition-all ${
                         i === selectedVarIdx
-                          ? "border-primary bg-primary text-white"
+                          ? "border-primary bg-primary text-white shadow-sm"
                           : v.available
                             ? "border-border bg-white hover:border-primary/60 text-foreground"
-                            : "border-border bg-secondary/50 text-muted-foreground opacity-50 cursor-not-allowed"
+                            : "border-border bg-secondary/50 text-muted-foreground opacity-50 cursor-not-allowed line-through"
                       }`}
                     >
                       {v.label}
                     </button>
                   ))}
                 </div>
+                {selectedVarIdx < 0 && (
+                  <p className="text-xs text-orange-500 flex items-center gap-1">
+                    <span>⚠</span> Будь ласка, оберіть розмір перед замовленням
+                  </p>
+                )}
               </div>
             )}
 
@@ -489,12 +425,17 @@ const ProductPage = () => {
                   </Button>
                 </div>
                 <Button size="lg" onClick={handleAddToCart}
+                  disabled={variants.length > 1 && selectedVarIdx < 0}
                   className={`flex-1 h-12 rounded-full border-0 font-medium text-sm transition-all duration-300 ${
-                    added ? "bg-green-600 hover:bg-green-600" : "btn-aura"
+                    added ? "bg-green-600 hover:bg-green-600"
+                    : variants.length > 1 && selectedVarIdx < 0 ? "bg-muted text-muted-foreground cursor-not-allowed"
+                    : "btn-aura"
                   }`}>
                   {added
                     ? <><Check className="h-5 w-5 mr-2" />Додано!</>
-                    : <><ShoppingCart className="h-5 w-5 mr-2" />Додати в кошик</>
+                    : variants.length > 1 && selectedVarIdx < 0
+                      ? "Оберіть розмір ↑"
+                      : <><ShoppingCart className="h-5 w-5 mr-2" />Додати в кошик</>
                   }
                 </Button>
               </div>
@@ -557,7 +498,7 @@ const ProductPage = () => {
                   </div>
                 )}
 
-                {activeTab === "reviews" && <ReviewsTab product={currentProduct!} />}
+                {activeTab === "reviews" && <ProductReviews productId={currentProduct!.id} />}
 
                 {activeTab === "questions" && (
                   <div className="space-y-4">

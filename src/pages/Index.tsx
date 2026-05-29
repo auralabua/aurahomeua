@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useRef, useMemo } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Truck, ShieldCheck, CreditCard, Headphones, RotateCcw } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Truck, ShieldCheck, CreditCard, Headphones, RotateCcw, Activity, Moon, Monitor, HeartPulse, Wind, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
@@ -61,13 +61,46 @@ const articles = [
 ];
 
 const needs = [
-  { icon: "🦴", label: "Болить спина", link: "/catalog?category=ortopedychni-podushky", color: "bg-[#F5EFE6] hover:bg-[#EDE3D5]" },
-  { icon: "🦶", label: "Втомлюються ноги", link: "/catalog?category=ortopedychni-ustilky", color: "bg-[#EAF2E8] hover:bg-[#D8EAD5]" },
-  { icon: "🌙", label: "Поганий сон", link: "/catalog?category=ortopedychni-podushky", color: "bg-[#E8EDF5] hover:bg-[#D5DEEA]" },
-  { icon: "💆", label: "Стрес і напруга", link: "/catalog?category=masazhery", color: "bg-[#F0EAE8] hover:bg-[#E5D8D5]" },
-  { icon: "🦵", label: "Реабілітація", link: "/catalog?category=ortezy-i-bandazhi", color: "bg-[#F0E8F0] hover:bg-[#E5D5E5]" },
-  { icon: "🧘", label: "Активність і фітнес", link: "/catalog?category=ortopedychni-masazhni-kylymky", color: "bg-[#F5F0E0] hover:bg-[#EAE5CC]" },
+  { icon: Activity,   label: "Для спини",       desc: "Подушки, масажери, бандажі",     link: "/catalog?category=ortopedychni-podushky" },
+  { icon: Moon,       label: "Для сну",          desc: "Ортопедичні подушки",             link: "/catalog?category=ortopedychni-podushky" },
+  { icon: Monitor,    label: "Для офісу",        desc: "Комфорт при сидячій роботі",     link: "/catalog?category=ortezy-i-bandazhi" },
+  { icon: HeartPulse, label: "Для відновлення",  desc: "Масажери та прилади",             link: "/catalog?category=masazhery" },
+  { icon: Wind,       label: "Зняти напругу",    desc: "Аплікатори, килимки",             link: "/catalog?category=ortopedychni-masazhni-kylymky" },
+  { icon: Home,       label: "Комфорт вдома",    desc: "Девайси та устілки",              link: "/catalog?category=tovary-dlia-krasy" },
 ];
+
+const NeedsSection = () => (
+  <section className="container py-10 sm:py-14">
+    <div className="mb-7 sm:mb-10">
+      <p className="aura-kicker mb-3">ваш запит</p>
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-light">Що хочете покращити?</h2>
+      <p className="mt-2 text-sm sm:text-base text-muted-foreground font-light">
+        Знайдіть товари, які вирішать конкретну задачу
+      </p>
+    </div>
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+      {needs.map((n, i) => (
+        <Link
+          key={i}
+          to={n.link}
+          className="group flex flex-col gap-3 sm:gap-4 rounded-2xl border border-border/50 bg-white p-5 sm:p-6 hover:border-primary/40 hover:shadow-[0_4px_24px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-0.5"
+        >
+          <div className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-primary/8 group-hover:bg-primary/12 transition-colors duration-300">
+            <n.icon className="h-[18px] w-[18px] sm:h-5 sm:w-5 text-primary" strokeWidth={1.5} />
+          </div>
+          <div className="flex-1">
+            <p className="text-sm sm:text-base font-medium text-foreground leading-tight">{n.label}</p>
+            <p className="mt-0.5 text-[11px] sm:text-sm font-light text-muted-foreground leading-snug">{n.desc}</p>
+          </div>
+          <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium text-primary/50 group-hover:text-primary transition-colors duration-200">
+            Обрати
+            <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5" />
+          </div>
+        </Link>
+      ))}
+    </div>
+  </section>
+);
 
 
 const FeaturedCarousel = ({ products, categoryNames }: { products: any[]; categoryNames: Map<string, string> }) => {
@@ -232,23 +265,9 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ── NEEDS / SYMPTOMS ── */}
-      <section className="container py-8 sm:py-10">
-        <p className="text-center text-[11px] uppercase tracking-[0.22em] text-muted-foreground/70 mb-5 font-medium">Що вас турбує?</p>
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-          {needs.map((n, i) => (
-            <Link key={i} to={n.link}
-              className={`inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-light border border-white/50 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${n.color} text-foreground/80`}>
-              <span className="text-base leading-none">{n.icon}</span>
-              {n.label}
-            </Link>
-          ))}
-        </div>
-      </section>
-
       {/* ── CATEGORIES ── */}
-      <section className="container py-12 sm:py-20">
-        <div className="mb-6 sm:mb-10 flex items-end justify-between gap-4">
+      <section className="container py-10 sm:py-16">
+        <div className="mb-6 sm:mb-8 flex items-end justify-between gap-4">
           <div>
             <p className="aura-kicker mb-3">каталог</p>
             <h2 className="text-4xl md:text-5xl font-light">Категорії товарів</h2>
@@ -262,6 +281,10 @@ const Index = () => {
           {categories.map(c => <CategoryCard key={c.id} category={c} />)}
         </div>
       </section>
+
+      {/* ── PROBLEM-BASED NAVIGATION ── */}
+      <NeedsSection />
+
       {/* ── FEATURED CAROUSEL ── */}
       <FeaturedCarousel products={featured} categoryNames={categoryNames} />
 

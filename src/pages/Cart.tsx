@@ -3,9 +3,11 @@ import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { formatUAH } from "@/data/products";
 import { Button } from "@/components/ui/button";
+import { useSEO } from "@/hooks/useSEO";
 import { OptimizedImage } from "@/components/OptimizedImage";
 
 const Cart = () => {
+  useSEO({ title: "Кошик", url: "/cart", noindex: true });
   const { items, updateQuantity, removeItem, totalPrice, totalCount, clear } = useCart();
 
   if (items.length === 0) {

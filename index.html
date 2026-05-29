@@ -16,7 +16,13 @@
     <meta name="description" content="BodyHome — інтернет-магазин ортопедичних товарів: подушки, устілки, бандажі, масажери. Перевірена якість, доставка Новою Поштою по всій Україні, оплата при отриманні." />
     <meta name="keywords" content="ортопедичні подушки, устілки ортопедичні, бандаж, масажер для спини, масажний килимок, купити ортопедичні товари, BodyHome" />
     <meta name="author" content="BodyHome" />
+    <meta name="geo.region" content="UA" />
+    <meta name="geo.placename" content="Україна" />
+    <meta name="language" content="Ukrainian" />
     <link rel="canonical" href="https://www.bodyhome.com.ua/" />
+    <link rel="alternate" hreflang="uk" href="https://www.bodyhome.com.ua/" />
+    <link rel="alternate" hreflang="uk-UA" href="https://www.bodyhome.com.ua/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.bodyhome.com.ua/" />
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PPDSJE1TM0"></script>
@@ -59,8 +65,13 @@
       "@id": "https://www.bodyhome.com.ua/#organization",
       "name": "BodyHome",
       "url": "https://www.bodyhome.com.ua",
-      "logo": "https://www.bodyhome.com.ua/logo.png",
-      "description": "Інтернет-магазин ортопедичних товарів, масажерів та товарів для здоров'я",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.bodyhome.com.ua/logo.png",
+        "width": 200,
+        "height": 60
+      },
+      "description": "Інтернет-магазин ортопедичних товарів, масажерів та товарів для здоров'я з доставкою по Україні",
       "telephone": "+380956981124",
       "email": "bodyhome@gmail.com",
       "address": {
@@ -68,14 +79,38 @@
         "addressCountry": "UA",
         "addressLocality": "Україна"
       },
+      "areaServed": { "@type": "Country", "name": "Україна" },
       "priceRange": "₴₴",
       "currenciesAccepted": "UAH",
-      "paymentAccepted": "Cash, Credit Card",
+      "paymentAccepted": "Cash, Credit Card, LiqPay",
       "openingHours": "Mo-Su 09:00-21:00",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Ортопедичні товари та масажери",
+        "url": "https://www.bodyhome.com.ua/catalog"
+      },
       "sameAs": [
         "https://t.me/bodyhomeua",
-        "https://instagram.com/bodyhomeua"
+        "https://www.instagram.com/bodyhomeua"
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://www.bodyhome.com.ua/#website",
+      "url": "https://www.bodyhome.com.ua",
+      "name": "BodyHome",
+      "inLanguage": "uk-UA",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.bodyhome.com.ua/catalog?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
 

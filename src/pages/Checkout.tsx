@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
+import { useSEO } from "@/hooks/useSEO";
 
 type DeliveryMethod = "novaposhta" | "mistexpress";
 type PaymentMethod = "wayforpay" | "cod";
@@ -42,6 +43,7 @@ function submitWayForPay(params: Record<string, any>) {
 }
 
 const Checkout = () => {
+  useSEO({ title: "Оформлення замовлення", url: "/checkout", noindex: true });
   const navigate = useNavigate();
   const { items, totalPrice, totalCount, clear } = useCart();
   const [delivery, setDelivery] = useState<DeliveryMethod>("novaposhta");

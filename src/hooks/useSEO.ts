@@ -60,6 +60,7 @@ interface SEOProps {
   breadcrumbs?: { name: string; url: string }[];
   faq?: { q: string; a: string }[];
   articleDate?: string;
+  noindex?: boolean;
 }
 
 export const useSEO = ({
@@ -78,6 +79,7 @@ export const useSEO = ({
   breadcrumbs,
   faq,
   articleDate,
+  noindex = false,
 }: SEOProps = {}) => {
   useEffect(() => {
     const fullTitle = title
@@ -92,6 +94,7 @@ export const useSEO = ({
     setMeta("description", fullDesc);
     if (keywords) setMeta("keywords", keywords);
     setLink("canonical", fullUrl);
+    setMeta("robots", noindex ? "noindex, nofollow" : "index, follow");
 
     // Preload product hero image for LCP
     if (type === "product" && image && image !== DEFAULT_IMG) {

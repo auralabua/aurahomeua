@@ -4,8 +4,10 @@ import { useCart } from "@/context/CartContext";
 import { formatUAH } from "@/data/products";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
+import { useSEO } from "@/hooks/useSEO";
 
 const Cart = () => {
+  useSEO({ title: "Кошик", url: "/cart", noindex: true });
   const { items, updateQuantity, removeItem, totalPrice, totalCount, clear } = useCart();
 
   if (items.length === 0) {

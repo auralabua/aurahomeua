@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useRef, useMemo } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Truck, ShieldCheck, CreditCard, Headphones, RotateCcw, Activity, Moon, Monitor, HeartPulse, Wind, Home } from "lucide-react";
+import { useRef } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight, Truck, ShieldCheck, CreditCard, Headphones, Star, RotateCcw, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
@@ -61,49 +61,16 @@ const articles = [
 ];
 
 const needs = [
-  { icon: Activity,   label: "Для спини",       desc: "Подушки, масажери, бандажі",     link: "/catalog?category=ortopedychni-podushky" },
-  { icon: Moon,       label: "Для сну",          desc: "Ортопедичні подушки",             link: "/catalog?category=ortopedychni-podushky" },
-  { icon: Monitor,    label: "Для офісу",        desc: "Комфорт при сидячій роботі",     link: "/catalog?category=ortezy-i-bandazhi" },
-  { icon: HeartPulse, label: "Для відновлення",  desc: "Масажери та прилади",             link: "/catalog?category=masazhery" },
-  { icon: Wind,       label: "Зняти напругу",    desc: "Аплікатори, килимки",             link: "/catalog?category=ortopedychni-masazhni-kylymky" },
-  { icon: Home,       label: "Комфорт вдома",    desc: "Девайси та устілки",              link: "/catalog?category=tovary-dlia-krasy" },
+  { icon: "🦴", label: "Болить спина", link: "/catalog?category=ortopedychni-podushky", color: "bg-[#F5EFE6] hover:bg-[#EDE3D5]" },
+  { icon: "🦶", label: "Втомлюються ноги", link: "/catalog?category=ortopedychni-ustilky", color: "bg-[#EAF2E8] hover:bg-[#D8EAD5]" },
+  { icon: "🌙", label: "Поганий сон", link: "/catalog?category=ortopedychni-podushky", color: "bg-[#E8EDF5] hover:bg-[#D5DEEA]" },
+  { icon: "💆", label: "Стрес і напруга", link: "/catalog?category=masazhery", color: "bg-[#F0EAE8] hover:bg-[#E5D8D5]" },
+  { icon: "🦵", label: "Реабілітація", link: "/catalog?category=ortezy-i-bandazhi", color: "bg-[#F0E8F0] hover:bg-[#E5D5E5]" },
+  { icon: "🧘", label: "Активність і фітнес", link: "/catalog?category=ortopedychni-masazhni-kylymky", color: "bg-[#F5F0E0] hover:bg-[#EAE5CC]" },
 ];
 
-const NeedsSection = () => (
-  <section className="container py-10 sm:py-14">
-    <div className="mb-7 sm:mb-10">
-      <p className="aura-kicker mb-3">ваш запит</p>
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-light">Що хочете покращити?</h2>
-      <p className="mt-2 text-sm sm:text-base text-muted-foreground font-light">
-        Знайдіть товари, які вирішать конкретну задачу
-      </p>
-    </div>
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-      {needs.map((n, i) => (
-        <Link
-          key={i}
-          to={n.link}
-          className="group flex flex-col gap-3 sm:gap-4 rounded-2xl border border-border/50 bg-white p-5 sm:p-6 hover:border-primary/40 hover:shadow-[0_4px_24px_rgba(0,0,0,0.07)] transition-all duration-300 hover:-translate-y-0.5"
-        >
-          <div className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-primary/8 group-hover:bg-primary/12 transition-colors duration-300">
-            <n.icon className="h-[18px] w-[18px] sm:h-5 sm:w-5 text-primary" strokeWidth={1.5} />
-          </div>
-          <div className="flex-1">
-            <p className="text-sm sm:text-base font-medium text-foreground leading-tight">{n.label}</p>
-            <p className="mt-0.5 text-[11px] sm:text-sm font-light text-muted-foreground leading-snug">{n.desc}</p>
-          </div>
-          <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium text-primary/50 group-hover:text-primary transition-colors duration-200">
-            Обрати
-            <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5" />
-          </div>
-        </Link>
-      ))}
-    </div>
-  </section>
-);
 
-
-const FeaturedCarousel = ({ products, categoryNames }: { products: any[]; categoryNames: Map<string, string> }) => {
+const FeaturedCarousel = ({ products }: { products: any[] }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (dir: "left" | "right") => {
@@ -147,7 +114,7 @@ const FeaturedCarousel = ({ products, categoryNames }: { products: any[]; catego
         >
           {products.map(p => (
             <div key={p.id} className="shrink-0 w-[calc(25%-10px)] min-w-[160px] max-w-[240px]">
-              <ProductCard product={p} compact categoryName={categoryNames.get(p.category)} />
+              <ProductCard product={p} compact />
             </div>
           ))}
         </div>
@@ -173,25 +140,15 @@ const Index = () => {
   const { products } = useProductsAsLegacy();
   const { categories: allCats } = useCategoriesAsLegacy();
   const categories = allCats.filter(c => !c.parentId);
-
-  // Build category name map once (passed down to avoid per-card hooks)
-  const categoryNames = useMemo(
-    () => new Map(allCats.map(c => [c.id, c.name])),
-    [allCats]
-  );
-
   // 2-3 товари з кожної категорії (топ-категорії)
   const featuredCatSlugs = [
     "tovary-dlia-krasy", "ortopedychni-podushky", "masazhery",
     "ortopedychni-masazhni-kylymky", "ortezy-i-bandazhi",
     "rozvyvaiuchi-ihrashky", "ortopedychni-ustilky",
   ];
-  const featured = useMemo(() =>
-    featuredCatSlugs.flatMap(slug =>
-      products.filter(p => p.category === slug).slice(0, 3)
-    ).slice(0, 20),
-    [products]
-  );
+  const featured = featuredCatSlugs.flatMap(slug =>
+    products.filter(p => p.category === slug).slice(0, 3)
+  ).slice(0, 20);
 
   return (
     <div>
@@ -266,8 +223,8 @@ const Index = () => {
       </section>
 
       {/* ── CATEGORIES ── */}
-      <section className="container py-10 sm:py-16">
-        <div className="mb-6 sm:mb-8 flex items-end justify-between gap-4">
+      <section className="container py-12 sm:py-20">
+        <div className="mb-6 sm:mb-10 flex items-end justify-between gap-4">
           <div>
             <p className="aura-kicker mb-3">каталог</p>
             <h2 className="text-4xl md:text-5xl font-light">Категорії товарів</h2>
@@ -281,12 +238,111 @@ const Index = () => {
           {categories.map(c => <CategoryCard key={c.id} category={c} />)}
         </div>
       </section>
-
-      {/* ── PROBLEM-BASED NAVIGATION ── */}
-      <NeedsSection />
+      {/* ── ЩО ХОЧЕТЕ ПОКРАЩИТИ ── */}
+      <section className="py-10 sm:py-12 bg-background">
+        <div className="container">
+          <div className="mb-7">
+            <p className="aura-kicker mb-2">підбір</p>
+            <h2 className="text-2xl sm:text-3xl font-medium">Що хочете покращити?</h2>
+            <p className="mt-1.5 text-sm text-muted-foreground font-light">
+              Рішення для сну, роботи, відновлення та щоденного комфорту
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+            {[
+              {
+                Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 2C9.5 2 7 4.5 7 7v10c0 2.5 2.5 5 5 5s5-2.5 5-5V7c0-2.5-2.5-5-5-5z"/><path d="M9 10h6M9 14h6"/></svg>,
+                title: "Для спини",
+                desc: "Подушки, масажери, бандажі",
+                badge: "Хіт категорія",
+                count: "86 товарів",
+                link: "/catalog?category=ortopedychni-podushky",
+                accent: "text-[#8A6440]",
+                iconBg: "bg-[#F5EFE6]",
+              },
+              {
+                Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M3 12h18M3 6h18M3 18h18"/><rect x="6" y="3" width="12" height="18" rx="2"/></svg>,
+                title: "Для сну",
+                desc: "Ортопедичні подушки",
+                badge: "Популярна",
+                count: "78 товарів",
+                link: "/catalog?category=ortopedychni-podushky",
+                accent: "text-[#3D5A8A]",
+                iconBg: "bg-[#E8EDF5]",
+              },
+              {
+                Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>,
+                title: "Для офісу",
+                desc: "Комфорт при сидячій роботі",
+                badge: null,
+                count: "54 товари",
+                link: "/catalog?category=ortezy-i-bandazhi",
+                accent: "text-[#2A7070]",
+                iconBg: "bg-[#E8F2F0]",
+              },
+              {
+                Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/><path d="M12 12v10M8 18l4 4 4-4"/><path d="M6 14c-2 1-3 3-2 5M18 14c2 1 3 3 2 5"/></svg>,
+                title: "Для відновлення",
+                desc: "Масажери та прилади",
+                badge: "Популярна",
+                count: "43 товари",
+                link: "/catalog?category=masazhery",
+                accent: "text-[#8A4040]",
+                iconBg: "bg-[#F0EAE8]",
+              },
+              {
+                Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 22V12M12 12C10 8 6 7 4 9M12 12C14 8 18 7 20 9"/><path d="M4 4h16"/><circle cx="12" cy="4" r="1" fill="currentColor"/></svg>,
+                title: "Зняти напругу",
+                desc: "Аплікатори, килимки",
+                badge: null,
+                count: "91 товар",
+                link: "/catalog?category=ortopedychni-masazhni-kylymky",
+                accent: "text-[#3D7A55]",
+                iconBg: "bg-[#EAF2E8]",
+              },
+              {
+                Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+                title: "Комфорт вдома",
+                desc: "Девайси та устілки",
+                badge: null,
+                count: "67 товарів",
+                link: "/catalog?category=tovary-dlia-krasy",
+                accent: "text-[#7A6A20]",
+                iconBg: "bg-[#F5F0E0]",
+              },
+            ].map((item, i) => (
+              <Link key={i} to={item.link}
+                className="group relative flex flex-col gap-3 rounded-2xl border border-border/40 bg-white p-4 sm:p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:border-border/70 active:scale-[0.98]">
+                {/* Badge */}
+                {item.badge && (
+                  <span className="absolute top-3 right-3 text-[10px] font-medium text-muted-foreground bg-secondary rounded-full px-2 py-0.5">
+                    {item.badge}
+                  </span>
+                )}
+                {/* Icon */}
+                <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${item.iconBg} ${item.accent} transition-transform duration-200 group-hover:scale-105`}>
+                  <item.Icon />
+                </div>
+                {/* Text */}
+                <div className="flex-1">
+                  <p className="text-sm font-semibold text-foreground">{item.title}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5 font-light">{item.desc}</p>
+                </div>
+                {/* Footer */}
+                <div className="flex items-center justify-between pt-1 border-t border-border/30">
+                  <span className="text-[11px] text-muted-foreground">{item.count}</span>
+                  <span className={`text-xs font-medium flex items-center gap-0.5 ${item.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}>
+                    Підібрати <ArrowRight className="h-3 w-3" />
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── FEATURED CAROUSEL ── */}
-      <FeaturedCarousel products={featured} categoryNames={categoryNames} />
+      <FeaturedCarousel products={featured} />
 
       {/* ── БЛОГ / СТАТТІ ── */}
       <section className="bg-secondary/40 py-12 sm:py-20">

@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Star, Minus, Plus, ShoppingCart, ArrowLeft, Truck, ShieldCheck, RotateCcw, Check, Tag } from "lucide-react";
 import { formatUAH } from "@/data/products";
@@ -9,6 +9,8 @@ import { ProductCard } from "@/components/ProductCard";
 import { useSEO } from "@/hooks/useSEO";
 import { OptimizedImage, vercelImg } from "@/components/OptimizedImage";
 import { ProductReviews } from "@/components/ProductReviews";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useIsMobile } from "@/hooks/use-mobile";
 import type { Product } from "@/data/products";
 
 const SIZE_ORDER = ["XS", "S", "M", "L", "XL", "XXL", "XXXL", "XXXXL"];
@@ -97,6 +99,9 @@ const ProductPage = () => {
   const [added, setAdded] = useState(false);
   const [activeTab, setActiveTab] = useState<"desc" | "reviews" | "questions">("desc");
   const [selectedVarIdx, setSelectedVarIdx] = useState(-1);
+  const [showStickyBar, setShowStickyBar] = useState(false);
+  const cartBtnRef = useRef<HTMLButtonElement>(null);
+  const isMobile = useIsMobile();
 
   // ── Resolve product data (before any conditional returns so hooks stay stable) ──
   const foundProduct   = products.find(p => p.id === id);
@@ -211,6 +216,16 @@ const ProductPage = () => {
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
+
+  useEffect(() => {
+    if (!isMobile || !cartBtnRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowStickyBar(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(cartBtnRef.current);
+    return () => observer.disconnect();
+  }, [isMobile]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const descParagraphs = displayProduct!.description
     ? displayProduct!.description
@@ -424,7 +439,7 @@ const ProductPage = () => {
                     <Plus className="h-4 w-4" />
                   </Button>
                 </div>
-                <Button size="lg" onClick={handleAddToCart}
+                <Button ref={cartBtnRef} size="lg" onClick={handleAddToCart}
                   disabled={variants.length > 1 && selectedVarIdx < 0}
                   className={`flex-1 h-12 rounded-full border-0 font-medium text-sm transition-all duration-300 ${
                     added ? "bg-green-600 hover:bg-green-600"
@@ -444,14 +459,14 @@ const ProductPage = () => {
             {/* Trust badges */}
             <div className="grid grid-cols-3 gap-2">
               {[
-                { icon: Truck, label: "Доставка по Україні" },
-                { icon: ShieldCheck, label: "Гарантія якості" },
-                { icon: RotateCcw, label: "Повернення 14 днів" },
+                { icon: Truck, label: "Доставка по Україні", href: "/delivery" },
+                { icon: ShieldCheck, label: "Гарантія якості", href: "/about" },
+                { icon: RotateCcw, label: "Повернення 14 днів", href: "/delivery" },
               ].map((f, i) => (
-                <div key={i} className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-secondary/50 text-center">
+                <Link key={i} to={f.href} className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-secondary/50 text-center hover:bg-primary/8 transition-colors">
                   <f.icon className="h-5 w-5 text-primary" strokeWidth={1.5} />
                   <span className="text-[10px] sm:text-xs text-muted-foreground font-medium leading-tight">{f.label}</span>
-                </div>
+                </Link>
               ))}
             </div>
 
@@ -501,26 +516,71 @@ const ProductPage = () => {
                 {activeTab === "reviews" && <ProductReviews productId={currentProduct!.id} />}
 
                 {activeTab === "questions" && (
-                  <div className="space-y-4">
-                    <p className="text-sm text-muted-foreground">Маєте питання про товар? Задайте його нам!</p>
-                    <textarea
-                      placeholder="Ваше питання..."
-                      className="w-full rounded-xl border border-border bg-background p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30 mb-2"
-                      rows={3}
-                    />
-                    <div className="flex gap-2">
-                      <input placeholder="Ваше ім'я" className="flex-1 rounded-xl border border-border bg-background p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
-                      <input placeholder="Телефон або email" className="flex-1 rounded-xl border border-border bg-background p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                  <div className="space-y-5">
+                    {seoFAQ && seoFAQ.length > 0 && (
+                      <div>
+                        <p className="text-xs text-muted-foreground uppercase tracking-wide mb-3">Часті запитання</p>
+                        <Accordion type="single" collapsible className="space-y-1">
+                          {seoFAQ.map((faq, i) => (
+                            <AccordionItem key={i} value={`faq-${i}`} className="border border-border/40 rounded-xl px-4 overflow-hidden">
+                              <AccordionTrigger className="text-sm font-medium py-3 hover:no-underline text-left">
+                                {faq.q}
+                              </AccordionTrigger>
+                              <AccordionContent className="text-sm text-muted-foreground pb-3 leading-relaxed">
+                                {faq.a}
+                              </AccordionContent>
+                            </AccordionItem>
+                          ))}
+                        </Accordion>
+                      </div>
+                    )}
+                    <div className="border-t border-border/40 pt-4">
+                      <p className="text-sm text-muted-foreground mb-3">Не знайшли відповіді? Задайте питання нам!</p>
+                      <textarea
+                        placeholder="Ваше питання..."
+                        className="w-full rounded-xl border border-border bg-background p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30 mb-2"
+                        rows={3}
+                      />
+                      <div className="flex gap-2 mb-3">
+                        <input placeholder="Ваше ім'я" className="flex-1 rounded-xl border border-border bg-background p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                        <input placeholder="Телефон або email" className="flex-1 rounded-xl border border-border bg-background p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                      </div>
+                      <button className="rounded-full bg-primary text-white px-5 py-2 text-sm font-medium hover:bg-primary/90 transition-colors">
+                        Задати питання
+                      </button>
                     </div>
-                    <button className="rounded-full bg-primary text-white px-5 py-2 text-sm font-medium hover:bg-primary/90 transition-colors">
-                      Задати питання
-                    </button>
                   </div>
                 )}
               </div>
             </div>
           </div>
         </div>
+
+        {/* Sticky mobile add-to-cart bar */}
+        {showStickyBar && (
+          <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur border-t border-border/50 px-4 py-3 flex items-center gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.12)]">
+            <div className="flex-1 min-w-0">
+              <p className="text-xs text-muted-foreground truncate">{displayProduct!.name}</p>
+              <p className="text-sm font-bold text-primary">{formatUAH(activePrice)}</p>
+            </div>
+            <Button
+              onClick={handleAddToCart}
+              disabled={variants.length > 1 && selectedVarIdx < 0}
+              className={`shrink-0 rounded-full border-0 h-10 px-5 text-sm font-medium ${
+                added ? "bg-green-600 hover:bg-green-600"
+                : variants.length > 1 && selectedVarIdx < 0 ? "bg-muted text-muted-foreground cursor-not-allowed"
+                : "btn-aura"
+              }`}
+            >
+              {added
+                ? <><Check className="h-4 w-4 mr-1.5" />Додано</>
+                : variants.length > 1 && selectedVarIdx < 0
+                  ? "Оберіть розмір ↑"
+                  : <><ShoppingCart className="h-4 w-4 mr-1.5" />В кошик</>
+              }
+            </Button>
+          </div>
+        )}
 
         {/* Related products */}
         {related.length > 0 && (

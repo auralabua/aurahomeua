@@ -8,16 +8,10 @@ import { useCart } from "@/context/CartContext";
 import { ProductCard } from "@/components/ProductCard";
 import { useSEO } from "@/hooks/useSEO";
 import { OptimizedImage, vercelImg } from "@/components/OptimizedImage";
+import { ProductReviews } from "@/components/ProductReviews";
 import type { Product } from "@/data/products";
 
 const SIZE_ORDER = ["XS", "S", "M", "L", "XL", "XXL", "XXXL", "XXXXL"];
-
-const SAMPLE_REVIEWS = [
-  { name: "Ольга Ткаченко", date: "3 дні тому", text: "Якісний товар, повністю відповідає опису. Доставка швидка, пакування надійне. Вже користуюсь другий тиждень — дуже задоволена!", rating: 5 },
-  { name: "Андрій Мельник", date: "1 тиждень тому", text: "Гарна якість за свої гроші. Замовляв для батьків — вони задоволені. Єдине — доставка трохи затрималась, але товар прийшов в цілості.", rating: 4 },
-  { name: "Марія Коваль", date: "2 тижні тому", text: "Беру вже вдруге. Перший раз подарувала мамі — вона дуже рада. Тепер собі замовила. Рекомендую!", rating: 5 },
-  { name: "Василь Гончаренко", date: "3 тижні тому", text: "Все відповідає опису, якість хороша. Швидко надіслали. Буду ще купувати.", rating: 5 },
-];
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -89,86 +83,6 @@ const buildProductFAQ = (
     ? []
     : [{ q: "Чи є товар в наявності?", a: "Наразі товар тимчасово відсутній. Залиште заявку — повідомимо про надходження." }]),
 ];
-
-// ── Reviews tab ──────────────────────────────────────────────────────────────
-
-const ReviewsTab = ({ product }: { product: Product }) => {
-  const [hovered, setHovered] = useState(0);
-  const [selected, setSelected] = useState(0);
-  const [text, setText] = useState("");
-  const [name, setName] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const reviews = SAMPLE_REVIEWS.slice(0, Math.min(product.reviews || 0, 2));
-
-  const handleSubmit = () => {
-    if (selected > 0 && text.trim()) setSubmitted(true);
-  };
-
-  return (
-    <div className="space-y-4">
-      {reviews.length > 0 ? reviews.map((r, i) => (
-        <div key={i} className="rounded-2xl border border-border/40 bg-secondary/30 p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="h-8 w-8 rounded-full bg-primary/15 flex items-center justify-center text-primary text-sm font-semibold shrink-0">
-              {r.name[0]}
-            </div>
-            <div>
-              <p className="text-sm font-medium text-foreground">{r.name}</p>
-              <p className="text-xs text-muted-foreground">{r.date}</p>
-            </div>
-            <div className="flex gap-0.5 ml-auto">
-              {[1, 2, 3, 4, 5].map(s => (
-                <Star key={s} className={`h-3.5 w-3.5 ${s <= r.rating ? "fill-amber-400 text-amber-400" : "fill-muted text-muted"}`} />
-              ))}
-            </div>
-          </div>
-          <p className="text-sm text-foreground/75 leading-relaxed">{r.text}</p>
-        </div>
-      )) : (
-        <p className="text-sm text-muted-foreground py-2">Поки немає відгуків. Будьте першим!</p>
-      )}
-
-      <div className="border-t border-border pt-4 mt-2">
-        <h4 className="text-sm font-medium mb-3">Залишити відгук</h4>
-        {submitted ? (
-          <div className="rounded-2xl bg-green-50 border border-green-200 p-4 text-center">
-            <p className="text-sm text-green-700 font-medium">✓ Дякуємо за відгук!</p>
-            <p className="text-xs text-green-600 mt-1">Він з'явиться після перевірки</p>
-          </div>
-        ) : (
-          <div className="space-y-3">
-            <div>
-              <p className="text-xs text-muted-foreground mb-1.5">Ваша оцінка:</p>
-              <div className="flex gap-1">
-                {[1, 2, 3, 4, 5].map(s => (
-                  <button key={s}
-                    onMouseEnter={() => setHovered(s)}
-                    onMouseLeave={() => setHovered(0)}
-                    onClick={() => setSelected(s)}
-                    className="transition-transform hover:scale-110 active:scale-95">
-                    <Star className={`h-7 w-7 transition-colors ${s <= (hovered || selected) ? "fill-amber-400 text-amber-400" : "fill-muted text-muted"}`} />
-                  </button>
-                ))}
-              </div>
-            </div>
-            <input value={name} onChange={e => setName(e.target.value)}
-              placeholder="Ваше ім'я"
-              className="w-full rounded-xl border border-border bg-background p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
-            <textarea value={text} onChange={e => setText(e.target.value)}
-              placeholder="Напишіть відгук про товар..."
-              className="w-full rounded-xl border border-border bg-background p-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30"
-              rows={3} />
-            <button onClick={handleSubmit} disabled={!selected || !text.trim()}
-              className="rounded-full bg-primary text-white px-5 py-2 text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-              Відправити відгук
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
 
 // ── Main component ───────────────────────────────────────────────────────────
 
@@ -417,22 +331,25 @@ const ProductPage = () => {
               )}
             </div>
 
-            {/* SKU + Availability */}
-            <div className="flex flex-wrap items-center gap-3">
-              {activeVendorCode && (
-                <div className="text-sm text-muted-foreground">
-                  Артикул: <span className="font-medium text-foreground">{activeVendorCode}</span>
-                </div>
+            {/* Availability badge */}
+            <div>
+              {currentProduct!.available ? (
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-green-500/15 px-3 py-1 text-xs font-semibold text-green-600">
+                  <span className="h-1.5 w-1.5 rounded-full bg-green-500" />В наявності
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-red-500/10 px-3 py-1 text-xs font-semibold text-red-500">
+                  <span className="h-1.5 w-1.5 rounded-full bg-red-500" />Немає в наявності
+                </span>
               )}
-              <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium border ${
-                currentProduct!.available
-                  ? "bg-green-50 text-green-700 border-green-200"
-                  : "bg-red-50 text-red-600 border-red-200"
-              }`}>
-                <span className={`h-1.5 w-1.5 rounded-full ${currentProduct!.available ? "bg-green-500" : "bg-red-400"}`} />
-                {currentProduct!.available ? "В наявності" : "Немає в наявності"}
-              </div>
             </div>
+
+            {/* SKU */}
+            {activeVendorCode && (
+              <div className="text-sm text-muted-foreground">
+                Артикул: <span className="font-medium text-foreground">{activeVendorCode}</span>
+              </div>
+            )}
 
             {/* Variant selector */}
             {variants.length > 1 && (
@@ -581,7 +498,7 @@ const ProductPage = () => {
                   </div>
                 )}
 
-                {activeTab === "reviews" && <ReviewsTab product={currentProduct!} />}
+                {activeTab === "reviews" && <ProductReviews productId={currentProduct!.id} />}
 
                 {activeTab === "questions" && (
                   <div className="space-y-4">

@@ -182,7 +182,7 @@ const ProductPage = () => {
   const [activeImg, setActiveImg] = useState(0);
   const [added, setAdded] = useState(false);
   const [activeTab, setActiveTab] = useState<"desc" | "reviews" | "questions">("desc");
-  const [selectedVarIdx, setSelectedVarIdx] = useState(0);
+  const [selectedVarIdx, setSelectedVarIdx] = useState(-1);
 
   // ── Resolve product data (before any conditional returns so hooks stay stable) ──
   const foundProduct   = products.find(p => p.id === id);
@@ -417,18 +417,32 @@ const ProductPage = () => {
               )}
             </div>
 
-            {/* SKU */}
-            {activeVendorCode && (
-              <div className="text-sm text-muted-foreground">
-                Артикул: <span className="font-medium text-foreground">{activeVendorCode}</span>
+            {/* SKU + Availability */}
+            <div className="flex flex-wrap items-center gap-3">
+              {activeVendorCode && (
+                <div className="text-sm text-muted-foreground">
+                  Артикул: <span className="font-medium text-foreground">{activeVendorCode}</span>
+                </div>
+              )}
+              <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium border ${
+                currentProduct!.available
+                  ? "bg-green-50 text-green-700 border-green-200"
+                  : "bg-red-50 text-red-600 border-red-200"
+              }`}>
+                <span className={`h-1.5 w-1.5 rounded-full ${currentProduct!.available ? "bg-green-500" : "bg-red-400"}`} />
+                {currentProduct!.available ? "В наявності" : "Немає в наявності"}
               </div>
-            )}
+            </div>
 
             {/* Variant selector */}
             {variants.length > 1 && (
               <div className="space-y-2">
                 <p className="text-sm font-medium text-foreground">
-                  Розмір: <span className="text-primary">{selectedVariant?.label ?? variants[0]?.label}</span>
+                  Розмір:{" "}
+                  {selectedVarIdx >= 0
+                    ? <span className="text-primary font-semibold">{selectedVariant?.label}</span>
+                    : <span className="text-orange-500 font-medium">оберіть ↓</span>
+                  }
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {variants.map((v, i) => (
@@ -439,16 +453,21 @@ const ProductPage = () => {
                       disabled={!v.available}
                       className={`min-w-[44px] h-10 px-3 rounded-xl border-2 text-sm font-medium transition-all ${
                         i === selectedVarIdx
-                          ? "border-primary bg-primary text-white"
+                          ? "border-primary bg-primary text-white shadow-sm"
                           : v.available
                             ? "border-border bg-white hover:border-primary/60 text-foreground"
-                            : "border-border bg-secondary/50 text-muted-foreground opacity-50 cursor-not-allowed"
+                            : "border-border bg-secondary/50 text-muted-foreground opacity-50 cursor-not-allowed line-through"
                       }`}
                     >
                       {v.label}
                     </button>
                   ))}
                 </div>
+                {selectedVarIdx < 0 && (
+                  <p className="text-xs text-orange-500 flex items-center gap-1">
+                    <span>⚠</span> Будь ласка, оберіть розмір перед замовленням
+                  </p>
+                )}
               </div>
             )}
 
@@ -489,12 +508,17 @@ const ProductPage = () => {
                   </Button>
                 </div>
                 <Button size="lg" onClick={handleAddToCart}
+                  disabled={variants.length > 1 && selectedVarIdx < 0}
                   className={`flex-1 h-12 rounded-full border-0 font-medium text-sm transition-all duration-300 ${
-                    added ? "bg-green-600 hover:bg-green-600" : "btn-aura"
+                    added ? "bg-green-600 hover:bg-green-600"
+                    : variants.length > 1 && selectedVarIdx < 0 ? "bg-muted text-muted-foreground cursor-not-allowed"
+                    : "btn-aura"
                   }`}>
                   {added
                     ? <><Check className="h-5 w-5 mr-2" />Додано!</>
-                    : <><ShoppingCart className="h-5 w-5 mr-2" />Додати в кошик</>
+                    : variants.length > 1 && selectedVarIdx < 0
+                      ? "Оберіть розмір ↑"
+                      : <><ShoppingCart className="h-5 w-5 mr-2" />Додати в кошик</>
                   }
                 </Button>
               </div>

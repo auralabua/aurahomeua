@@ -232,6 +232,20 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ── NEEDS / SYMPTOMS ── */}
+      <section className="container py-8 sm:py-10">
+        <p className="text-center text-[11px] uppercase tracking-[0.22em] text-muted-foreground/70 mb-5 font-medium">Що вас турбує?</p>
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+          {needs.map((n, i) => (
+            <Link key={i} to={n.link}
+              className={`inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-light border border-white/50 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${n.color} text-foreground/80`}>
+              <span className="text-base leading-none">{n.icon}</span>
+              {n.label}
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* ── CATEGORIES ── */}
       <section className="container py-12 sm:py-20">
         <div className="mb-6 sm:mb-10 flex items-end justify-between gap-4">

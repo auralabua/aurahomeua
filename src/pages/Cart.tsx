@@ -3,7 +3,7 @@ import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { formatUAH } from "@/data/products";
 import { Button } from "@/components/ui/button";
-import { toast } from "@/hooks/use-toast";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 const Cart = () => {
   const { items, updateQuantity, removeItem, totalPrice, totalCount, clear } = useCart();
@@ -40,7 +40,7 @@ const Cart = () => {
             <div key={itemKey} className="flex gap-4 p-4 rounded-2xl aura-card">
               <Link to={`/product/${product.id}`} className="grid h-24 w-24 shrink-0 place-items-center rounded-xl gradient-hero overflow-hidden border border-white/10">
                 {product.images?.[0] ? (
-                  <img src={product.images[0]} alt={product.name} className="h-full w-full object-contain p-2" loading="lazy" />
+                  <OptimizedImage src={product.images[0]} alt={product.name} className="h-full w-full object-contain p-2" sizes="96px" quality={70} />
                 ) : (
                   <span className="text-xs text-muted-foreground">Фото</span>
                 )}

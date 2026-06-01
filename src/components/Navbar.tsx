@@ -1,10 +1,10 @@
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
-import { ShoppingCart, Search, Menu, X, Phone, Sparkles, ChevronDown, ChevronRight, ArrowRight, BookOpen, Bone, Waves, Moon, Baby } from "lucide-react";
+import { ShoppingCart, Menu, X, Phone, Sparkles, ChevronDown, ChevronRight, ArrowRight, BookOpen, Bone, Waves, Moon, Baby } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import { useCategoriesAsLegacy } from "@/hooks/useShopData";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { SearchAutocomplete } from "@/components/SearchAutocomplete";
 
 const PHONE = "+380956981124";
 const TELEGRAM = "https://t.me/bodyhomeua";
@@ -31,7 +31,6 @@ export const Navbar = () => {
   const { categories } = useCategoriesAsLegacy();
   const navigate = useNavigate();
   const location = useLocation();
-  const [query, setQuery] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [catOpen, setCatOpen] = useState(false);
   const [blogOpen, setBlogOpen] = useState(false);
@@ -52,12 +51,6 @@ export const Navbar = () => {
 
   // Close mobile menu on route change
   useEffect(() => { setMobileOpen(false); }, [location.pathname]);
-
-  const onSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    navigate(`/catalog${query.trim() ? `?q=${encodeURIComponent(query.trim())}` : ""}`);
-    setMobileOpen(false);
-  };
 
   const goToCategory = (catId?: string) => {
     setCatOpen(false);
@@ -181,10 +174,10 @@ export const Navbar = () => {
         </nav>
 
         {/* Search */}
-        <form onSubmit={onSearch} className="hidden md:flex relative flex-1 max-w-md ml-auto">
-          <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground pointer-events-none"/>
-          <Input value={query} onChange={e => setQuery(e.target.value)} placeholder="Пошук подушок, устілок, масажерів..." className="h-11 rounded-full border-border bg-white/75 pl-10 text-sm focus:bg-white transition-colors"/>
-        </form>
+        <SearchAutocomplete
+          placeholder="Пошук подушок, устілок, масажерів..."
+          className="hidden md:block flex-1 max-w-md ml-auto"
+        />
 
         {/* Cart + burger */}
         <div className="flex items-center gap-2 ml-auto md:ml-0">
@@ -208,10 +201,10 @@ export const Navbar = () => {
       {mobileOpen && (
         <div className="lg:hidden border-t border-border bg-background/95 animate-fade-in">
           <div className="container py-4 space-y-3">
-            <form onSubmit={onSearch} className="relative">
-              <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground pointer-events-none"/>
-              <Input value={query} onChange={e => setQuery(e.target.value)} placeholder="Пошук товарів..." className="rounded-full bg-white/75 border-border pl-10"/>
-            </form>
+            <SearchAutocomplete
+              placeholder="Пошук товарів..."
+              onNavigate={() => setMobileOpen(false)}
+            />
 
             <nav className="grid gap-1">
               <NavLink to="/" end onClick={() => setMobileOpen(false)} className={({isActive}) => `rounded-2xl px-4 py-3 text-sm font-light ${isActive ? "bg-secondary text-primary" : "text-foreground"}`}>

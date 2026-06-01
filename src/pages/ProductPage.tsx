@@ -699,31 +699,49 @@ const ProductPage = () => {
           </div>
         </section>
 
-        {/* Sticky mobile add-to-cart bar */}
-        {showStickyBar && (
-          <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur border-t border-border/50 px-4 py-3 flex items-center gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.12)]">
-            <div className="flex-1 min-w-0">
-              <p className="text-xs text-muted-foreground truncate">{displayProduct!.name}</p>
-              <p className="text-sm font-bold text-primary">{formatUAH(activePrice)}</p>
+        {/* Sticky mobile add-to-cart bar — always rendered, slides in/out */}
+        <div
+          className={`md:hidden fixed bottom-0 left-0 right-0 z-50 transition-transform duration-300 ease-out ${
+            showStickyBar ? "translate-y-0" : "translate-y-full"
+          }`}
+          aria-hidden={!showStickyBar}
+        >
+          <div
+            className="bg-white border-t border-border/60 shadow-[0_-4px_24px_rgba(0,0,0,0.08)]"
+            style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+          >
+            <div className="flex items-center gap-3 px-4 py-3">
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-medium text-foreground truncate leading-snug">{displayProduct!.name}</p>
+                <div className="flex items-center gap-1.5 mt-0.5">
+                  <p className="text-sm font-bold text-primary">{formatUAH(activePrice)}</p>
+                  {hasDiscount && (
+                    <p className="text-[11px] text-muted-foreground line-through leading-none">
+                      {formatUAH(currentProduct!.originalPrice!)}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <Button
+                onClick={handleAddToCart}
+                disabled={variants.length > 1 && selectedVarIdx < 0}
+                aria-label="Додати в кошик"
+                className={`shrink-0 rounded-full border-0 h-10 px-5 text-sm font-medium touch-manipulation ${
+                  added ? "bg-green-600 hover:bg-green-600"
+                  : variants.length > 1 && selectedVarIdx < 0 ? "bg-muted text-muted-foreground cursor-not-allowed"
+                  : "btn-aura"
+                }`}
+              >
+                {added
+                  ? <><Check className="h-4 w-4 mr-1.5" />Додано</>
+                  : variants.length > 1 && selectedVarIdx < 0
+                    ? "Оберіть розмір ↑"
+                    : <><ShoppingCart className="h-4 w-4 mr-1.5" />В кошик</>
+                }
+              </Button>
             </div>
-            <Button
-              onClick={handleAddToCart}
-              disabled={variants.length > 1 && selectedVarIdx < 0}
-              className={`shrink-0 rounded-full border-0 h-10 px-5 text-sm font-medium ${
-                added ? "bg-green-600 hover:bg-green-600"
-                : variants.length > 1 && selectedVarIdx < 0 ? "bg-muted text-muted-foreground cursor-not-allowed"
-                : "btn-aura"
-              }`}
-            >
-              {added
-                ? <><Check className="h-4 w-4 mr-1.5" />Додано</>
-                : variants.length > 1 && selectedVarIdx < 0
-                  ? "Оберіть розмір ↑"
-                  : <><ShoppingCart className="h-4 w-4 mr-1.5" />В кошик</>
-              }
-            </Button>
           </div>
-        )}
+        </div>
 
         {/* Related products */}
         {related.length > 0 && (
@@ -779,6 +797,9 @@ const ProductPage = () => {
             </section>
           );
         })()}
+
+        {/* Mobile spacer — keeps content above sticky add-to-cart bar */}
+        <div className="h-24 md:hidden" aria-hidden="true" />
       </div>
     </div>
   );

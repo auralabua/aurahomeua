@@ -79,7 +79,7 @@ const AdminOrders = () => {
           <SelectContent>
             <SelectItem value="all">Уся доставка</SelectItem>
             <SelectItem value="novaposhta">Нова Пошта</SelectItem>
-            <SelectItem value="mistexpress">MistExpress</SelectItem>
+            <SelectItem value="mistexpress">Meest / Rozetka</SelectItem>
           </SelectContent>
         </Select>
         <Input type="date" value={dateFilter} onChange={(e) => setDateFilter(e.target.value)} className="w-[180px] rounded-xl" />
@@ -135,7 +135,7 @@ const AdminOrders = () => {
                     </TableCell>
                     <TableCell className="font-medium whitespace-nowrap">{formatUAH(Number(o.amount))}</TableCell>
                     <TableCell className="whitespace-nowrap">
-                      {o.delivery_method === "novaposhta" ? "Нова Пошта" : o.delivery_method === "mistexpress" ? "MistExpress" : "—"}
+                      {o.delivery_method === "novaposhta" ? "Нова Пошта" : o.delivery_method === "mistexpress" ? "Meest / Rozetka" : "—"}
                       {o.delivery_city && <div className="text-xs text-muted-foreground">{o.delivery_city}, {o.delivery_branch}</div>}
                     </TableCell>
                     <TableCell className="whitespace-nowrap text-sm">

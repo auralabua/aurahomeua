@@ -498,8 +498,8 @@ const Checkout = () => {
                 active={delivery === "mistexpress"}
                 onClick={() => setDelivery("mistexpress")}
                 icon={<Package className="h-5 w-5" />}
-                title="MistExpress"
-                subtitle="Відділення MistExpress"
+                title="Meest / Rozetka"
+                subtitle="Відділення Meest або Rozetka"
               />
             </div>
 
@@ -553,7 +553,7 @@ const Checkout = () => {
               {(delivery !== "novaposhta" || npType === "warehouse") && (
                 <div className="space-y-1.5">
                   <Label htmlFor="branch">
-                    {delivery === "novaposhta" ? "Відділення або поштомат" : "Відділення MistExpress"}
+                    {delivery === "novaposhta" ? "Відділення або поштомат" : "Відділення Meest / Rozetka"}
                   </Label>
                   {delivery === "novaposhta" ? (
                     <BranchAutocomplete
@@ -610,7 +610,7 @@ const Checkout = () => {
               )}
             </div>
             <p className="text-sm text-muted-foreground mt-3">
-              Оплата доставки при отриманні за тарифами {delivery === "novaposhta" ? "Нової Пошти" : "MistExpress"}
+              Оплата доставки при отриманні за тарифами {delivery === "novaposhta" ? "Нової Пошти" : "Meest / Rozetka"}
             </p>
           </section>
 

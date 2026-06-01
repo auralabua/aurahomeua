@@ -34,7 +34,7 @@ export const ReviewsSection = () => {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        "name": "BodyHumm",
+        "name": "BodyHome",
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": avgRating,

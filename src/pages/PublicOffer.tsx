@@ -1,13 +1,23 @@
-const PublicOffer = () => (
+import { useSEO } from "@/hooks/useSEO";
+
+const PublicOffer = () => {
+  useSEO({
+    title: "Публічний договір (оферта) — BodyHome",
+    description: "Публічний договір інтернет-магазину BodyHome: умови замовлення, оплати, доставки та повернення товарів.",
+    url: "/public-offer",
+    noindex: true,
+  });
+
+  return (
   <div className="container py-14 max-w-3xl">
     <p className="aura-kicker mb-4">юридична інформація</p>
     <h1 className="text-4xl md:text-5xl font-light mb-3">Публічний договір (оферта)</h1>
-    <p className="text-muted-foreground font-light mb-10">Остання редакція: травень 2026 року</p>
+    <p className="text-muted-foreground font-light mb-10">Остання редакція: червень 2026 року</p>
 
     <div className="space-y-8 font-light text-foreground/80 leading-relaxed text-sm">
       <section>
         <h2 className="text-xl font-light text-foreground mb-3">1. Загальні положення</h2>
-        <p>Цей документ є публічною офертою інтернет-магазину <strong className="font-medium">BodyHumm</strong> (далі — Продавець) та визначає умови продажу товарів через сайт bodyhumm.com.ua.</p>
+        <p>Цей документ є публічною офертою інтернет-магазину <strong className="font-medium">BodyHome</strong> (далі — Продавець) та визначає умови продажу товарів через сайт www.bodyhome.com.ua.</p>
         <p className="mt-2">Оформлення замовлення на сайті означає повне та беззастережне прийняття покупцем умов цього договору відповідно до ст. 642 Цивільного кодексу України.</p>
       </section>
 
@@ -123,14 +133,15 @@ const PublicOffer = () => (
       <section>
         <h2 className="text-xl font-light text-foreground mb-3">9. Контактна інформація</h2>
         <ul className="space-y-1 list-none">
-          <li>Назва: BodyHumm</li>
-          <li>Email: <a href="mailto:bodyhumm@gmail.com" className="text-primary hover:underline">bodyhumm@gmail.com</a></li>
+          <li>Назва: BodyHome</li>
+          <li>Email: <a href="mailto:bodyhome@gmail.com" className="text-primary hover:underline">bodyhome@gmail.com</a></li>
           <li>Телефон: <a href="tel:+380956981124" className="text-primary hover:underline">+380956981124</a></li>
-          <li>Telegram: <a href="https://t.me/aurahomeua" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">@aurahomeua</a></li>
+          <li>Telegram: <a href="https://t.me/bodyhomeua" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">@bodyhomeua</a></li>
         </ul>
       </section>
     </div>
   </div>
-);
+  );
+};
 
 export default PublicOffer;

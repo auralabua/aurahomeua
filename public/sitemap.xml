@@ -2,3008 +2,2948 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.bodyhome.com.ua/</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/catalog</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/blog</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/about</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.65</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/contacts</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/delivery</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://www.bodyhome.com.ua/privacy</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.bodyhome.com.ua/public-offer</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/catalog?category=ortopedychni-podushky</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/catalog?category=masazhery</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/catalog?category=ortopedychni-masazhni-kylymky</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/catalog?category=ortezy-i-bandazhi</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/catalog?category=ortopedychni-ustilky</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.bodyhome.com.ua/catalog?category=rozvyvaiuchi-ihrashky</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/catalog?category=tovary-dlia-krasy</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.bodyhome.com.ua/catalog?category=rozvyvaiuchi-ihrashky</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/blog/chomu-bolyt-spyna-i-yak-dopomahaie-ortopediia</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/blog/masazh-vdoma-yak-vidnovytysia-pislia-vazhkoho-dnia</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/blog/yak-pravylna-podushka-vplyvaie-na-yakist-snu</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/blog/ortopediia-dlia-ditei-koly-pochynaty-ta-shcho-obuyraty</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.bodyhome.com.ua/blog/yak-vybraty-ortopedychni-ustilky</loc>
-    <lastmod>2026-05-26</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0e8f7291-4d6c-4a1f-b932-1a4bc8ccec91</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/pivsfera-masazhna-balansuvalna-16x16-sm-7e48211b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/c4a8417e-8ce9-4584-8a3f-18c52708d4e8</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yach-masazhnyy-tverdyy-d-7sm-7x7-sm-8d0ea25d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/15dd0865-e542-49a7-991e-0994b64f73b1</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yach-masazhnyy-d-9sm-9x9-sm-85bb191d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/9f8e92a8-13ab-4dc0-bf89-1ee8f1165fc7</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/pivsfera-masazhna-balansuvalna-krystal-17x17-sm-d88b65fc</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/237f874d-0478-4fb0-a35a-0e6076bac6cc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podviynyy-masazhnyy-m-yach-z-shypamy-7x15-sm-3e5a7079</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/957f609b-a00e-484a-8df7-75b4d44aafa6</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/trenazher-dlya-spyny-mistok-tm-ortek-25x31-sm-57996df5</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/45f3130e-8bc0-408f-b82a-9a8cbc38d0c9</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yach-masazhnyy-tsylindr-15kh5sm-6x15-sm-f15cb022</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/316dce70-1bab-4dd9-9100-41ce17fdbc21</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/trenazher-dlya-spyny-mistok-rehulovanyy-tm-ortek-26x41-sm-da91cc2d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1fef54cf-4a33-44af-8683-07ca7a47714f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/balansuvalna-podushka-masazhna-d-33sm-naduvna-z-nasosom-33x33-sm-39909145</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4ac0b6c1-9cbd-41f6-9f83-ea56c69352a1</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yach-masazhnyy-tverdyy-d-5sm-5x5-sm-c90767b1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/02e70be3-c79d-4304-8b8f-a17fb65a9a32</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-m-yach-dlya-samomasazhu-10sm-epp-10x10-sm-ef22af86</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/408544c3-4d69-4477-aecf-3bb97ef3cf68</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podviynyy-masazhnyy-m-yach-dlya-masazhu-16kh8sm-epp-8x16-sm-9e333111</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/6db7520d-ebf0-4b03-9169-18162400700c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podviynyy-masazhnyy-m-yach-12kh6sm-vazhkyy-fastsialnyy-m-yach-6x12-sm-08174140</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/846cf3f1-6e57-412a-8952-5ea447368c6d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yach-masazhnyy-d-3-5sm-3x3-5-sm-20bce403</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/10093d36-d47e-435e-adbe-c637eb02860b</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/naduvnyy-steper-dlya-nih-krokovyy-trenazher-dlya-spalyuvannya-kaloriy-2--b7a2684e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4b428090-85e9-4f54-b0ba-06da84fb93cc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/nakladky-na-p-yaty-vid-tertya-vstavky-u-vzuttya-dlya-zmenshennya-rozmiru-11aa1b49</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/42ace254-e24d-4421-a782-337822b37ef1</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/nakladky-na-p-yaty-vid-tertya-chorni-4x9-5-sm-4aacae5f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/192ea960-2f80-4602-b08f-eb09ae5c5784</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yach-dlya-fitnesu-hladkyy-55sm-55x55-sm-b0222269</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3940f8a9-1d3f-49f4-9d18-58cc3f4495c2</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/rolyk-dlya-yohy-pilatesu-fitnesu-33kh14-sm-multikolir-33x33-sm-985b7ef3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2d1527ea-65d8-4146-bb58-0060f315a069</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/rolyk-dlya-yohy-pilatesu-fitnesu-33kh14-sm-33x33-sm-0a96023a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3d6bcf34-c8c3-4055-9ef2-d745250f3042</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yach-dlya-fitnesu-hladkyy-65sm-65x65-sm-46dfabda</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2d41e3ba-1326-48ae-b29b-6e3a7c1f5f8d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-m-yach-dlya-mfr-vazhkyy-fastsialnyy-m-yach-dlya-fitnesu-ta-yoh-89640711</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/6b2c3e81-fdc8-455c-8648-add751e03ef4</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/naduvna-balansuvalna-podushka-masazhna-d-34sm-z-nasosom-34x34-sm-3f9aedb4</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/5f8d1082-829f-4abb-a0df-44b240acdf2d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/pidstavky-pid-kolino-ta-likot-nekovzayuchi-kylymky-dlya-yohy-para-20x20--e31a893a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/a8c5d6a3-69e5-4a0a-b8c2-1e9a5a3d9a83</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/universalnyy-rolykovyy-masazher-palytsya-dlya-vsoho-tila-6x42-sm-4b43fa31</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/b363985b-b5d4-4040-8240-a907567294f1</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-rolyk-dlya-stop-i-tila-6x16-sm-ccf638f4</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4581396f-f3a8-443e-969c-9b5830e8998d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/stepper-z-espanderom-ta-monitorom-krokovyy-trenazher-29x38-sm-764e6128</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0758db4c-57b1-42a6-949a-18423a0a022e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yach-masazhnyy-tverdyy-d-9sm-9x9-sm-1956f533</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2612c4d7-ee16-4dfc-804d-0c13c36e5b8a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yach-masazhnyy-tverdyy-3-5-sm-5x5-5-sm-d679108d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4bf6306b-7b73-4e68-8ab9-5861db1c3aa3</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/tverdyy-masazhnyy-m-yach-dlya-tryhernykh-tochok-12-5-sm-13x13-sm-da9d7be4</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/948f5737-f357-40d1-a3f2-aef902073b09</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/balansbord-dlya-rozvytku-i-trenuvannya-vestybulyarnoho-aparatu-37x37-sm-e89d3998</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/30770de9-a7c1-4c11-8938-725fc1a51cd9</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/mini-velotrenazher-dlya-ruk-ta-nih-kompaktnyy-trenazher-dlya-domu-ta-rea-68f1a262</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0fac19c2-5f6d-4dff-b934-6f4d6f2bbcf1</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/derev-yanyy-balansbord-trenazher-dlya-rozvytku-rivnovahy-ta-koordynatsiy-2c043bd8</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2c2d82d7-550d-4e13-a1cd-99ca22d51997</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/anatomichni-ustilky-4rest-orto-universal-09-907-r-36-40-8x26-sm-rozmir-3-b7f07f65</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/79ea9188-3525-4b32-a0d7-2db6c1acd178</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ustilky-4rest-orto-comfort-pruzhni-09-201-r-36-40-9x27-sm-rozmir-36-40-82e23a69</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/9dbc5c0c-b15e-4c7b-a34d-fdc23ce7c4c9</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/fitnes-humka-dlya-trenuvannya-stop-ortek-25-sm-5x25-sm-rozmir-lehkyy-566766d5</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/a8853371-5b1f-4373-a8b8-7bd63cb2a6c3</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhni-ustilky-4rest-orto-z-efektom-pam-yati-09-192-r-36-40-9x26-sm-ro-60bf1fde</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/90a0efbf-0afb-4096-af49-f03db42117e9</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ustilky-4rest-orto-foot-support-09-203-r-36-40-9x27-sm-rozmir-36-40-4e95fbfb</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/14789177-c0e8-413f-ba21-9c7ee1faf15f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/dytyachi-ustilky-ortopedychni-medifoam-fd425d93</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4659b6fd-73c0-47fd-9ec0-676c3ce76c9d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/dytyachi-ustilky-ortopedychni-shkira-c-3a9cd187</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/40f5d6a5-d061-4c24-a29c-0a48cbb0d9f5</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shkiryani-karkasni-napivustilky-4rest-orto-09-905-r-36-45-80ee508e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2ad42b3b-5b15-4228-9344-7dac0083703e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shkiryani-ustilky-supinator-dlya-doroslykh-ups-001r-35-46-ae2a40e5</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/53c097d6-2b73-45b1-b8da-0ca5b3fc0e71</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ustilky-4rest-orto-dlya-poloyi-stopy-z-efektom-pam-yati-relax-09-205-r-3-0cbf0597</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/64756ea4-0006-4d3f-9f4a-92f6b962c3a3</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shkiryani-ustilky-dlya-profilaktyky-ploskostoposti-ups-003-8570ba51</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/73b334bb-9c31-41ca-9497-4289553148f8</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shkiryana-napivustilka-supinator-dlya-modelnoho-vzuttya-shns-003-7b55b408</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0ae24e10-baae-47fe-b6bf-b0f2174b2753</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/napivustilka-supinator-dlya-pidtrymky-poperechnoho-sklepinnya-stopy-shns-1473ca41</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/8e5bc793-daaf-4881-b945-e493372f5107</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/napivustilky-supinator-dlya-pidtrymannya-sklevin-stopy-shns-005-8f58d25a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/669d553a-8779-4d73-aba1-a33a271a28e6</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ustilky-4rest-orto-z-efektom-pam-yati-work-09-184-r-36-40-9x27-sm-rozmir-e4687ea7</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0a60a154-5d55-48b5-a71e-3f94c7528e06</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shkiryani-karkasni-ustilky-4rest-orto-09-904-r-36-45-450b6ea0</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/8c865e25-8c11-4004-8f9c-25d5eca8aa8f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/anatomichni-ustilky-4rest-orto-ultra-sport-09-200-r-36-40-9x26-sm-rozmir-81826d44</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/133d8a7c-0d72-42d2-ae63-979f2a80ff1c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/anatomichni-ustilky-4rest-orto-z-efektom-pam-yati-09-906-r-36-40-9x27-sm-b24725cc</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3e7d82d5-4f33-4f7f-b77e-c5d6b0f397fe</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/karkasni-shkiryani-ustilky-4rest-orto-09-914-r-ultra-36-45-fd9e047d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/890bfd5a-5844-47e9-88bd-dab81b8d7cb0</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ustilky-z-efektom-pam-yati-4rest-orto-09-204r-36-40-10x27-sm-rozmir-36-4-71f5cbe3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/617ebba1-9693-4a26-927d-0fd4192b4911</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shkiryani-napivustilky-supinator-shns-001-81628169</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/52add2fd-4c1a-4d2b-85c3-457245aac53c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-m-yach-dlya-mfr-vazhkyy-fastsialnyy-m-yach-dlya-fitnesu-ta-yoh-2ff066ab</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1b7f02ea-e8d7-47d2-adf3-c6d299a3d6f0</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/rolykovyy-masazher-dlya-stop-ortek-9x35-sm-d7b9548e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/46c31e52-a7d6-4247-97e2-d58c2266fc5d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shkiryani-pidp-yatochnyky-pl-001-10c0899b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3dd572db-cbe2-4c73-99d3-6b374083a162</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhni-helevi-ustilky-gi-02-a8ef4018</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/03b40988-af05-4f59-906e-18971e8425cd</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/rolykovyy-masazher-dlya-stop-ortek-foot-roller-15x31-sm-3cb873df</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3c09b867-c87f-4cd6-89e4-924d40a6d2c2</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shkiryana-vstavka-dlya-pidtrymky-pozdovzhnoho-sklepinnya-vpz-001-f71c25f3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/289ca7a7-c016-4cc5-bb72-c5bddba73c1d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/manzheta-na-kistochku-gbn-110fu-8x14-sm-c78cf156</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1ab4a159-9da2-47d1-b03f-158b6b41bf34</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yach-masazhnyy-oval-15kh6-5sm-7x14-sm-97559864</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/02551a1c-8761-40c9-a6cf-e6cda484cd01</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/balansuvalna-napivsfera-bosu-dlya-fitnesu-ta-himnastyky-d-59sm-naduvna-z-49e6c863</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1fb14e79-d90f-46ce-a492-b9bfe850f587</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/t-podibna-vstavka-dlya-pidtrymky-poperechnoho-sklepinnya-shp-110-8x14-sm-62861f0f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0eb8b800-b20d-48e9-aaeb-7e118e0a9af9</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-pistolet-vibratsiynyy-masazher-20v1-chokhol-27x22-sm-fdb049fd</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1d2d0bc2-0637-4689-9c3b-2bd34c935e08</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bahatofunktsionalnyy-elektrychnyy-masazhnyy-kylymok-dlya-vsoho-tila-masa-4a7a59c4</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7aed666e-3154-44d9-8dd7-f21cd4794647</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/elektrostymulyatsiynyy-masazh-dlya-nih-ta-masazhnyy-kylymok-dlya-stupniv-ba8ea9a7</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/18d5448b-54af-4b5e-91c0-ebbd8603a1cd</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yach-dlya-fitnesu-fitbol-podviynyy-45-90-sm-45x90-sm-5ed41e76</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/5b58a3cc-8307-49e4-ad88-8ff108d932bd</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kompresiynyy-limfodrenazhnyy-masazher-dlya-nih-z-pidihrivom-30x50-sm-0e8a702d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/306b52e6-99b4-4636-b771-98e72311eea4</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazher-vorotnyk-dlya-shyyi-elektrychnyy-z-pidihrivom-22x22-sm-c50b43df</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/241794f7-479a-4d18-8105-040eec9e70b2</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/elektrychnyy-masazher-dlya-holovy-pavuchok-15x16-sm-0ddbde27</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/a3678efa-36e7-4abc-a778-90940035d3dc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-roler-360-dlya-taliyi-nih-sidnyts-ta-vsoho-tila-rozbirnyy-25x3-5b346518</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/02d6af33-c6df-4ca8-aefe-1480d979ad92</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/rolykovyy-ruchnyy-masazher-palytsya-dlya-hlybokoho-masazhu-m-yaziv-8x45--a15d4b43</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/55367403-85c6-4f93-a473-76d901fcac3f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhna-podushka-dlya-spyny-z-rolykamy-shyatsu-z-funktsiyeyu-nahriva-ro-310a1b74</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/279249b3-6c36-4a3f-be97-1bcf89137289</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/dytyacha-ortopedychna-podushka-z-efektom-pam-yati-olvi-j2501-27x42-sm-1c0d1f04</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/23c3fd01-7925-4218-9c57-768da207c0aa</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-novonarodzhenykh-olvi-metelyk-j2302-25x32-sm-735d3742</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/02c58cb5-15f4-4191-b51c-dce769b838ad</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-dlya-vahitnykh-i-hodivli-olvi-j2309-43x90-sm-c24fc648</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/643698fd-3b6b-4542-9667-cbf74eaf7080</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/dytyacha-ortopedychna-podushka-olvi-j2305-27x42-sm-6516b15d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/668e6416-0106-48d9-a386-31e11721794e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/trysharova-ortopedychna-podushka-dlya-ditey-z-efektom-pam-yati-olvi-j250-6a28ea59</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2d46e872-4efe-439c-a155-3887b454a294</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-obmezhuvach-dlya-nemovlyat-olvi-23x27-sm-d20b37a6</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/589c2788-5ff8-406e-896b-10ce59bcbc18</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/navolochka-na-podushku-dlya-vahitnykh-i-hodivli-olvi-j2309-40x40-sm-ecaf972a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/14c2e03e-6f1a-4485-a9d8-8db69861b076</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-pid-spynu-dlya-sydinnya-36kh38sm-olvi-j2308-36x38--cb114c3e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/b7c7403f-f9cc-4321-bf30-4db177d7ce97</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-dlya-hoduvannya-op-17-art-j2307-55x55-sm-15425230</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0889ee12-105b-4057-81a4-15bf19c6ddad</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-dlya-novonarodzhenykh-olvi-klyn-j2303-36x42-sm-b0116639</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1916741c-103f-4d39-9fdf-37cd22bd07b5</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-dlya-novonarodzhenykh-olvi-klyn-j2304-37x62-sm-2a113036</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/17a65631-b87c-48c5-83b1-178f4040ffef</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-dlya-novonarodzhenykh-z-efektom-pam-yati-olvi-klyn-j2520-36x62--989a561f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/023d581e-9db9-4d12-84e5-f15db0a05d39</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-ortopedychna-z-efektom-pam-yati-dlya-podorozhey-olvi-j2517-28x4-b31dbb9c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/a480b6d4-becd-426f-a36a-a23dad120f7a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-z-efektom-pam-yati-universalna-olvi-j2525-32x52-sm-5caff3f9</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/ab5dab9b-4c2c-4af9-9bd9-8c9ba299cd7b</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-nemovlyat-pidvyshchenoyi-elastychnosti-olvi-j-dc86fe6b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/19338edb-e31a-4a55-bc28-517c51bb3d0c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-sydinnya-03239-32x42-sm-922f5fd3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/5f40f29b-dcdd-40d4-bb73-f42f20ccd72c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-pid-nohy-rozdilnyk-nih-52kh20-sm-olvi-j2310-22x55--fe0e038d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0abf54d3-0289-4cfb-b41f-f9560a133b9f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-rektalna-z-hrechkoyu-z-otvorom-40kh40sm-olvi-37x37-bff7cf42</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/8693f5a0-04f9-41e9-a04b-285151169b08</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-rektalna-z-polistyrolovymy-kulkamy-40kh40sm-olvi-3-595b16fd</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/38ef0eb8-33c2-4452-8a92-1a1208422b86</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-dlya-hoduvannya-41kh31sm-z-khollofayberom-podviyna-buster-olvi--7cb3d395</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3b44cbb8-69c6-4b2b-afba-3266611dadd2</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-sydinnya-z-efektom-pam-yati-41kh38sm-olvi-j25-9f486a9c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/256d8bd9-ad2d-49cd-95f1-d4d8f53bb359</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-fiksatsiyi-stehon-bandazh-45kh15kh30sm-olvi-j-2bfacf0d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0bd568b4-4053-485b-9ced-e8909b214b7e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-rektalna-z-efektom-pam-yati-44kh45kh8-5sm-olvi-j25-ef9fc366</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0bbb5ae1-3f6b-452b-88d5-eac2e103fe00</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/trysharova-ortopedychna-podushka-z-efektom-pam-yati-50kh32sm-olvi-j2503--e57f913f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/07d80e83-e8fb-4be7-befb-2980b31fefef</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-doroslykh-z-efektom-pam-yati-olvi-2504-37x48--6f7c91e1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/110e8ab1-7e2c-4cbd-acb7-ce7364a318eb</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-doroslykh-olvi-j2306-40x50-sm-28c05e8b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/33ff2d24-7a0d-4d53-8f03-7a708337d8cd</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-napivvalyk-z-efektom-pam-yati-olvi-j2510-20x45-sm-4d73757f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/bde23f5a-5687-44b8-9b3f-47fbf2c4b865</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-doroslykh-z-efektom-pam-yati-khmarynka-olvi-j-2a057b43</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/22e70854-8142-46e3-9d27-d62728c27f98</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/nakolinnyk-fe530225</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/8c7c5f7f-aed4-4858-881b-90feca84aa43</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-pislyaoperatsiynyy-abdominalnyy-74e968a1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1de8df46-6894-455e-8172-ceb41b0a7ff5</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-hryzhovyy-pupochnyy-def53161</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/09ca4a18-75bc-45b9-955b-1229cb4136f5</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-poperekovyy-stabilizuyuchyy-20x25-sm-rozmir-s-a22ee4cf</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3f2c78f0-c3d8-415a-a072-9f30d7e24ca0</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-pidtrymky-vnutrishnikh-orhaniv-matky-7b41ac03</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/cc5fd993-8274-472f-a503-f373bdb78e87</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-shyynoho-viddilu-khrebta-filadelfiya-15x17-sm-e6d0be21</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/505fe2e1-99e4-47cb-bcc2-85ec9c19a0ad</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/dorodovyy-bandazh-dlya-vahitnykh-pislyapolohovyy-bandazh-20x20-sm-rozmir-aa3ebba6</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/03e4ca08-b5e9-465d-b60e-ab139ccc83fc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-hrudo-poperekovoho-viddilu-spyny-198f44a6</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2abdee05-5e98-442e-ba61-f2a1eb6dad89</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shyna-vilenskoho-62af9b77</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/40690928-dd1c-4b20-931c-b6f980e6b6c2</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/komir-shantsa-dlya-ditey-ddf605f6</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1c6a1556-19e5-475f-9719-2cf00241161a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/komir-shantsa-dlya-doroslykh-a476efbd</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/c508cb53-1141-4fc0-b43b-5d05aeda6cbc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/profshtany-likuvannya-dytyachoyi-tazostehnovoyi-dysplaziyi-podushka-frey-8b767372</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0a0809aa-33d6-4bf9-a9dc-c7567b784938</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/korektor-postavy-posylenyy-70f5b61a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/654adba5-7755-4fe3-a414-a0f776f1300c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-pidtrymky-ruky-12x19-sm-ebbe39f1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/36d0e988-423a-4340-ab33-4ee995feedd4</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-spyny-universalnyy-20x25-sm-rozmir-l-5055ada7</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/82c1098b-f029-469c-84b1-2f5619b09d91</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-na-velykyy-palets-nohy-e2570a23</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/36be0c80-86d3-46ea-9960-c09a07bd7d1e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-fiksuyuchyy-zhinochyy-ad569768</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/aaa0116d-1612-4cc4-bf2e-5d3ee9169135</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-pidtrymky-shlunka-c385ba7a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/bcfbaaa6-c79c-4bd5-be25-8c43cd4bd5e2</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/akupunkturnyy-kylymok-ortek-nabir-kylymok-podushka-aplikator-kuznyetsova-18ef74be</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/70d49f40-1696-4686-ac29-2e356d7c12d2</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-z-naturalnoyu-halkoyu-ortek-90kh40sm-12x37-sm-3cfe9061</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/17945e65-043a-4713-a361-4c62549ddc20</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-z-naturalnoyu-halkoyu-ortek-60kh40sm-10x36-sm-b27ba5a7</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/58081f33-d1f4-4f6f-be2c-40af22304f4d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-z-naturalnoyu-halkoyu-ortek-d-44sm-9x35-sm-3282e823</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1d417819-346c-4405-8c93-38471608d5b1</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-valyk-dlya-shyyi-i-nih-olvi-j2522-50-19-sm-20x52-s-45c82a4a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/13761708-97f0-4b53-a44b-28df30f86dfd</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/trenazher-dlya-hallus-valgus-khallyus-valhus-4x7-sm-665b5c96</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/634aaefc-69be-4da7-ab67-99d9accab11e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-z-lushpynnyam-hrechky-ta-khollofayberom-60kh40-sm--af317d50</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/abc55337-acce-4024-85ea-ac05ce98dcad</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-z-efektom-morskoyi-halky-150kh40sm-38x41-sm-0cea25bd</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/fd572bf9-7ad7-420d-9c9d-6414c6033ed1</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-doroslykh-z-efektom-pam-yati-z-valykamy-m-yak-89b9c42f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/c89e3ec4-4667-497e-82a9-6c006d3c0049</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/valhusnyy-bandazh-nichnyy-sm-02-11x17-sm-0e56da13</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1236fca4-601c-4026-b5a0-74a1faeac5a4</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-novonarodzhenykh-u-korobtsi-28-5kh21kh7-5sm-m-63b38cbd</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2c44311d-c8c1-4c8e-b61d-335a8080a221</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-shyshky-1-element-26x26-sm-5db6626e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2c9b90a1-4793-47a7-b41b-b692762f113e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-shypy-1-element-26x26-sm-330f9bbc</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/13c3639a-05db-45a0-9bb8-a0f1bbafe228</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-yizhachky-1-element-26x26-sm-1f0acf3b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2ca9f97f-ca8f-4d5a-9610-04fc4a95160d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-6-elementiv-27x28-sm-4f1397b1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1f111351-84a4-4faf-90a4-ca6cb71af747</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-4-elementa-27x28-sm-7bc64594</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/76d75f5c-00be-41bb-bf2b-f3654cfa5242</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-z-lushpynnyam-hrechky-ta-khollofayberom-50kh70-sm--891a6a78</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/10199f25-7d11-4e4d-bb83-6d668d8c5439</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-pakhovoyi-hryzhi-dvostoronniy-8b59db09</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2d780f07-9862-43f0-a7cb-bd4395662e18</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/dytyacha-anatomichna-podushka-dlya-podorozhey-dorozhnya-42kh32kh6sm-olvi-7986e5f2</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2961d057-9088-4a41-beb5-2147f4adae09</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-pakhovoyi-hryzhi-odnostoronniy-livyy-a5e47357</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/73c9c7cf-200c-4f86-97a4-c4e25da9c274</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/dytyachyy-tazostehnovyy-ortez-remintsi-pavlyka-20x25-sm-203c14d7</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/38465312-2649-43b8-be1d-bf7ea7b22e03</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-8-elementiv-27x28-sm-2ac09275</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/562cf348-f645-477e-96ab-604a8d3657f7</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-hryby-1-element-26x26-sm-447cadd6</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4092b737-fa0a-48c8-b5f7-cfebf0cf3b8d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-travka-1-element-26x26-sm-8d609e17</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4bc13502-1922-42b1-9153-9e46b7870dbb</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-10-elementiv-28x27-sm-e115de3a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/95c1a7b9-cd99-4a75-8c5d-fd57bf1c6f8f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-dlya-vodiya-na-sydinnya-avto-z-lushpynnyam-hrechky-37kh42sm-olv-7ae81a2a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/08b4bafd-ce20-485b-aa04-c7c989a883d5</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/akupunkturnyy-masazhnyy-kylymok-lotos-1-element-26x26-sm-b8d71af6</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2b460c9e-2aa5-4036-b337-bec4392058bf</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/akupunkturnyy-masazhnyy-kylymok-lotos-6-elementiv-27x28-sm-34279d04</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/790ab213-fee7-4c8c-a678-1acf3e1140c5</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/akupunkturnyy-masazhnyy-kylymok-lotos-4-elementa-27x28-sm-b19cd7e8</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/886429c4-9dd9-43db-b72b-ce22d4906fba</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/akupunkturnyy-masazhnyy-kylymok-lotos-9-elementiv-27x28-sm-bb8f29c4</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/97c06f5f-9342-442c-a8ce-d51780d718e8</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-ortopedychna-klyn-pry-reflyuksi-58kh58kh29sm-olvi-j2540-58x58-s-73f5900a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/03916843-6f8f-463b-80ce-099da087cf8c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-z-nastilnoyu-hroyu-8-elementiv-27x28-sm-eb618e88</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/712f490a-0e9a-4a59-8f41-82b205743bd9</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-z-nastilnoyu-hroyu-lisovi-pryhody-10-elementiv-27x28-s-e43ee0dd</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/033ef658-46cd-46cd-8ef4-2bfe9679b605</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/okholodzhuyucha-nakydka-na-sydinnya-avto-pratsyuye-vid-prykuryuvacha-pod-288e42a1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/9b881451-0ed2-41cf-be5d-3e5619044d7d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-z-efektom-pam-yati-olvi-butterfly-59kh39kh14sm-j25-7737dd4e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/298aeb14-a4f6-4841-a388-7419f3a4cf95</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-sydinnya-z-hrechky-43kh31sm-z-remenyamy-kripl-2701eb5c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/77d1e5f3-3aee-45ae-9a6a-405d089aad35</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-halka-1-element-26x26-sm-f4296a35</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0b358488-373b-4c6d-8896-b26ca4eaf2ec</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-morskyy-1-element-26x26-sm-18635512</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4c272c20-60e7-42df-99e1-fd29118acac9</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-piramida-1-element-26x26-sm-e9e5ea4e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/00014dc7-a9b6-4693-aa32-bb1d00db090f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-morskyy-6-elementiv-27x28-sm-960db145</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2fbb2c11-3f08-48fc-a699-8fa6cddf48fa</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-morskyy-8-elementiv-27x28-sm-c6c4023d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/55d2207d-7111-426f-9ce0-c4595abdbb64</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-dlya-shyyi-kistochka-z-hrechykhoyu-32kh12sm-olvi-16x35-sm-bdf2ed6c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/349ab35e-f8e9-457b-b77a-b78719379b49</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/protyprolezhnevyy-matrats-z-hrechky-olvi-30x90-sm-d048a667</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/5790ef11-cf04-4b09-a037-b4537065f121</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-z-lushpynnyam-hrechky-dlya-snu-ta-vidpochynku-32kh-67a356cc</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/59ce8c8b-6b2c-4383-a72f-68213fd1b8a5</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhna-podushka-dlya-sydinnya-z-hrechykhoyu-37kh33sm-z-remenyamy-kripl-d894ae0a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/bc1613aa-386e-499c-b606-f77bcb6fcd1d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-dlya-sydinnya-dlya-pokrashchennya-postavy-m-yaka-46kh30kh11sm-b-f16994bd</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/634f93dd-0ed4-4e40-a0ff-493753a8fd48</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-pid-spynu-dlya-vodiya-na-blyskavtsi-34kh13kh8sm-z--ea64b7bf</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/183f4aec-2c8d-4c22-949c-3fec125b94d5</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-ortopedychna-klyn-pry-reflyuksi-58kh73kh15sm-olvi-j2540-s-59x73-dbf2d0b7</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/6c2e9804-018c-4758-93d0-3357ba09b005</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/heleva-podushka-dlya-sydinnya-z-efektom-pam-yati-m-yaka-45kh35kh7sm-na-b-296be2da</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2e46bb62-34a6-484b-9fe7-78c898fe5114</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/navolochka-dlya-ortopedychnoyi-podushky-z-efektom-pam-yati-olvi-butterfl-ff308c7e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/24b9650c-03b9-475c-a0d8-a2736a0bd746</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-meha-miks-14-elementiv-27x28-sm-75fba0d8</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1624586b-4ced-434a-90fb-1041389c0d00</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-meha-miks-16-elementiv-27x28-sm-385e0aa5</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/6ede1ce4-2691-4bf5-b4c8-1eb8157aeaad</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-meha-miks-18-elementiv-27x28-sm-3568d8e1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7483e9b1-6304-4fd1-be2f-3f6d5b0b4f19</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-z-naturalnoyu-halkoyu-ortek-soft-74kh44sm-34x40-sm-6c9c086c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1914cb88-6927-4edc-9795-2798caf7be9d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/sensorni-humky-dlya-dribnoyi-motoryky-stretch-it-13x15-sm-6caba5ef</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/28f69bd1-fc25-4a85-b84f-c3c528e2b27c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-rektalna-z-hrechkoyu-z-otvorom-40kh40sm-sira-olvi--ce4b0f38</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/57ef1344-f2ee-4f43-94d6-af9fb95f01c8</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-rektalna-z-hrechky-v-chokhli-na-blyskavtsi-40kh40s-19dcc8c4</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4c330314-b089-4b61-a1ab-84cb8caa846d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-matematyka-32-elementa-15x29-sm-55aedc91</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/5832da50-d7f6-4a16-9922-50161c78b0da</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-zholudi-1-element-26x26-sm-9ae4a4bf</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0bfe3a64-bf61-4b76-8d48-c5cd6fdb480d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/mobilnyy-tkanynnyy-stilchyk-dorozhniy-dlya-hoduvannya-feedseat-79ac55a5</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/363e4017-3701-4b3f-a2df-a46c6c37d197</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/mobilnyy-tkanynnyy-stilchyk-dorozhniy-dlya-hoduvannya-feedseat-morskyy-2cfa4322</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/e6fee9da-f330-4eaa-8f7e-b187da769659</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-dlya-perevertannya-khvorykh-j2006-43x48-sm-75aa5130</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/35274708-e9d0-4578-9db1-50e6847d8e3c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-klyn-podviynyy-pry-reflyuksi-z-rehulyuvannyam-vysoty-62x69-sm-1ab194e1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/28664904-0e5d-4650-8a01-7de865f4d79e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-meha-miks-z-nastilnoyu-hroyu-14-elementiv-27x28-sm-5ac11ca0</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2aa00915-98d8-4aa5-b01f-fbaa2b0f69fd</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-meha-miks-z-nastilnoyu-hroyu-lisovi-pryhody-16-element-4bba10da</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/a52156ef-4f95-493a-9447-a5ea04cf40c0</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shyna-radialnoho-nerva-w350-12x25-sm-003697ca</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/79400201-114e-42b2-b147-f13a92cf1e88</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-na-3-paltsi-dynamichna-reabilitatsiyna-shyna-dlya-paltsiv-trio-w33-ceed347d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0a5cab5a-d98c-4400-b5b0-f0e927436d14</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shyna-dlya-fiksatsiyi-kysti-ta-paltsiv-w324-prava-18x41-sm-4277148c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/da774d9f-6ca2-4e52-acfd-2245d9ce9847</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/reabilitatsiynyy-trenazher-dlya-kysti-ta-paltsiv-dynamichna-shyna-dlya-r-b2cd1591</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/81b70b53-5a80-4c70-a9cd-d6771180a907</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-plecha-z-podushkoyu-45-60-hradusiv-kosynkovyy-bandazh-w213--c1d4ff5c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/a316ac01-9a32-4904-9efa-01950245c63c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-liktovoho-suhloba-z-rehulovanym-sharnirnym-mekhanizmom-w218-prava--339a3485</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3d7a9e49-8543-4298-ab1c-7b1cc87e1233</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-pry-padayuchiy-stopi-w644-universalnyy-14x30-sm-52736fc2</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/17178805-6aec-4e33-bdf1-497c960440d6</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-pry-padayuchiy-stopi-w613-universalnyy-21x30-sm-c08879e6</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2cd6a4a8-0e4a-45f9-ac13-52a7dd81da3c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-pry-padayuchiy-stopi-w623-universalnyy-18x23-sm-44012444</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/55ac515d-b58d-4d55-b4f9-765bf5190d29</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-homilkovostopnyy-z-helevymy-vkladkamy-w616-universalnyy-14x16-sm-5f96de1e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/81968301-52b9-4068-b4ab-a6dfe2f45367</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shyna-dlya-velykoho-paltsya-nohy-rehulovana-bandazh-pry-khalyusi-valhus--84668dca</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/408fbb01-7c2d-484e-8c91-62d596877d5d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-pid-spynu-z-efektom-pam-yati-j2508-m-37x37-sm-c6676cc2</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/38a21463-d29d-430a-8bed-9f64e29b8899</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-snu-na-spyni-z-efektom-pam-yati-37x37-sm-33140456</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/02ef0ed0-ff7f-4be3-a9e2-f5302e2c89f2</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/medialna-i-lateralna-sylikonova-ustilka-klynovydna-2sht-na-lypkiy-osnovi-a9300c95</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/10b01d5b-8d80-4cc9-9007-14fb669b9afc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/pov-yazka-dezo-w217-837a3d6d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3d0dd576-6d0b-492d-ab17-587da89572eb</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shyna-dlya-immobilizatsiyi-ruky-bandazh-dlya-fiksatsiyi-kysti-w325-liva-781f3c5d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3d7ebfea-1e99-4a44-ae14-8f93dc2ca368</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-na-kolino-dlya-immobilizatsiyi-w519-fcd62a96</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/454b6246-8c11-4e84-9cbb-ae21687fc91c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/lihamentarnyy-ortez-na-kolino-20-hradusiv-immobilizatsiya-kolina-w529-b5e5a7d3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/077cad67-0bea-441e-bba8-26693d17ea81</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/tazostehnovyy-bandazh-zhorstkyy-universalnyy-ortez-na-tazostehnovyy-suhl-cd900523</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7a1a8faf-8ffd-45af-87d7-050d5f128c52</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/vzuttya-pislyaoperatsiyne-baruka-w610-eaf643dd</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/a2633b00-af41-4e97-9eee-dc8fe959de80</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/derotatsiynyy-ortez-chobitok-dlya-homilkovostopnoho-suhloba-siryy-w643-79acee7e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/73019b4a-645a-4058-b12c-4fcf13bbd2f0</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/derotatsiynyy-ortez-cherevyk-dlya-homilkovostopnoho-suhloba-z-rehulyuvan-dc60953c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/762fda84-6587-4402-8123-6ab55ddefa18</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/nakolinnyk-dlya-kruhovoho-kolinnoho-suhloba-sharnirnyy-z-rehulyuvannyam--8403445f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/aa00dfb8-5a16-43ba-9e93-46a57e2ef240</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shyna-dlya-immobilizatsiyi-ruky-bandazh-dlya-fiksatsiyi-kysti-w325-prava-15764a19</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/522a6a21-15fe-4ae8-9ced-2fd01afe5c64</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/termoplastychna-shyna-proty-spastychnosti-w326-prava-ad651a4f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/56c05f8e-d8ee-41aa-b696-e92c270c9380</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-ortopedychna-z-efektom-pam-yati-j2531-z-vyyimkoyu-dlya-plecha-3ecce29c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4981fed8-df94-4f72-ac23-d4c908b6db33</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/sensorne-sydinnya-pidlohove-skladnyy-stilets-53x75-sm-03b3790d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/83515f93-1a82-414b-8545-1e95130cee3e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-shyynyy-rehulovanyy-z-fiksatsiyeyu-pidboriddya-holovotrymach-20x-4060bf06</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/84fc33d1-d721-4795-a6ad-469d3a074cc2</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/mikrostrumovyy-masazher-dlya-oblychchya-huasha-liftynh-ta-znyattya-nabry-61ef1211</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1f3bf464-49c0-4d82-9db9-20db133f2ddc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-nih-ta-kolin-z-efektom-pam-yati-j2518-24x25-5-e08598cf</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/914ee519-d02d-4862-95a6-9a25636dd755</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yaka-ortopedychna-podushka-z-efektom-pam-yati-sonata-soft-j2528-38x68--db9d9367</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2709bff5-61bf-49fa-ba5f-1e53b345ff2e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-z-efektom-pam-yati-sonata-j2527-38x68-sm-73237f0d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/5b7cf6d3-b377-42a9-9943-a1e502552c42</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhna-podushka-dlya-sydinnya-dlya-vodiyiv-new-45x42-sm-0220d9e4</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1f52d0d9-e022-4c3d-8b68-c98737a2e434</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-liktovoho-suhloba-z-rehulovanym-sharnirnym-mekhanizmom-w218-liva-922765a6</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/69b72548-b652-4762-9eb1-46158335834a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-doroslykh-z-efektom-pam-yati-khmarynka-olvi-j-862dec4b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2fe48cbe-61d9-4cf0-8b43-57ba1ccace39</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-doroslykh-z-efektom-pam-yati-khmarynka-olvi-j-664c8dc1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/a85cb767-d8f6-4afb-b176-0f542b0a52b5</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-doroslykh-z-efektom-pam-yati-z-valykamy-m-yak-82789ef2</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/ac5a308f-a8fe-4aad-b122-7c3f7e5a1c21</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-doroslykh-z-efektom-pam-yati-z-valykamy-m-yak-1e8bc83b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/99da6bf3-7a1c-4d16-8fd6-d92d80f557d2</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/robot-trenazher-dlya-ruky-ta-paltsiv-reabilitatsiya-ruky-pravyy-89f03437</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/18f526e1-f7fa-4572-9352-120694992c97</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-mushli-1-element-26x26-sm-563cdc47</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/470fa246-49cd-4142-bda7-585de04a6f24</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-vezhi-1-element-26x26-sm-21f94025</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/53c4e6cf-0cbc-4837-bb05-672324d0d90f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kinezio-teyp-kineziolohichna-strichka-5sm-5m-w1033-8x8-sm-43e450ef</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/217997ad-7764-410d-8a72-5f56dc25a36c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yach-dlya-trenuvannya-reaktsiyi-reaction-ball-7x7-sm-4875e2b4</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/aa637ca4-86ba-4ec1-8d69-d4a3b525c9f7</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-9-elementiv-27x28-sm-3fc46ab1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/45b52cd7-c9ba-44e0-bc2c-d4907cb78a5d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-morskyy-9-elementiv-27x28-sm-7fb078f3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/c1dcac5a-2ec6-475a-835c-ab6f1c12f7f0</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-meha-miks-12-elementiv-27x28-sm-eddd6738</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/e02d3e24-3368-4c3d-b2e5-a4d6b2441e09</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/strasburzka-shkarpetka-dlya-likuvannya-shpory-p-yaty-8185ef2e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/532b329f-124f-4423-8896-42aa26dea5d5</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/portatyvnyy-dush-robot-iz-zvorotnym-vsmoktuvannyam-vody-dlya-kupannya-bu-1c28a757</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/35712c41-4723-4bfc-8fdd-abaef0b69511</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shyna-dlya-fiksatsiyi-kysti-ta-paltsiv-w324-liva-18x41-sm-7134d13e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0832a0fb-ba17-4359-9dd5-3eb92790e25a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-pazly-hryby-kolorovi-blakytnyy-1-element-26x26-s-8a85362c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/16536233-081e-458d-8118-772b1d411e7d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-pazly-hryby-kolorovi-chervonyy-1-element-26x26-s-f1d10ee2</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/a95d715f-186c-402f-a020-ff39e7fd105a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-z-efektom-pam-yati-ta-helevoyu-vstavkoyu-butterfly-3f015eb6</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/56fbe3fe-3c8a-4f78-a253-deeec0a4468c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-dytyachyy-pry-kylevydniy-deformatsiyi-hrudnoyi-klitky-dynamichnyy--b0ebabf4</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/151115ac-fad5-4f74-a1bb-8a68849f8980</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-dytyachyy-pry-kylevydniy-deformatsiyi-hrudnoyi-klitky-asymetrychny-f83d56b7</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1191797f-4f07-4503-822e-9692b33300af</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-dlya-vodiya-na-sydinnya-avto-z-lushpynnyam-hrechky-sira-37kh42s-c68fbc92</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/45e5558b-a7da-4cbc-b9fd-349371015a5a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/aparat-dlya-fizioterapiyi-ruky-z-pultom-keruvannya-na-opori-50x60-sm-ef99874f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/299b9050-0073-4d5e-b967-28e1d832bcb0</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-meha-miks-20-elementiv-27x28-sm-1ce1a2e3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/19dd5b10-723a-4e24-a6a6-fca9b73ad043</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-meha-miks-21-element-27x28-sm-88ab30ba</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/d0b758e5-3387-4ec6-9bca-395dbf4af8d2</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-meha-miks-24-elementy-27x28-sm-3861de9a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2a3cd0e8-e07c-4492-89a4-7a28d75e7eac</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-meha-miks-25-elementiv-27x28-sm-75cf3de7</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1da0351b-e954-42a5-8ce2-ee20e83fe784</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/avtomatychnyy-aparat-dlya-vyhotovlennya-diy-masok-naturalni-ovochevi-ta--510a410d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/73dd32c0-011e-4bbc-b609-e4367c029f8d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-klyn-podviynyy-pry-reflyuksi-z-rehulyuvannyam-vysoty-j2540-dg-6-e91538a9</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/16ecabc2-ba6e-4881-b62c-453b1a63ad72</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-ortopedychna-klyn-pry-reflyuksi-58kh58kh29sm-olvi-j2540gr-58x58-86fb08f0</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/50f46ac6-b69b-4549-82f4-e893002f6757</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-ortopedychna-klyn-pry-reflyuksi-58kh73kh15sm-olvi-j2540sg-59x73-5a2fb48f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/17b5040e-bcd2-4ce0-a110-86e6ff36b120</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/nabir-z-2-rehulovanykh-valhusnykh-shyn-z-bandazhom-dlya-likuvannya-khaly-35806b70</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/90df5f2f-7a86-47d6-b645-858dad3b6aca</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-klyn-pry-reflyuksi-shyroka-ta-m-yaka-73kh73kh29sm--0b94c737</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/225eb4e6-c1dd-4c66-9348-89f012d72445</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-klyn-transformer-pry-reflyuksi-z-rehulyuvannyam-vysoty-ta-dovzh-01367544</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2b3a5356-6e24-4f49-a74a-5623c5be5864</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/svitlodiodna-led-maska-dlya-fototerapiyi-7-spektriv-svitla-25x33-sm-0af7503c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3ee86122-e5c6-483b-80ce-9d919ed56655</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-pazl-halka-kolorovyy-rozhevyy-1-element-26x26-sm-9cfadb8c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3afc97fc-acf1-40d6-b64c-84e8d00759e4</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-klyn-transformer-pry-reflyuksi-z-rehulyuvannyam-vysoty-ta-dovzh-f0af3d34</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/123c483f-b1ac-4abf-88a7-56fc04e79b3d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ihrashka-antystres-sadovyy-cherv-yachok-5x8-sm-b3fa37fd</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/70a04a64-3bcc-435b-9237-892bb5774596</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yach-dekompresiynyy-magic-ball-25x25-sm-020ffc44</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3fe66bde-3560-4326-aded-ef720e5c1a74</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/sensorna-ihrashka-spiner-orbita-7x7-sm-3f6a6349</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/50a217e2-b85c-4f81-8db8-220af6177a87</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/karkasni-napivustilky-4rest-orto-art-09-908-r-r-dytyachi-7x14-sm-rozmir--21625739</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/341d2290-cee0-4363-bc09-337e5a1742ea</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/dodatkova-rukavychka-dlya-trenazhera-robot-prava-dfa802e5</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/413cf6bd-1ab7-4d04-b384-e34f61c3fa51</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/dodatkova-rukavychka-dlya-trenazhera-robot-liva-3a441729</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/76b62196-ffdd-44c5-bf2d-f59f50883a9d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/dodatkovi-rukavychky-dlya-podviynoho-trenazhera-robot-dlya-dvokh-ruk-95ba4f7d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/15fb0e9a-17da-4493-91d6-1d82eb0afec3</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/mezoroller-dlya-oblychchya-ta-tila-6-v-1-10x18-sm-21cffff3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/74f4d379-0c0d-460d-be5e-ac3a6cca82db</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/vakuumnyy-masazher-dlya-tila-elektrychnyy-banochnyy-masazher-14x18-sm-3772dcee</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/375abec6-b04a-4c29-bb45-0eb1cfc1073e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/vakuumnyy-masazher-dlya-vsoho-tila-akumulyatornyy-antytselyulitnyy-masaz-1d641381</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/c34e565f-f33b-4678-99a4-6bdea276e97b</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/okholodzhuyuche-zihrivayuchyy-komres-dlya-holovy-z-helem-360-18x22-sm-7b798f7f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/85874b52-2dcc-4aac-94c4-ba1e4be657d8</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/okholodzhuyuche-zihrivayuchyy-kompres-shkarpetka-13x18-sm-ce983b8e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/89ac9e8e-5350-4384-9791-0538d090d0b3</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/okholodzhuyuche-zihrivayuchyy-kompres-shkarpetka-z-vidkrytymy-paltsyamy-15b56a85</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0c4fc2c2-2610-4422-b88f-2ddc7b13b872</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/okholodzhuyuche-zihrivayuchyy-kompres-dlya-zap-yastya-12x18-sm-00486641</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/c395862a-b46f-4855-a5e4-3cd1f7864ab6</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/okholodzhuyucha-nakydka-na-sydinnya-avto-z-bambukovym-pokryttyam-49x51-s-38196245</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/9f0cb07f-e51f-4bab-828b-7b31738527f8</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/okholodzhuyucha-podushka-na-sydinnya-avto-45x45-sm-d9dde6ca</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/14b29027-3aa4-4c5f-8793-1b2827519041</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazher-dlya-rf-liftynhu-oblychchya-9x21-sm-d181a4bb</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/5b38a2e3-2e16-40cd-b447-772b474c448c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-6-elementiv-kolorovi-hrybochky-dlya-divchyn-1cbaa778</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/64d6679a-fbdb-4939-a4ac-24b130b3d358</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-6-elementiv-kolorovi-hrybochky-dlya-khlopch-e78533e8</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/6a066d67-716a-41dd-91fd-0f59a2d4e2cc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazher-dlya-holovy-vid-vypadinnya-volossya-ta-dlya-vsoho-tila-16x14-sm-72a61692</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/00edc6a6-5e84-417d-9012-010adc46d25c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-dlya-fiksatsiyi-shyynoho-ta-hrudnoho-viddiliv-khrebta-minerva-posy-2123710a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0235c0a3-2d44-4ced-a650-c67484275a8e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-kolinnoho-suhloba-z-mishkom-dlya-lodu-roz-yemnyy-w538-14x8--00a0e6e0</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/04974eb5-b138-4e46-9cec-050a612ad531</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-plechovoho-suhloba-z-mishkom-dlya-lodu-w227-14x8-sm-cc710ffa</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/cf824343-70c8-462f-b054-867bff4e4245</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/korset-dlya-pasturalnoyi-korektsiyi-z-2-ma-rebramy-zhorstkosti-w408-18x3-6c99401a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/26821e31-2174-42d2-b6c8-c9d09259deb0</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-stabilizatsiyi-klyuchytsi-w215-03ac6e95</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/ac842e5b-8019-40db-b38f-c8b32518ed04</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/dytyachyy-ortez-liktovoho-suhloba-z-rehulovanym-sharnirnym-mekhanizmom-w-91c54995</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/67caf810-2f99-4adc-892d-9b00953d4832</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/dytyachyy-ortez-liktovoho-suhloba-z-rehulovanym-sharnirnym-mekhanizmom-w-bbdcd2aa</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/25e90695-a721-4914-ada3-182fcdb7e338</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/vzuttya-pid-hips-pislyaoperatsiyne-w612-ce39bbd7</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1e1854f1-c3fb-4f57-8fd6-15e0dcaeacf9</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-dlya-fiksatsiyi-akhillovoho-sukhozhyllya-w638-523b67c3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/299a95a4-d0c7-4d52-a829-e95ad81d027b</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhna-opora-dlya-shyyi-relaksator-16x23-5-sm-ca1b76d8</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/18ff36d2-c2e3-40d2-94c5-9ca7aaf5c737</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-terrazavry-1-element-26x26-sm-0a6d79f5</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/29a62672-99a7-4ba4-adce-87c975a83936</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-zap-yastya-fiksuyuchyy-podovzhenyy-10x20-sm-07fa81df</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/6243dcc1-f664-409b-81f1-b0c2f79acd28</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/valhusnyy-bandazh-z-2-vydamy-rozdilyuvachiv-paltsiv-ta-helevoyu-podushec-6e608cd9</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0fef48af-6fa0-47cb-9c43-595a1af023e1</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-zap-yastya-ta-velykoho-paltsya-z-alyuminiyevoyu-vstavkoyu-1-56ad731e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2a38bbdc-781a-46b0-9cf7-222f192be87a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/hrebinets-zi-svitloterapiyeyu-vibratsiyeyu-ta-rozpylennyam-dlya-posylenn-8c42b4b1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7469847e-52a3-4961-9663-d6ae910f9ecd</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-pid-nohu-pry-perelomakh-chy-operatsiyakh-20x42-sm-25ab319b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/9f414df4-f732-49be-b577-bad15ae16100</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-dlya-nih-ta-kolin-z-efektom-pam-yati-sira-j2518-g--95fc0dfa</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/69a82746-cca1-4509-b3aa-dd3a4a9ff7d4</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-pidyomnyk-dlya-sydinnya-z-efektom-pam-yati-dlya-dopomohy-pid-ch-1ce664d5</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2c208983-54d0-421b-93fa-61142aa0f58e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/nabir-balansyriv-dlya-ditey-krokodyl-6sht-balansuvalni-fihury-22x41-sm-bd85649a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/63a31a51-2a84-4339-9d1b-c447bf9fe02c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/balansuvalna-dorizhka-derev-yana-25x60-sm-2c48be58</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7b72cdbf-cc4e-472f-9c05-b4736db4d65d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/doshka-dlya-vidzhyman-z-taymerom-ta-lichylnykom-60-polozhen-ruchok-25x38-af42abff</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/77c54fdd-6ddd-408b-a0d3-7a8b177d2be6</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kubyk-fidget-dlya-rozvytku-dribnoyi-motoryky-sensorna-ihrashka-antystres-27f6ddba</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1bf61649-19fd-489a-98e6-de33bca03dcc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/svitlodiodnyy-poyas-aparat-dlya-led-terapiyi-20x43-sm-443163ae</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/9510b707-2f32-43ae-a746-e9e4add54781</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-z-lushpynnyam-hrechky-dlya-snu-ta-vidpochynku-33kh-6d1500ca</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/07887ddc-8015-4de7-8258-13c2c498cefb</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-z-naturalnoyu-halkoyu-ortek-110-40sm-15x40-sm-ff316c4b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/6f466138-640e-4a5d-8a19-f303986f9034</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-z-naturalnoyu-halkoyu-ortek-soft-93-44sm-30x45-sm-e8181d13</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/57854339-305f-4047-8de0-9a409d9f4936</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/okholodzhuvalno-zihrivayuchyy-kompres-dlya-holovy-z-helem-na-180-17x22-s-9d59cf3d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/054aeaa8-eaab-419c-a63a-f92f7c4d1968</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-ptakhozavry-1-element-26x26-sm-37881e1e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/69a32984-8879-4417-9db6-33958c5f08d7</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-z-efektom-pam-yati-baby-dream-j2519-28x38-sm-a5a048f8</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/8af785bb-e995-4420-a484-8f6bfbfadcfd</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-pid-spynu-anatomichna-z-efektom-pam-yati-ta-dodatkovym-valykom--915d6629</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/539af606-8dbe-47bd-8773-cd8f84058f10</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-akvazavry-1-element-26x26-sm-13ab190c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/8e5e0b98-4ada-409b-ae65-b3003fd9eea9</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-trykutnyk-zmiyka-1-element-19x23-sm-39ad2618</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/98e48675-fe7f-44b8-96b8-3722f8962ef8</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-trykutnyk-khvyli-1-element-19x23-sm-3e18faec</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/72d9a308-b9ba-4402-853b-febca1ce2613</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-dynozavry-pazly-9-elementiv-27x28-sm-049f64bf</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/12a89443-1f52-4f13-94ff-8e186ac4aa40</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-dynozavry-pazly-10-elementiv-27x28-sm-9669f39a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/24111196-8d89-4fd7-be34-efab32a64d1d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-dynozavry-pazly-12-elementiv-28x28-sm-dd19a0d9</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7f691a60-b495-4902-a1c7-a82e87de69b7</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-dynozavry-pazly-9-el-6-trykutnykiv-28x28-sm-8d3e5cac</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/73eb2aeb-26ef-43c4-9602-f0a2affd5e83</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-dynozavry-pazly-10-el-6-trykutnykiv-28x28-sm-5dc4c78f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/420dfc38-83c4-436f-a86c-55d8d2b0b48a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-dynozavry-pazly-12-el-8-trykutnykiv-28x28-sm-65a05a3a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/f3114fa4-3ab3-46e4-aba0-174de94c583f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-dynozavry-pazly-8-el-8-trykutnykiv-28x28-sm-3e28ae78</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3d3ade50-b991-48c6-9bef-c4940d28122d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-trykutnyky-8-elementiv-28x28-sm-304c5cfd</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/11d26bf6-6783-4a0a-a6ea-b807f29e5d76</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-trykutnyky-12-elementiv-28x28-sm-a03bc0ac</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7751ccf1-3d38-44a0-9a33-932e3cd3ca28</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/rolator-dytyachyy-z-pidlokitnykamy-25x70-sm-46f715e9</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/b5448122-5d8a-4f16-afd6-97dbb7ce9eb4</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bizibord-montessori-na-batareykakh-12x21-sm-8a3e5bd1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/639fe475-f959-48e9-b0bf-fa978e0ec53f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ihrashka-dlya-trenuvannya-reaktsiyi-z-palytsyamy-shcho-padayut-vstyhny-z-bfd5e0e4</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/64235a02-d7c6-4a60-86f8-72e5958c621f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/pidholovnyk-bichnyy-na-sydinnya-avto-trymach-holovy-v-avto-rehulovanyy-3-434e24e6</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/b4e1d6d5-80dc-43fe-b9f5-9f0cd6ce952e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-6-el-6-trykutnykiv-28x28-sm-33914ba9</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2385a392-e7fc-46c0-8719-01cc580d4132</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-8-el-8-trykutnykiv-28x28-sm-6782dfc3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3451c32b-9bdf-46c9-bae3-60e906ba7f05</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-10-el-6-trykutnykiv-28x28-sm-e9a53244</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4993f9a0-088b-4408-89a3-ad0eb95e62e1</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-12-el-8-trykutnykiv-28x28-sm-bd8fdb0b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2e382495-d87b-478e-9b5c-01ef4c0a5cf1</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-14-el-8-trykutnykiv-28x28-sm-e2cac35d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/18b773c1-dcfd-4867-a5f8-a63c7cecf0f2</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-16-el-10-trykutnykiv-30x30-sm-00af442b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/32236ac6-26ee-4333-9040-88722ba06666</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-18-el-10-trykutnykiv-30x30-sm-b1af1a1b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3399c7ab-21dc-40ad-bdcc-2a649d37ae83</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-morskyy-6-el-6-trykutnykiv-28x28-sm-2b74d5bf</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7503b095-f296-4e1a-b11e-4ad472b075d0</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-morskyy-8-el-8-trykutnykiv-28x28-sm-c39ba7b4</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4d547d5b-1c29-438c-8679-dd3a7ec72312</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/nabir-dlya-sensornoho-rozvytku-dytyny-ruchky-nizhky-16-el-sensorni-tekst-12c835fe</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/50a1e5c9-b79d-4885-bb1e-e8aec584ba5b</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-6-elementiv-pastel-27x28-sm-e4d02ebd</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/14f2138e-904e-4ddb-b00e-16ada4ed9c22</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-8-elementiv-pastel-27x28-sm-a66c8826</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3f7a0e17-3928-4d94-8c35-889d2d3a91ee</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-dlya-reabilitatsiyi-ortek-mix-20-elementiv-zhorstkyy-2-34ef782e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/5f4d4c91-2e0b-4e32-9114-18c8a4492e11</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-dlya-reabilitatsiyi-ortek-mix-10-elementiv-zhorstkyy-2-bfde2df9</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/123613a2-f468-4107-b6c5-fc56c59ca600</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/rozumnyy-elektronnyy-korektor-postavy-z-vibratsiyeyu-10x12-sm-00d58bfc</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4072ace2-4b55-44f1-8737-c9d525901632</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/piznavalna-navchalna-mozayika-holovolomka-23x23-sm-ec125136</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/320ee292-3801-4844-b861-a3019b5ef316</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/mizhpivpivkulna-doshka-zi-znimnymy-vkladyshamy-17x32-sm-1b16b721</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2aa94338-f76c-4245-82b6-326eddc783b4</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/derev-yana-mizhpivkulna-doshka-zmiyka-16x31-sm-b684b54a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/41df991e-b934-48a6-9507-f30866f2db69</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/dvostoronniy-sensornyy-antystres-kylymok-calmpad-17x20-sm-04a8c4eb</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/9189c1ca-ed54-4b3f-8d02-b5942291ac41</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/nastilna-lohichna-hra-ball-battle-7x18-sm-33b8e45b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0dee71c8-7b52-4977-bcb4-1479ab275080</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/navchalna-holovolomka-dlya-rozvytku-lohichnoho-myslennya-19x27-sm-967beddc</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3acb860e-7b5e-4394-9653-4f0f87ce9980</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-12-elementiv-pastel-27x28-sm-2b919da4</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/40280f60-01f6-43c5-ae65-6dfaf09fba2a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-6-elementiv-m-yakyy-27x28-sm-f52f1695</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/a3987c40-8942-4b00-a172-3b8c4adc3e0b</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-8-elementiv-m-yakyy-27x28-sm-5b060164</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/6aa755ca-f775-461d-a0f0-d544bc1a6a48</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-10-elementiv-pastel-27x28-sm-77b511af</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7c4a0ef0-5b43-4aa0-96d6-3309103f886a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/heleva-podushka-dlya-sydinnya-soty-43x22-sm-b49f6182</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/81b2aafb-6eb5-44c1-a4af-5e61b2768a80</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/navchalna-holovolomka-dlya-rozvytku-lohichnoho-myslennya-fihury-20x25-sm-ac9d7771</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7a3b533e-7c01-493c-a286-6e27b5ed876b</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/hra-labirynt-zhabka-13x15-sm-69dcf337</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/11620e92-6924-4c19-ada9-f465f1db3033</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/rolikovyy-elektrychnyy-masazher-dlya-oblychchya-11x29-sm-22edd187</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1ccd6d27-ecd4-4fc9-8c83-d21ad325fa14</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/valhusnyy-bandazh-sm-01-11x17-sm-8c00785d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/222c6c6f-7e06-4061-81a3-a5d6833641dd</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/obertalnyy-stilets-dlya-trenuvannya-rivnovahy-16x57-sm-a3a5af94</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/5a6666ed-654f-45a5-b915-f18e7d9202a4</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-na-koleno-s-rehulyrovkoy-uhla-shybanyya-w516-24x66-sm-razmer-45sm-441c512c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/08ebfe7d-179b-422b-a1e8-fcf4c1bc28d5</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/derotatsyonn-y-ortez-sapozhok-dlya-holenostopnoho-sustava-bel-y-w618-32x-7cb6ddbc</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/97345df6-2710-470d-8bfd-2c72cfcd2aac</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-na-homilkovostopnyy-suhlob-derotatsiynyy-chobitok-nichnyy-w640-44232074</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/03199133-0b46-4729-8453-233a93f9cf11</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-dlya-fyksatsyy-sheynoho-y-hrudnoho-otdelov-pozvonochnyka-minerva-u-e937b3c9</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/574d7909-55ab-439d-b5e4-544e1d12a3f4</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-na-holenostopn-y-suhlob-pry-padayushchey-stope-zhestkyy-pry-dorsyf-3d35d005</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/a1d5594d-bfcc-4eee-98ad-7eb599d1c96b</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-na-homilkovostopnyy-suhlob-pry-padayuchiy-stopi-dorsyfleksiyi-w617-e710a423</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4f0bb292-8e5b-4e94-a206-bf210338095e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shyna-dlya-fiksatsiyi-4-ho-ta-5-ho-paltsiv-bokserska-shyna-w307-liva-10x-5c92c9b1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/c63efbeb-645c-4a4f-aff1-c00b8ec48db1</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/shyna-dlya-fiksatsiyi-4-ho-ta-5-ho-paltsiv-bokserska-shyna-w307-prava-10-4485d92e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1e88de3b-e75a-4641-b244-a9d4d04c6ea9</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-podderzhky-pochek-20x20-sm-razmer-l-ab2f9b07</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/8d420bce-cea0-400f-bf85-f118b28c501f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-pakhovoyi-hryzhi-odnostoronniy-pravyy-768f39c9</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/87549c63-01c7-4953-aeb6-f940134c23d4</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-na-paltsi-dynamichna-reabilitatsiyna-shyna-dlya-paltsiv-binarna-w3-e36c65f2</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/36552816-4206-4cbb-89c9-7548a2165f26</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortez-na-palets-dynamichna-reabilitatsiyna-shyna-dlya-paltsya-w336-8eedcb38</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/72b55a56-ed44-440b-b3f0-c697e02a970e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/lektromassazher-huasha-s-podohrevom-y-ovaln-my-kamnyamy-byan-20x25-sm-750165b3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3a9afa6f-6744-4484-a71c-077499800a0d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/lektromassazher-huasha-s-podohrevom-y-kruhl-my-kamnyamy-byan-20x25-sm-d9bb5c57</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4f95f2de-7c61-4d78-8f12-25eb1443422a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/sensorni-antystres-kamintsi-dlya-ditey-z-osoblyvymy-potrebamy-11x13-sm-ebd320a0</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/a1d787a4-84cc-4ed9-8131-bd174a65bfc1</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/reabilitatsiynyy-robot-dlya-plecha-liktya-ta-zap-yastya-20x51-sm-c17f83ff</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/39fe65c1-f128-4f18-983e-6e3122562a5e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/khodunky-alyuminiyevi-51kh45kh71-88-2-8-kh-78x52-sm-bce7487f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7a48622c-77fc-4c74-aab3-0c066b9568c4</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-sektor-krystaly-1-element-art-1038-19x24-sm-1a0c6aec</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/5af46979-1f9d-4b80-9117-0a144069ada1</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-sektor-krapli-1-element-art-1037-19x23-sm-51b0aa8e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7798428f-ade4-4849-9cc1-50226395a991</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-8-elementiv-8-sektoriv-pastel-28x28-s-51fd746c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/47eb2dab-121d-4e11-89a8-f82595077079</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-10-elementiv-6-sektoriv-pastel-28x28--cd697a97</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3ef117ff-0f4f-47e6-9c82-9a90f13fe3a2</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-meha-miks-pazly-12-elementiv-8-sektoriv-pastel-2-c5f97a2b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3eb052aa-8f24-4e03-b6e7-1249327fd412</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-meha-miks-pazly-14-elementiv-8-sektoriv-pastel-2-98837c2c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3986f0f4-2f6f-4b67-a9e3-6d700b584992</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-6-elementiv-6-sektoriv-pastel-28x28-s-ae58fcaf</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/5e44dcae-b978-4c0b-b0e8-73a1de766ae2</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-soty-1-element-art-1039-26x26-sm-ff73f226</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/599debc1-f724-43ed-89bb-3c59ade6fc04</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-dlya-sydinnya-z-pidihrivom-chorna-45x1-5-sm-82dc848f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2a89fcca-7497-4dde-8dc5-5035a09b590f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/termonakladka-dlya-avtosydinnya-49x3-sm-0e70a12b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/49edb6b6-93da-4223-831e-e50b013008b3</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-2v1-dlya-pidtrymky-shyyi-ta-popereku-11x40-sm-1498140d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/657f6d04-91cd-4268-a8d7-2e97b3e33902</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/okholodzhuyucha-nakydka-na-sydinnya-avto-z-tekstylnym-pokryttyam-49x51-s-3f4747e7</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/167ed774-b365-40d2-a390-2f7cf8fd3c65</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/robot-trenazher-dlya-obeykh-ruk-dvoynoy-reabylytatsyya-ruky-34x33-sm-raz-54f8778a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/9c20e145-59ee-4127-9cf8-8982853edf1f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/robot-trenazher-dlya-ruky-y-paltsev-reabylytatsyya-ruky-lev-y-24x30-sm-r-ccc1a91f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/43e1c214-8435-4674-874b-970b9ffc5fc9</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-pid-spynu-anatomichna-z-efektom-pam-yati-ta-dodatkovym-valykom--169d3bbd</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/34ae1955-93b4-4261-9497-bdfd5c41078e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-pistolet-u-obraznyy-z-podovzhenoyu-ruchkoyu-model-930-41x6-sm-77c3fe0c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/335d90eb-dd9b-429a-a78f-b359db8e003c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/innovatsiyna-robotyzovana-rukavychka-dlya-vidnovlennya-funktsiy-ruky-tj--18fff04e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7b4674d9-71ae-42a3-a31c-1a30328aeb6f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/elektrychna-hrilka-dlya-spyny-shyyi-kolina-43x84-sm-ed4ba25a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7be8fd8f-0459-401e-a153-7d5ed4c0b3ff</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-ortopedychna-lateksna-41-5kh24kh11sm-olvi-latex-classic-s-j2513-21f3d274</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/5a8209f1-19e0-4d02-a598-879bce9f7d33</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-ortopedychna-lateksna-59kh43kh10sm-olvi-latex-classic-j2514-43x-b7918c74</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4b004359-28f7-4949-bfa3-ef638dbfed95</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-ortopedychna-lateksna-59kh43kh12sm-olvi-latex-classic-j2515-43x-b431f427</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/6f4d4267-ef53-4268-84bb-37682e584d37</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/heleva-podushka-dlya-spyny-z-efektom-pam-yati-32kh33sm-33x32-sm-0a99e415</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/529a4351-5e43-4a11-9940-963d9705e9fc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/sensorna-doshka-z-labiryntom-3d-17x20-sm-77b22105</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/a3245827-3ab7-40be-a436-f5469d7d3d88</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/3d-sensornyy-kub-17x20-sm-74520b7d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/d9dced72-6f41-4bde-9312-8168c0ace62e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-4-elementy-komplekt-moduliv-vizerunky-75728a28</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/b42bc2c7-6083-4a54-8914-d3b58f0f1326</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-6-elementiv-komplekt-moduliv-vizerunk-6b04b730</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/066d7ec8-d089-4641-9f53-7e3deb1b940f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-ortopedychna-j2311-dlya-chytannya-55x56-sm-0d28f660</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3a93ab96-d0e9-44e3-82bf-4fc2c6866ba7</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/antystres-braslety-tekstura-11x13-sm-68eefedf</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/183f96f7-e40e-44a7-b63c-46ce72cfb42c</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-ortopedychna-z-efektom-pam-yati-j2529-sertse-30x53-sm-c7d5bb86</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/97a55c8c-6579-4030-8504-5004e9dc2f74</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-derev-yanyy-eko-90kh40sm-331dbdbf</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/32e7586d-8778-46eb-87b3-c9a9377c7698</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-6-el-6-trykutnykiv-hra-v-podarunok-28x28-s-b31b2713</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2c2ea5d4-e99e-4324-bec7-6acd0e6fd077</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-8-el-8-trykutnykiv-hra-v-podarunok-28x28-s-8387d994</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/252549cf-0308-49d9-a815-1de25ad0d4e5</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-pazly-10-el-6-trykutnykiv-hra-v-podarunok-28x28--10fdbbd1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/89aa6df5-b0a7-47be-9390-ecfa237f9b8a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-8-elementiv-vizerunky-v-podarunok-27x-bfe17103</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/16dd3f74-5787-4643-95c1-e592a2620ec6</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-12-elementiv-vizerunky-v-podarunok-27-cbfec1df</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/21f55e2d-c143-4dea-aa57-b5c444d14129</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/komplekt-moduliv-vizerunky-16x24-sm-a5b627ba</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/71105355-9710-49c8-8a6a-608724fe34cc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-soty-1-element-komplekt-moduliv-vizerunky-2-477ed459</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/40706852-37c3-4f4c-976f-e4725381a620</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-pivsfera-1-element-art-1040-26x26-sm-c26501cc</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/5b0cd505-31f8-437b-af9d-bb121c453ee3</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-9-elementiv-onovlenyy-27x28-sm-3a5ce78e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/30af4a14-d689-4250-8a4c-a4806634e9fc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-napivvalyk-z-efektom-pam-yati-olvi-j2510-s-21x32-s-19153e44</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/136222aa-ff53-4930-91fd-8dcdab420fba</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychna-podushka-z-efektom-pam-yati-m-yaka-olvi-butterfly-soft-59kh-cf5e8ac3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/18f225c3-f242-42b4-b336-f2d7fcf91c51</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podushka-ortopedychna-z-efektom-pam-yati-j2531-soft-z-vyyimkoyu-dlya-ple-198df1ae</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2df1db1d-4434-41bb-ad2a-0555b0b16920</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-10-elementiv-vizerunky-v-podarunok-27-1daa20e1</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/8f9c3c58-4b90-4824-8091-cae9c612b227</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/nakleyka-na-zadnyk-vzuttya-8x14-sm-ab95609f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/75a3ed73-453c-4565-a246-902d485f9a89</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/vstavka-pid-plyusnu-z-kiltsem-heleva-8x14-sm-38e84e1d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4e41057a-5ac5-4eaa-be51-1b57c6fd11b5</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/derev-yana-kendama-morozyvo-7x25-sm-7825e63c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/9318846d-f8c8-4f22-b671-8954c30c5b87</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-6-elementiv-kolorova-halka-dlya-divchynky-2-0bcd35f7</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1a7fd288-f7a7-4f6f-aea0-eb9a5c4af159</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-6-elementiv-kolorova-halka-dlya-khlopchyka-f74932d8</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/510995a7-219b-40ee-887c-d75ae4f56b6e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-9-elementiv-dlya-divchynky-27x28-sm-de07a34f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4e08d1e9-2170-426b-b7ef-37b982904155</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-9-elementiv-dlya-khlopchyka-27x28-sm-425ad009</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/91390aa8-613e-4841-b2de-3ef3c6656be4</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-multy-miks-6-elementiv-6-sektoriv-27x13-sm-b9709aff</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/09d23fc6-0d93-4f57-bfbe-219281efa63d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-multy-miks-8-elementiv-6-sektoriv-27x13-sm-c5adf787</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0939fa98-817e-45ae-9e3b-f99b2fa8614f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-multy-miks-12-elementiv-8-sektoriv-27x17-sm-302ce5a6</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/33c4d6f1-0425-4cd3-81b7-d2f23be649ba</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/sensostick-teksturovanyy-hnuchkyy-sensornyy-stik-7x25-sm-80dedb51</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/286df59d-1bb9-4971-ab71-b209d659bdff</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/portatyvnyy-masazher-shiatsu-dlya-hlybokykh-tkanyn-spyny-ta-shyyi-z-funk-12526f6c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/baceb2e6-90c4-4015-8585-7ca50afd6e4f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/heleva-podushka-dlya-sydinnya-sira-37x47-sm-aac10057</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4408ccd8-de36-451a-b1e0-16ce3f13184f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-9-elementiv-pastel-27x13-sm-afc7564b</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/b10f602e-c41f-40e2-8010-a3d72a932c0e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/komplekt-moduliv-kamintsi-16x24-sm-a6384bb3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0ff21b9d-4d23-4427-ba08-cd5baa23f62d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-pazly-miks-soty-1-element-komplekt-moduliv-kamintsi-26-8ca14f11</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4e90be38-76fc-49de-ab11-924fb7e8c8e0</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-8-elementiv-kamintsi-27x27-sm-ac2f28df</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/014a5f78-5b74-4650-8f38-5cbb38ce028b</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-10-elementiv-kamintsi-27x27-sm-64ac5c8d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/55701923-17ce-45e7-a602-066addbc1240</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/trenuvalna-palytsya-dlya-reaktsiyi-ta-koordynatsiyi-reflex-stick-22x39-s-43f45ecc</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/090b862c-73fa-4130-b0b4-34e09f87674a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-6-elementiv-6-komplektiv-moduliv-kami-f35ef336</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/2062e774-1b7d-4924-992c-864f5bbf96fc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-miks-pazly-12-elementiv-kamintsi-27x18-sm-78c46a8c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/ce750325-b417-42e1-908b-53f4c15bc369</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ortopedychnyy-poyasnychno-khrebetnyy-korset-w406-24a39eab</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0f23e58e-ad35-46ef-830f-d88999bd3b49</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/bandazh-dlya-zap-yastya-iz-fiksatsiyeyu-velykoho-paltsya-w322-51da9ea9</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0f0a5500-69ea-4c3a-863c-c1bbd6cc47e6</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/navolochka-dlya-ortopedychnoyi-podushky-z-efektom-pam-yati-olvi-butterfl-a33d4d10</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1ed3e161-481e-4396-affa-c9e571d35884</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/navolochka-dlya-ortopedychnoyi-podushky-z-efektom-pam-yati-olvi-butterfl-08fb97ca</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/d3d22e46-0188-448f-a443-5146f18b5c6e</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/heymerskyy-ofisnyy-kylymok-iz-zap-yastnoyu-oporoyu-z-memory-foam-20x20-s-4cb38e80</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/343f9c51-2f92-4a91-acf0-56a7e9b885fc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-meha-miks-pazly-12-elementiv-onovlenyy-27x27-sm-6c55835a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/210ef5fc-09c0-43fc-a4a9-051ea8d78dbf</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazhnyy-kylymok-ortek-meha-miks-pazly-6-elementiv-onovlenyy-27x27-sm-ccd33d2d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/5148fca5-d79e-49d7-907d-86dc27bea084</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/pidstavka-pid-kolino-ta-likot-nekovzayuchyy-kylymok-dlya-yohy-20x20-sm-a973aef9</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1824957f-3bff-4e6c-9dfa-b03a686ffa44</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/komplekt-ortopedychnykh-ofisnykh-podushok-dlya-sydinnya-z-rehulovanoyu-p-7b69f705</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/6476b631-256b-432b-81fa-1754142bfacb</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/m-yakyy-sensornyy-m-yach-dlya-rozvytku-dribnoyi-motoryky-35-mm-0-035x0-0-29979dd3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1afdc396-093e-4a2d-bd29-79b492b6aed8</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/balansuvalna-dorizhka-z-masazhnymy-elementamy-ta-balansbordom-19x60-5-sm-b0fa666c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1a60276d-fdbf-4775-a5a4-88f102346735</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/masazher-dlya-kolina-elektrychnyy-z-vibratsiyeyu-ta-nahrivannyam-fiziote-ff3bb43a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/686379cf-8943-422d-9882-e8907a32c58b</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/nabir-derev-yanykh-tsylindriv-montesori-rozvyvayucha-ihrashka-16-5x16-5--67b40705</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/28554bd1-2e8e-41f7-b365-4c0ecf812d77</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/derev-yanyy-balansbord-rokerbord-dytyachyy-37x37-sm-5071ac28</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/3fabdafc-dd57-4ac3-a2bb-6ddaace9e4e5</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/dytyachyy-proektor-dlya-malyuvannya-9x23-sm-b585f395</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/c1a13145-164e-4567-b548-8acfa844da81</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-pazly-hryby-kolorovi-rozhevyy-1-element-26x26-sm-04a3be5a</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/dc0b7a7e-6d18-4769-a0c2-4be94b1648d9</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/remintsi-pavlyka-vid-dysplaziyi-61b633b3</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4bebb0af-5867-4324-bfff-99ca3d88db02</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/pidpyatochnyk-koryhuyuchyy-dovzhynu-nih-5b2fb50e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/76964fa8-9d2a-4ddd-b919-612563d8d80a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/pidpyatochnyk-dlya-korektsiyi-dovzhyny-nih-dc141e2c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/372f299c-860f-4245-a620-3814ca3951e6</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/pidpyatochnyk-koryhuyuchyy-dovzhynu-nih-chornyy-3-43-46-68c54f73</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/20ee4944-1774-4cb8-bc79-6928ae509d76</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/heleva-podushka-na-sydinnya-z-efektom-pam-yati-rektalna-podushka-z-otvor-ddfade46</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/b7f234b6-d574-4fd3-9a18-f40f75a4b7f1</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/ustilky-ortopedychni-active-r-23-34-c223ffd4</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7492329b-3361-44f9-ae7e-b4e64885b119</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/pidpyatochnyk-koryhuyuchyy-dovzhynu-nih-chornyy-1-35-38-ccde87e4</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4f11dc72-461c-4631-9fd1-b0fdb67b50a8</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-kolyuchky-biryuzovyy-4-sektory-35x25-sm-a93133a7</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/802ea8e8-d173-4533-bf89-87fa176d1b1a</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-kolyuchky-1-sektor-biryuzovyy-35x25-sm-bf20d557</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/a64b9b6b-7b2e-4e33-a1a1-88dde2e04ffc</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-kolyuchky-m-yatnyy-4-sektory-35x25-sm-64c032d0</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0e3bb222-4f0b-4bac-bc92-a8b258efa620</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-kolyuchky-4-sektory-buzkovyy-35x25-sm-16c5c05d</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/1d3ff338-02d1-4946-8b1d-3b716cfa0572</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-kolyuchky-4-sektory-siryy-35x25-sm-53b21f0e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/45f7f353-c653-4c68-8db2-1e40d68d8eb9</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-kolyuchky-4-sektory-rozhevyy-35x25-sm-079fa31f</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/7d8b4606-b1bd-452d-9d5b-80264e7ec839</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-kolyuchky-4-sektory-hrafitovyy-35x25-sm-c2f9b3b8</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/6bb87127-f299-47ec-9f35-1ed0b33ba835</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-kolyuchky-1-sektor-hrafitovyy-35x25-sm-1a1dffbc</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/4a418b93-d8ea-416d-b247-cff010512e6f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-kolyuchky-1-sektor-siryy-35x25-sm-00dfcc7c</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/6aa10e7e-6580-45b6-900c-b4be6d972b2f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-kolyuchky-1-sektor-rozhevyy-35x25-sm-692bfb0e</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/92da0b76-429b-4793-b09a-818c4c841524</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-kolyuchky-1-sektor-m-yatnyy-35x25-sm-dfc02ce9</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/0405b7dc-1167-456d-8890-2cdef2939f30</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-kolyuchky-1-sektor-buzkovyy-35x25-sm-2c917f88</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/b88619f7-03a6-4e32-8d46-fc997802d60d</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/kylymok-masazhnyy-ortek-pazl-halka-kolorovyy-blakytnyy-1-element-26x26-s-9c09cf73</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/cdbace07-6c47-4de0-b166-5b27aa9bf39f</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/podpyatochnyk-korrektyruyushchyy-dlynu-noh-chern-y-2-39-42-8x14-sm-razme-688e5070</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.bodyhome.com.ua/product/14bc631b-abd6-4878-9cb2-bb4343d14186</loc>
-    <lastmod>2026-05-26</lastmod>
+    <loc>https://www.bodyhome.com.ua/product/termoplastycheskaya-shyna-protyv-spastychnosty-w326-levaya-18x41-sm-razm-b1be98a8</loc>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.bodyhome.com.ua/product/8408336e-f23a-4010-8ba8-1d1f06a89c82</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.bodyhome.com.ua/product/96417a66-6d4f-4c54-9191-37ff2a9bb9e9</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.bodyhome.com.ua/product/b7c1fa72-35a7-4dc8-b38e-8dc8af261394</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.bodyhome.com.ua/product/467ca2dd-d5a6-4ae0-96cf-e13605f8f53d</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.bodyhome.com.ua/product/60e5c3fe-1e06-47a7-89d7-309578a2f80e</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.bodyhome.com.ua/product/69774202-de3c-4196-90a5-60cf75979772</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.bodyhome.com.ua/product/d00e4f94-9d8e-45b4-a5e8-605863c06a2a</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.bodyhome.com.ua/product/8bb2dd93-0071-4bb9-972a-883033b9249a</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.bodyhome.com.ua/product/936c34f3-a171-4937-88f5-45116f1ba6a8</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.bodyhome.com.ua/product/70593acc-a403-4b78-84ba-8d33819fa6a0</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.bodyhome.com.ua/product/57a7008c-8b7a-40e8-bd9d-49d3b1c2731e</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.bodyhome.com.ua/product/ec699639-3c04-4fc5-b8ee-9c839a70dfb2</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
 </urlset>

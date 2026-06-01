@@ -1,8 +1,9 @@
 import { Truck, CreditCard, RotateCcw, Package, Clock, Phone, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useSEO } from "@/hooks/useSEO";
 
 const PHONE = "+380956981124";
-const TELEGRAM = "https://t.me/aurahomeua";
+const TELEGRAM = "https://t.me/bodyhomeua";
 const VIBER = "viber://chat?number=%2B380956981124";
 
 const Section = ({ icon: Icon, title, children }: { icon: any; title: string; children: React.ReactNode }) => (
@@ -24,7 +25,15 @@ const Li = ({ children }: { children: React.ReactNode }) => (
   </li>
 );
 
-const Delivery = () => (
+const Delivery = () => {
+  useSEO({
+    title: "Доставка та оплата — BodyHome",
+    description: "Доставка Новою Поштою, Meest та Укрпоштою по всій Україні. Оплата при отриманні або онлайн карткою (WayForPay). Повернення протягом 14 днів.",
+    keywords: "доставка Нова Пошта, оплата при отриманні, WayForPay, доставка ортопедичних товарів",
+    url: "/delivery",
+  });
+
+  return (
   <div className="container py-14 max-w-4xl">
     <p className="aura-kicker mb-4">доставка та оплата</p>
     <h1 className="text-4xl md:text-5xl font-light mb-3">Доставка та оплата</h1>
@@ -129,6 +138,7 @@ const Delivery = () => (
       </div>
     </div>
   </div>
-);
+  );
+};
 
 export default Delivery;

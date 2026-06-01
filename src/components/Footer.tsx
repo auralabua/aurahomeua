@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Instagram, Facebook, Music2, Phone, Mail, MapPin, Sparkles, ShieldCheck, CreditCard, Truck, HeartHandshake } from "lucide-react";
 
 const PHONE = "+380956981124";
-const TELEGRAM = "https://t.me/aurahomeua";
+const TELEGRAM = "https://t.me/bodyhomeua";
 const VIBER = "viber://chat?number=%2B380956981124";
 
 const TelegramIcon = () => (

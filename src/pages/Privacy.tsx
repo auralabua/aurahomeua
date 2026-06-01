@@ -1,13 +1,23 @@
-const Privacy = () => (
+import { useSEO } from "@/hooks/useSEO";
+
+const Privacy = () => {
+  useSEO({
+    title: "Політика конфіденційності — BodyHome",
+    description: "Політика конфіденційності інтернет-магазину BodyHome. Як ми збираємо, використовуємо та захищаємо ваші персональні дані.",
+    url: "/privacy",
+    noindex: true,
+  });
+
+  return (
   <div className="container py-14 max-w-3xl">
     <p className="aura-kicker mb-4">юридична інформація</p>
     <h1 className="text-4xl md:text-5xl font-light mb-3">Політика конфіденційності</h1>
-    <p className="text-muted-foreground font-light mb-10">Останнє оновлення: травень 2026 року</p>
+    <p className="text-muted-foreground font-light mb-10">Останнє оновлення: червень 2026 року</p>
 
     <div className="prose prose-sm max-w-none space-y-8 font-light text-foreground/80 leading-relaxed">
       <section>
         <h2 className="text-xl font-light text-foreground mb-3">1. Загальні положення</h2>
-        <p>Ця Політика конфіденційності регулює порядок збору, використання та захисту персональних даних користувачів інтернет-магазину BodyHumm (bodyhumm.com.ua).</p>
+        <p>Ця Політика конфіденційності регулює порядок збору, використання та захисту персональних даних користувачів інтернет-магазину BodyHome (www.bodyhome.com.ua).</p>
         <p className="mt-2">Використовуючи наш сайт, ви погоджуєтесь з умовами цієї політики. Якщо ви не погоджуєтесь — будь ласка, не використовуйте наш сайт.</p>
       </section>
 
@@ -97,7 +107,7 @@ const Privacy = () => (
             </li>
           ))}
         </ul>
-        <p className="mt-3 text-sm">Для реалізації ваших прав зверніться до нас: <a href="mailto:bodyhumm@gmail.com" className="text-primary hover:underline">bodyhumm@gmail.com</a></p>
+        <p className="mt-3 text-sm">Для реалізації ваших прав зверніться до нас: <a href="mailto:bodyhome@gmail.com" className="text-primary hover:underline">bodyhome@gmail.com</a></p>
       </section>
 
       <section>
@@ -109,13 +119,14 @@ const Privacy = () => (
         <h2 className="text-xl font-light text-foreground mb-3">8. Контакти</h2>
         <p>З питань конфіденційності звертайтесь:</p>
         <ul className="mt-2 space-y-1 text-sm list-none">
-          <li>Email: <a href="mailto:bodyhumm@gmail.com" className="text-primary hover:underline">bodyhumm@gmail.com</a></li>
+          <li>Email: <a href="mailto:bodyhome@gmail.com" className="text-primary hover:underline">bodyhome@gmail.com</a></li>
           <li>Телефон: <a href="tel:+380956981124" className="text-primary hover:underline">+380956981124</a></li>
-          <li>Telegram: <a href="https://t.me/aurahomeua" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">@aurahomeua</a></li>
+          <li>Telegram: <a href="https://t.me/bodyhomeua" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">@bodyhomeua</a></li>
         </ul>
       </section>
     </div>
   </div>
-);
+  );
+};
 
 export default Privacy;

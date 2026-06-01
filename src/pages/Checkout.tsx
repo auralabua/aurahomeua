@@ -28,6 +28,12 @@ interface NPWarehouse {
   Description: string;
 }
 
+interface NPStreet {
+  Ref: string;
+  Description: string;
+  StreetsType: string;
+}
+
 async function npPost<T>(modelName: string, calledMethod: string, props: object): Promise<T[]> {
   try {
     const res = await fetch("https://api.novaposhta.ua/v2.0/json/", {
@@ -221,6 +227,97 @@ function BranchAutocomplete({ id, cityRef, value, onChange }: {
   );
 }
 
+function StreetAutocomplete({ id, cityRef, value, onChange }: {
+  id?: string;
+  cityRef: string;
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const [suggestions, setSuggestions] = useState<NPStreet[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [notFound, setNotFound] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => {
+      if (!wrapRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, []);
+
+  useEffect(() => {
+    setNotFound(false);
+    if (!cityRef || value.length < 2) { setSuggestions([]); setOpen(false); return; }
+    const t = setTimeout(async () => {
+      setLoading(true);
+      try {
+        const data = await npPost<NPStreet>("Address", "getStreet", {
+          FindByString: value,
+          CityRef: cityRef,
+          Limit: "15",
+        });
+        setSuggestions(data);
+        setOpen(data.length > 0);
+        setNotFound(data.length === 0);
+      } finally {
+        setLoading(false);
+      }
+    }, 300);
+    return () => clearTimeout(t);
+  }, [value, cityRef]);
+
+  if (!cityRef) {
+    return (
+      <Input
+        id={id}
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        className="rounded-xl h-11 text-muted-foreground"
+        placeholder="Спочатку оберіть місто"
+      />
+    );
+  }
+
+  return (
+    <div ref={wrapRef} className="relative">
+      <div className="relative">
+        <Input
+          id={id}
+          value={value}
+          onChange={e => onChange(e.target.value)}
+          onFocus={() => { if (suggestions.length > 0) setOpen(true); }}
+          onKeyDown={e => { if (e.key === "Escape") setOpen(false); }}
+          className="rounded-xl h-11 pr-9"
+          placeholder="Назва вулиці…"
+          autoComplete="off"
+        />
+        {loading && (
+          <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin text-muted-foreground pointer-events-none" />
+        )}
+      </div>
+      {notFound && !loading && (
+        <p className="text-xs text-muted-foreground mt-1 px-1">Вулицю не знайдено</p>
+      )}
+      {open && suggestions.length > 0 && (
+        <ul className="absolute z-50 mt-1 w-full rounded-xl border border-border bg-background shadow-lg max-h-56 overflow-y-auto">
+          {suggestions.map(s => (
+            <li
+              key={s.Ref}
+              onMouseDown={() => { onChange(`${s.StreetsType} ${s.Description}`); setOpen(false); setSuggestions([]); }}
+              className="px-3 py-2.5 cursor-pointer hover:bg-secondary text-sm first:rounded-t-xl last:rounded-b-xl"
+            >
+              <span className="text-muted-foreground text-xs mr-1">{s.StreetsType}</span>
+              {s.Description}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 // ── Checkout ─────────────────────────────────────────────────────────────────
 
 type DeliveryMethod = "novaposhta" | "mistexpress";
@@ -258,9 +355,10 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { items, totalPrice, totalCount, clear } = useCart();
   const [delivery, setDelivery] = useState<DeliveryMethod>("novaposhta");
+  const [npType, setNpType] = useState<"warehouse" | "courier">("warehouse");
   const [payment, setPayment] = useState<PaymentMethod>("cod");
   const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({ fullName: "", phone: "", email: "", city: "", branch: "" });
+  const [form, setForm] = useState({ fullName: "", phone: "", email: "", city: "", branch: "", street: "", house: "", apt: "" });
   const [cityRef, setCityRef] = useState("");
 
   if (items.length === 0) {
@@ -275,7 +373,15 @@ const Checkout = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const parsed = checkoutSchema.safeParse(form);
+    const isCourier = delivery === "novaposhta" && npType === "courier";
+    if (isCourier) {
+      if (!form.street) { toast({ title: "Перевірте поля", description: "Вкажіть вулицю", variant: "destructive" }); return; }
+      if (!form.house)  { toast({ title: "Перевірте поля", description: "Вкажіть номер будинку", variant: "destructive" }); return; }
+    }
+    const courierBranch = isCourier
+      ? `${form.street}, буд. ${form.house}${form.apt ? `, кв. ${form.apt}` : ""}`
+      : form.branch;
+    const parsed = checkoutSchema.safeParse({ ...form, branch: courierBranch });
     if (!parsed.success) {
       toast({ title: "Перевірте поля", description: parsed.error.errors[0].message, variant: "destructive" });
       return;
@@ -296,8 +402,8 @@ const Checkout = () => {
         order_reference: orderRef, amount: totalPrice, currency: "UAH",
         status: "pending", admin_status: "new",
         customer_name: form.fullName, customer_phone: form.phone, customer_email: form.email,
-        delivery_address: `${form.city}, ${form.branch}`,
-        delivery_method: delivery, delivery_city: form.city, delivery_branch: form.branch,
+        delivery_address: `${form.city}, ${courierBranch}`,
+        delivery_method: delivery, delivery_city: form.city, delivery_branch: courierBranch,
         payment_method: payment, items: orderItems,
       });
       if (dbError) {
@@ -397,15 +503,37 @@ const Checkout = () => {
               />
             </div>
 
+            {/* NP sub-type toggle */}
+            {delivery === "novaposhta" && (
+              <div className="flex gap-2 mb-4">
+                {(["warehouse", "courier"] as const).map(t => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => { setNpType(t); setForm(f => ({ ...f, branch: "", street: "", house: "", apt: "" })); }}
+                    className={cn(
+                      "px-4 py-1.5 rounded-full text-sm border transition-smooth",
+                      npType === t
+                        ? "border-primary bg-primary/10 text-primary font-medium"
+                        : "border-border text-muted-foreground hover:border-primary/40"
+                    )}
+                  >
+                    {t === "warehouse" ? "Відділення / Поштомат" : "Кур'єр на адресу"}
+                  </button>
+                ))}
+              </div>
+            )}
+
             <div className="grid sm:grid-cols-2 gap-4">
-              <div className="space-y-1.5">
+              {/* City — always shown */}
+              <div className={cn("space-y-1.5", delivery === "novaposhta" && npType === "courier" && "sm:col-span-2")}>
                 <Label htmlFor="city">Місто</Label>
                 {delivery === "novaposhta" ? (
                   <CityAutocomplete
                     id="city"
                     value={form.city}
                     onChange={v => {
-                      setForm(f => ({ ...f, city: v, branch: "" }));
+                      setForm(f => ({ ...f, city: v, branch: "", street: "", house: "", apt: "" }));
                       setCityRef("");
                     }}
                     onSelect={city => setCityRef(city.Ref)}
@@ -420,27 +548,66 @@ const Checkout = () => {
                   />
                 )}
               </div>
-              <div className="space-y-1.5">
-                <Label htmlFor="branch">
-                  {delivery === "novaposhta" ? "Відділення або поштомат" : "Відділення MistExpress"}
-                </Label>
-                {delivery === "novaposhta" ? (
-                  <BranchAutocomplete
-                    id="branch"
-                    cityRef={cityRef}
-                    value={form.branch}
-                    onChange={v => setForm(f => ({ ...f, branch: v }))}
-                  />
-                ) : (
-                  <Input
-                    id="branch"
-                    value={form.branch}
-                    onChange={e => setForm({...form, branch: e.target.value})}
-                    className="rounded-xl h-11"
-                    placeholder="№ ..."
-                  />
-                )}
-              </div>
+
+              {/* Warehouse branch */}
+              {(delivery !== "novaposhta" || npType === "warehouse") && (
+                <div className="space-y-1.5">
+                  <Label htmlFor="branch">
+                    {delivery === "novaposhta" ? "Відділення або поштомат" : "Відділення MistExpress"}
+                  </Label>
+                  {delivery === "novaposhta" ? (
+                    <BranchAutocomplete
+                      id="branch"
+                      cityRef={cityRef}
+                      value={form.branch}
+                      onChange={v => setForm(f => ({ ...f, branch: v }))}
+                    />
+                  ) : (
+                    <Input
+                      id="branch"
+                      value={form.branch}
+                      onChange={e => setForm({...form, branch: e.target.value})}
+                      className="rounded-xl h-11"
+                      placeholder="№ ..."
+                    />
+                  )}
+                </div>
+              )}
+
+              {/* Courier address fields */}
+              {delivery === "novaposhta" && npType === "courier" && (
+                <>
+                  <div className="space-y-1.5 sm:col-span-2">
+                    <Label htmlFor="street">Вулиця</Label>
+                    <StreetAutocomplete
+                      id="street"
+                      cityRef={cityRef}
+                      value={form.street}
+                      onChange={v => setForm(f => ({ ...f, street: v }))}
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="house">Номер будинку</Label>
+                    <Input
+                      id="house"
+                      value={form.house}
+                      onChange={e => setForm(f => ({ ...f, house: e.target.value }))}
+                      className="rounded-xl h-11"
+                      placeholder="1А"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="apt">Квартира / офіс <span className="text-muted-foreground text-xs">(необов'язково)</span></Label>
+                    <Input
+                      id="apt"
+                      value={form.apt}
+                      onChange={e => setForm(f => ({ ...f, apt: e.target.value }))}
+                      className="rounded-xl h-11"
+                      placeholder="25"
+                    />
+                  </div>
+                </>
+              )}
             </div>
             <p className="text-sm text-muted-foreground mt-3">
               Оплата доставки при отриманні за тарифами {delivery === "novaposhta" ? "Нової Пошти" : "MistExpress"}

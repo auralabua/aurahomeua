@@ -7,35 +7,78 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { toast } from "@/hooks/use-toast";
-import { Phone, MessageCircle, ChevronDown, ChevronUp } from "lucide-react";
+import { Phone, MessageCircle, ChevronDown, ChevronUp, Download, Copy } from "lucide-react";
 
 const STATUSES: Record<string, { label: string; dot: string }> = {
-  new: { label: "Нове", dot: "bg-yellow-400" },
-  processing: { label: "В обробці", dot: "bg-blue-500" },
-  shipped: { label: "Відправлено", dot: "bg-orange-500" },
-  completed: { label: "Виконано", dot: "bg-green-500" },
-  cancelled: { label: "Скасовано", dot: "bg-red-500" },
+  new:       { label: "Нове",         dot: "bg-yellow-400" },
+  confirmed: { label: "Підтверджено", dot: "bg-blue-500" },
+  shipped:   { label: "Відправлено",  dot: "bg-orange-500" },
+  delivered: { label: "Доставлено",   dot: "bg-green-600" },
+  cancelled: { label: "Скасовано",    dot: "bg-red-500" },
 };
 
 interface Order {
-  id: string; order_reference: string; created_at: string;
-  customer_name: string; customer_phone: string; customer_email: string | null;
-  amount: number; items: any; delivery_method: string | null;
-  delivery_city: string | null; delivery_branch: string | null;
-  payment_method: string | null; admin_status: string; status: string;
+  id: string;
+  order_reference: string;
+  created_at: string;
+  customer_name: string;
+  customer_phone: string;
+  customer_email: string | null;
+  amount: number;
+  items: any;
+  delivery_method: string | null;
+  delivery_city: string | null;
+  delivery_branch: string | null;
+  delivery_address: string | null;
+  payment_method: string | null;
+  admin_status: string;
 }
+
+const copyText = (text: string, label: string) => {
+  navigator.clipboard.writeText(text).then(() => toast({ title: label + " скопійовано" }));
+};
+
+const exportCSV = (orders: Order[]) => {
+  const header = ["№", "Дата", "Клієнт", "Телефон", "Email", "Сума", "Статус", "Доставка", "Місто", "Відділення", "Оплата"];
+  const rows = orders.map(o => [
+    o.order_reference,
+    new Date(o.created_at).toLocaleString("uk-UA"),
+    o.customer_name,
+    o.customer_phone,
+    o.customer_email ?? "",
+    o.amount,
+    STATUSES[o.admin_status]?.label ?? o.admin_status,
+    o.delivery_method === "novaposhta" ? "Нова Пошта" : o.delivery_method ?? "",
+    o.delivery_city ?? "",
+    o.delivery_branch ?? "",
+    o.payment_method === "wayforpay" ? "WayForPay" : o.payment_method === "cod" ? "При отриманні" : "",
+  ]);
+  const csv = [header, ...rows].map(r => r.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(",")).join("\n");
+  const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "orders-" + new Date().toISOString().slice(0, 10) + ".csv";
+  a.click();
+  URL.revokeObjectURL(url);
+};
 
 const AdminOrders = () => {
   const qc = useQueryClient();
   const [statusFilter, setStatusFilter] = useState("all");
   const [deliveryFilter, setDeliveryFilter] = useState("all");
-  const [dateFilter, setDateFilter] = useState("");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const { data, isLoading } = useQuery({
     queryKey: ["admin-orders"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("orders").select("*").order("created_at", { ascending: false }).limit(500);
+      const { data, error } = await supabase
+        .from("orders")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(1000);
       if (error) throw error;
       return data as Order[];
     },
@@ -46,24 +89,35 @@ const AdminOrders = () => {
       const { error } = await supabase.from("orders").update({ admin_status: status }).eq("id", id);
       if (error) throw error;
     },
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["admin-orders"] }); qc.invalidateQueries({ queryKey: ["admin-stats"] }); toast({ title: "Статус оновлено" }); },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-orders"] });
+      qc.invalidateQueries({ queryKey: ["admin-stats"] });
+      toast({ title: "Статус оновлено" });
+    },
     onError: (e: any) => toast({ title: "Помилка", description: e.message, variant: "destructive" }),
   });
 
-  const filtered = useMemo(() => (data ?? []).filter((o) => {
+  const filtered = useMemo(() => (data ?? []).filter(o => {
     if (statusFilter !== "all" && o.admin_status !== statusFilter) return false;
     if (deliveryFilter !== "all" && o.delivery_method !== deliveryFilter) return false;
-    if (dateFilter) { const d = new Date(o.created_at).toISOString().slice(0, 10); if (d !== dateFilter) return false; }
+    if (dateFrom) { const d = new Date(o.created_at).toISOString().slice(0, 10); if (d < dateFrom) return false; }
+    if (dateTo) { const d = new Date(o.created_at).toISOString().slice(0, 10); if (d > dateTo) return false; }
     return true;
-  }), [data, statusFilter, deliveryFilter, dateFilter]);
+  }), [data, statusFilter, deliveryFilter, dateFrom, dateTo]);
 
-  const formatPhone = (p: string) => p.replace(/(\d{3})(\d{3})(\d{3})(\d{2})(\d{2})/, "+$1 ($2) $3-$4-$5");
+  const hasFilters = statusFilter !== "all" || deliveryFilter !== "all" || dateFrom || dateTo;
+  const totalAmount = filtered.reduce((s, o) => s + Number(o.amount || 0), 0);
 
   return (
     <div className="space-y-6">
-      <header>
-        <h1 className="text-3xl">Замовлення</h1>
-        <p className="text-muted-foreground text-sm mt-1">{filtered.length} замовлень</p>
+      <header className="flex items-center justify-between gap-3 flex-wrap">
+        <div>
+          <h1 className="text-3xl">Замовлення</h1>
+          <p className="text-muted-foreground text-sm mt-1">{filtered.length} замовлень · {formatUAH(totalAmount)}</p>
+        </div>
+        <Button variant="outline" className="rounded-xl gap-2" onClick={() => exportCSV(filtered)} disabled={filtered.length === 0}>
+          <Download className="h-4 w-4" /> Експорт CSV
+        </Button>
       </header>
 
       <div className="flex flex-wrap gap-3 p-4 rounded-2xl bg-card border border-border/60">
@@ -71,20 +125,28 @@ const AdminOrders = () => {
           <SelectTrigger className="w-[180px] rounded-xl"><SelectValue /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Усі статуси</SelectItem>
-            {Object.entries(STATUSES).map(([k, v]) => <SelectItem key={k} value={k}>{v.label}</SelectItem>)}
+            {Object.entries(STATUSES).map(([k, v]) => (
+              <SelectItem key={k} value={k}>
+                <span className="inline-flex items-center gap-2"><span className={"h-2 w-2 rounded-full " + v.dot} />{v.label}</span>
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
         <Select value={deliveryFilter} onValueChange={setDeliveryFilter}>
-          <SelectTrigger className="w-[200px] rounded-xl"><SelectValue /></SelectTrigger>
+          <SelectTrigger className="w-[190px] rounded-xl"><SelectValue /></SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Уся доставка</SelectItem>
             <SelectItem value="novaposhta">Нова Пошта</SelectItem>
             <SelectItem value="mistexpress">Meest / Rozetka</SelectItem>
           </SelectContent>
         </Select>
-        <Input type="date" value={dateFilter} onChange={(e) => setDateFilter(e.target.value)} className="w-[180px] rounded-xl" />
-        {(statusFilter !== "all" || deliveryFilter !== "all" || dateFilter) && (
-          <Button variant="outline" className="rounded-xl" onClick={() => { setStatusFilter("all"); setDeliveryFilter("all"); setDateFilter(""); }}>
+        <div className="flex items-center gap-2">
+          <Input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="w-[160px] rounded-xl" />
+          <span className="text-muted-foreground text-sm">—</span>
+          <Input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="w-[160px] rounded-xl" />
+        </div>
+        {hasFilters && (
+          <Button variant="outline" className="rounded-xl" onClick={() => { setStatusFilter("all"); setDeliveryFilter("all"); setDateFrom(""); setDateTo(""); }}>
             Скинути
           </Button>
         )}
@@ -101,7 +163,7 @@ const AdminOrders = () => {
               <TableHead>Сума</TableHead>
               <TableHead>Доставка</TableHead>
               <TableHead>Оплата</TableHead>
-              <TableHead className="min-w-[180px]">Статус</TableHead>
+              <TableHead className="min-w-[190px]">Статус</TableHead>
               <TableHead />
             </TableRow>
           </TableHeader>
@@ -110,43 +172,55 @@ const AdminOrders = () => {
               <TableRow><TableCell colSpan={9} className="text-center py-10 text-muted-foreground">Завантаження…</TableCell></TableRow>
             ) : filtered.length === 0 ? (
               <TableRow><TableCell colSpan={9} className="text-center py-10 text-muted-foreground">Замовлень не знайдено</TableCell></TableRow>
-            ) : filtered.map((o) => {
+            ) : filtered.map(o => {
               const items = Array.isArray(o.items) ? o.items : [];
               const isExpanded = expandedId === o.id;
-              const phone = o.customer_phone?.replace(/\D/g, "");
+              const phone = (o.customer_phone ?? "").replace(/\D/g, "");
+              const deliveryAddr = [o.delivery_city, o.delivery_branch].filter(Boolean).join(", ");
               return (
                 <>
                   <TableRow key={o.id} className={isExpanded ? "bg-secondary/30" : ""}>
-                    <TableCell className="font-mono text-xs">{o.order_reference}</TableCell>
+                    <TableCell className="font-mono text-xs whitespace-nowrap">{o.order_reference || o.id.slice(0, 8)}</TableCell>
                     <TableCell className="text-xs whitespace-nowrap">
                       {new Date(o.created_at).toLocaleString("uk-UA", { dateStyle: "short", timeStyle: "short" })}
                     </TableCell>
-                    <TableCell className="font-light">{o.customer_name}</TableCell>
+                    <TableCell className="font-light whitespace-nowrap">{o.customer_name}</TableCell>
                     <TableCell>
-                      <div className="flex items-center gap-2">
-                        <a href={`tel:${phone}`} className="text-xs text-muted-foreground hover:text-primary whitespace-nowrap">{o.customer_phone}</a>
-                        <a href={`tel:${phone}`} className="grid h-7 w-7 place-items-center rounded-lg bg-secondary hover:bg-primary hover:text-white transition-colors" title="Зателефонувати">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-xs text-muted-foreground hover:text-primary cursor-pointer whitespace-nowrap" onClick={() => copyText(o.customer_phone, "Телефон")}>
+                          {o.customer_phone}
+                        </span>
+                        <a href={"tel:" + phone} className="grid h-7 w-7 place-items-center rounded-lg bg-secondary hover:bg-primary hover:text-white transition-colors" title="Зателефонувати">
                           <Phone className="h-3.5 w-3.5" />
                         </a>
-                        <a href={`https://t.me/+${phone}`} target="_blank" rel="noopener noreferrer" className="grid h-7 w-7 place-items-center rounded-lg bg-[#229ED9]/10 hover:bg-[#229ED9] hover:text-white text-[#229ED9] transition-colors" title="Telegram">
+                        <a href={"https://t.me/+" + phone} target="_blank" rel="noopener noreferrer" className="grid h-7 w-7 place-items-center rounded-lg bg-[#229ED9]/10 hover:bg-[#229ED9] hover:text-white text-[#229ED9] transition-colors" title="Telegram">
                           <MessageCircle className="h-3.5 w-3.5" />
                         </a>
                       </div>
                     </TableCell>
                     <TableCell className="font-medium whitespace-nowrap">{formatUAH(Number(o.amount))}</TableCell>
-                    <TableCell className="whitespace-nowrap">
-                      {o.delivery_method === "novaposhta" ? "Нова Пошта" : o.delivery_method === "mistexpress" ? "Meest / Rozetka" : "—"}
-                      {o.delivery_city && <div className="text-xs text-muted-foreground">{o.delivery_city}, {o.delivery_branch}</div>}
+                    <TableCell>
+                      <div className="text-sm whitespace-nowrap">
+                        {o.delivery_method === "novaposhta" ? "Нова Пошта" : o.delivery_method === "mistexpress" ? "Meest" : "—"}
+                      </div>
+                      {deliveryAddr && (
+                        <div className="flex items-center gap-1 mt-0.5">
+                          <span className="text-xs text-muted-foreground line-clamp-1 max-w-[120px]">{deliveryAddr}</span>
+                          <button onClick={() => copyText(deliveryAddr, "Адреса")} className="text-muted-foreground hover:text-primary" title="Скопіювати адресу">
+                            <Copy className="h-3 w-3" />
+                          </button>
+                        </div>
+                      )}
                     </TableCell>
                     <TableCell className="whitespace-nowrap text-sm">
                       {o.payment_method === "wayforpay" ? "WayForPay" : o.payment_method === "cod" ? "При отриманні" : "—"}
                     </TableCell>
                     <TableCell>
-                      <Select value={o.admin_status} onValueChange={(v) => updateStatus.mutate({ id: o.id, status: v })}>
-                        <SelectTrigger className="rounded-xl h-9">
+                      <Select value={o.admin_status} onValueChange={v => updateStatus.mutate({ id: o.id, status: v })}>
+                        <SelectTrigger className="rounded-xl h-9 w-full">
                           <SelectValue>
                             <span className="inline-flex items-center gap-2">
-                              <span className={`h-2 w-2 rounded-full ${STATUSES[o.admin_status]?.dot ?? "bg-muted"}`} />
+                              <span className={"h-2 w-2 rounded-full " + (STATUSES[o.admin_status]?.dot ?? "bg-muted")} />
                               {STATUSES[o.admin_status]?.label ?? o.admin_status}
                             </span>
                           </SelectValue>
@@ -154,7 +228,7 @@ const AdminOrders = () => {
                         <SelectContent>
                           {Object.entries(STATUSES).map(([k, v]) => (
                             <SelectItem key={k} value={k}>
-                              <span className="inline-flex items-center gap-2"><span className={`h-2 w-2 rounded-full ${v.dot}`} />{v.label}</span>
+                              <span className="inline-flex items-center gap-2"><span className={"h-2 w-2 rounded-full " + v.dot} />{v.label}</span>
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -166,10 +240,8 @@ const AdminOrders = () => {
                       </Button>
                     </TableCell>
                   </TableRow>
-
-                  {/* Expanded row — order details */}
                   {isExpanded && (
-                    <TableRow key={`${o.id}-detail`} className="bg-secondary/20">
+                    <TableRow key={o.id + "-detail"} className="bg-secondary/20">
                       <TableCell colSpan={9} className="py-4 px-6">
                         <div className="grid md:grid-cols-2 gap-6">
                           <div>
@@ -189,12 +261,26 @@ const AdminOrders = () => {
                               ))}
                             </div>
                           </div>
-                          <div className="space-y-3">
-                            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">Деталі</p>
-                            {o.customer_email && <p className="text-sm"><span className="text-muted-foreground">Email: </span>{o.customer_email}</p>}
-                            <p className="text-sm"><span className="text-muted-foreground">Місто: </span>{o.delivery_city || "—"}</p>
-                            <p className="text-sm"><span className="text-muted-foreground">Відділення: </span>{o.delivery_branch || "—"}</p>
-                            <p className="text-sm font-medium">Разом: {formatUAH(Number(o.amount))}</p>
+                          <div>
+                            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-3">Деталі замовлення</p>
+                            <div className="space-y-2 text-sm">
+                              {o.customer_email && <p><span className="text-muted-foreground">Email: </span>{o.customer_email}</p>}
+                              <p>
+                                <span className="text-muted-foreground">Місто: </span>{o.delivery_city || "—"}
+                                {o.delivery_city && <button className="ml-1.5 text-muted-foreground hover:text-primary" onClick={() => copyText(o.delivery_city!, "Місто")}><Copy className="h-3 w-3 inline" /></button>}
+                              </p>
+                              <p>
+                                <span className="text-muted-foreground">Відділення: </span>{o.delivery_branch || "—"}
+                                {o.delivery_branch && <button className="ml-1.5 text-muted-foreground hover:text-primary" onClick={() => copyText(o.delivery_branch!, "Відділення")}><Copy className="h-3 w-3 inline" /></button>}
+                              </p>
+                              {o.delivery_address && (
+                                <p>
+                                  <span className="text-muted-foreground">Адреса: </span>{o.delivery_address}
+                                  <button className="ml-1.5 text-muted-foreground hover:text-primary" onClick={() => copyText(o.delivery_address!, "Адреса")}><Copy className="h-3 w-3 inline" /></button>
+                                </p>
+                              )}
+                              <p className="font-medium pt-1">Разом: {formatUAH(Number(o.amount))}</p>
+                            </div>
                           </div>
                         </div>
                       </TableCell>

@@ -480,8 +480,21 @@ const Checkout = () => {
       ).catch(() => {});
 
       if (payment === "cod") {
-        toast({ title: "Замовлення оформлено ✅", description: `№ ${orderRef}. Менеджер зв'яжеться з вами.` });
-        clear(); navigate("/"); return;
+        clear();
+        navigate("/order-success", {
+          state: {
+            order_reference: orderRef,
+            customer_name: form.fullName,
+            phone: form.phone,
+            city: form.city,
+            branch: courierBranch,
+            delivery,
+            payment,
+            items: orderItems,
+            total: totalPrice,
+          },
+        });
+        return;
       }
 
       const { data: signed, error: signErr } = await supabase.functions.invoke("wayforpay-sign", {

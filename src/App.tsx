@@ -38,6 +38,7 @@ const AdminProducts = lazy(() => import("./pages/admin/AdminProducts.tsx"));
 const AdminCategories = lazy(() => import("./pages/admin/AdminCategories.tsx"));
 const AdminCustomers = lazy(() => import("./pages/admin/AdminCustomers.tsx"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings.tsx"));
+const OrderSuccess = lazy(() => import("./pages/OrderSuccess.tsx"));
 
 // Page loader skeleton (minimal flicker)
 const PageLoader = () => (
@@ -77,6 +78,7 @@ const App = () => (
                 <Route path="/product/:id" element={<ProductPage />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
+                <Route path="/order-success" element={<OrderSuccess />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contacts" element={<Contacts />} />
                 <Route path="/delivery" element={<Delivery />} />

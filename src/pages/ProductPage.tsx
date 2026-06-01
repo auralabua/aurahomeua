@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
-import { Star, Minus, Plus, ShoppingCart, ArrowLeft, Truck, ShieldCheck, RotateCcw, Check, Tag } from "lucide-react";
+import { Star, Minus, Plus, ShoppingCart, ArrowLeft, Truck, ShieldCheck, RotateCcw, Check, Tag, Wallet, MessageCircle } from "lucide-react";
 import { formatUAH } from "@/data/products";
 import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 import { Button } from "@/components/ui/button";
@@ -85,6 +85,78 @@ const buildProductFAQ = (
   ...(available
     ? []
     : [{ q: "Чи є товар в наявності?", a: "Наразі товар тимчасово відсутній. Залиште заявку — повідомимо про надходження." }]),
+];
+
+// ── Category-based CRO content ───────────────────────────────────────────────
+
+const CATEGORY_BENEFIT: Record<string, string> = {
+  "ortopedychni-podushky":        "Підтримує правильне положення шиї та хребта під час сну",
+  "ortopedychni-masazhni-kylymky":"Стимулює акупунктурні точки, знімає напругу та втому в ногах",
+  "ortezy-i-bandazhi":            "Фіксує та підтримує суглоби при навантаженнях і реабілітації",
+  "masazhery":                    "Знімає м'язову напругу та покращує кровообіг у проблемних зонах",
+  "tovary-dlia-krasy":            "Доглядає за шкірою і допомагає розслабитись після важкого дня",
+  "rozvyvaiuchi-ihrashky":        "Розвиває дрібну моторику та когнітивні здібності дитини",
+  "ortopedychni-ustilky":         "Рівномірно розподіляє навантаження та знижує втому ніг",
+};
+
+const CATEGORY_WHO: Record<string, Array<{ icon: string; label: string }>> = {
+  "ortopedychni-podushky": [
+    { icon: "💤", label: "Для здорового сну" },
+    { icon: "💻", label: "Для роботи за комп'ютером" },
+    { icon: "🤰", label: "Для вагітних" },
+    { icon: "🏥", label: "Після операції на шиї" },
+    { icon: "🧓", label: "При остеохондрозі" },
+  ],
+  "ortopedychni-masazhni-kylymky": [
+    { icon: "🧘", label: "Для релаксу вдома" },
+    { icon: "💼", label: "Після сидячої роботи" },
+    { icon: "🏃", label: "Після тренувань" },
+    { icon: "🦶", label: "При болях у ступнях" },
+    { icon: "⚡", label: "Для покращення кровообігу" },
+  ],
+  "ortezy-i-bandazhi": [
+    { icon: "🏥", label: "Під час реабілітації" },
+    { icon: "⚽", label: "При заняттях спортом" },
+    { icon: "🏗️", label: "При фізичній роботі" },
+    { icon: "🦴", label: "Після травм або операцій" },
+    { icon: "🧓", label: "При хронічних болях" },
+  ],
+  "masazhery": [
+    { icon: "💆", label: "Для зняття напруги" },
+    { icon: "💼", label: "Після сидячої роботи" },
+    { icon: "🏃", label: "Для відновлення після спорту" },
+    { icon: "🏠", label: "Для SPA вдома" },
+    { icon: "🦵", label: "При важкості в ногах" },
+  ],
+  "tovary-dlia-krasy": [
+    { icon: "💆‍♀️", label: "Для жінок 30+" },
+    { icon: "🏠", label: "Для домашнього догляду" },
+    { icon: "🌿", label: "Для антистрес процедур" },
+    { icon: "🎁", label: "Як подарунок" },
+    { icon: "✨", label: "Для SPA-ефекту вдома" },
+  ],
+  "rozvyvaiuchi-ihrashky": [
+    { icon: "👶", label: "Для дітей від 1 до 7 років" },
+    { icon: "🎓", label: "Для розвитку логіки" },
+    { icon: "✋", label: "Для дрібної моторики" },
+    { icon: "🏠", label: "Для гри вдома" },
+    { icon: "🎁", label: "Як подарунок" },
+  ],
+  "ortopedychni-ustilky": [
+    { icon: "🏃", label: "Для активного відпочинку" },
+    { icon: "⚽", label: "Для занять спортом" },
+    { icon: "👣", label: "При плоскостопості" },
+    { icon: "💼", label: "Для роботи на ногах" },
+    { icon: "🏔️", label: "Для тривалих прогулянок" },
+  ],
+};
+
+const WHY_BODYHOME = [
+  { icon: Wallet,        title: "Оплата при отриманні",    desc: "Платите тільки після того, як отримали й перевірили товар." },
+  { icon: Truck,         title: "Доставка по Україні",     desc: "Нова Пошта, Meest. Відправка наступного дня після замовлення." },
+  { icon: RotateCcw,     title: "14 днів на повернення",   desc: "Якщо товар не підійшов — повернемо гроші без зайвих питань." },
+  { icon: ShieldCheck,   title: "Перевірка перед оплатою", desc: "Можете відкрити посилку та перевірити вміст перед тим, як платити." },
+  { icon: MessageCircle, title: "Підтримка у Telegram",    desc: "Відповімо на будь-яке питання у Telegram або Viber." },
 ];
 
 // ── Main component ───────────────────────────────────────────────────────────
@@ -361,6 +433,14 @@ const ProductPage = () => {
               )}
             </div>
 
+            {/* Benefit line */}
+            {category && CATEGORY_BENEFIT[category.id] && (
+              <p className="text-sm text-muted-foreground flex items-center gap-2">
+                <Check className="h-4 w-4 text-green-600 shrink-0" />
+                {CATEGORY_BENEFIT[category.id]}
+              </p>
+            )}
+
             {/* SKU */}
             {activeVendorCode && (
               <div className="text-sm text-muted-foreground">
@@ -494,24 +574,42 @@ const ProductPage = () => {
 
               <div className="pt-4">
                 {activeTab === "desc" && (
-                  <div className="space-y-2.5 text-sm text-foreground/75 leading-relaxed">
-                    {descParagraphs.length > 0 ? (
-                      <>
-                        {descParagraphs.slice(0, 3).map((para, i) => <p key={i}>{para.trim()}</p>)}
-                        {descParagraphs.length > 3 && (
-                          <details className="group">
-                            <summary className="text-primary text-sm cursor-pointer hover:underline list-none">
-                              Читати більше ↓
-                            </summary>
-                            <div className="space-y-2.5 mt-2.5">
-                              {descParagraphs.slice(3).map((para, i) => <p key={i}>{para.trim()}</p>)}
-                            </div>
-                          </details>
-                        )}
-                      </>
-                    ) : (
-                      <p className="text-muted-foreground">Опис відсутній.</p>
-                    )}
+                  <div className="space-y-5">
+                    {/* Description text */}
+                    <div className="space-y-2.5 text-sm leading-relaxed">
+                      {descParagraphs.length > 0 ? (
+                        <>
+                          <p className="text-foreground/90 font-[450]">{descParagraphs[0].trim()}</p>
+                          {descParagraphs.slice(1, 3).map((para, i) => (
+                            <p key={i} className="text-foreground/70">{para.trim()}</p>
+                          ))}
+                          {descParagraphs.length > 3 && (
+                            <details className="group">
+                              <summary className="text-primary text-sm cursor-pointer hover:underline list-none">
+                                Читати більше ↓
+                              </summary>
+                              <div className="space-y-2.5 mt-2.5">
+                                {descParagraphs.slice(3).map((para, i) => (
+                                  <p key={i} className="text-foreground/70">{para.trim()}</p>
+                                ))}
+                              </div>
+                            </details>
+                          )}
+                        </>
+                      ) : (
+                        <p className="text-muted-foreground">Опис відсутній.</p>
+                      )}
+                    </div>
+
+                    {/* Delivery & payment mini-block */}
+                    <div className="rounded-xl bg-secondary/50 px-4 py-3.5 space-y-2">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-foreground/60 mb-2.5">Доставка та оплата</p>
+                      <ul className="space-y-1.5 text-sm text-foreground/75">
+                        <li className="flex items-center gap-2.5"><Truck className="h-3.5 w-3.5 text-primary shrink-0" />Нова Пошта, Meest — 1–3 робочі дні по Україні</li>
+                        <li className="flex items-center gap-2.5"><Wallet className="h-3.5 w-3.5 text-primary shrink-0" />Оплата при отриманні або онлайн</li>
+                        <li className="flex items-center gap-2.5"><RotateCcw className="h-3.5 w-3.5 text-primary shrink-0" />Повернення протягом 14 днів</li>
+                      </ul>
+                    </div>
                   </div>
                 )}
 
@@ -557,6 +655,49 @@ const ProductPage = () => {
             </div>
           </div>
         </div>
+
+        {/* ── Кому підійде ──────────────────────────────────────────────── */}
+        {category && CATEGORY_WHO[category.id] && (
+          <section className="mt-12 sm:mt-16">
+            <div className="mb-5">
+              <p className="aura-kicker mb-1">застосування</p>
+              <h2 className="text-xl sm:text-2xl font-medium">Кому підійде</h2>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              {CATEGORY_WHO[category.id].map((item, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-2.5 rounded-2xl border border-border/50 bg-white px-4 py-2.5 text-sm font-medium shadow-sm"
+                >
+                  <span className="text-lg leading-none">{item.icon}</span>
+                  <span>{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ── Чому обирають BodyHome ────────────────────────────────────── */}
+        <section className="mt-12 sm:mt-14">
+          <div className="mb-5">
+            <p className="aura-kicker mb-1">довіра</p>
+            <h2 className="text-xl sm:text-2xl font-medium">Чому обирають BodyHome</h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            {WHY_BODYHOME.map((item, i) => (
+              <div
+                key={i}
+                className="flex flex-col gap-2 rounded-2xl border border-border/40 bg-white p-4 hover:border-primary/30 hover:shadow-sm transition-all"
+              >
+                <div className="grid h-9 w-9 place-items-center rounded-xl bg-primary/10">
+                  <item.icon className="h-4.5 w-4.5 text-primary" strokeWidth={1.5} />
+                </div>
+                <p className="text-sm font-semibold leading-snug">{item.title}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* Sticky mobile add-to-cart bar */}
         {showStickyBar && (

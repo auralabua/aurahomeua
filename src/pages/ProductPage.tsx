@@ -11,6 +11,7 @@ import { OptimizedImage, vercelImg } from "@/components/OptimizedImage";
 import { ProductReviews } from "@/components/ProductReviews";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import type { Product } from "@/data/products";
 
 const SIZE_ORDER = ["XS", "S", "M", "L", "XL", "XXL", "XXXL", "XXXXL"];
@@ -102,6 +103,7 @@ const ProductPage = () => {
   const [showStickyBar, setShowStickyBar] = useState(false);
   const cartBtnRef = useRef<HTMLButtonElement>(null);
   const isMobile = useIsMobile();
+  const recentIds = useRecentlyViewed(id ?? "");
 
   // ── Resolve product data (before any conditional returns so hooks stay stable) ──
   const foundProduct   = products.find(p => p.id === id);
@@ -610,6 +612,32 @@ const ProductPage = () => {
             </div>
           </section>
         )}
+
+        {/* Recently viewed */}
+        {recentIds.length > 0 && (() => {
+          const recentProducts = recentIds
+            .map(rid => products.find(p => p.id === rid))
+            .filter(Boolean)
+            .slice(0, 4) as typeof products;
+          if (!recentProducts.length) return null;
+          return (
+            <section className="mt-12 sm:mt-16">
+              <div className="mb-5">
+                <p className="aura-kicker mb-1">нещодавно</p>
+                <h2 className="text-xl sm:text-2xl font-medium">Нещодавно переглянуті</h2>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
+                {recentProducts.map(p => (
+                  <ProductCard
+                    key={p.id}
+                    product={p}
+                    categoryName={categoryNameById.get(p.category)}
+                  />
+                ))}
+              </div>
+            </section>
+          );
+        })()}
       </div>
     </div>
   );

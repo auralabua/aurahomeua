@@ -1,5 +1,5 @@
 import { useMemo, useState, useEffect, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import { CategoryId } from "@/data/products";
 import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 import { ProductCard } from "@/components/ProductCard";
@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { SlidersHorizontal, X, BedDouble, Hand, Shield, Zap, Sparkles, Baby, Footprints, Grip, Plug, ChevronRight, ChevronDown, ChevronLeft, type LucideIcon } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
 
@@ -126,12 +127,12 @@ const Catalog = () => {
 
   useSEO({
     title: activeCatName
-      ? `${activeCatName} — купити в Україні`
+      ? `${activeCatName} — купити в Україні | BodyHome`
       : "Каталог товарів для здоров'я та ортопедії",
     description: activeCatName
-      ? `${activeCatName} в інтернет-магазині BodyHome. Доставка Новою Поштою по Україні, оплата при отриманні.`
-      : "Каталог ортопедичних товарів BodyHome: подушки, устілки, бандажі, масажери. Доставка по Україні.",
-    url: "/catalog",
+      ? `${activeCatName} в інтернет-магазині BodyHome — ${filtered.length} товарів. Доставка Новою Поштою по Україні, оплата при отриманні.`
+      : `Каталог ортопедичних товарів BodyHome: подушки, устілки, бандажі, масажери — ${filtered.length} товарів. Доставка по Україні.`,
+    url: selectedCategories.length === 1 ? `/catalog?category=${selectedCategories[0]}` : "/catalog",
   });
 
   const Filters = () => (
@@ -229,9 +230,30 @@ const Catalog = () => {
 
   return (
     <div className="container py-6 sm:py-10">
+      {/* Breadcrumb */}
+      {activeCatName && (
+        <Breadcrumb className="mb-4 text-xs">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild><Link to="/">Головна</Link></BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink asChild><Link to="/catalog">Каталог</Link></BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{activeCatName}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      )}
+
       <header className="mb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-light">Каталог товарів</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-light">
+            {activeCatName ? `${activeCatName} — купити в Україні` : "Каталог товарів"}
+          </h1>
           <p className="text-muted-foreground mt-2 font-light text-sm">
             {query ? `Результати пошуку: "${query}" — ` : ""}Знайдено: {filtered.length} товарів
           </p>

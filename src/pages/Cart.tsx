@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft } from "lucide-react";
 import { useCart } from "@/context/CartContext";
@@ -5,10 +6,22 @@ import { formatUAH } from "@/data/products";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/hooks/useSEO";
 import { OptimizedImage } from "@/components/OptimizedImage";
+import { useProductsAsLegacy } from "@/hooks/useShopData";
 
 const Cart = () => {
   useSEO({ title: "Кошик", url: "/cart", noindex: true });
-  const { items, updateQuantity, removeItem, totalPrice, totalCount, clear } = useCart();
+  const { items, updateQuantity, removeItem, totalPrice, totalCount, clear, addItem } = useCart();
+  const { products: allProducts } = useProductsAsLegacy();
+
+  const upsellProducts = useMemo(() => {
+    if (!allProducts?.length || !items.length) return [];
+    const cartIds = new Set(items.map(i => i.product.id));
+    const cartCategories = [...new Set(items.map(i => i.product.category).filter(Boolean))];
+    if (!cartCategories.length) return [];
+    return allProducts
+      .filter(p => cartCategories.includes(p.category) && !cartIds.has(p.id) && p.available)
+      .slice(0, 6);
+  }, [allProducts, items]);
 
   if (items.length === 0) {
     return (
@@ -100,6 +113,44 @@ const Cart = () => {
           </button>
         </aside>
       </div>
+
+      {upsellProducts.length > 0 && (
+        <section className="mt-10">
+          <h2 className="text-xl font-medium mb-4">З цим товаром часто купують</h2>
+          <div className="flex gap-3 overflow-x-auto pb-2 lg:grid lg:grid-cols-4 lg:overflow-visible snap-x snap-mandatory">
+            {upsellProducts.slice(0, 4).map(p => {
+              const hasDisc = p.originalPrice && p.originalPrice > p.price;
+              const discPct = hasDisc ? Math.round((1 - p.price / p.originalPrice!) * 100) : 0;
+              return (
+                <div key={p.id} className="flex-shrink-0 w-44 lg:w-auto snap-start rounded-2xl aura-card overflow-hidden">
+                  <Link to={`/product/${p.slug ?? p.id}`} className="relative block aspect-square bg-secondary/20">
+                    {p.images?.[0] ? (
+                      <OptimizedImage src={p.images[0]} alt={p.name} className="h-full w-full object-contain p-3" sizes="(min-width: 1024px) 25vw, 176px" quality={70} />
+                    ) : (
+                      <div className="h-full w-full bg-secondary/40" />
+                    )}
+                    {hasDisc && (
+                      <span className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold rounded-lg px-1.5 py-0.5">-{discPct}%</span>
+                    )}
+                  </Link>
+                  <div className="p-3">
+                    <Link to={`/product/${p.slug ?? p.id}`} className="text-sm font-medium line-clamp-2 hover:text-primary transition-smooth">{p.name}</Link>
+                    <div className="flex items-center justify-between mt-2 gap-1">
+                      <div>
+                        <span className="font-bold text-primary text-sm">{formatUAH(p.price)}</span>
+                        {hasDisc && <span className="text-xs text-muted-foreground line-through ml-1">{formatUAH(p.originalPrice!)}</span>}
+                      </div>
+                      <Button size="sm" className="rounded-full btn-aura border-0 h-7 px-2.5 text-xs shrink-0" onClick={() => addItem(p, 1)}>
+                        Додати
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
     </div>
   );
 };

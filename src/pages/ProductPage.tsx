@@ -353,6 +353,16 @@ const getCategoryContent = <T,>(
   return map[categoryId] ?? (parentId ? map[parentId] : undefined);
 };
 
+const COMPLEMENTARY: Record<string, string[]> = {
+  "ortopedychni-podushky":         ["masazhery", "ortopedychni-ustilky"],
+  "masazhery":                     ["ortopedychni-masazhni-kylymky", "ortopedychni-podushky"],
+  "ortopedychni-masazhni-kylymky": ["masazhery", "ortopedychni-ustilky"],
+  "ortezy-i-bandazhi":             ["ortopedychni-ustilky", "masazhery"],
+  "ortopedychni-ustilky":          ["ortezy-i-bandazhi", "ortopedychni-masazhni-kylymky"],
+  "rozvyvaiuchi-ihrashky":         ["ortopedychni-podushky", "ortopedychni-ustilky"],
+  "tovary-dlia-krasy":             ["masazhery", "ortopedychni-masazhni-kylymky"],
+};
+
 const WHY_BODYHOME = [
   { icon: Wallet,        title: "Оплата при отриманні",    desc: "Платите тільки після того, як отримали й перевірили товар." },
   { icon: Truck,         title: "Доставка по Україні",     desc: "Нова Пошта, Meest. Відправка наступного дня після замовлення." },
@@ -409,6 +419,28 @@ const ProductPage = () => {
     () => new Map(categories.map(c => [c.id, c.name])),
     [categories]
   );
+
+  // Complementary category slugs for this product's category
+  const complementaryCatSlugs = useMemo(() => {
+    const catId = category?.id ?? "";
+    const parentId = (category?.parentId as string | undefined) ?? "";
+    return COMPLEMENTARY[catId] ?? COMPLEMENTARY[parentId] ?? [];
+  }, [category]);
+
+  // Products from complementary categories (different from this product's category)
+  const complementaryProducts = useMemo(() => {
+    if (!complementaryCatSlugs.length) return [];
+    const validCatIds = new Set<string>(
+      categories.flatMap(c =>
+        complementaryCatSlugs.includes(c.id) || complementaryCatSlugs.includes(c.parentId as string)
+          ? [c.id]
+          : []
+      )
+    );
+    return products
+      .filter(p => validCatIds.has(p.category) && p.id !== (foundProduct?.id ?? "") && p.available)
+      .slice(0, 4);
+  }, [products, categories, complementaryCatSlugs, foundProduct]);
 
   // ── SEO — always called unconditionally ──────────────────────────────────
   const seoDescription = displayProduct && currentProduct
@@ -475,6 +507,8 @@ const ProductPage = () => {
     ? Math.round((1 - activePrice / currentProduct!.originalPrice!) * 100)
     : 0;
   const activeVendorCode = selectedVariant?.vendor_code || currentProduct!.vendorCode;
+  const bundleProduct = complementaryProducts[0] ?? null;
+  const bundleTotal = bundleProduct ? Math.round((activePrice + bundleProduct.price) * 0.95) : 0;
 
   const handleAddToCart = () => {
     if (selectedVariant) {
@@ -904,6 +938,85 @@ const ProductPage = () => {
             ))}
           </div>
         </section>
+
+        {/* ── Комплект зі знижкою ───────────────────────────────────────── */}
+        {bundleProduct && (
+          <section className="mt-12 sm:mt-14">
+            <div className="mb-5">
+              <p className="aura-kicker mb-1">вигідна пропозиція</p>
+              <h2 className="text-xl sm:text-2xl font-medium">Комплект зі знижкою 5%</h2>
+            </div>
+            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5 sm:p-6">
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+                {/* Current product */}
+                <div className="flex flex-col items-center gap-2 min-w-[90px]">
+                  <div className="h-20 w-20 rounded-xl bg-white border border-border/40 grid place-items-center overflow-hidden">
+                    {currentProduct!.images?.[0] ? (
+                      <OptimizedImage src={currentProduct!.images[0]} alt={currentProduct!.name} className="h-full w-full object-contain p-2" sizes="80px" quality={70} />
+                    ) : <div className="h-full w-full bg-secondary/30" />}
+                  </div>
+                  <p className="text-xs text-center line-clamp-2 max-w-[100px] text-muted-foreground">{displayProduct!.name}</p>
+                  <p className="text-sm font-semibold">{formatUAH(activePrice)}</p>
+                </div>
+
+                <span className="text-2xl font-light text-muted-foreground">+</span>
+
+                {/* Bundle companion */}
+                <Link to={`/product/${bundleProduct.slug ?? bundleProduct.id}`} className="flex flex-col items-center gap-2 min-w-[90px] hover:opacity-80 transition-opacity">
+                  <div className="h-20 w-20 rounded-xl bg-white border border-border/40 grid place-items-center overflow-hidden">
+                    {bundleProduct.images?.[0] ? (
+                      <OptimizedImage src={bundleProduct.images[0]} alt={bundleProduct.name} className="h-full w-full object-contain p-2" sizes="80px" quality={70} />
+                    ) : <div className="h-full w-full bg-secondary/30" />}
+                  </div>
+                  <p className="text-xs text-center line-clamp-2 max-w-[100px] text-muted-foreground">{bundleProduct.name}</p>
+                  <p className="text-sm font-semibold">{formatUAH(bundleProduct.price)}</p>
+                </Link>
+
+                {/* Price + CTA */}
+                <div className="flex-1 min-w-[180px] space-y-2.5">
+                  <div>
+                    <p className="text-xs text-muted-foreground line-through">{formatUAH(activePrice + bundleProduct.price)}</p>
+                    <p className="text-2xl font-bold text-primary">{formatUAH(bundleTotal)}</p>
+                    <p className="text-xs text-green-600 font-medium mt-0.5">
+                      Економія {formatUAH(Math.round(activePrice + bundleProduct.price - bundleTotal))}
+                    </p>
+                  </div>
+                  <Button
+                    className="w-full rounded-full btn-aura border-0"
+                    disabled={variants.length > 1 && selectedVarIdx < 0}
+                    onClick={() => {
+                      if (selectedVariant) {
+                        addItem({ ...currentProduct!, id: `${currentProduct!.id}__${selectedVariant.label}`, name: `${displayProduct!.name} (${selectedVariant.label})`, price: selectedVariant.price, variantLabel: selectedVariant.label, vendorCode: selectedVariant.vendor_code || currentProduct!.vendorCode }, 1);
+                      } else {
+                        addItem(currentProduct!, 1);
+                      }
+                      addItem(bundleProduct, 1);
+                      setAdded(true);
+                      setTimeout(() => setAdded(false), 2000);
+                    }}
+                  >
+                    {variants.length > 1 && selectedVarIdx < 0 ? "Оберіть розмір ↑" : "Купити разом зі знижкою 5%"}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ── З цим товаром купують ─────────────────────────────────────── */}
+        {complementaryProducts.length > 0 && (
+          <section className="mt-12 sm:mt-14">
+            <div className="mb-5">
+              <p className="aura-kicker mb-1">доповнення</p>
+              <h2 className="text-xl sm:text-2xl font-medium">З цим товаром купують</h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
+              {complementaryProducts.map(p => (
+                <ProductCard key={p.id} product={p} categoryName={categoryNameById.get(p.category)} />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Sticky mobile add-to-cart bar — always rendered, slides in/out */}
         <div

@@ -318,6 +318,49 @@ function StreetAutocomplete({ id, cityRef, value, onChange }: {
   );
 }
 
+// ── Telegram notifications ───────────────────────────────────────────────────
+
+const TG_TOKEN = "8632833094:AAF6DCv98UfUj3qu4qinE64ILwp6swJMPLo";
+const TG_CHAT  = "5119568271";
+
+async function sendTelegramNotification(order: {
+  order_reference: string;
+  customer_name: string;
+  phone: string;
+  email: string;
+  city: string;
+  branch: string;
+  delivery_method: string;
+  payment_method: string;
+  amount: number;
+}, items: { name: string; price: number; quantity: number }[]) {
+  const itemsList = items.map(i =>
+    `• ${i.name} ×${i.quantity} — ${i.price * i.quantity} ₴`
+  ).join("\n");
+
+  const deliveryLabel = order.delivery_method === "novaposhta" ? "Нова Пошта" : "Meest / Rozetka";
+  const paymentLabel  = order.payment_method  === "cod"        ? "Накладений платіж" : "Онлайн оплата (WayForPay)";
+
+  const text =
+    `🛍 <b>Нове замовлення ${order.order_reference}</b>\n\n` +
+    `👤 ${order.customer_name}\n` +
+    `📞 ${order.phone}\n` +
+    `📧 ${order.email}\n\n` +
+    `📦 ${deliveryLabel}\n` +
+    `🏙 Місто: ${order.city}\n` +
+    `🏪 ${order.branch}\n\n` +
+    `🛒 Товари:\n${itemsList}\n\n` +
+    `💰 Сума: <b>${order.amount} ₴</b>\n` +
+    `💳 ${paymentLabel}\n\n` +
+    `⏰ ${new Date().toLocaleString("uk-UA")}`;
+
+  await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ chat_id: TG_CHAT, text, parse_mode: "HTML" }),
+  });
+}
+
 // ── Checkout ─────────────────────────────────────────────────────────────────
 
 type DeliveryMethod = "novaposhta" | "mistexpress";
@@ -353,6 +396,15 @@ function submitWayForPay(params: Record<string, any>) {
 const Checkout = () => {
   useSEO({ title: "Оформлення замовлення", url: "/checkout", noindex: true });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!import.meta.env.DEV) return;
+    fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: TG_CHAT, text: "✅ Telegram-сповіщення підключено (тест з dev-середовища)", parse_mode: "HTML" }),
+    }).catch(() => {});
+  }, []);
   const { items, totalPrice, totalCount, clear } = useCart();
   const [delivery, setDelivery] = useState<DeliveryMethod>("novaposhta");
   const [npType, setNpType] = useState<"warehouse" | "courier">("warehouse");
@@ -410,6 +462,22 @@ const Checkout = () => {
         toast({ title: "Помилка збереження", description: dbError.message, variant: "destructive" });
         return;
       }
+
+      // Fire-and-forget — never block the order flow if Telegram is unavailable
+      sendTelegramNotification(
+        {
+          order_reference: orderRef,
+          customer_name: form.fullName,
+          phone: form.phone,
+          email: form.email,
+          city: form.city,
+          branch: courierBranch,
+          delivery_method: delivery,
+          payment_method: payment,
+          amount: totalPrice,
+        },
+        orderItems,
+      ).catch(() => {});
 
       if (payment === "cod") {
         toast({ title: "Замовлення оформлено ✅", description: `№ ${orderRef}. Менеджер зв'яжеться з вами.` });

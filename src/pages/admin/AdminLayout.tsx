@@ -1,107 +1,129 @@
-import { useState, FormEvent, useEffect } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
+import { useState } from "react";
+import { Outlet, Navigate, NavLink, useNavigate } from "react-router-dom";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
-import { Lock } from "lucide-react";
+import {
+  LayoutDashboard, ShoppingBag, Package, FolderTree,
+  Users, Settings, LogOut, Menu, X,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const AdminLogin = () => {
-  const navigate = useNavigate();
+const NAV = [
+  { to: "/admin", label: "Дашборд", icon: LayoutDashboard, end: true },
+  { to: "/admin/orders", label: "Замовлення", icon: ShoppingBag },
+  { to: "/admin/products", label: "Товари", icon: Package },
+  { to: "/admin/categories", label: "Категорії", icon: FolderTree },
+  { to: "/admin/customers", label: "Клієнти", icon: Users },
+  { to: "/admin/settings", label: "Налаштування", icon: Settings },
+];
+
+const SidebarContent = ({ onClose, onSignOut }: { onClose?: () => void; onSignOut: () => void }) => (
+  <>
+    <nav className="flex-1 space-y-0.5 px-3 py-4">
+      {NAV.map(({ to, label, icon: Icon, end }) => (
+        <NavLink
+          key={to}
+          to={to}
+          end={end}
+          onClick={onClose}
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors ${
+              isActive
+                ? "bg-primary text-primary-foreground font-medium"
+                : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+            }`
+          }
+        >
+          <Icon className="h-4 w-4 shrink-0" />
+          {label}
+        </NavLink>
+      ))}
+    </nav>
+    <div className="px-3 pb-4 border-t border-border/40 pt-3">
+      <button
+        onClick={onSignOut}
+        className="flex w-full items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
+      >
+        <LogOut className="h-4 w-4" />
+        Вийти
+      </button>
+    </div>
+  </>
+);
+
+const AdminLayout = () => {
   const { session, isAdmin, loading } = useAdminAuth();
-  const [mode, setMode] = useState<"signin" | "signup">("signin");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [busy, setBusy] = useState(false);
+  const navigate = useNavigate();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  useEffect(() => {
-    if (!loading && session && isAdmin) navigate("/admin", { replace: true });
-  }, [loading, session, isAdmin, navigate]);
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+      </div>
+    );
+  }
 
-  if (!loading && session && isAdmin) return <Navigate to="/admin" replace />;
+  if (!session || !isAdmin) return <Navigate to="/admin/login" replace />;
 
-  const handle = async (e: FormEvent) => {
-    e.preventDefault();
-    setBusy(true);
-    try {
-      if (mode === "signin") {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-        toast({ title: "Вхід виконано" });
-      } else {
-        const redirectUrl = `${window.location.origin}/admin`;
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: { emailRedirectTo: redirectUrl },
-        });
-        if (error) throw error;
-        toast({
-          title: "Акаунт створено",
-          description: "Перевірте пошту для підтвердження. Після підтвердження зверніться до власника сайту, щоб призначити роль адміністратора.",
-        });
-      }
-    } catch (err: any) {
-      toast({ title: "Помилка", description: err.message, variant: "destructive" });
-    } finally {
-      setBusy(false);
-    }
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    toast({ title: "Виконано вихід" });
+    navigate("/admin/login");
   };
 
   return (
-    <div className="min-h-screen grid place-items-center bg-secondary px-4">
-      <div className="w-full max-w-md p-8 rounded-2xl bg-card shadow-card border border-border/60">
-        <div className="grid place-items-center mb-6">
-          <div className="h-12 w-12 grid place-items-center rounded-full bg-primary text-primary-foreground">
-            <Lock className="h-5 w-5" />
+    <div className="min-h-screen flex bg-background">
+      {/* Desktop sidebar */}
+      <aside className="hidden md:flex w-56 flex-col border-r border-border/60 bg-card shrink-0 fixed top-0 bottom-0 left-0">
+        <div className="px-5 py-5 border-b border-border/40">
+          <div className="flex items-center gap-2.5">
+            <span className="grid h-8 w-8 place-items-center rounded-xl bg-primary/12 text-primary text-sm font-semibold">B</span>
+            <div>
+              <div className="text-sm font-medium">BodyHome</div>
+              <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Адмін-панель</div>
+            </div>
           </div>
         </div>
-        <h1 className="text-2xl text-center mb-2">BodyHome — Адмін</h1>
-        <p className="text-sm text-muted-foreground text-center mb-6">
-          {mode === "signin" ? "Увійдіть до панелі керування" : "Створіть обліковий запис"}
-        </p>
-        <form onSubmit={handle} className="space-y-4">
-          <div className="space-y-1.5">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="rounded-xl h-11"
-              autoComplete="email"
-            />
-          </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="password">Пароль</Label>
-            <Input
-              id="password"
-              type="password"
-              required
-              minLength={6}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="rounded-xl h-11"
-              autoComplete={mode === "signin" ? "current-password" : "new-password"}
-            />
-          </div>
-          <Button type="submit" disabled={busy} className="w-full rounded-full btn-caramel border-0 h-11">
-            {busy ? "..." : mode === "signin" ? "Увійти" : "Створити акаунт"}
-          </Button>
-        </form>
-        <button
-          type="button"
-          onClick={() => setMode((m) => (m === "signin" ? "signup" : "signin"))}
-          className="mt-5 w-full text-sm text-muted-foreground hover:text-primary transition-smooth"
-        >
-          {mode === "signin" ? "Немає акаунту? Зареєструватись" : "Вже маєте акаунт? Увійти"}
-        </button>
+        <SidebarContent onSignOut={signOut} />
+      </aside>
+
+      {/* Mobile top bar */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 bg-card border-b border-border/60 shadow-sm">
+        <div className="flex items-center gap-2.5">
+          <span className="grid h-8 w-8 place-items-center rounded-xl bg-primary/12 text-primary text-sm font-semibold">B</span>
+          <span className="text-sm font-medium">BodyHome Адмін</span>
+        </div>
+        <Button variant="ghost" size="icon" onClick={() => setMobileOpen(v => !v)}>
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </Button>
       </div>
+
+      {/* Mobile drawer overlay */}
+      {mobileOpen && (
+        <div
+          className="md:hidden fixed inset-0 z-40 bg-black/50"
+          onClick={() => setMobileOpen(false)}
+        >
+          <aside
+            className="absolute left-0 top-0 bottom-0 w-64 bg-card flex flex-col pt-14"
+            onClick={e => e.stopPropagation()}
+          >
+            <SidebarContent onClose={() => setMobileOpen(false)} onSignOut={signOut} />
+          </aside>
+        </div>
+      )}
+
+      {/* Main content */}
+      <main className="flex-1 md:ml-56 overflow-auto">
+        <div className="h-14 md:hidden" />
+        <div className="p-4 md:p-6 lg:p-8 max-w-[1400px]">
+          <Outlet />
+        </div>
+      </main>
     </div>
   );
 };
 
-export default AdminLogin;
+export default AdminLayout;

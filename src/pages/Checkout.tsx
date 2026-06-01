@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Truck, Package, CreditCard, Wallet, Check, Loader2 } from "lucide-react";
 import { z } from "zod";
@@ -12,6 +12,217 @@ import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 import { useSEO } from "@/hooks/useSEO";
 
+// ── Nova Poshta API ──────────────────────────────────────────────────────────
+
+const NP_API_KEY = "834e3cb96a88d90edb794d24aec1191";
+
+interface NPCity {
+  Ref: string;
+  Description: string;
+  RegionsDescription: string;
+  SettlementTypeDescription?: string;
+}
+
+interface NPWarehouse {
+  Ref: string;
+  Description: string;
+}
+
+async function npPost<T>(modelName: string, calledMethod: string, props: object): Promise<T[]> {
+  try {
+    const res = await fetch("https://api.novaposhta.ua/v2.0/json/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ apiKey: NP_API_KEY, modelName, calledMethod, methodProperties: props }),
+    });
+    const json = await res.json();
+    return json.success ? (json.data as T[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+// ── Generic autocomplete dropdown ────────────────────────────────────────────
+
+function CityAutocomplete({ id, value, onChange, onSelect }: {
+  id?: string;
+  value: string;
+  onChange: (v: string) => void;
+  onSelect: (city: NPCity) => void;
+}) {
+  const [suggestions, setSuggestions] = useState<NPCity[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [notFound, setNotFound] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => {
+      if (!wrapRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, []);
+
+  useEffect(() => {
+    setNotFound(false);
+    if (value.length < 2) { setSuggestions([]); setOpen(false); return; }
+    const t = setTimeout(async () => {
+      setLoading(true);
+      try {
+        const data = await npPost<NPCity>("Address", "getCities", { FindByString: value, Limit: "10" });
+        setSuggestions(data);
+        setOpen(data.length > 0);
+        setNotFound(data.length === 0);
+      } finally {
+        setLoading(false);
+      }
+    }, 300);
+    return () => clearTimeout(t);
+  }, [value]);
+
+  return (
+    <div ref={wrapRef} className="relative">
+      <div className="relative">
+        <Input
+          id={id}
+          value={value}
+          onChange={e => onChange(e.target.value)}
+          onFocus={() => { if (suggestions.length > 0) setOpen(true); }}
+          onKeyDown={e => { if (e.key === "Escape") setOpen(false); }}
+          className="rounded-xl h-11 pr-9"
+          placeholder="Починайте вводити місто…"
+          autoComplete="off"
+        />
+        {loading && (
+          <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin text-muted-foreground pointer-events-none" />
+        )}
+      </div>
+      {notFound && !loading && (
+        <p className="text-xs text-muted-foreground mt-1 px-1">Місто не знайдено</p>
+      )}
+      {open && suggestions.length > 0 && (
+        <ul className="absolute z-50 mt-1 w-full rounded-xl border border-border bg-background shadow-lg max-h-56 overflow-y-auto">
+          {suggestions.map(city => (
+            <li
+              key={city.Ref}
+              onMouseDown={() => {
+                onChange(city.Description);
+                onSelect(city);
+                setOpen(false);
+                setSuggestions([]);
+              }}
+              className="flex items-baseline gap-1.5 px-3 py-2.5 cursor-pointer hover:bg-secondary text-sm first:rounded-t-xl last:rounded-b-xl"
+            >
+              <span className="font-medium">{city.Description}</span>
+              {city.SettlementTypeDescription && city.SettlementTypeDescription !== "місто" && (
+                <span className="text-muted-foreground text-xs">{city.SettlementTypeDescription}</span>
+              )}
+              {city.RegionsDescription && (
+                <span className="text-muted-foreground text-xs ml-auto shrink-0">
+                  {city.RegionsDescription} обл.
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function BranchAutocomplete({ id, cityRef, value, onChange }: {
+  id?: string;
+  cityRef: string;
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const [suggestions, setSuggestions] = useState<NPWarehouse[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [notFound, setNotFound] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => {
+      if (!wrapRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, []);
+
+  useEffect(() => {
+    setNotFound(false);
+    if (!cityRef || value.length < 1) { setSuggestions([]); setOpen(false); return; }
+    const t = setTimeout(async () => {
+      setLoading(true);
+      try {
+        const data = await npPost<NPWarehouse>("AddressGeneral", "getWarehouses", {
+          CityRef: cityRef,
+          FindByString: value,
+          Limit: "25",
+        });
+        setSuggestions(data);
+        setOpen(data.length > 0);
+        setNotFound(data.length === 0);
+      } finally {
+        setLoading(false);
+      }
+    }, 300);
+    return () => clearTimeout(t);
+  }, [value, cityRef]);
+
+  if (!cityRef) {
+    return (
+      <Input
+        id={id}
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        className="rounded-xl h-11 text-muted-foreground"
+        placeholder="Спочатку оберіть місто"
+      />
+    );
+  }
+
+  return (
+    <div ref={wrapRef} className="relative">
+      <div className="relative">
+        <Input
+          id={id}
+          value={value}
+          onChange={e => onChange(e.target.value)}
+          onFocus={() => { if (suggestions.length > 0) setOpen(true); }}
+          onKeyDown={e => { if (e.key === "Escape") setOpen(false); }}
+          className="rounded-xl h-11 pr-9"
+          placeholder="Номер або адреса відділення…"
+          autoComplete="off"
+        />
+        {loading && (
+          <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin text-muted-foreground pointer-events-none" />
+        )}
+      </div>
+      {notFound && !loading && (
+        <p className="text-xs text-muted-foreground mt-1 px-1">Відділення не знайдено</p>
+      )}
+      {open && suggestions.length > 0 && (
+        <ul className="absolute z-50 mt-1 w-full rounded-xl border border-border bg-background shadow-lg max-h-56 overflow-y-auto">
+          {suggestions.map(w => (
+            <li
+              key={w.Ref}
+              onMouseDown={() => { onChange(w.Description); setOpen(false); setSuggestions([]); }}
+              className="px-3 py-2.5 cursor-pointer hover:bg-secondary text-sm first:rounded-t-xl last:rounded-b-xl"
+            >
+              {w.Description}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+// ── Checkout ─────────────────────────────────────────────────────────────────
+
 type DeliveryMethod = "novaposhta" | "mistexpress";
 type PaymentMethod = "wayforpay" | "cod";
 
@@ -19,8 +230,8 @@ const checkoutSchema = z.object({
   fullName: z.string().trim().min(2, "Вкажіть ім'я та прізвище").max(100),
   phone: z.string().trim().min(10, "Невірний номер телефону").max(20),
   email: z.string().trim().email("Невірний email").max(255),
-  city: z.string().trim().min(2, "Вкажіть місто").max(100),
-  branch: z.string().trim().min(1, "Вкажіть відділення").max(100),
+  city: z.string().trim().min(2, "Вкажіть місто"),
+  branch: z.string().trim().min(1, "Вкажіть відділення"),
 });
 
 function submitWayForPay(params: Record<string, any>) {
@@ -50,6 +261,7 @@ const Checkout = () => {
   const [payment, setPayment] = useState<PaymentMethod>("cod");
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ fullName: "", phone: "", email: "", city: "", branch: "" });
+  const [cityRef, setCityRef] = useState("");
 
   if (items.length === 0) {
     return (
@@ -80,7 +292,6 @@ const Checkout = () => {
         variant: selectedVariant?.label ?? null,
       }));
 
-      // Зберегти замовлення в Supabase
       const { error: dbError } = await supabase.from("orders").insert({
         order_reference: orderRef, amount: totalPrice, currency: "UAH",
         status: "pending", admin_status: "new",
@@ -99,7 +310,6 @@ const Checkout = () => {
         clear(); navigate("/"); return;
       }
 
-      // WayForPay підпис генерується на сервері
       const { data: signed, error: signErr } = await supabase.functions.invoke("wayforpay-sign", {
         body: {
           orderReference: orderRef,
@@ -129,7 +339,7 @@ const Checkout = () => {
         clientPhone: form.phone,
         clientEmail: form.email,
         language: "UA",
-        returnUrl: "https://aurahomeua.lovable.app/",
+        returnUrl: "https://www.bodyhome.com.ua/",
       });
 
     } catch (err: any) {
@@ -146,40 +356,90 @@ const Checkout = () => {
       </Link>
       <h1 className="text-3xl md:text-4xl mb-8">Оформлення замовлення</h1>
 
-      <form onSubmit={handleSubmit} className="grid lg:grid-cols-[1fr_380px] gap-8">
+      <form onSubmit={handleSubmit} className="grid lg:grid-cols-[1fr_380px] gap-8" noValidate>
         <div className="space-y-8">
+          {/* Contact info */}
           <section className="p-6 rounded-2xl aura-card">
             <h2 className="text-xl font-medium mb-5">Контактні дані</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="sm:col-span-2 space-y-1.5">
                 <Label htmlFor="fullName">Ім'я та Прізвище</Label>
-                <Input id="fullName" required value={form.fullName} onChange={e => setForm({...form, fullName: e.target.value})} className="rounded-xl h-11" placeholder="Олена Коваленко" />
+                <Input id="fullName" value={form.fullName} onChange={e => setForm({...form, fullName: e.target.value})} className="rounded-xl h-11" placeholder="Олена Коваленко" />
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="phone">Номер телефону</Label>
-                <Input id="phone" type="tel" required value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} className="rounded-xl h-11" placeholder="+380 XX XXX XX XX" />
+                <Input id="phone" type="tel" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} className="rounded-xl h-11" placeholder="+380 XX XXX XX XX" />
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" required value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="rounded-xl h-11" placeholder="you@example.com" />
+                <Input id="email" type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="rounded-xl h-11" placeholder="you@example.com" />
               </div>
             </div>
           </section>
 
+          {/* Delivery */}
           <section className="p-6 rounded-2xl aura-card">
             <h2 className="text-xl font-medium mb-5">Спосіб доставки</h2>
             <div className="grid sm:grid-cols-2 gap-3 mb-5">
-              <OptionCard active={delivery === "novaposhta"} onClick={() => setDelivery("novaposhta")} icon={<Truck className="h-5 w-5" />} title="Нова Пошта" subtitle="Відділення або поштомат" />
-              <OptionCard active={delivery === "mistexpress"} onClick={() => setDelivery("mistexpress")} icon={<Package className="h-5 w-5" />} title="MistExpress" subtitle="Відділення MistExpress" />
+              <OptionCard
+                active={delivery === "novaposhta"}
+                onClick={() => setDelivery("novaposhta")}
+                icon={<Truck className="h-5 w-5" />}
+                title="Нова Пошта"
+                subtitle="Відділення або поштомат"
+              />
+              <OptionCard
+                active={delivery === "mistexpress"}
+                onClick={() => setDelivery("mistexpress")}
+                icon={<Package className="h-5 w-5" />}
+                title="MistExpress"
+                subtitle="Відділення MistExpress"
+              />
             </div>
+
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <Label htmlFor="city">Місто</Label>
-                <Input id="city" required value={form.city} onChange={e => setForm({...form, city: e.target.value})} className="rounded-xl h-11" placeholder="Київ" />
+                {delivery === "novaposhta" ? (
+                  <CityAutocomplete
+                    id="city"
+                    value={form.city}
+                    onChange={v => {
+                      setForm(f => ({ ...f, city: v, branch: "" }));
+                      setCityRef("");
+                    }}
+                    onSelect={city => setCityRef(city.Ref)}
+                  />
+                ) : (
+                  <Input
+                    id="city"
+                    value={form.city}
+                    onChange={e => setForm({...form, city: e.target.value})}
+                    className="rounded-xl h-11"
+                    placeholder="Введіть місто"
+                  />
+                )}
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="branch">{delivery === "novaposhta" ? "Відділення або поштомат" : "Відділення MistExpress"}</Label>
-                <Input id="branch" required value={form.branch} onChange={e => setForm({...form, branch: e.target.value})} className="rounded-xl h-11" placeholder="№ ..." />
+                <Label htmlFor="branch">
+                  {delivery === "novaposhta" ? "Відділення або поштомат" : "Відділення MistExpress"}
+                </Label>
+                {delivery === "novaposhta" ? (
+                  <BranchAutocomplete
+                    id="branch"
+                    cityRef={cityRef}
+                    value={form.branch}
+                    onChange={v => setForm(f => ({ ...f, branch: v }))}
+                  />
+                ) : (
+                  <Input
+                    id="branch"
+                    value={form.branch}
+                    onChange={e => setForm({...form, branch: e.target.value})}
+                    className="rounded-xl h-11"
+                    placeholder="№ ..."
+                  />
+                )}
               </div>
             </div>
             <p className="text-sm text-muted-foreground mt-3">
@@ -187,6 +447,7 @@ const Checkout = () => {
             </p>
           </section>
 
+          {/* Payment */}
           <section className="p-6 rounded-2xl aura-card">
             <h2 className="text-xl font-medium mb-5">Спосіб оплати</h2>
             <div className="grid sm:grid-cols-2 gap-3">
@@ -201,6 +462,7 @@ const Checkout = () => {
           </section>
         </div>
 
+        {/* Order summary */}
         <aside className="lg:sticky lg:top-24 h-fit p-6 rounded-2xl aura-card">
           <h2 className="text-xl font-medium mb-4">Ваше замовлення</h2>
           <ul className="space-y-3 mb-4 max-h-64 overflow-y-auto pr-1">
@@ -208,17 +470,17 @@ const Checkout = () => {
               const itemPrice = selectedVariant?.price ?? product.price;
               const varLabel = selectedVariant?.label;
               return (
-              <li key={product.id + (varLabel ?? "")} className="flex gap-3 text-sm">
-                <div className="h-12 w-12 shrink-0 rounded-lg bg-secondary overflow-hidden grid place-items-center">
-                  {product.images?.[0] && <img src={product.images[0]} alt="" className="h-full w-full object-contain p-1" />}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="line-clamp-2">{product.name}</div>
-                  {varLabel && <div className="text-primary text-[11px] font-medium">Розмір: {varLabel}</div>}
-                  <div className="text-muted-foreground text-xs mt-0.5">{quantity} × {formatUAH(itemPrice)}</div>
-                </div>
-                <div className="font-medium whitespace-nowrap">{formatUAH(itemPrice * quantity)}</div>
-              </li>
+                <li key={product.id + (varLabel ?? "")} className="flex gap-3 text-sm">
+                  <div className="h-12 w-12 shrink-0 rounded-lg bg-secondary overflow-hidden grid place-items-center">
+                    {product.images?.[0] && <img src={product.images[0]} alt="" className="h-full w-full object-contain p-1" />}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="line-clamp-2">{product.name}</div>
+                    {varLabel && <div className="text-primary text-[11px] font-medium">Розмір: {varLabel}</div>}
+                    <div className="text-muted-foreground text-xs mt-0.5">{quantity} × {formatUAH(itemPrice)}</div>
+                  </div>
+                  <div className="font-medium whitespace-nowrap">{formatUAH(itemPrice * quantity)}</div>
+                </li>
               );
             })}
           </ul>

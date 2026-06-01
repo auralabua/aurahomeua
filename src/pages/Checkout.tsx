@@ -14,7 +14,7 @@ import { useSEO } from "@/hooks/useSEO";
 
 // ── Nova Poshta API ──────────────────────────────────────────────────────────
 
-const NP_API_KEY = "834e3cb96a88d90edb794d24aec1191";
+const NP_API_KEY = "834e3cb96a88d9dd5db794d24aec1191";
 
 interface NPCity {
   Ref: string;

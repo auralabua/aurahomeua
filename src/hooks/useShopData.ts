@@ -65,6 +65,7 @@ export interface DBProduct {
   is_parent: boolean | null;
   xml_group_id: string | null;
   variants: import("@/data/products").ProductVariant[] | null;
+  slug: string | null;
 }
 
 export const useDBCategories = () =>
@@ -129,6 +130,7 @@ export const useAllProductsAsLegacy = () => {
     isParent: p.is_parent ?? false,
     xmlGroupId: p.xml_group_id ?? undefined,
     variants: p.variants ?? undefined,
+    slug: p.slug ?? undefined,
   }));
   return { products, isLoading: productsQ.isLoading || catsQ.isLoading, isError: productsQ.isError || catsQ.isError };
 };
@@ -174,6 +176,7 @@ export const useProductsAsLegacy = () => {
     isParent: p.is_parent ?? false,
     xmlGroupId: p.xml_group_id ?? undefined,
     variants: p.variants ?? undefined,
+    slug: p.slug ?? undefined,
   }));
   return {
     products,

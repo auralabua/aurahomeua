@@ -106,7 +106,7 @@ const ProductPage = () => {
   const recentIds = useRecentlyViewed(id ?? "");
 
   // ── Resolve product data (before any conditional returns so hooks stay stable) ──
-  const foundProduct   = products.find(p => p.id === id);
+  const foundProduct   = products.find(p => p.id === id) ?? products.find(p => p.slug === id);
   const displayProduct = foundProduct;
 
   // JSONB variants from the product itself, sorted by size
@@ -158,7 +158,7 @@ const ProductPage = () => {
     ? [
         { name: "Каталог", url: "/catalog" },
         ...(category ? [{ name: category.name, url: `/catalog?category=${category.id}` }] : []),
-        { name: displayProduct.name, url: `/product/${displayProduct.id}` },
+        { name: displayProduct.name, url: `/product/${displayProduct.slug ?? displayProduct.id}` },
       ]
     : undefined;
 
@@ -168,7 +168,7 @@ const ProductPage = () => {
     keywords:          seoKeywords,
     image:             displayProduct?.images?.[0],
     images:            displayProduct?.images,
-    url:               displayProduct ? `/product/${displayProduct.id}` : "/catalog",
+    url:               displayProduct ? `/product/${displayProduct.slug ?? displayProduct.id}` : "/catalog",
     type:              "product",
     price:             currentProduct?.price,
     originalPrice:     currentProduct?.originalPrice,

@@ -125,7 +125,7 @@ export const ProductCard = ({ product, compact = false, categoryName }: ProductC
   if (compact) {
     return (
       <article className="group flex flex-col overflow-hidden rounded-2xl border border-border/40 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-card h-full">
-        <Link to={`/product/${product.id}`} className="relative overflow-hidden bg-secondary/20">
+        <Link to={`/product/${product.slug ?? product.id}`} className="relative overflow-hidden bg-secondary/20">
           <div className="aspect-[4/3] grid place-items-center p-3">
             {product.images?.[0] ? (
               <OptimizedImage
@@ -149,7 +149,7 @@ export const ProductCard = ({ product, compact = false, categoryName }: ProductC
         </Link>
         <div className="flex flex-col flex-1 gap-1.5 p-3">
           {categoryName && <span className="text-[9px] uppercase tracking-[0.15em] text-primary/60 font-medium line-clamp-1">{categoryName}</span>}
-          <Link to={`/product/${product.id}`} className="line-clamp-2 text-xs font-medium leading-snug text-foreground hover:text-primary transition-colors">
+          <Link to={`/product/${product.slug ?? product.id}`} className="line-clamp-2 text-xs font-medium leading-snug text-foreground hover:text-primary transition-colors">
             {product.name}
           </Link>
           <Stars rating={product.rating} reviews={product.reviews} size="xs" />
@@ -171,7 +171,7 @@ export const ProductCard = ({ product, compact = false, categoryName }: ProductC
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-border/40 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-card">
-      <Link to={`/product/${product.id}`} className="relative overflow-hidden bg-secondary/20">
+      <Link to={`/product/${product.slug ?? product.id}`} className="relative overflow-hidden bg-secondary/20">
         <div className="aspect-square grid place-items-center p-4 sm:p-6">
           {product.images?.[0] ? (
             <OptimizedImage
@@ -203,7 +203,7 @@ export const ProductCard = ({ product, compact = false, categoryName }: ProductC
         {categoryName && (
           <span className="text-[10px] uppercase tracking-[0.18em] text-primary/70 font-medium line-clamp-1">{categoryName}</span>
         )}
-        <Link to={`/product/${product.id}`} className="line-clamp-2 text-sm font-medium leading-snug text-foreground hover:text-primary transition-colors">
+        <Link to={`/product/${product.slug ?? product.id}`} className="line-clamp-2 text-sm font-medium leading-snug text-foreground hover:text-primary transition-colors">
           {product.name}
         </Link>
         <Stars rating={product.rating} reviews={product.reviews} />

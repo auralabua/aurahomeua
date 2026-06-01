@@ -64,6 +64,7 @@ export interface Product {
   isParent?: boolean;
   xmlGroupId?: string;
   variants?: ProductVariant[];
+  slug?: string;
 }
 
 // Legacy static export removed — products now come from the database (see useProductsAsLegacy).

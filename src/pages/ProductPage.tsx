@@ -90,16 +90,47 @@ const buildProductFAQ = (
 // ── Category-based CRO content ───────────────────────────────────────────────
 
 const CATEGORY_BENEFIT: Record<string, string> = {
-  "ortopedychni-podushky":        "Підтримує правильне положення шиї та хребта під час сну",
-  "ortopedychni-masazhni-kylymky":"Стимулює акупунктурні точки, знімає напругу та втому в ногах",
-  "ortezy-i-bandazhi":            "Фіксує та підтримує суглоби при навантаженнях і реабілітації",
-  "masazhery":                    "Знімає м'язову напругу та покращує кровообіг у проблемних зонах",
-  "tovary-dlia-krasy":            "Доглядає за шкірою і допомагає розслабитись після важкого дня",
-  "rozvyvaiuchi-ihrashky":        "Розвиває дрібну моторику та когнітивні здібності дитини",
-  "ortopedychni-ustilky":         "Рівномірно розподіляє навантаження та знижує втому ніг",
+  // ── Top-level categories ──────────────────────────────────────────────────
+  "ortopedychni-podushky":         "Підтримує правильне положення шиї та хребта під час сну",
+  "ortopedychni-masazhni-kylymky": "Стимулює акупунктурні точки, знімає напругу та втому в ногах",
+  "ortezy-i-bandazhi":             "Фіксує та підтримує суглоби при навантаженнях і реабілітації",
+  "masazhery":                     "Знімає м'язову напругу та покращує кровообіг у проблемних зонах",
+  "tovary-dlia-krasy":             "Доглядає за шкірою і допомагає розслабитись після важкого дня",
+  "rozvyvaiuchi-ihrashky":         "Розвиває дрібну моторику та когнітивні здібності дитини",
+  "ortopedychni-ustilky":          "Рівномірно розподіляє навантаження та знижує втому ніг",
+  // ── Pillow subcategories ──────────────────────────────────────────────────
+  "podushky-dlia-snu":             "Підтримує шию в правильному положенні для здорового глибокого сну",
+  "podushky-dlia-vahitnykh":       "Підтримує живіт, спину та стегна для комфортного сну під час вагітності",
+  "podushky-dlia-sidinnia":        "Знижує тиск на куприк та крижі при тривалому сидінні",
+  "podushky-z-efektom-pamiati":    "Повторює контури тіла та рівномірно розподіляє тиск уві сні",
+  "podushky-dytiachy":             "Підтримує формування правильної постави у дітей з перших місяців",
+  // ── Massager subcategories ────────────────────────────────────────────────
+  "elektrichni-masazhery":         "Знімає м'язову напругу за допомогою вібрації та теплової терапії",
+  "ruchni-masazhery":              "Допомагає при болях у спині, шиї та ногах — завжди під рукою",
+  // ── Mat subcategories ─────────────────────────────────────────────────────
+  "aplikatory":                    "Стимулює нервові закінчення і відновлює тонус після важкого дня",
+  "kylymky-pazly":                 "Масажує ступні та стимулює рефлекторні зони при кожному кроці",
+  "kylymky-z-halkoiu":             "Масажує ступні природною галькою — як прогулянка по пляжу",
+  "dytiachy-masazhni-kylymky":     "Розвиває дрібну моторику та тактильне сприйняття малюка",
+  // ── Brace/orthosis subcategories ─────────────────────────────────────────
+  "bandazhi":                      "Фіксує м'які тканини, зменшує біль і прискорює відновлення",
+  "ortezy":                        "Жорстко фіксує суглоб, знімає навантаження та запобігає травмам",
+  "nakolinnyky":                   "Стабілізує колінний суглоб при навантаженнях та під час реабілітації",
+  // ── Insole subcategories ──────────────────────────────────────────────────
+  "ustilky-dlia-doroslykh":        "Коригує положення стопи та знижує втому при тривалому ходінні",
+  "ustilky-dlia-ditei":            "Формує правильну поставу і підтримує розвиток стопи у дітей",
+  "pidpiatnyky":                   "Знімає навантаження з п'ятки та зменшує біль при шпорах",
+  "napivustilky":                  "Підтримує передню частину стопи і зменшує тиск на пальці",
+  // ── Beauty subcategories ──────────────────────────────────────────────────
+  "krasota-i-doglyad":             "Доглядає за шкірою обличчя та тіла для свіжого вигляду щодня",
+  "fitnes-ta-sport":               "Підвищує ефективність тренувань і прискорює відновлення м'язів",
+  "reabilitatsiia":                "Прискорює відновлення після травм та операцій на опорно-руховому апараті",
+  // ── Toy subcategories ─────────────────────────────────────────────────────
+  "sensorno-rozvyvalni":           "Стимулює сенсорний розвиток і заспокоює дитину через тактильні відчуття",
 };
 
 const CATEGORY_WHO: Record<string, Array<{ icon: string; label: string }>> = {
+  // ── Top-level categories ──────────────────────────────────────────────────
   "ortopedychni-podushky": [
     { icon: "💤", label: "Для здорового сну" },
     { icon: "💻", label: "Для роботи за комп'ютером" },
@@ -149,6 +180,177 @@ const CATEGORY_WHO: Record<string, Array<{ icon: string; label: string }>> = {
     { icon: "💼", label: "Для роботи на ногах" },
     { icon: "🏔️", label: "Для тривалих прогулянок" },
   ],
+  // ── Pillow subcategories ──────────────────────────────────────────────────
+  "podushky-dlia-snu": [
+    { icon: "💤", label: "Для здорового глибокого сну" },
+    { icon: "🤕", label: "При болях у шиї та спині" },
+    { icon: "😴", label: "При порушенні сну" },
+    { icon: "🧓", label: "При остеохондрозі" },
+    { icon: "💆", label: "Для повного розслаблення" },
+  ],
+  "podushky-dlia-vahitnykh": [
+    { icon: "🤰", label: "Для вагітних" },
+    { icon: "🍼", label: "Для годуючих мам" },
+    { icon: "💤", label: "Для комфортного сну" },
+    { icon: "💆‍♀️", label: "При болях у спині та тазі" },
+    { icon: "🎁", label: "Як подарунок майбутній мамі" },
+  ],
+  "podushky-dlia-sidinnia": [
+    { icon: "💼", label: "Для офісних працівників" },
+    { icon: "🚗", label: "Для водіїв" },
+    { icon: "🏥", label: "Після операцій на куприку" },
+    { icon: "🧓", label: "При болях у крижах" },
+    { icon: "💻", label: "При тривалій роботі за ПК" },
+  ],
+  "podushky-z-efektom-pamiati": [
+    { icon: "💤", label: "Для чутливого сну" },
+    { icon: "🤕", label: "При болях у шиї" },
+    { icon: "🧓", label: "При остеохондрозі" },
+    { icon: "💆", label: "Для максимального комфорту" },
+    { icon: "🎁", label: "Як преміум-подарунок" },
+  ],
+  "podushky-dytiachy": [
+    { icon: "👶", label: "Для немовлят від 1 місяця" },
+    { icon: "🎒", label: "Для дошкільнят" },
+    { icon: "💤", label: "Для здорового сну дитини" },
+    { icon: "🦴", label: "Для формування правильної постави" },
+    { icon: "🎁", label: "Як подарунок на народження" },
+  ],
+  // ── Massager subcategories ────────────────────────────────────────────────
+  "elektrichni-masazhery": [
+    { icon: "💆", label: "Для зняття напруги" },
+    { icon: "💼", label: "Після сидячої роботи" },
+    { icon: "🏃", label: "Для відновлення після спорту" },
+    { icon: "🏠", label: "Для SPA вдома" },
+    { icon: "🔌", label: "При хронічних болях у спині" },
+  ],
+  "ruchni-masazhery": [
+    { icon: "💆", label: "Для самомасажу вдома" },
+    { icon: "✈️", label: "Для подорожей — завжди з собою" },
+    { icon: "💼", label: "Для офісу" },
+    { icon: "🏃", label: "Після тренувань" },
+    { icon: "🧓", label: "Для людей старшого віку" },
+  ],
+  // ── Mat subcategories ─────────────────────────────────────────────────────
+  "aplikatory": [
+    { icon: "💆", label: "Для розслаблення спини" },
+    { icon: "💼", label: "Після напруженого дня" },
+    { icon: "🏃", label: "Для відновлення після спорту" },
+    { icon: "🦶", label: "Для масажу ступень" },
+    { icon: "⚡", label: "Для покращення кровообігу" },
+  ],
+  "kylymky-pazly": [
+    { icon: "🧘", label: "Для релаксу вдома" },
+    { icon: "💼", label: "Після сидячої роботи" },
+    { icon: "🏃", label: "Після тренувань" },
+    { icon: "🦶", label: "При болях у ступнях" },
+    { icon: "⚡", label: "Для покращення кровообігу" },
+  ],
+  "kylymky-z-halkoiu": [
+    { icon: "🧘", label: "Для релаксу та медитації" },
+    { icon: "🦶", label: "Для масажу ступень" },
+    { icon: "🌿", label: "Для SPA-ефекту вдома" },
+    { icon: "⚡", label: "Для покращення кровообігу" },
+    { icon: "💼", label: "Після сидячої роботи" },
+  ],
+  "dytiachy-masazhni-kylymky": [
+    { icon: "👶", label: "Для дітей від 0 до 3 років" },
+    { icon: "✋", label: "Для розвитку тактильних відчуттів" },
+    { icon: "🧠", label: "Для когнітивного розвитку" },
+    { icon: "🏠", label: "Для ігрових куточків" },
+    { icon: "🎁", label: "Як подарунок" },
+  ],
+  // ── Brace/orthosis subcategories ─────────────────────────────────────────
+  "bandazhi": [
+    { icon: "🏥", label: "Під час реабілітації" },
+    { icon: "⚽", label: "При заняттях спортом" },
+    { icon: "🤰", label: "Під час вагітності" },
+    { icon: "💼", label: "При тривалому стоянні" },
+    { icon: "🦴", label: "При хронічних болях" },
+  ],
+  "ortezy": [
+    { icon: "🏥", label: "Після травм і операцій" },
+    { icon: "⚽", label: "Для профілактики при спорті" },
+    { icon: "🦴", label: "При артриті та артрозі" },
+    { icon: "🏗️", label: "При важкій фізичній роботі" },
+    { icon: "👴", label: "При вікових змінах суглобів" },
+  ],
+  "nakolinnyky": [
+    { icon: "⚽", label: "Для спортсменів" },
+    { icon: "🏥", label: "Під час реабілітації коліна" },
+    { icon: "🏗️", label: "При роботі на ногах" },
+    { icon: "🧓", label: "При артрозі коліна" },
+    { icon: "🚶", label: "Для тривалих прогулянок" },
+  ],
+  // ── Insole subcategories ──────────────────────────────────────────────────
+  "ustilky-dlia-doroslykh": [
+    { icon: "🏃", label: "Для активних людей" },
+    { icon: "💼", label: "Для роботи на ногах" },
+    { icon: "👣", label: "При плоскостопості" },
+    { icon: "⚽", label: "Для занять спортом" },
+    { icon: "🏔️", label: "Для тривалих прогулянок" },
+  ],
+  "ustilky-dlia-ditei": [
+    { icon: "👶", label: "Для дітей від 3 років" },
+    { icon: "⚽", label: "Для активних дітей" },
+    { icon: "👣", label: "При плоскостопості у дітей" },
+    { icon: "🏫", label: "Для шкільного взуття" },
+    { icon: "🦴", label: "Для формування стопи" },
+  ],
+  "pidpiatnyky": [
+    { icon: "👠", label: "При болях у п'ятці" },
+    { icon: "🦷", label: "При п'ятковій шпорі" },
+    { icon: "💼", label: "Для роботи на ногах" },
+    { icon: "👟", label: "Для спортивного взуття" },
+    { icon: "🏥", label: "Під час реабілітації" },
+  ],
+  "napivustilky": [
+    { icon: "👠", label: "Для взуття на підборах" },
+    { icon: "💃", label: "При натоптишах та мозолях" },
+    { icon: "💼", label: "Для повсякденного взуття" },
+    { icon: "🏃", label: "Для активного відпочинку" },
+    { icon: "👟", label: "Для зменшення тиску на пальці" },
+  ],
+  // ── Beauty subcategories ──────────────────────────────────────────────────
+  "krasota-i-doglyad": [
+    { icon: "💆‍♀️", label: "Для домашнього догляду" },
+    { icon: "✨", label: "Для SPA-ефекту вдома" },
+    { icon: "🌿", label: "Для антистрес процедур" },
+    { icon: "🎁", label: "Як подарунок" },
+    { icon: "👩", label: "Для жінок будь-якого віку" },
+  ],
+  "fitnes-ta-sport": [
+    { icon: "🏋️", label: "Для фітнесу та тренувань" },
+    { icon: "🏃", label: "Для бігунів і спортсменів" },
+    { icon: "🧘", label: "Для йоги та пілатесу" },
+    { icon: "💆", label: "Для відновлення після тренувань" },
+    { icon: "🏆", label: "Для аматорів та профі" },
+  ],
+  "reabilitatsiia": [
+    { icon: "🏥", label: "Після операцій і травм" },
+    { icon: "🦴", label: "При захворюваннях суглобів" },
+    { icon: "🧓", label: "Для людей старшого віку" },
+    { icon: "💆", label: "Для фізичної терапії" },
+    { icon: "🔄", label: "Для поступового відновлення" },
+  ],
+  // ── Toy subcategories ─────────────────────────────────────────────────────
+  "sensorno-rozvyvalni": [
+    { icon: "🧒", label: "Для дітей від 6 місяців" },
+    { icon: "✋", label: "Для розвитку дрібної моторики" },
+    { icon: "🧠", label: "Для сенсорного розвитку" },
+    { icon: "🌿", label: "Для заспокоєння" },
+    { icon: "🎁", label: "Як подарунок" },
+  ],
+};
+
+// Lookup with fallback to parent category slug
+const getCategoryContent = <T,>(
+  map: Record<string, T>,
+  categoryId: string | undefined,
+  parentId: string | undefined
+): T | undefined => {
+  if (!categoryId) return undefined;
+  return map[categoryId] ?? (parentId ? map[parentId] : undefined);
 };
 
 const WHY_BODYHOME = [
@@ -434,10 +636,10 @@ const ProductPage = () => {
             </div>
 
             {/* Benefit line */}
-            {category && CATEGORY_BENEFIT[category.id] && (
+            {category && getCategoryContent(CATEGORY_BENEFIT, category.id, category.parentId as string | undefined) && (
               <p className="text-sm text-muted-foreground flex items-center gap-2">
                 <Check className="h-4 w-4 text-green-600 shrink-0" />
-                {CATEGORY_BENEFIT[category.id]}
+                {getCategoryContent(CATEGORY_BENEFIT, category.id, category.parentId as string | undefined)}
               </p>
             )}
 
@@ -657,14 +859,17 @@ const ProductPage = () => {
         </div>
 
         {/* ── Кому підійде ──────────────────────────────────────────────── */}
-        {category && CATEGORY_WHO[category.id] && (
+        {category && (() => {
+          const whoItems = getCategoryContent(CATEGORY_WHO, category.id, category.parentId as string | undefined);
+          if (!whoItems) return null;
+          return (
           <section className="mt-12 sm:mt-16">
             <div className="mb-5">
               <p className="aura-kicker mb-1">застосування</p>
               <h2 className="text-xl sm:text-2xl font-medium">Кому підійде</h2>
             </div>
             <div className="flex flex-wrap gap-3">
-              {CATEGORY_WHO[category.id].map((item, i) => (
+              {whoItems.map((item, i) => (
                 <div
                   key={i}
                   className="flex items-center gap-2.5 rounded-2xl border border-border/50 bg-white px-4 py-2.5 text-sm font-medium shadow-sm"
@@ -675,7 +880,8 @@ const ProductPage = () => {
               ))}
             </div>
           </section>
-        )}
+          );
+        })()}
 
         {/* ── Чому обирають BodyHome ────────────────────────────────────── */}
         <section className="mt-12 sm:mt-14">

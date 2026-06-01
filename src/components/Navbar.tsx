@@ -171,6 +171,10 @@ export const Navbar = () => {
             )}
           </div>
 
+          <NavLink to="/about" className={({isActive}) => `rounded-full px-4 py-2 text-sm font-light transition-smooth ${isActive ? "bg-secondary text-primary" : "text-foreground/78 hover:bg-secondary hover:text-primary"}`}>
+            Про нас
+          </NavLink>
+
           <NavLink to="/contacts" className={({isActive}) => `rounded-full px-4 py-2 text-sm font-light transition-smooth ${isActive ? "bg-secondary text-primary" : "text-foreground/78 hover:bg-secondary hover:text-primary"}`}>
             Контакти
           </NavLink>
@@ -280,6 +284,10 @@ export const Navbar = () => {
                   </div>
                 )}
               </div>
+
+              <NavLink to="/about" onClick={() => setMobileOpen(false)} className={({isActive}) => `rounded-2xl px-4 py-3 text-sm font-light ${isActive ? "bg-secondary text-primary" : "text-foreground"}`}>
+                Про нас
+              </NavLink>
 
               <NavLink to="/contacts" onClick={() => setMobileOpen(false)} className={({isActive}) => `rounded-2xl px-4 py-3 text-sm font-light ${isActive ? "bg-secondary text-primary" : "text-foreground"}`}>
                 Контакти

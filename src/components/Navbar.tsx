@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
-import { ShoppingCart, Search, Menu, X, Phone, Sparkles, ChevronDown, ChevronRight, ArrowRight, BookOpen, Bone, Waves, Moon, Baby } from "lucide-react";
+import { ShoppingCart, Search, Menu, X, Phone, Sparkles, ChevronDown, ChevronRight, ArrowRight, BookOpen, Bone, Waves, Baby, Activity, Heart } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import { useCategoriesAsLegacy } from "@/hooks/useShopData";
@@ -11,11 +11,11 @@ const TELEGRAM = "https://t.me/bodyhomeua";
 const VIBER = "viber://chat?number=%2B380956981124";
 
 const blogItems = [
-  { icon: Bone, label: "Чому болить спина і як допомагає ортопедія", link: "/blog/chomu-bolyt-spyna-i-yak-dopomahaie-ortopediia", tag: "Здоров'я спини" },
-  { icon: Waves, label: "Масаж вдома: як відновитися після важкого дня", link: "/blog/masazh-vdoma-yak-vidnovytysia-pislia-vazhkoho-dnia", tag: "Відновлення" },
-  { icon: Moon, label: "Як правильна подушка впливає на якість сну", link: "/blog/yak-pravylna-podushka-vplyvaie-na-yakist-snu", tag: "Якість сну" },
-  { icon: Baby, label: "Ортопедія для дітей: коли починати та що обирати", link: "/blog/ortopediia-dlia-ditei-koly-pochynaty-ta-shcho-obuyraty", tag: "Дитяча ортопедія" },
-  { icon: BookOpen, label: "Як вибрати ортопедичні устілки", link: "/blog/yak-vybraty-ortopedychni-ustilky", tag: "Ортопедія" },
+  { icon: Activity, label: "Остеохондроз шиї: симптоми і домашнє лікування", link: "/blog/osteokhondroz-shyiny-symptomy-i-domashnye-likuvannia", tag: "Здоров'я спини" },
+  { icon: Bone, label: "Як обрати ортез на гомілковостопний суглоб", link: "/blog/yak-obraty-ortez-na-homilkovostopnyi-suhlyb", tag: "Ортези і бандажі" },
+  { icon: Baby, label: "Дитяча постура: як сформувати правильну з дитинства", link: "/blog/dytiacha-postura-yak-sformuvaty-pravilnu-z-dytynstva", tag: "Дитяча ортопедія" },
+  { icon: Heart, label: "Після пологів: відновлення тіла — що допоможе", link: "/blog/pislia-rodiv-vidnovlennia-tila-shcho-dopomazhe", tag: "Відновлення" },
+  { icon: Waves, label: "Масаж стоп: чому це важливо і як робити вдома", link: "/blog/masazh-stop-chomu-tse-vazhlyvo-i-yak-robyty-vdoma", tag: "Здоров'я ніг" },
 ];
 
 const TelegramIcon = () => (
@@ -164,7 +164,7 @@ export const Navbar = () => {
                 <div className="my-1 h-px bg-border" />
                 <Link to="/blog" onClick={() => setBlogOpen(false)}
                   className="flex items-center justify-between rounded-xl px-3 py-2 hover:bg-secondary group transition-colors">
-                  <span className="text-sm font-medium text-primary">Всі статті</span>
+                  <span className="text-sm font-medium text-primary">Всі статті (20) →</span>
                   <ArrowRight className="h-3.5 w-3.5 text-primary group-hover:translate-x-0.5 transition-transform" />
                 </Link>
               </div>

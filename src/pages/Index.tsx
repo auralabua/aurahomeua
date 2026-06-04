@@ -239,36 +239,43 @@ const Index = () => {
         </div>
       </section>
       {/* ── ЩО ХОЧЕТЕ ПОКРАЩИТИ ── */}
-      <section className="py-10 sm:py-12 bg-background">
+      <section className="py-12 sm:py-16 bg-[#F8F6F2]">
         <div className="container">
-          <div className="mb-7">
-            <p className="aura-kicker mb-2">підбір</p>
-            <h2 className="text-2xl sm:text-3xl font-medium">Що хочете покращити?</h2>
-            <p className="mt-1.5 text-sm text-muted-foreground font-light">
-              Рішення для сну, роботи, відновлення та щоденного комфорту
+          <div className="mb-8 sm:mb-10">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="block h-px w-6 bg-[#3D7A55]" />
+              <p className="aura-kicker">підбір</p>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-medium">Що хочете покращити?</h2>
+            <p className="mt-2 text-sm sm:text-base text-muted-foreground font-light">
+              Оберіть свій запит — підберемо відповідні товари
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {[
               {
                 Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 2C9.5 2 7 4.5 7 7v10c0 2.5 2.5 5 5 5s5-2.5 5-5V7c0-2.5-2.5-5-5-5z"/><path d="M9 10h6M9 14h6"/></svg>,
                 title: "Для спини",
                 desc: "Подушки, масажери, бандажі",
-                badge: "Хіт категорія",
+                badge: "ХІТ",
                 count: "86 товарів",
                 link: "/catalog?category=ortopedychni-podushky",
-                accent: "text-[#8A6440]",
-                iconBg: "bg-[#F5EFE6]",
+                accentColor: "#3D7A55",
+                iconBg: "#3D7A55",
+                iconColor: "#ffffff",
+                badgeColor: "#3D7A55",
               },
               {
                 Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M3 12h18M3 6h18M3 18h18"/><rect x="6" y="3" width="12" height="18" rx="2"/></svg>,
                 title: "Для сну",
                 desc: "Ортопедичні подушки",
-                badge: "Популярна",
+                badge: "ТОП",
                 count: "78 товарів",
                 link: "/catalog?category=ortopedychni-podushky",
-                accent: "text-[#3D5A8A]",
-                iconBg: "bg-[#E8EDF5]",
+                accentColor: "#3D5A8A",
+                iconBg: "#3D5A8A",
+                iconColor: "#ffffff",
+                badgeColor: "#3D5A8A",
               },
               {
                 Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>,
@@ -277,18 +284,22 @@ const Index = () => {
                 badge: null,
                 count: "54 товари",
                 link: "/catalog?category=ortezy-i-bandazhi",
-                accent: "text-[#2A7070]",
-                iconBg: "bg-[#E8F2F0]",
+                accentColor: "#2A7070",
+                iconBg: "#2A7070",
+                iconColor: "#ffffff",
+                badgeColor: null,
               },
               {
                 Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/><path d="M12 12v10M8 18l4 4 4-4"/><path d="M6 14c-2 1-3 3-2 5M18 14c2 1 3 3 2 5"/></svg>,
                 title: "Для відновлення",
                 desc: "Масажери та прилади",
-                badge: "Популярна",
+                badge: "ТОП",
                 count: "43 товари",
                 link: "/catalog?category=masazhery",
-                accent: "text-[#8A4040]",
-                iconBg: "bg-[#F0EAE8]",
+                accentColor: "#8A4040",
+                iconBg: "#8A4040",
+                iconColor: "#ffffff",
+                badgeColor: "#8A4040",
               },
               {
                 Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 22V12M12 12C10 8 6 7 4 9M12 12C14 8 18 7 20 9"/><path d="M4 4h16"/><circle cx="12" cy="4" r="1" fill="currentColor"/></svg>,
@@ -297,8 +308,10 @@ const Index = () => {
                 badge: null,
                 count: "91 товар",
                 link: "/catalog?category=ortopedychni-masazhni-kylymky",
-                accent: "text-[#3D7A55]",
-                iconBg: "bg-[#EAF2E8]",
+                accentColor: "#3D7A55",
+                iconBg: "#EAF2E8",
+                iconColor: "#3D7A55",
+                badgeColor: null,
               },
               {
                 Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
@@ -307,32 +320,41 @@ const Index = () => {
                 badge: null,
                 count: "67 товарів",
                 link: "/catalog?category=tovary-dlia-krasy",
-                accent: "text-[#7A6A20]",
-                iconBg: "bg-[#F5F0E0]",
+                accentColor: "#7A6A20",
+                iconBg: "#7A6A20",
+                iconColor: "#ffffff",
+                badgeColor: null,
               },
             ].map((item, i) => (
               <Link key={i} to={item.link}
-                className="group relative flex flex-col gap-3 rounded-2xl border border-border/40 bg-white p-4 sm:p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] hover:border-border/70 active:scale-[0.98]">
-                {/* Badge */}
-                {item.badge && (
-                  <span className="absolute top-3 right-3 text-[10px] font-medium text-muted-foreground bg-secondary rounded-full px-2 py-0.5">
-                    {item.badge}
-                  </span>
-                )}
-                {/* Icon */}
-                <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${item.iconBg} ${item.accent} transition-transform duration-200 group-hover:scale-105`}>
-                  <item.Icon />
+                className="group relative flex flex-col gap-3 rounded-2xl border border-border/40 bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.10)] active:scale-[0.98]"
+                style={{ borderLeftColor: item.accentColor, borderLeftWidth: "4px" }}>
+
+                {/* Top row: icon + badge */}
+                <div className="flex items-start justify-between">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
+                    style={{ backgroundColor: item.iconBg, color: item.iconColor }}>
+                    <item.Icon />
+                  </div>
+                  {item.badge && (
+                    <span className="rounded-full px-2 py-0.5 text-[10px] font-bold text-white uppercase tracking-wide"
+                      style={{ backgroundColor: item.badgeColor! }}>
+                      {item.badge}
+                    </span>
+                  )}
                 </div>
-                {/* Text */}
+
+                {/* Content */}
                 <div className="flex-1">
-                  <p className="text-sm font-semibold text-foreground">{item.title}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5 font-light">{item.desc}</p>
+                  <p className="font-semibold text-foreground text-sm sm:text-base">{item.title}</p>
+                  <p className="hidden sm:block text-xs text-muted-foreground mt-0.5 font-light">{item.desc}</p>
                 </div>
+
                 {/* Footer */}
-                <div className="flex items-center justify-between pt-1 border-t border-border/30">
-                  <span className="text-[11px] text-muted-foreground">{item.count}</span>
-                  <span className={`text-xs font-medium flex items-center gap-0.5 ${item.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-200`}>
-                    Підібрати <ArrowRight className="h-3 w-3" />
+                <div className="flex items-center justify-between pt-2 border-t border-border/30">
+                  <span className="text-xs text-muted-foreground font-medium">{item.count}</span>
+                  <span className="text-xs font-semibold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-200">
+                    Переглянути <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
                   </span>
                 </div>
               </Link>

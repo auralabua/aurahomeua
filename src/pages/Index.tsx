@@ -349,67 +349,52 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ── FEATURED CAROUSEL ── */}
       {/* ── ХІТИ / НОВИНКИ / РОЗПРОДАЖ ── */}
-      <section id="featured" className="bg-secondary/40 py-12 sm:py-20">
-        <div className="container">
-          <div className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-5">
-            <div>
-              <p className="aura-kicker mb-3">добірка</p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-light">Кращі товари</h2>
+      <section id="featured" className="bg-secondary/40 pt-8 pb-12 sm:pt-10 sm:pb-20">
+        <div className="container mb-6">
+          <div className="flex items-center justify-between gap-3">
+            {/* Tabs */}
+            <div className="flex gap-2">
+              <button
+                onClick={() => setActiveTab("hits")}
+                className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                  activeTab === "hits"
+                    ? "bg-primary text-white"
+                    : "border border-border text-muted-foreground hover:border-primary hover:text-primary"
+                }`}>
+                <Flame className="h-3.5 w-3.5" />
+                Хіти
+              </button>
+              <button
+                onClick={() => setActiveTab("new")}
+                className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                  activeTab === "new"
+                    ? "bg-primary text-white"
+                    : "border border-border text-muted-foreground hover:border-primary hover:text-primary"
+                }`}>
+                <Sparkles className="h-3.5 w-3.5" />
+                Новинки
+              </button>
+              <button
+                onClick={() => setActiveTab("sale")}
+                className={`flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                  activeTab === "sale"
+                    ? "bg-primary text-white"
+                    : "border border-border text-muted-foreground hover:border-primary hover:text-primary"
+                }`}>
+                <Tag className="h-3.5 w-3.5" />
+                Розпродаж
+              </button>
             </div>
-            <Link to="/catalog" className="hidden items-center gap-2 text-sm text-primary font-light transition-smooth hover:gap-3 sm:flex shrink-0">
+
+            {/* Весь каталог */}
+            <Link to="/catalog" className="flex items-center gap-2 text-sm text-primary font-light transition-smooth hover:gap-3 shrink-0">
               Весь каталог <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
-
-          {/* Tabs */}
-          <div className="flex gap-2 mb-7">
-            <button
-              onClick={() => setActiveTab("hits")}
-              className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                activeTab === "hits"
-                  ? "bg-[#8A4040] text-white shadow-sm"
-                  : "bg-white border border-border/50 text-muted-foreground hover:border-[#8A4040]/40 hover:text-foreground"
-              }`}>
-              <Flame className="h-3.5 w-3.5" />
-              Хіти
-            </button>
-            <button
-              onClick={() => setActiveTab("new")}
-              className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                activeTab === "new"
-                  ? "bg-[#3D5A8A] text-white shadow-sm"
-                  : "bg-white border border-border/50 text-muted-foreground hover:border-[#3D5A8A]/40 hover:text-foreground"
-              }`}>
-              <Sparkles className="h-3.5 w-3.5" />
-              Новинки
-            </button>
-            <button
-              onClick={() => setActiveTab("sale")}
-              className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                activeTab === "sale"
-                  ? "bg-[#3D7A55] text-white shadow-sm"
-                  : "bg-white border border-border/50 text-muted-foreground hover:border-[#3D7A55]/40 hover:text-foreground"
-              }`}>
-              <Tag className="h-3.5 w-3.5" />
-              Розпродаж
-            </button>
           </div>
         </div>
 
         <ProductCarousel products={tabProducts} />
-
-        <div className="container mt-4 flex items-center justify-between">
-          <Link to="/catalog" className="flex items-center gap-2 text-sm text-primary font-light sm:hidden">
-            Весь каталог <ArrowRight className="h-4 w-4" />
-          </Link>
-          {activeTab === "sale" && (
-            <p className="text-xs text-muted-foreground ml-auto">
-              Ціни знижено — до закінчення залишків
-            </p>
-          )}
-        </div>
       </section>
 
       {/* ── БЛОГ / СТАТТІ ── */}

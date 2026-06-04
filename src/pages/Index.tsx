@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useRef } from "react";
-import { ArrowRight, ChevronLeft, ChevronRight, Truck, ShieldCheck, CreditCard, Headphones, Star, RotateCcw, Instagram } from "lucide-react";
+import { useRef, useState } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight, Truck, ShieldCheck, CreditCard, Headphones, Star, RotateCcw, Flame, Sparkles, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
@@ -70,62 +70,38 @@ const needs = [
 ];
 
 
-const FeaturedCarousel = ({ products }: { products: any[] }) => {
+const ProductCarousel = ({ products }: { products: any[] }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
-
   const scroll = (dir: "left" | "right") => {
     if (!scrollRef.current) return;
     const card = scrollRef.current.querySelector("article");
     const w = card ? card.offsetWidth + 16 : 240;
     scrollRef.current.scrollBy({ left: dir === "right" ? w * 2 : -w * 2, behavior: "smooth" });
   };
-
+  if (products.length === 0) return (
+    <div className="flex items-center justify-center py-16 text-muted-foreground text-sm">
+      Товари завантажуються...
+    </div>
+  );
   return (
-    <section id="featured" className="bg-secondary/40 py-12 sm:py-20">
-      <div className="container">
-        <div className="mb-8 flex items-end justify-between gap-4">
-          <div>
-            <p className="aura-kicker mb-3">рекомендовано</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light">Популярні товари</h2>
+    <div className="relative px-4 sm:px-6 lg:px-8">
+      <button onClick={() => scroll("left")}
+        className="absolute left-0 sm:left-1 top-1/2 -translate-y-8 z-10 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
+        <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+      </button>
+      <button onClick={() => scroll("right")}
+        className="absolute right-0 sm:right-1 top-1/2 -translate-y-8 z-10 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
+        <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
+      </button>
+      <div ref={scrollRef} className="flex gap-3 overflow-x-auto pb-3 mx-6 sm:mx-8"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+        {products.map(p => (
+          <div key={p.id} className="shrink-0 w-[calc(25%-10px)] min-w-[160px] max-w-[240px]">
+            <ProductCard product={p} compact />
           </div>
-          <Link to="/catalog" className="hidden items-center gap-2 text-sm text-primary font-light transition-smooth hover:gap-3 sm:flex shrink-0">
-            Всі товари <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
+        ))}
       </div>
-
-      {/* Carousel with side arrows */}
-      <div className="relative px-4 sm:px-6 lg:px-8">
-        {/* Left arrow */}
-        <button onClick={() => scroll("left")}
-          className="absolute left-0 sm:left-1 top-1/2 -translate-y-8 z-10 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
-          <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
-        </button>
-        {/* Right arrow */}
-        <button onClick={() => scroll("right")}
-          className="absolute right-0 sm:right-1 top-1/2 -translate-y-8 z-10 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
-          <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
-        </button>
-
-        <div
-          ref={scrollRef}
-          className="flex gap-3 overflow-x-auto pb-3 mx-6 sm:mx-8"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {products.map(p => (
-            <div key={p.id} className="shrink-0 w-[calc(25%-10px)] min-w-[160px] max-w-[240px]">
-              <ProductCard product={p} compact />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="container mt-3">
-        <Link to="/catalog" className="flex items-center gap-2 text-sm text-primary font-light sm:hidden">
-          Всі товари <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
-    </section>
+    </div>
   );
 };
 
@@ -137,18 +113,28 @@ const Index = () => {
     url: "/",
     type: "website",
   });
+  const [activeTab, setActiveTab] = useState<"hits" | "new" | "sale">("hits");
   const { products } = useProductsAsLegacy();
   const { categories: allCats } = useCategoriesAsLegacy();
   const categories = allCats.filter(c => !c.parentId);
-  // 2-3 товари з кожної категорії (топ-категорії)
-  const featuredCatSlugs = [
-    "tovary-dlia-krasy", "ortopedychni-podushky", "masazhery",
-    "ortopedychni-masazhni-kylymky", "ortezy-i-bandazhi",
-    "rozvyvaiuchi-ihrashky", "ortopedychni-ustilky",
-  ];
-  const featured = featuredCatSlugs.flatMap(slug =>
-    products.filter(p => p.category === slug).slice(0, 3)
-  ).slice(0, 20);
+
+  const baseProducts = products.filter(p => !p.parentProductId && !p.isParent);
+
+  const hits = baseProducts
+    .filter(p => p.reviews >= 3)
+    .sort((a, b) => b.reviews - a.reviews || b.rating - a.rating)
+    .slice(0, 16);
+
+  const novelties = baseProducts
+    .filter(p => p.badge === "Новинка")
+    .slice(0, 16);
+
+  const sales = baseProducts
+    .filter(p => p.originalPrice && p.originalPrice > p.price)
+    .sort((a, b) => (b.originalPrice! / b.price) - (a.originalPrice! / a.price))
+    .slice(0, 16);
+
+  const tabProducts = activeTab === "hits" ? hits : activeTab === "new" ? novelties : sales;
 
   return (
     <div>
@@ -364,7 +350,67 @@ const Index = () => {
       </section>
 
       {/* ── FEATURED CAROUSEL ── */}
-      <FeaturedCarousel products={featured} />
+      {/* ── ХІТИ / НОВИНКИ / РОЗПРОДАЖ ── */}
+      <section id="featured" className="bg-secondary/40 py-12 sm:py-20">
+        <div className="container">
+          <div className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-5">
+            <div>
+              <p className="aura-kicker mb-3">добірка</p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-light">Кращі товари</h2>
+            </div>
+            <Link to="/catalog" className="hidden items-center gap-2 text-sm text-primary font-light transition-smooth hover:gap-3 sm:flex shrink-0">
+              Весь каталог <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          {/* Tabs */}
+          <div className="flex gap-2 mb-7">
+            <button
+              onClick={() => setActiveTab("hits")}
+              className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                activeTab === "hits"
+                  ? "bg-[#8A4040] text-white shadow-sm"
+                  : "bg-white border border-border/50 text-muted-foreground hover:border-[#8A4040]/40 hover:text-foreground"
+              }`}>
+              <Flame className="h-3.5 w-3.5" />
+              Хіти
+            </button>
+            <button
+              onClick={() => setActiveTab("new")}
+              className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                activeTab === "new"
+                  ? "bg-[#3D5A8A] text-white shadow-sm"
+                  : "bg-white border border-border/50 text-muted-foreground hover:border-[#3D5A8A]/40 hover:text-foreground"
+              }`}>
+              <Sparkles className="h-3.5 w-3.5" />
+              Новинки
+            </button>
+            <button
+              onClick={() => setActiveTab("sale")}
+              className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                activeTab === "sale"
+                  ? "bg-[#3D7A55] text-white shadow-sm"
+                  : "bg-white border border-border/50 text-muted-foreground hover:border-[#3D7A55]/40 hover:text-foreground"
+              }`}>
+              <Tag className="h-3.5 w-3.5" />
+              Розпродаж
+            </button>
+          </div>
+        </div>
+
+        <ProductCarousel products={tabProducts} />
+
+        <div className="container mt-4 flex items-center justify-between">
+          <Link to="/catalog" className="flex items-center gap-2 text-sm text-primary font-light sm:hidden">
+            Весь каталог <ArrowRight className="h-4 w-4" />
+          </Link>
+          {activeTab === "sale" && (
+            <p className="text-xs text-muted-foreground ml-auto">
+              Ціни знижено — до закінчення залишків
+            </p>
+          )}
+        </div>
+      </section>
 
       {/* ── БЛОГ / СТАТТІ ── */}
       <section className="bg-secondary/40 py-12 sm:py-20">

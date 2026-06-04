@@ -1,6 +1,7 @@
 {
   "rewrites": [
-    { "source": "/((?!feed\\.xml|google_merchant_feed\\.xml|sitemap\\.xml|robots\\.txt).*)", "destination": "/index.html" }
+    { "source": "/feed.xml", "destination": "/api/feed" },
+    { "source": "/((?!google_merchant_feed\\.xml|sitemap\\.xml|robots\\.txt).*)", "destination": "/index.html" }
   ],
   "headers": [
     {

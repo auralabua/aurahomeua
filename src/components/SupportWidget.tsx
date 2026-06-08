@@ -102,7 +102,7 @@ export const SupportWidget = () => {
                 <TelegramIcon />
                 <div>
                   <p className="text-sm font-semibold leading-tight">Написати в Telegram</p>
-                  <p className="text-xs opacity-80">Відповідь протягом 1 години</p>
+                  <p className="text-xs opacity-80">Відповідь протягом 3–5 хвилин</p>
                 </div>
               </a>
 

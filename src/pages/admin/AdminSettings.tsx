@@ -14,8 +14,8 @@ interface Settings {
   telegram: string;
   npApiKey: string;
   telegramBotToken: string;
-  wayforpayMerchant: string;
-  wayforpaySecret: string;
+  liqpayPublicKey: string;
+  liqpayPrivateKey: string;
 }
 
 const defaults: Settings = {
@@ -25,8 +25,8 @@ const defaults: Settings = {
   telegram: "@bodyhomeua",
   npApiKey: "",
   telegramBotToken: "",
-  wayforpayMerchant: "",
-  wayforpaySecret: "",
+  liqpayPublicKey: "",
+  liqpayPrivateKey: "",
 };
 
 const loadSettings = (): Settings => {
@@ -153,25 +153,25 @@ const AdminSettings = () => {
         />
       </div>
 
-      {/* WayForPay */}
+      {/* LiqPay */}
       <div className="rounded-2xl bg-card border border-border/60 p-6 space-y-4">
-        <SectionHeader title="WayForPay" desc="Налаштування онлайн оплати" />
+        <SectionHeader title="LiqPay" desc="Налаштування онлайн оплати (Visa, Mastercard, Apple Pay)" />
         <Field
-          label="Merchant Account"
-          id="wayforpayMerchant"
-          value={settings.wayforpayMerchant}
-          onChange={update("wayforpayMerchant")}
-          placeholder="merchant_bodyhome"
-          hint="Назва мерчант-акаунта в особистому кабінеті WayForPay"
+          label="Public Key"
+          id="liqpayPublicKey"
+          value={settings.liqpayPublicKey}
+          onChange={update("liqpayPublicKey")}
+          placeholder="i21815439512"
+          hint="Публічний ключ з особистого кабінету LiqPay"
         />
         <Field
-          label="Secret Key"
-          id="wayforpaySecret"
-          value={settings.wayforpaySecret}
-          onChange={update("wayforpaySecret")}
+          label="Private Key"
+          id="liqpayPrivateKey"
+          value={settings.liqpayPrivateKey}
+          onChange={update("liqpayPrivateKey")}
           type="password"
           placeholder="••••••••"
-          hint="Секретний ключ для підпису транзакцій"
+          hint="Приватний ключ — зберігається у змінних середовища Vercel (LIQPAY_PRIVATE_KEY)"
         />
       </div>
 

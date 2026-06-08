@@ -28,8 +28,8 @@ const Li = ({ children }: { children: React.ReactNode }) => (
 const Delivery = () => {
   useSEO({
     title: "Доставка та оплата — BodyHome",
-    description: "Доставка Новою Поштою, Meest та Укрпоштою по всій Україні. Оплата при отриманні або онлайн карткою (WayForPay). Повернення протягом 14 днів.",
-    keywords: "доставка Нова Пошта, оплата при отриманні, WayForPay, доставка ортопедичних товарів",
+    description: "Доставка Новою Поштою, Meest та Укрпоштою по всій Україні. Оплата при отриманні або онлайн карткою (LiqPay). Повернення протягом 14 днів.",
+    keywords: "доставка Нова Пошта, оплата при отриманні, LiqPay, доставка ортопедичних товарів",
     url: "/delivery",
   });
 
@@ -67,7 +67,7 @@ const Delivery = () => {
         <div className="grid md:grid-cols-2 gap-4">
           {[
             { title: "Накладений платіж", desc: "Оплата готівкою або карткою при отриманні посилки у відділенні Нової Пошти або Meest. Найпопулярніший спосіб.", badge: "Найпопулярніше" },
-            { title: "Оплата онлайн (WayForPay)", desc: "Оплата карткою Visa або Mastercard через захищену платіжну систему WayForPay. Підтримуються всі українські банки.", badge: "Миттєво" },
+            { title: "Оплата онлайн (LiqPay)", desc: "Оплата карткою Visa, Mastercard або Apple Pay через захищену платіжну систему LiqPay. Підтримуються всі українські банки.", badge: "Миттєво" },
           ].map((p, i) => (
             <div key={i} className="rounded-xl border border-border/60 p-5">
               <div className="flex items-center justify-between mb-2">

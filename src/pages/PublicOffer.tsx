@@ -50,7 +50,7 @@ const PublicOffer = () => {
             "Ціни на сайті вказані в гривнях (UAH) з урахуванням ПДВ",
             "Продавець залишає за собою право змінювати ціни без попереднього повідомлення",
             "Ціна замовлення фіксується на момент підтвердження менеджером",
-            "Оплата: накладений платіж або онлайн через WayForPay (Visa/Mastercard)",
+            "Оплата: накладений платіж або онлайн через LiqPay (Visa/Mastercard, Apple Pay)",
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-2.5">
               <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary/60" />

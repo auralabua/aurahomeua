@@ -80,7 +80,7 @@ const Privacy = () => {
         <ul className="mt-2 space-y-2 list-none">
           {[
             "Служби доставки (Нова Пошта, Meest) — для відправки замовлення",
-            "Платіжна система WayForPay — для обробки онлайн-платежів",
+            "Платіжна система LiqPay — для обробки онлайн-платежів",
             "Державні органи — лише за вимогою закону",
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-2.5 text-sm">

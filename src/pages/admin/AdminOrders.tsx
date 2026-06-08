@@ -11,6 +11,7 @@ import { Phone, MessageCircle, ChevronDown, ChevronUp, Download, Copy } from "lu
 
 const STATUSES: Record<string, { label: string; dot: string }> = {
   new:       { label: "Нове",         dot: "bg-yellow-400" },
+  paid:      { label: "Оплачено",     dot: "bg-emerald-500" },
   confirmed: { label: "Підтверджено", dot: "bg-blue-500" },
   shipped:   { label: "Відправлено",  dot: "bg-orange-500" },
   delivered: { label: "Доставлено",   dot: "bg-green-600" },
@@ -51,7 +52,7 @@ const exportCSV = (orders: Order[]) => {
     o.delivery_method === "novaposhta" ? "Нова Пошта" : o.delivery_method ?? "",
     o.delivery_city ?? "",
     o.delivery_branch ?? "",
-    o.payment_method === "wayforpay" ? "WayForPay" : o.payment_method === "cod" ? "При отриманні" : "",
+    o.payment_method === "liqpay" ? "LiqPay" : o.payment_method === "cod" ? "При отриманні" : "",
   ]);
   const csv = [header, ...rows].map(r => r.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(",")).join("\n");
   const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
@@ -213,7 +214,7 @@ const AdminOrders = () => {
                       )}
                     </TableCell>
                     <TableCell className="whitespace-nowrap text-sm">
-                      {o.payment_method === "wayforpay" ? "WayForPay" : o.payment_method === "cod" ? "При отриманні" : "—"}
+                      {o.payment_method === "liqpay" ? "LiqPay" : o.payment_method === "cod" ? "При отриманні" : "—"}
                     </TableCell>
                     <TableCell>
                       <Select value={o.admin_status} onValueChange={v => updateStatus.mutate({ id: o.id, status: v })}>

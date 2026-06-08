@@ -339,7 +339,7 @@ async function sendTelegramNotification(order: {
   ).join("\n");
 
   const deliveryLabel = order.delivery_method === "novaposhta" ? "Нова Пошта" : "Meest / Rozetka";
-  const paymentLabel  = order.payment_method  === "cod"        ? "Накладений платіж" : "Онлайн оплата (WayForPay)";
+  const paymentLabel  = order.payment_method  === "cod"        ? "Накладений платіж" : "Онлайн оплата (LiqPay)";
 
   const text =
     `🛍 <b>Нове замовлення ${order.order_reference}</b>\n\n` +
@@ -364,7 +364,7 @@ async function sendTelegramNotification(order: {
 // ── Checkout ─────────────────────────────────────────────────────────────────
 
 type DeliveryMethod = "novaposhta" | "mistexpress";
-type PaymentMethod = "wayforpay" | "cod";
+type PaymentMethod = "liqpay" | "cod";
 
 const checkoutSchema = z.object({
   fullName: z.string().trim().min(2, "Вкажіть ім'я та прізвище").max(100),
@@ -374,21 +374,21 @@ const checkoutSchema = z.object({
   branch: z.string().trim().min(1, "Вкажіть відділення"),
 });
 
-function submitWayForPay(params: Record<string, any>) {
+function submitLiqPay(data: string, signature: string) {
   const form = document.createElement("form");
   form.method = "POST";
-  form.action = "https://secure.wayforpay.com/pay";
-  form.target = "_top";
+  form.action = "https://www.liqpay.ua/api/3/checkout";
   form.acceptCharset = "utf-8";
   form.style.display = "none";
-  const add = (name: string, value: string | number | string[] | number[]) => {
-    (Array.isArray(value) ? value : [value]).forEach(v => {
-      const el = document.createElement("input");
-      el.type = "hidden"; el.name = name; el.value = String(v);
-      form.appendChild(el);
-    });
-  };
-  Object.entries(params).forEach(([k, v]) => add(k, v as any));
+
+  const dataInput = document.createElement("input");
+  dataInput.type = "hidden"; dataInput.name = "data"; dataInput.value = data;
+  form.appendChild(dataInput);
+
+  const sigInput = document.createElement("input");
+  sigInput.type = "hidden"; sigInput.name = "signature"; sigInput.value = signature;
+  form.appendChild(sigInput);
+
   document.body.appendChild(form);
   form.submit();
 }
@@ -497,37 +497,23 @@ const Checkout = () => {
         return;
       }
 
-      const { data: signed, error: signErr } = await supabase.functions.invoke("wayforpay-sign", {
-        body: {
-          orderReference: orderRef,
+      const liqpayRes = await fetch("/api/liqpay", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           amount: totalPrice,
-          items: orderItems.map(i => ({ name: i.name, price: i.price, quantity: i.quantity })),
-        },
+          order_id: orderRef,
+          description: `Замовлення BodyHome #${orderRef}`,
+        }),
       });
-      if (signErr || !signed?.merchantSignature) {
-        toast({ title: "Помилка платежу", description: signErr?.message || "Не вдалося сформувати підпис", variant: "destructive" });
+      if (!liqpayRes.ok) {
+        toast({ title: "Помилка платежу", description: "Не вдалося підключитись до LiqPay", variant: "destructive" });
         return;
       }
+      const liqpayData = await liqpayRes.json();
 
       clear();
-      submitWayForPay({
-        merchantAccount: signed.merchantAccount,
-        merchantDomain: signed.merchantDomain,
-        merchantSignature: signed.merchantSignature,
-        orderReference: signed.orderReference,
-        orderDate: signed.orderDate,
-        amount: signed.amount,
-        currency: signed.currency,
-        "productName[]": signed.productName,
-        "productCount[]": signed.productCount,
-        "productPrice[]": signed.productPrice,
-        clientFirstName: form.fullName.split(" ")[0] || form.fullName,
-        clientLastName: form.fullName.split(" ")[1] || "",
-        clientPhone: form.phone,
-        clientEmail: form.email,
-        language: "UA",
-        returnUrl: "https://www.bodyhome.com.ua/",
-      });
+      submitLiqPay(liqpayData.data, liqpayData.signature);
 
     } catch (err: any) {
       toast({ title: "Помилка", description: err.message, variant: "destructive" });
@@ -699,12 +685,12 @@ const Checkout = () => {
           <section className="p-6 rounded-2xl aura-card">
             <h2 className="text-xl font-medium mb-5">Спосіб оплати</h2>
             <div className="grid sm:grid-cols-2 gap-3">
-              <OptionCard active={payment === "wayforpay"} onClick={() => setPayment("wayforpay")} icon={<CreditCard className="h-5 w-5" />} title="Оплата онлайн" subtitle="Visa, Mastercard через WayForPay" />
+              <OptionCard active={payment === "liqpay"} onClick={() => setPayment("liqpay")} icon={<CreditCard className="h-5 w-5" />} title="Оплата онлайн" subtitle="Visa, Mastercard, Apple Pay через LiqPay" />
               <OptionCard active={payment === "cod"} onClick={() => setPayment("cod")} icon={<Wallet className="h-5 w-5" />} title="При отриманні" subtitle="Накладений платіж" />
             </div>
-            {payment === "wayforpay" && (
+            {payment === "liqpay" && (
               <div className="mt-4 p-3 rounded-xl bg-primary/8 text-sm text-primary font-light">
-                🔒 Безпечна оплата через WayForPay. Підтримуються всі українські банки.
+                🔒 Безпечна оплата через LiqPay. Підтримуються Visa, Mastercard, Apple Pay та всі українські банки.
               </div>
             )}
           </section>
@@ -746,10 +732,10 @@ const Checkout = () => {
           <Button type="submit" size="lg" disabled={submitting} className="w-full rounded-full btn-aura border-0">
             {submitting
               ? <span className="flex items-center gap-2"><Loader2 className="h-4 w-4 animate-spin" />Опрацювання…</span>
-              : payment === "wayforpay" ? "Перейти до оплати" : "Підтвердити замовлення"}
+              : payment === "liqpay" ? "Перейти до оплати" : "Підтвердити замовлення"}
           </Button>
           <p className="text-center text-xs text-muted-foreground mt-3">
-            {payment === "wayforpay" ? "🔒 Безпечна оплата WayForPay" : "Оплата при отриманні посилки"}
+            {payment === "liqpay" ? "🔒 Безпечна оплата LiqPay" : "Оплата при отриманні посилки"}
           </p>
         </aside>
       </form>

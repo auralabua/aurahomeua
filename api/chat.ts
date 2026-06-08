@@ -1,13 +1,13 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@supabase/supabase-js';
-import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const supabase = createClient(
   process.env.VITE_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY!,
 );
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
 const BASE_SYSTEM = `Ти — Міла, AI-консультант інтернет-магазину BodyHome (bodyhome.com.ua).
 
@@ -16,15 +16,15 @@ const BASE_SYSTEM = `Ти — Міла, AI-консультант інтерне
 • Telegram: t.me/BodyHome1
 • Графік: Пн–Нд 9:00–21:00 (Київ)
 • Доставка: Нова Пошта по всій Україні, 1–3 дні. Вартість — за тарифами НП при отриманні.
-• Оплата: картою онлайн (LiqPay, Visa/Mastercard/Apple Pay) або накладений платіж
+• Оплата: карткою онлайн (LiqPay, Visa/Mastercard/Apple Pay) або накладений платіж
 • Повернення: 14 днів після отримання, якщо товар не використовувався
 
 Правила:
 • Відповідай ТІЛЬКИ українською мовою
 • Будь дружнім, лаконічним і корисним — не більше 3-4 речень у відповіді
-• Допомагай підбирати товари з наявного каталогу нижче
+• Допомагай підбирати товари з каталогу нижче
 • Якщо питання поза твоїми знаннями — пропонуй t.me/BodyHome1
-• Якщо товар є зі знижкою — обов'язково згадай старосту ціну`;
+• Якщо товар зі знижкою — згадай стару ціну`;
 
 async function buildProductContext(): Promise<string> {
   const { data: products } = await supabase
@@ -53,7 +53,7 @@ async function buildProductContext(): Promise<string> {
     grouped[cat].push(`${p.name} — ${priceStr}`);
   }
 
-  const lines = ['', '=== КАТАЛОГ ТОВАРІВ (актуальні ціни) ==='];
+  const lines = ['\n\n=== КАТАЛОГ ТОВАРІВ (актуальні ціни) ==='];
   for (const [cat, items] of Object.entries(grouped)) {
     lines.push(`\n[${cat}]`);
     items.forEach(i => lines.push(`  • ${i}`));
@@ -82,34 +82,38 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const rows = messagesResult.data;
     if (!rows?.length) return res.status(200).json({ ok: true });
 
-    const msgs: Anthropic.MessageParam[] = rows.map(r => ({
-      role: r.sender === 'customer' ? 'user' : 'assistant',
-      content: r.text as string,
-    }));
-
-    // Merge consecutive same-role messages (Anthropic requires strict alternation)
-    const merged: Anthropic.MessageParam[] = [];
-    for (const m of msgs) {
-      if (merged.length && merged[merged.length - 1].role === m.role) {
-        const prev = merged[merged.length - 1];
-        prev.content = `${prev.content}\n${m.content}`;
+    // Gemini requires alternating user/model turns
+    // Merge consecutive same-role messages
+    type Turn = { role: 'user' | 'model'; text: string };
+    const turns: Turn[] = [];
+    for (const r of rows as any[]) {
+      const role = r.sender === 'customer' ? 'user' : 'model';
+      if (turns.length && turns[turns.length - 1].role === role) {
+        turns[turns.length - 1].text += '\n' + r.text;
       } else {
-        merged.push({ role: m.role, content: m.content });
+        turns.push({ role, text: r.text });
       }
     }
 
-    if (merged[0]?.role !== 'user') return res.status(200).json({ ok: true });
+    // Must start and end with user
+    if (turns[0]?.role !== 'user') return res.status(200).json({ ok: true });
+    const lastTurn = turns[turns.length - 1];
+    if (lastTurn.role !== 'user') return res.status(200).json({ ok: true });
 
-    const systemPrompt = BASE_SYSTEM + productContext;
+    const history = turns.slice(0, -1).map(t => ({
+      role: t.role,
+      parts: [{ text: t.text }],
+    }));
 
-    const completion = await anthropic.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 600,
-      system: systemPrompt,
-      messages: merged,
+    const model = genAI.getGenerativeModel({
+      model: 'gemini-1.5-flash',
+      systemInstruction: BASE_SYSTEM + productContext,
     });
 
-    const aiText = completion.content[0]?.type === 'text' ? completion.content[0].text.trim() : '';
+    const chat   = model.startChat({ history });
+    const result = await chat.sendMessage(lastTurn.text);
+    const aiText = result.response.text().trim();
+
     if (!aiText) return res.status(200).json({ ok: true });
 
     await supabase.from('chat_messages').insert({
@@ -120,7 +124,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('AI chat error:', err);
+    console.error('Gemini chat error:', err);
     await supabase.from('chat_messages').insert({
       session_id: sessionId,
       sender: 'admin',

@@ -2,7 +2,7 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Star, Minus, Plus, ShoppingCart, ArrowLeft, Truck, ShieldCheck, RotateCcw, Check, Tag, Wallet, MessageCircle } from "lucide-react";
 import { formatUAH } from "@/data/products";
-import { useProductsAsLegacy, useCategoriesAsLegacy, useDBProducts } from "@/hooks/useShopData";
+import { useProductsAsLegacy, useAllProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { ProductCard } from "@/components/ProductCard";
@@ -376,9 +376,9 @@ const WHY_BODYHOME = [
 const ProductPage = () => {
   const { id } = useParams();
   const { products, isLoading } = useProductsAsLegacy();
+  const { products: allProducts } = useAllProductsAsLegacy();
   const { categories } = useCategoriesAsLegacy();
   const { addItem } = useCart();
-  const { data: rawProducts } = useDBProducts();
 
   const [qty, setQty] = useState(1);
   const [activeImg, setActiveImg] = useState(0);
@@ -391,24 +391,14 @@ const ProductPage = () => {
   const recentIds = useRecentlyViewed(id ?? "");
 
   // ── Resolve product data (before any conditional returns so hooks stay stable) ──
-  const foundProduct   = products.find(p => p.id === id) ?? products.find(p => p.slug === id);
+  // Try filtered list first (legacy_id or UUID), then all products (raw UUID).
+  // allProducts uses raw UUIDs as id so it handles old UUID-based URLs and child variants.
+  const foundProduct =
+    products.find(p => p.id === id) ??
+    products.find(p => p.slug === id) ??
+    allProducts.find(p => p.id === id) ??
+    allProducts.find(p => p.slug === id);
   const displayProduct = foundProduct;
-
-  // Fallback: for old UUID-based URLs or child-variant slugs not in the filtered list,
-  // compute a canonical redirect target using the unfiltered raw product data.
-  const canonicalRedirectSlug = useMemo(() => {
-    if (foundProduct || !rawProducts?.length || !id) return null;
-    const raw = rawProducts.find(p => (p.id as string) === id || p.slug === id);
-    if (!raw) return null;
-    // UUID URL → redirect to canonical slug URL
-    if (raw.slug && raw.slug !== id) return raw.slug;
-    // Child variant → redirect to parent product
-    if (raw.parent_product_id) {
-      const parent = rawProducts.find(p => (p.id as string) === (raw.parent_product_id as string));
-      return parent?.slug ?? (parent?.id as string | undefined) ?? null;
-    }
-    return null;
-  }, [foundProduct, rawProducts, id]);
 
   // JSONB variants from the product itself, sorted by size
   const variants = useMemo(() => {
@@ -510,9 +500,13 @@ const ProductPage = () => {
       </div>
     );
   }
-  if (!foundProduct) {
-    if (canonicalRedirectSlug) return <Navigate to={`/product/${canonicalRedirectSlug}`} replace />;
-    return <Navigate to="/catalog" replace />;
+  if (!foundProduct) return <Navigate to="/catalog" replace />;
+  // Child variant: redirect to the parent product page
+  if (foundProduct.parentProductId) {
+    const parent =
+      products.find(p => p.id === foundProduct.parentProductId) ??
+      allProducts.find(p => p.id === foundProduct.parentProductId);
+    return <Navigate to={`/product/${parent?.slug ?? parent?.id ?? ''}`} replace />;
   }
 
   // ── Derived values ───────────────────────────────────────────────────────

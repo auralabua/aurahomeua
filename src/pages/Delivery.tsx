@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSEO } from "@/hooks/useSEO";
 
 const PHONE = "+380956981124";
-const TELEGRAM = "https://t.me/bodyhomeua";
+const TELEGRAM = "https://t.me/BodyHome1";
 const VIBER = "viber://chat?number=%2B380956981124";
 
 const Section = ({ icon: Icon, title, children }: { icon: any; title: string; children: React.ReactNode }) => (

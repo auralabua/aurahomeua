@@ -187,7 +187,7 @@ const OrderSuccess = () => {
           <p className="text-sm text-muted-foreground mb-4">Звертайтесь — відповімо швидко</p>
           <div className="flex flex-wrap gap-3">
             <Button asChild variant="outline" className="rounded-xl gap-2 hover:border-[#229ED9]/50 hover:text-[#229ED9]">
-              <a href="https://t.me/bodyhomeua" target="_blank" rel="noopener noreferrer">
+              <a href="https://t.me/BodyHome1" target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="h-4 w-4" /> Telegram
               </a>
             </Button>

@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 const TG_TOKEN = import.meta.env.VITE_TG_TOKEN || "8632833094:AAF6DCv98UfUj3qu4qinE64ILwp6swJMPLo";
 const TG_CHAT  = import.meta.env.VITE_TG_CHAT  || "5119568271";
-const TG_LINK  = "https://t.me/bodyhomeua";
+const TG_LINK  = "https://t.me/BodyHome1";
 
 const TelegramIcon = () => (
   <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0" fill="currentColor">

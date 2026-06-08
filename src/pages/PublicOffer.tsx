@@ -136,7 +136,7 @@ const PublicOffer = () => {
           <li>Назва: BodyHome</li>
           <li>Email: <a href="mailto:bodyhome@gmail.com" className="text-primary hover:underline">bodyhome@gmail.com</a></li>
           <li>Телефон: <a href="tel:+380956981124" className="text-primary hover:underline">+380956981124</a></li>
-          <li>Telegram: <a href="https://t.me/bodyhomeua" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">@bodyhomeua</a></li>
+          <li>Telegram: <a href="https://t.me/BodyHome1" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">@bodyhomeua</a></li>
         </ul>
       </section>
     </div>

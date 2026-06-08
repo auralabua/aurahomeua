@@ -1,7 +1,7 @@
 import { Phone, Mail, MapPin, MessageCircle, Truck, RotateCcw, CreditCard } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
 const PHONE = "+380956981124";
-const TELEGRAM = "https://t.me/bodyhomeua";
+const TELEGRAM = "https://t.me/BodyHome1";
 const VIBER = "viber://chat?number=%2B380956981124";
 const Contacts = () => {
   useSEO({

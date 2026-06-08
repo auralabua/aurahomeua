@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { SearchAutocomplete } from "@/components/SearchAutocomplete";
 
 const PHONE = "+380956981124";
-const TELEGRAM = "https://t.me/bodyhomeua";
+const TELEGRAM = "https://t.me/BodyHome1";
 const VIBER = "viber://chat?number=%2B380956981124";
 
 const blogItems = [

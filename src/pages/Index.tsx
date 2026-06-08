@@ -9,7 +9,7 @@ import { ReviewsSection } from "@/components/ReviewsSection";
 import { useSEO } from "@/hooks/useSEO";
 
 // Жінка з масажером вдома — домашній комфорт
-const HERO_IMG = "https://images.pexels.com/photos/9788571/pexels-photo-9788571.jpeg?auto=compress&cs=tinysrgb&w=1400";
+const HERO_IMG = "https://images.pexels.com/photos/5927933/pexels-photo-5927933.jpeg?auto=compress&cs=tinysrgb&w=1400";
 
 
 

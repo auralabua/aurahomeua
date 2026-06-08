@@ -390,6 +390,17 @@ const ProductPage = () => {
   const isMobile = useIsMobile();
   const recentIds = useRecentlyViewed(id ?? "");
 
+  // ── Sticky bar effect — must stay here (before early returns) to respect Rules of Hooks ──
+  useEffect(() => {
+    if (!isMobile || !cartBtnRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowStickyBar(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(cartBtnRef.current);
+    return () => observer.disconnect();
+  }, [isMobile]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // ── Resolve product data (before any conditional returns so hooks stay stable) ──
   // Try filtered list first (legacy_id or UUID), then all products (raw UUID).
   // allProducts uses raw UUIDs as id so it handles old UUID-based URLs and child variants.
@@ -540,16 +551,6 @@ const ProductPage = () => {
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
-
-  useEffect(() => {
-    if (!isMobile || !cartBtnRef.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setShowStickyBar(!entry.isIntersecting),
-      { threshold: 0 }
-    );
-    observer.observe(cartBtnRef.current);
-    return () => observer.disconnect();
-  }, [isMobile]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const descParagraphs = displayProduct!.description
     ? displayProduct!.description

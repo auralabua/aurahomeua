@@ -1,4 +1,5 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, Component } from "react";
+import type { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 
@@ -47,6 +48,33 @@ const LandingBandages  = lazy(() => import("./pages/landing/LandingBandages.tsx"
 const LandingMats      = lazy(() => import("./pages/landing/LandingMats.tsx"));
 const LandingKids      = lazy(() => import("./pages/landing/LandingKids.tsx"));
 
+class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() { return { hasError: true }; }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4 text-center px-4">
+          <p className="text-lg font-medium text-foreground">Щось пішло не так</p>
+          <p className="text-sm text-muted-foreground max-w-sm">
+            Спробуйте оновити сторінку. Якщо проблема залишається — напишіть нам.
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-2 px-6 py-2.5 rounded-full bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors"
+          >
+            Оновити сторінку
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 // Page loader skeleton (minimal flicker)
 const PageLoader = () => (
   <div className="min-h-[60vh] flex items-center justify-center">
@@ -77,6 +105,7 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <CartProvider>
+          <ErrorBoundary>
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route element={<Layout />}>
@@ -113,6 +142,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
+          </ErrorBoundary>
           <PWAInstallPrompt />
         </CartProvider>
       </BrowserRouter>

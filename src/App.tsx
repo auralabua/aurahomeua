@@ -40,6 +40,12 @@ const AdminCustomers = lazy(() => import("./pages/admin/AdminCustomers.tsx"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings.tsx"));
 const AdminSupport  = lazy(() => import("./pages/admin/AdminSupport.tsx"));
 const OrderSuccess = lazy(() => import("./pages/OrderSuccess.tsx"));
+const LandingPillows   = lazy(() => import("./pages/landing/LandingPillows.tsx"));
+const LandingMassagers = lazy(() => import("./pages/landing/LandingMassagers.tsx"));
+const LandingInsoles   = lazy(() => import("./pages/landing/LandingInsoles.tsx"));
+const LandingBandages  = lazy(() => import("./pages/landing/LandingBandages.tsx"));
+const LandingMats      = lazy(() => import("./pages/landing/LandingMats.tsx"));
+const LandingKids      = lazy(() => import("./pages/landing/LandingKids.tsx"));
 
 // Page loader skeleton (minimal flicker)
 const PageLoader = () => (
@@ -85,6 +91,12 @@ const App = () => (
                 <Route path="/delivery" element={<Delivery />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/public-offer" element={<PublicOffer />} />
+                <Route path="/ortopedychni-podushky" element={<LandingPillows />} />
+                <Route path="/masazhery-dlya-spyny" element={<LandingMassagers />} />
+                <Route path="/ortopedychni-ustilky-kuputy" element={<LandingInsoles />} />
+                <Route path="/bandazhi-ta-ortezy" element={<LandingBandages />} />
+                <Route path="/masazhni-kylymky" element={<LandingMats />} />
+                <Route path="/tovary-dlya-ditey-ortopedychni" element={<LandingKids />} />
               </Route>
               <Route path="/blog" element={<BlogList />} />
               <Route path="/blog/:slug" element={<BlogPost />} />

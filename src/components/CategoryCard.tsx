@@ -115,6 +115,15 @@ const InsoleIllustration = () => (
   </svg>
 );
 
+const landingUrlMap: Record<string, string> = {
+  "ortopedychni-podushky":        "/ortopedychni-podushky",
+  "masazhery":                    "/masazhery-dlya-spyny",
+  "ortopedychni-masazhni-kylymky":"/masazhni-kylymky",
+  "ortezy-i-bandazhi":            "/bandazhi-ta-ortezy",
+  "ortopedychni-ustilky":         "/ortopedychni-ustilky-kuputy",
+  "rozvyvaiuchi-ihrashky":        "/tovary-dlya-ditey-ortopedychni",
+};
+
 const categoryConfig: Record<string, {
   bg: string;
   accent: string;
@@ -167,7 +176,7 @@ export const CategoryCard = ({ category }: { category: Category }) => {
 
   return (
     <Link
-      to={`/catalog?category=${category.id}`}
+      to={landingUrlMap[category.id] ?? `/catalog?category=${category.id}`}
       className={`group relative flex flex-col overflow-hidden rounded-2xl bg-gradient-to-br ${cfg.bg} border border-white/70 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card active:scale-95`}
     >
       {/* Illustration */}

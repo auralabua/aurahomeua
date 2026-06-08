@@ -24,12 +24,22 @@ const BASE_SYSTEM = `Ти — Міла, AI-консультант інтерне
 • Будь дружнім, лаконічним і корисним — не більше 3-4 речень у відповіді
 • Допомагай підбирати товари з каталогу нижче
 • Якщо питання поза твоїми знаннями — пропонуй t.me/BodyHome1
-• Якщо товар зі знижкою — згадай стару ціну`;
+• Якщо товар зі знижкою — згадай стару ціну
+• Якщо рекомендуєш конкретні товари з каталогу — додай в КІНЦІ відповіді маркер [REFS:slug1,slug2] (до 3 товарів, тільки реальні slug з каталогу)
+• Якщо не рекомендуєш конкретний товар — НЕ додавай маркер [REFS:]`;
 
-async function buildProductContext(): Promise<string> {
+interface ProductInfo {
+  slug: string;
+  name: string;
+  price: number;
+  original_price: number | null;
+  image: string;
+}
+
+async function buildProductContext(): Promise<{ text: string; productMap: Map<string, ProductInfo> }> {
   const { data: products } = await supabase
     .from('products')
-    .select('name, price, original_price, category_id')
+    .select('name, price, original_price, category_id, slug, images')
     .eq('available', true)
     .order('position')
     .limit(150);
@@ -38,19 +48,33 @@ async function buildProductContext(): Promise<string> {
     .from('categories')
     .select('id, name');
 
-  if (!products?.length) return '';
+  if (!products?.length) return { text: '', productMap: new Map() };
 
   const catMap: Record<string, string> = {};
   (categories ?? []).forEach((c: any) => { catMap[c.id] = c.name; });
 
+  const productMap = new Map<string, ProductInfo>();
   const grouped: Record<string, string[]> = {};
+
   for (const p of products as any[]) {
     const cat = catMap[p.category_id] ?? 'Інше';
     if (!grouped[cat]) grouped[cat] = [];
     const priceStr = p.original_price
       ? `${p.price}₴ (знижка зі ${p.original_price}₴)`
       : `${p.price}₴`;
-    grouped[cat].push(`${p.name} — ${priceStr}`);
+    const slug = (p.slug as string) || '';
+    grouped[cat].push(`${p.name} — ${priceStr}${slug ? ` | slug: ${slug}` : ''}`);
+
+    if (slug) {
+      const images = Array.isArray(p.images) ? p.images : [];
+      productMap.set(slug, {
+        slug,
+        name: p.name as string,
+        price: Number(p.price),
+        original_price: p.original_price ? Number(p.original_price) : null,
+        image: (images as string[]).find(img => img?.startsWith('http')) || '',
+      });
+    }
   }
 
   const lines = ['\n\n=== КАТАЛОГ ТОВАРІВ (актуальні ціни) ==='];
@@ -59,7 +83,8 @@ async function buildProductContext(): Promise<string> {
     items.forEach(i => lines.push(`  • ${i}`));
   }
   lines.push('\n=== КІНЕЦЬ КАТАЛОГУ ===');
-  return lines.join('\n');
+
+  return { text: lines.join('\n'), productMap };
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -69,7 +94,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!sessionId) return res.status(400).json({ error: 'sessionId required' });
 
   try {
-    const [messagesResult, productContext] = await Promise.all([
+    const [messagesResult, { text: productContext, productMap }] = await Promise.all([
       supabase
         .from('chat_messages')
         .select('sender, text')
@@ -83,19 +108,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!rows?.length) return res.status(200).json({ ok: true });
 
     // Gemini requires alternating user/model turns
-    // Merge consecutive same-role messages
     type Turn = { role: 'user' | 'model'; text: string };
     const turns: Turn[] = [];
     for (const r of rows as any[]) {
       const role = r.sender === 'customer' ? 'user' : 'model';
+      // Decode stored JSON message back to plain text for history
+      let text = r.text as string;
+      try {
+        const parsed = JSON.parse(text);
+        if (parsed.text) text = parsed.text;
+      } catch {}
       if (turns.length && turns[turns.length - 1].role === role) {
-        turns[turns.length - 1].text += '\n' + r.text;
+        turns[turns.length - 1].text += '\n' + text;
       } else {
-        turns.push({ role, text: r.text });
+        turns.push({ role, text });
       }
     }
 
-    // Must start and end with user
     if (turns[0]?.role !== 'user') return res.status(200).json({ ok: true });
     const lastTurn = turns[turns.length - 1];
     if (lastTurn.role !== 'user') return res.status(200).json({ ok: true });
@@ -112,14 +141,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const chat   = model.startChat({ history });
     const result = await chat.sendMessage(lastTurn.text);
-    const aiText = result.response.text().trim();
+    const aiRaw  = result.response.text().trim();
 
-    if (!aiText) return res.status(200).json({ ok: true });
+    if (!aiRaw) return res.status(200).json({ ok: true });
+
+    // Extract product refs marker [REFS:slug1,slug2]
+    const refsMatch = aiRaw.match(/\[REFS:([^\]]+)\]/);
+    const cleanText = aiRaw.replace(/\[REFS:[^\]]*\]/g, '').trim();
+    const slugs = refsMatch
+      ? refsMatch[1].split(',').map(s => s.trim()).filter(Boolean)
+      : [];
+    const products = slugs.map(s => productMap.get(s)).filter(Boolean) as ProductInfo[];
+
+    const messageText = products.length > 0
+      ? JSON.stringify({ text: cleanText, products })
+      : cleanText;
 
     await supabase.from('chat_messages').insert({
       session_id: sessionId,
       sender: 'admin',
-      text: aiText,
+      text: messageText,
     });
 
     res.status(200).json({ ok: true });

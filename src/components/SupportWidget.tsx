@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { MessageCircle, X, Send, ChevronLeft, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -9,6 +10,17 @@ const NAME_KEY    = "bh_chat_name";
 
 type Screen  = "choice" | "intro" | "chat";
 type Message = { id: string; sender: "customer" | "admin"; text: string; created_at: string };
+type ProductCard = { slug: string; name: string; price: number; original_price?: number | null; image: string };
+
+function parseAdminMessage(text: string): { text: string; products: ProductCard[] } {
+  try {
+    const parsed = JSON.parse(text);
+    if (parsed.text && Array.isArray(parsed.products)) {
+      return { text: parsed.text, products: parsed.products };
+    }
+  } catch {}
+  return { text, products: [] };
+}
 
 const TelegramIcon = () => (
   <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0" fill="currentColor">
@@ -256,20 +268,54 @@ export const SupportWidget = () => {
                       <p className="text-xs text-muted-foreground">Привіт, {customerName}! Задайте ваше питання — AI відповість миттєво</p>
                     </div>
                   )}
-                  {messages.map(m => (
-                    <div key={m.id} className={`flex ${m.sender === "customer" ? "justify-end" : "justify-start"}`}>
-                      <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm ${
-                        m.sender === "customer"
-                          ? "bg-primary text-white rounded-br-sm"
-                          : "bg-secondary text-foreground rounded-bl-sm"
-                      }`}>
-                        <p className="leading-snug whitespace-pre-wrap">{m.text}</p>
-                        <p className={`text-[10px] mt-1 ${m.sender === "customer" ? "text-white/60 text-right" : "text-muted-foreground"}`}>
-                          {fmtTime(m.created_at)}
-                        </p>
+                  {messages.map(m => {
+                    const { text: msgText, products } = m.sender === "admin"
+                      ? parseAdminMessage(m.text)
+                      : { text: m.text, products: [] };
+                    return (
+                      <div key={m.id} className={`flex ${m.sender === "customer" ? "justify-end" : "justify-start"}`}>
+                        <div className={`max-w-[88%] rounded-2xl px-3 py-2 text-sm ${
+                          m.sender === "customer"
+                            ? "bg-primary text-white rounded-br-sm"
+                            : "bg-secondary text-foreground rounded-bl-sm"
+                        }`}>
+                          <p className="leading-snug whitespace-pre-wrap">{msgText}</p>
+                          {products.length > 0 && (
+                            <div className="mt-2 space-y-1.5">
+                              {products.map(p => (
+                                <Link
+                                  key={p.slug}
+                                  to={`/product/${p.slug}`}
+                                  onClick={() => setOpen(false)}
+                                  className="flex gap-2 rounded-xl bg-white border border-border/50 p-1.5 hover:border-primary/60 transition-colors"
+                                >
+                                  {p.image && (
+                                    <img
+                                      src={p.image}
+                                      alt={p.name}
+                                      className="h-14 w-14 rounded-lg object-cover shrink-0"
+                                    />
+                                  )}
+                                  <div className="min-w-0 flex flex-col justify-center">
+                                    <p className="text-xs font-medium leading-tight line-clamp-2 text-foreground">{p.name}</p>
+                                    <div className="flex items-center gap-1.5 mt-1">
+                                      <span className="text-xs font-semibold text-primary">{p.price}₴</span>
+                                      {p.original_price && (
+                                        <span className="text-[10px] text-muted-foreground line-through">{p.original_price}₴</span>
+                                      )}
+                                    </div>
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                          <p className={`text-[10px] mt-1 ${m.sender === "customer" ? "text-white/60 text-right" : "text-muted-foreground"}`}>
+                            {fmtTime(m.created_at)}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
 
                   {/* Typing indicator */}
                   {isTyping && (

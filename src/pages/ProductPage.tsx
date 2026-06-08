@@ -27,7 +27,7 @@ const buildDescription = (
   const base = product.description?.trim();
   // Use first meaningful sentence if description exists
   const firstSentence = base
-    ? base.split(/(?<=[.!?])\s+/).find(s => s.length > 30) ?? base.slice(0, 120)
+    ? base.replace(/([.!?])\s+/g, "$1\n").split("\n").find(s => s.length > 30) ?? base.slice(0, 120)
     : null;
 
   if (firstSentence && firstSentence.length >= 60) {
@@ -553,7 +553,8 @@ const ProductPage = () => {
 
   const descParagraphs = displayProduct!.description
     ? displayProduct!.description
-        .split(/(?<=\. )(?=[А-ЯІЇЄA-Z])/)
+        .split(/\. (?=[А-ЯІЇЄA-Z])/)
+        .map((p, i, arr) => (i < arr.length - 1 ? p + "." : p))
         .filter(p => p.trim().length > 20)
     : [];
 

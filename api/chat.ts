@@ -9,31 +9,58 @@ const supabase = createClient(
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! });
 
-const SYSTEM = `Ти — Міла, дружній AI-асистент підтримки інтернет-магазину BodyHome (bodyhome.com.ua).
-
-Магазин спеціалізується на товарах для здоров'я, спорту та активного відпочинку:
-• Ортопедичні подушки та матраци
-• Масажні килимки та аплікатори (Кузнєцова, Лянського)
-• Ортези, бандажі, підтримка суглобів і спини
-• Електричні та ручні масажери
-• Товари для краси та догляду за тілом
-• Розвиваючі іграшки для дітей
-• Ортопедичні устілки
+const BASE_SYSTEM = `Ти — Міла, AI-консультант інтернет-магазину BodyHome (bodyhome.com.ua).
 
 Основна інформація:
 • Сайт: bodyhome.com.ua
-• Telegram для зв'язку: t.me/BodyHome1
+• Telegram: t.me/BodyHome1
 • Графік: Пн–Нд 9:00–21:00 (Київ)
-• Доставка: Нова Пошта по всій Україні, 1–3 дні
-• Оплата: картою онлайн, накладений платіж, Monobank, PrivatBank
+• Доставка: Нова Пошта по всій Україні, 1–3 дні. Вартість — за тарифами НП при отриманні.
+• Оплата: картою онлайн (LiqPay, Visa/Mastercard/Apple Pay) або накладений платіж
 • Повернення: 14 днів після отримання, якщо товар не використовувався
 
-Правила поведінки:
+Правила:
 • Відповідай ТІЛЬКИ українською мовою
-• Будь дружнім, лаконічним і корисним
-• Якщо не знаєш точної відповіді — чесно скажи та запропонуй написати в Telegram t.me/BodyHome1
-• Не вигадуй ціни, наявність або характеристики конкретних товарів — направ на сайт
-• Допомагай з вибором товарів, питаннями доставки/оплати/повернення`;
+• Будь дружнім, лаконічним і корисним — не більше 3-4 речень у відповіді
+• Допомагай підбирати товари з наявного каталогу нижче
+• Якщо питання поза твоїми знаннями — пропонуй t.me/BodyHome1
+• Якщо товар є зі знижкою — обов'язково згадай старосту ціну`;
+
+async function buildProductContext(): Promise<string> {
+  const { data: products } = await supabase
+    .from('products')
+    .select('name, price, original_price, category_id')
+    .eq('available', true)
+    .order('position')
+    .limit(150);
+
+  const { data: categories } = await supabase
+    .from('categories')
+    .select('id, name');
+
+  if (!products?.length) return '';
+
+  const catMap: Record<string, string> = {};
+  (categories ?? []).forEach((c: any) => { catMap[c.id] = c.name; });
+
+  const grouped: Record<string, string[]> = {};
+  for (const p of products as any[]) {
+    const cat = catMap[p.category_id] ?? 'Інше';
+    if (!grouped[cat]) grouped[cat] = [];
+    const priceStr = p.original_price
+      ? `${p.price}₴ (знижка зі ${p.original_price}₴)`
+      : `${p.price}₴`;
+    grouped[cat].push(`${p.name} — ${priceStr}`);
+  }
+
+  const lines = ['', '=== КАТАЛОГ ТОВАРІВ (актуальні ціни) ==='];
+  for (const [cat, items] of Object.entries(grouped)) {
+    lines.push(`\n[${cat}]`);
+    items.forEach(i => lines.push(`  • ${i}`));
+  }
+  lines.push('\n=== КІНЕЦЬ КАТАЛОГУ ===');
+  return lines.join('\n');
+}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') return res.status(405).end();
@@ -42,13 +69,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!sessionId) return res.status(400).json({ error: 'sessionId required' });
 
   try {
-    const { data: rows } = await supabase
-      .from('chat_messages')
-      .select('sender, text')
-      .eq('session_id', sessionId)
-      .order('created_at', { ascending: true })
-      .limit(30);
+    const [messagesResult, productContext] = await Promise.all([
+      supabase
+        .from('chat_messages')
+        .select('sender, text')
+        .eq('session_id', sessionId)
+        .order('created_at', { ascending: true })
+        .limit(30),
+      buildProductContext(),
+    ]);
 
+    const rows = messagesResult.data;
     if (!rows?.length) return res.status(200).json({ ok: true });
 
     const msgs: Anthropic.MessageParam[] = rows.map(r => ({
@@ -56,7 +87,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       content: r.text as string,
     }));
 
-    // Anthropic requires alternating user/assistant roles — merge consecutive same-role messages
+    // Merge consecutive same-role messages (Anthropic requires strict alternation)
     const merged: Anthropic.MessageParam[] = [];
     for (const m of msgs) {
       if (merged.length && merged[merged.length - 1].role === m.role) {
@@ -67,13 +98,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
     }
 
-    // Must start with user
     if (merged[0]?.role !== 'user') return res.status(200).json({ ok: true });
+
+    const systemPrompt = BASE_SYSTEM + productContext;
 
     const completion = await anthropic.messages.create({
       model: 'claude-haiku-4-5-20251001',
-      max_tokens: 512,
-      system: SYSTEM,
+      max_tokens: 600,
+      system: systemPrompt,
       messages: merged,
     });
 
@@ -89,14 +121,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.status(200).json({ ok: true });
   } catch (err) {
     console.error('AI chat error:', err);
-
-    // Fallback message so the user isn't left hanging
     await supabase.from('chat_messages').insert({
       session_id: sessionId,
       sender: 'admin',
-      text: 'Вибачте, зараз виникла технічна помилка. Будь ласка, напишіть нам у Telegram t.me/BodyHome1 — відповімо протягом кількох хвилин.',
+      text: 'Вибачте, зараз виникла технічна помилка. Напишіть нам у Telegram t.me/BodyHome1 — відповімо протягом кількох хвилин.',
     }).catch(() => {});
-
     res.status(200).json({ ok: true });
   }
 }

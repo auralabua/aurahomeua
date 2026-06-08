@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import {
   LayoutDashboard, ShoppingBag, Package, FolderTree,
-  Users, Settings, LogOut, Menu, X,
+  Users, Settings, LogOut, Menu, X, MessageCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -15,6 +15,7 @@ const NAV = [
   { to: "/admin/products", label: "Товари", icon: Package },
   { to: "/admin/categories", label: "Категорії", icon: FolderTree },
   { to: "/admin/customers", label: "Клієнти", icon: Users },
+  { to: "/admin/support", label: "Підтримка", icon: MessageCircle },
   { to: "/admin/settings", label: "Налаштування", icon: Settings },
 ];
 

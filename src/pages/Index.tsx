@@ -9,7 +9,7 @@ import { ReviewsSection } from "@/components/ReviewsSection";
 import { useSEO } from "@/hooks/useSEO";
 
 // Жінка з масажером вдома — домашній комфорт
-const HERO_IMG = "https://images.pexels.com/photos/6787202/pexels-photo-6787202.jpeg?auto=compress&cs=tinysrgb&w=1400";
+const HERO_IMG = "https://images.pexels.com/photos/6388978/pexels-photo-6388978.jpeg?auto=compress&cs=tinysrgb&w=1400";
 
 
 
@@ -139,52 +139,52 @@ const Index = () => {
   return (
     <div>
       {/* ── HERO ── */}
-      <section className="hero-bg">
-        <div className="flex flex-col lg:flex-row lg:min-h-[600px]">
-          {/* Text side — always on top on mobile, left on desktop */}
-          <div className="flex items-center w-full lg:w-1/2 bg-[#F5F0EA]/80 px-6 py-12 sm:px-10 sm:py-16 lg:px-16 lg:py-20">
-            <div className="w-full max-w-[520px] mx-auto lg:mx-0 space-y-4 sm:space-y-5">
+      <section className="hero-bg relative overflow-hidden min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] flex items-center">
+        {/* Photo — права половина */}
+        <div className="absolute inset-y-0 right-0 w-full sm:w-[62%] lg:w-[55%]">
+          <img
+            src={HERO_IMG}
+            alt="Ортопедичні товари та масажери для домашнього комфорту — BodyHome"
+            className="h-full w-full object-cover object-top"
+            loading="eager"
+            fetchPriority="high"
+          />
+          <div className="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-[#F5F0EA] via-[#F5F0EA]/85 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#F5F0EA]/50 to-transparent" />
+        </div>
 
-              {/* Kicker */}
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-3 py-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                <span className="text-[11px] uppercase tracking-[0.2em] text-primary font-medium">
-                  Доставка по всій Україні
-                </span>
-              </div>
+        {/* Content */}
+        <div className="relative z-10 container py-12 sm:py-16 lg:py-20">
+          <div className="max-w-[520px] space-y-4 sm:space-y-5">
 
-              {/* H1 */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.1] text-foreground">
-                Корисні товари для здоров'я та комфорту вдома
-              </h1>
-
-              {/* Subtitle */}
-              <p className="text-base sm:text-lg font-light leading-relaxed text-foreground/70 max-w-md">
-                Масажери, ортопедичні подушки, устілки та бандажі — все для щоденного комфорту. Без переплат, з доставкою Новою Поштою.
-              </p>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row gap-3 pt-1">
-                <Button asChild size="lg" className="h-12 w-full sm:w-auto rounded-full btn-aura border-0 font-medium px-8">
-                  <Link to="/catalog">Переглянути каталог <ArrowRight className="ml-2 h-4 w-4" /></Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="h-12 w-full sm:w-auto rounded-full font-light px-8 border-border/60 bg-white/70 hover:bg-white text-foreground">
-                  <a href="#featured">Популярні товари</a>
-                </Button>
-              </div>
-
+            {/* Kicker */}
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-3 py-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="text-[11px] uppercase tracking-[0.2em] text-primary font-medium">
+                Доставка по всій Україні
+              </span>
             </div>
-          </div>
 
-          {/* Image side — below text on mobile, right on desktop */}
-          <div className="w-full aspect-video lg:aspect-auto lg:w-1/2 overflow-hidden">
-            <img
-              src={HERO_IMG}
-              alt="Ортопедичні товари та масажери для домашнього комфорту — BodyHome"
-              className="w-full h-full object-cover object-top"
-              loading="eager"
-              fetchPriority="high"
-            />
+            {/* H1 */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.1] text-foreground">
+              Корисні товари для здоров'я та комфорту вдома
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-base sm:text-lg font-light leading-relaxed text-foreground/70 max-w-md">
+              Масажери, ортопедичні подушки, устілки та бандажі — все для щоденного комфорту. Без переплат, з доставкою Новою Поштою.
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-3 pt-1">
+              <Button asChild size="lg" className="h-12 w-full sm:w-auto rounded-full btn-aura border-0 font-medium px-8">
+                <Link to="/catalog">Переглянути каталог <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="h-12 w-full sm:w-auto rounded-full font-light px-8 border-border/60 bg-white/70 hover:bg-white text-foreground">
+                <a href="#featured">Популярні товари</a>
+              </Button>
+            </div>
+
           </div>
         </div>
       </section>

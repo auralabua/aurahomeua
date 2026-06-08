@@ -2,7 +2,7 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Star, Minus, Plus, ShoppingCart, ArrowLeft, Truck, ShieldCheck, RotateCcw, Check, Tag, Wallet, MessageCircle } from "lucide-react";
 import { formatUAH } from "@/data/products";
-import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
+import { useProductsAsLegacy, useCategoriesAsLegacy, useDBProducts } from "@/hooks/useShopData";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { ProductCard } from "@/components/ProductCard";
@@ -378,6 +378,7 @@ const ProductPage = () => {
   const { products, isLoading } = useProductsAsLegacy();
   const { categories } = useCategoriesAsLegacy();
   const { addItem } = useCart();
+  const { data: rawProducts } = useDBProducts();
 
   const [qty, setQty] = useState(1);
   const [activeImg, setActiveImg] = useState(0);
@@ -392,6 +393,22 @@ const ProductPage = () => {
   // ── Resolve product data (before any conditional returns so hooks stay stable) ──
   const foundProduct   = products.find(p => p.id === id) ?? products.find(p => p.slug === id);
   const displayProduct = foundProduct;
+
+  // Fallback: for old UUID-based URLs or child-variant slugs not in the filtered list,
+  // compute a canonical redirect target using the unfiltered raw product data.
+  const canonicalRedirectSlug = useMemo(() => {
+    if (foundProduct || !rawProducts?.length || !id) return null;
+    const raw = rawProducts.find(p => (p.id as string) === id || p.slug === id);
+    if (!raw) return null;
+    // UUID URL → redirect to canonical slug URL
+    if (raw.slug && raw.slug !== id) return raw.slug;
+    // Child variant → redirect to parent product
+    if (raw.parent_product_id) {
+      const parent = rawProducts.find(p => (p.id as string) === (raw.parent_product_id as string));
+      return parent?.slug ?? (parent?.id as string | undefined) ?? null;
+    }
+    return null;
+  }, [foundProduct, rawProducts, id]);
 
   // JSONB variants from the product itself, sorted by size
   const variants = useMemo(() => {
@@ -493,7 +510,10 @@ const ProductPage = () => {
       </div>
     );
   }
-  if (!foundProduct) return <Navigate to="/catalog" replace />;
+  if (!foundProduct) {
+    if (canonicalRedirectSlug) return <Navigate to={`/product/${canonicalRedirectSlug}`} replace />;
+    return <Navigate to="/catalog" replace />;
+  }
 
   // ── Derived values ───────────────────────────────────────────────────────
   const related = products

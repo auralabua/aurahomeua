@@ -36,7 +36,6 @@ export const SupportWidget = () => {
   const [isTyping,     setIsTyping]     = useState(false);
 
   const [name,  setName]  = useState("");
-  const [phone, setPhone] = useState("");
   const [input, setInput] = useState("");
   const [busy,  setBusy]  = useState(false);
   const [err,   setErr]   = useState("");
@@ -106,7 +105,7 @@ export const SupportWidget = () => {
     try {
       const { data: sess, error: dbErr } = await (supabase as any)
         .from("chat_sessions")
-        .insert({ customer_name: name, customer_phone: phone })
+        .insert({ customer_name: name })
         .select("id")
         .single();
       if (dbErr) throw dbErr;
@@ -152,7 +151,7 @@ export const SupportWidget = () => {
     localStorage.removeItem(SESSION_KEY);
     localStorage.removeItem(NAME_KEY);
     setSessionId(null); setCustomerName(""); setMessages([]); setIsTyping(false);
-    setName(""); setPhone(""); setScreen("choice");
+    setName(""); setScreen("choice");
   };
 
   return (
@@ -232,12 +231,6 @@ export const SupportWidget = () => {
                   <input
                     required value={name} onChange={e => setName(e.target.value)}
                     placeholder="Ваше ім'я"
-                    className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none transition-colors"
-                  />
-                  <input
-                    required value={phone} onChange={e => setPhone(e.target.value)}
-                    placeholder="Телефон +380..."
-                    type="tel"
                     className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none transition-colors"
                   />
                   {err && <p className="text-xs text-destructive">{err}</p>}

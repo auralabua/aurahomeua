@@ -145,6 +145,11 @@ export const ProductCard = ({ product, compact = false, categoryName }: ProductC
                 {product.badge === "Хіт продажів" ? "Хіт" : product.badge}
               </span>
             )}
+            {!product.badge && product.category === "krasota-i-doglyad" && (
+              <span className="rounded-md px-1.5 py-0.5 text-[9px] font-semibold tracking-wide text-white" style={{ background: "linear-gradient(135deg,#c9716e,#a0509a)" }}>
+                ✨ Краса
+              </span>
+            )}
           </div>
         </Link>
         <div className="flex flex-col flex-1 gap-1.5 p-3">
@@ -189,6 +194,11 @@ export const ProductCard = ({ product, compact = false, categoryName }: ProductC
           {product.badge && (
             <span className="rounded-md bg-primary/90 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm">
               {product.badge === "Хіт продажів" ? "Хіт" : product.badge}
+            </span>
+          )}
+          {!product.badge && product.category === "krasota-i-doglyad" && (
+            <span className="rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wide text-white shadow-sm" style={{ background: "linear-gradient(135deg,#c9716e,#a0509a)" }}>
+              ✨ Краса
             </span>
           )}
           {hasDiscount && (() => {

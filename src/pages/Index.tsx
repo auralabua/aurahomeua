@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useRef, useState, useMemo } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight, Truck, ShieldCheck, CreditCard, Headphones, Star, RotateCcw, Flame, Sparkles, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CategoryCard } from "@/components/CategoryCard";
@@ -7,6 +7,8 @@ import { ProductCard } from "@/components/ProductCard";
 import { useProductsAsLegacy, useCategoriesAsLegacy } from "@/hooks/useShopData";
 import { ReviewsSection } from "@/components/ReviewsSection";
 import { useSEO } from "@/hooks/useSEO";
+import { OptimizedImage } from "@/components/OptimizedImage";
+import { formatUAH } from "@/data/products";
 
 // Жінка з масажером вдома — домашній комфорт
 const HERO_IMG = "https://images.pexels.com/photos/5927933/pexels-photo-5927933.jpeg?auto=compress&cs=tinysrgb&w=1400";
@@ -119,6 +121,14 @@ const Index = () => {
   const categories = allCats.filter(c => !c.parentId);
 
   const baseProducts = products.filter(p => !p.parentProductId && !p.isParent);
+
+  const beautyProducts = useMemo(() =>
+    products
+      .filter(p => p.category === "krasota-i-doglyad" && !p.parentProductId)
+      .sort((a, b) => b.price - a.price)
+      .slice(0, 4),
+    [products]
+  );
 
   const hits = baseProducts
     .filter(p => p.reviews >= 3)
@@ -399,6 +409,99 @@ const Index = () => {
 
         <ProductCarousel products={tabProducts} />
       </section>
+
+      {/* ── BEAUTY & CARE ── */}
+      {beautyProducts.length > 0 && (
+        <section className="py-12 sm:py-16" style={{ background: "linear-gradient(135deg, #131a17 0%, #1c2820 60%, #1a1f1d 100%)" }}>
+          <div className="container">
+            {/* Header */}
+            <div className="mb-8 sm:mb-10 flex items-end justify-between gap-4">
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.28em] font-medium mb-3" style={{ color: "#c9a96e" }}>
+                  Домашній догляд
+                </p>
+                <h2 className="text-3xl sm:text-4xl font-medium text-white">Салонний ефект — вдома</h2>
+                <p className="mt-2 text-sm font-light" style={{ color: "rgba(255,255,255,0.45)" }}>
+                  Апарати для догляду за обличчям та тілом
+                </p>
+              </div>
+              <Link
+                to="/catalog?category=krasota-i-doglyad"
+                className="hidden sm:flex items-center gap-2 text-sm font-light shrink-0 transition-colors hover:opacity-80"
+                style={{ color: "#c9a96e" }}
+              >
+                Всі товари краси <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            {/* Cards */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              {beautyProducts.map((p, i) => (
+                <Link
+                  key={p.id}
+                  to={`/product/${p.slug ?? p.id}`}
+                  className="group relative flex flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1"
+                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
+                  onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(201,169,110,0.35)")}
+                  onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)")}
+                >
+                  {/* Hit badge */}
+                  {i < 2 && (
+                    <span
+                      className="absolute left-2.5 top-2.5 z-10 rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide"
+                      style={{ background: "#c9a96e", color: "#131a17" }}
+                    >
+                      ✨ Хіт продажів
+                    </span>
+                  )}
+                  {/* Image */}
+                  <div className="aspect-square grid place-items-center p-4" style={{ background: "rgba(255,255,255,0.06)" }}>
+                    {p.images?.[0] ? (
+                      <OptimizedImage
+                        src={p.images[0]}
+                        alt={p.name}
+                        className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 640px) 45vw, 25vw"
+                        quality={80}
+                      />
+                    ) : (
+                      <div className="h-full w-full rounded-xl" style={{ background: "rgba(255,255,255,0.08)" }} />
+                    )}
+                  </div>
+                  {/* Info */}
+                  <div className="flex flex-col flex-1 gap-2 p-3 sm:p-4">
+                    <p className="text-xs sm:text-sm font-medium leading-snug line-clamp-2 transition-colors" style={{ color: "rgba(255,255,255,0.85)" }}>
+                      {p.name}
+                    </p>
+                    <div className="mt-auto pt-2 flex items-center justify-between gap-2">
+                      <span className="text-base sm:text-lg font-bold" style={{ color: "#c9a96e" }}>
+                        {formatUAH(p.price)}
+                      </span>
+                      <span
+                        className="text-[10px] sm:text-xs rounded-full px-2 sm:px-3 py-1 transition-all duration-200 whitespace-nowrap"
+                        style={{ border: "1px solid rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.55)" }}
+                      >
+                        Переглянути →
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Mobile link */}
+            <div className="mt-6 flex justify-center sm:hidden">
+              <Link
+                to="/catalog?category=krasota-i-doglyad"
+                className="inline-flex items-center gap-2 text-sm font-light"
+                style={{ color: "#c9a96e" }}
+              >
+                Всі товари краси <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── БЛОГ / СТАТТІ ── */}
       <section className="bg-secondary/40 py-12 sm:py-20">

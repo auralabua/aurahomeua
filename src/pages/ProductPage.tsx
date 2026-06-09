@@ -22,23 +22,26 @@ const SIZE_ORDER = ["XS", "S", "M", "L", "XL", "XXL", "XXXL", "XXXXL"];
 const buildDescription = (
   product: Product,
   categoryName: string | undefined,
-  price: number
+  price: number,
+  categorySlug?: string
 ): string => {
   const base = product.description?.trim();
-  // Use first meaningful sentence if description exists
   const firstSentence = base
     ? base.replace(/([.!?])\s+/g, "$1\n").split("\n").find(s => s.length > 30) ?? base.slice(0, 120)
     : null;
+  const beautyNote = categorySlug === "krasota-i-doglyad"
+    ? " Купити в Україні з доставкою Новою Поштою. Салонний ефект вдома."
+    : "";
 
   if (firstSentence && firstSentence.length >= 60) {
-    // Trim to 155 chars and add price hint
     const trimmed = firstSentence.slice(0, 120).replace(/[,.]?\s*$/, "");
-    return `${trimmed}. Купити за ${formatUAH(price)} з доставкою по Україні.`;
+    return categorySlug === "krasota-i-doglyad"
+      ? `${trimmed}.${beautyNote}`
+      : `${trimmed}. Купити за ${formatUAH(price)} з доставкою по Україні.`;
   }
 
-  // Fallback: synthetic description
   const cat = categoryName ? `${categoryName.toLowerCase()} ` : "";
-  return `${product.name} — ${cat}від BodyHome. Ціна ${formatUAH(price)}, доставка Новою Поштою, оплата при отриманні. Гарантія якості 14 днів.`;
+  return `${product.name} — ${cat}від BodyHome. Ціна ${formatUAH(price)}, доставка Новою Поштою, оплата при отриманні.${beautyNote}`;
 };
 
 /** Build keyword string for product */
@@ -515,7 +518,7 @@ const ProductPage = () => {
 
   // ── SEO — always called unconditionally ──────────────────────────────────
   const seoDescription = displayProduct && currentProduct
-    ? buildDescription(displayProduct, categoryName, currentProduct.price)
+    ? buildDescription(displayProduct, categoryName, currentProduct.price, category?.id)
     : undefined;
 
   const seoKeywords = displayProduct

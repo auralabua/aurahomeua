@@ -107,9 +107,9 @@ const ProductCarousel = ({ products }: { products: any[] }) => {
 
 const Index = () => {
   useSEO({
-    title: "Ортопедичні товари, масажери та товари для здоров'я",
-    description: "BodyHome — інтернет-магазин товарів для здоров'я. Ортопедичні подушки, устілки, бандажі, масажери, аплікатори. Доставка по Україні. Оплата при отриманні.",
-    keywords: "ортопедичні подушки, масажери, устілки, бандажі, товари для здоров'я, ортопедія Україна",
+    title: "Масажери та товари для краси, здоров'я і комфорту",
+    description: "BodyHome — масажери для обличчя та тіла, ортопедичні подушки, устілки, бандажі. Товари для щоденного догляду та здоров'я. Доставка по Україні.",
+    keywords: "масажери для обличчя, товари для краси, ортопедичні подушки, устілки, бандажі, товари для здоров'я, Україна",
     url: "/",
     type: "website",
   });
@@ -140,16 +140,19 @@ const Index = () => {
     <div>
       {/* ── HERO ── */}
       <section className="hero-bg relative overflow-hidden min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] flex items-center">
-        {/* Photo — права половина */}
+        {/* Photo */}
         <div className="absolute inset-y-0 right-0 w-full sm:w-[62%] lg:w-[55%]">
           <img
             src={HERO_IMG}
-            alt="Ортопедичні товари та масажери для домашнього комфорту — BodyHome"
+            alt="Масажери та товари для краси і здоров'я вдома — BodyHome"
             className="h-full w-full object-cover object-top"
             loading="eager"
             fetchPriority="high"
           />
-          <div className="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-[#F5F0EA] via-[#F5F0EA]/85 to-transparent" />
+          {/* Desktop: beige gradient so dark text sits on light background */}
+          <div className="hidden sm:block absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-[#F5F0EA] via-[#F5F0EA]/85 to-transparent" />
+          {/* Mobile: dark overlay so white text is readable over the photo */}
+          <div className="sm:hidden absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.0) 100%)" }} />
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#F5F0EA]/50 to-transparent" />
         </div>
 
@@ -158,21 +161,21 @@ const Index = () => {
           <div className="max-w-[520px] space-y-4 sm:space-y-5">
 
             {/* Kicker */}
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-3 py-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              <span className="text-[11px] uppercase tracking-[0.2em] text-primary font-medium">
-                Доставка по всій Україні
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/25 sm:bg-primary/10 border border-white/40 sm:border-primary/20 px-3 py-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-white sm:bg-primary animate-pulse" />
+              <span className="text-[11px] uppercase tracking-[0.2em] text-white sm:text-primary font-medium">
+                Краса та здоров'я вдома
               </span>
             </div>
 
             {/* H1 */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.1] text-foreground">
-              Корисні товари для здоров'я та комфорту вдома
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.1] text-white sm:text-foreground [text-shadow:0_1px_4px_rgba(0,0,0,0.45)] sm:[text-shadow:none]">
+              Краса та здоров'я — починаються вдома
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base sm:text-lg font-light leading-relaxed text-foreground/70 max-w-md">
-              Масажери, ортопедичні подушки, устілки та бандажі — все для щоденного комфорту. Без переплат, з доставкою Новою Поштою.
+            <p className="text-base sm:text-lg font-light leading-relaxed text-white/90 sm:text-foreground/70 max-w-md">
+              Масажери для обличчя і тіла, ортопедичні подушки, устілки — для щоденного догляду та комфорту. Доставка Новою Поштою.
             </p>
 
             {/* CTAs */}
@@ -180,7 +183,7 @@ const Index = () => {
               <Button asChild size="lg" className="h-12 w-full sm:w-auto rounded-full btn-aura border-0 font-medium px-8">
                 <Link to="/catalog">Переглянути каталог <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="h-12 w-full sm:w-auto rounded-full font-light px-8 border-border/60 bg-white/70 hover:bg-white text-foreground">
+              <Button asChild size="lg" variant="outline" className="h-12 w-full sm:w-auto rounded-full font-light px-8 border-white/50 sm:border-border/60 bg-white/15 sm:bg-white/70 hover:bg-white/25 sm:hover:bg-white text-white sm:text-foreground">
                 <a href="#featured">Популярні товари</a>
               </Button>
             </div>
@@ -403,8 +406,8 @@ const Index = () => {
           <div className="mb-8 sm:mb-12 flex items-end justify-between gap-4">
             <div>
               <p className="aura-kicker mb-3">корисно знати</p>
-              <h2 className="text-4xl md:text-5xl font-light">Здоров'я починається вдома</h2>
-              <p className="mt-2 text-muted-foreground font-light">Поради щодо догляду за тілом і відновлення</p>
+              <h2 className="text-4xl md:text-5xl font-light">Краса і здоров'я починаються вдома</h2>
+              <p className="mt-2 text-muted-foreground font-light">Поради щодо догляду за тілом, красою та відновленням</p>
             </div>
             <Link to="/blog" className="hidden sm:flex items-center gap-2 text-sm text-primary font-light transition-smooth hover:gap-3 shrink-0">
               Всі статті <ArrowRight className="h-4 w-4" />

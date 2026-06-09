@@ -402,13 +402,26 @@ const ProductPage = () => {
   }, [isMobile]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Resolve product data (before any conditional returns so hooks stay stable) ──
-  // Try filtered list first (legacy_id or UUID), then all products (raw UUID).
-  // allProducts uses raw UUIDs as id so it handles old UUID-based URLs and child variants.
+  // Lookup order:
+  //   1. legacy_id / UUID exact match
+  //   2. exact slug match
+  //   3. raw UUID match (allProducts)
+  //   4. exact slug match (allProducts)
+  //   5. UUID hex-suffix fallback — handles stale Google Ads slugs where the
+  //      URL ends with an older/shorter UUID suffix (e.g. "sm-85649a") but the
+  //      DB slug was later regenerated with a longer suffix ("sm-bd85649a").
+  //      Slugs are always generated as <name>-<last-N-hex-chars-of-uuid>.
+  const idSuffix = typeof id === "string" ? id.split("-").pop()?.toLowerCase() : undefined;
+  const isHexSuffix = idSuffix ? /^[0-9a-f]{4,}$/.test(idSuffix) : false;
   const foundProduct =
     products.find(p => p.id === id) ??
     products.find(p => p.slug === id) ??
     allProducts.find(p => p.id === id) ??
-    allProducts.find(p => p.slug === id);
+    allProducts.find(p => p.slug === id) ??
+    (isHexSuffix
+      ? products.find(p => p.id.replace(/-/g, "").endsWith(idSuffix!)) ??
+        allProducts.find(p => p.id.replace(/-/g, "").endsWith(idSuffix!))
+      : undefined);
   const displayProduct = foundProduct;
 
   // JSONB variants from the product itself, sorted by size

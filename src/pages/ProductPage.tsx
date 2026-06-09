@@ -385,10 +385,14 @@ const ProductPage = () => {
   const [added, setAdded] = useState(false);
   const [activeTab, setActiveTab] = useState<"desc" | "reviews" | "questions">("desc");
   const [selectedVarIdx, setSelectedVarIdx] = useState(-1);
+  const [selectedSiblingIdx, setSelectedSiblingIdx] = useState(0);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const cartBtnRef = useRef<HTMLButtonElement>(null);
   const isMobile = useIsMobile();
   const recentIds = useRecentlyViewed(id ?? "");
+
+  // Reset sibling selection when URL changes (different product)
+  useEffect(() => { setSelectedSiblingIdx(0); }, [id]);
 
   // ── Sticky bar effect — must stay here (before early returns) to respect Rules of Hooks ──
   useEffect(() => {
@@ -441,6 +445,42 @@ const ProductPage = () => {
   }, [foundProduct]);
 
   const selectedVariant = variants[selectedVarIdx] ?? null;
+
+  // Sibling variants from parent-child DB structure (active when JSONB variants absent)
+  const siblingVariants = useMemo(() => {
+    if (!foundProduct?.isParent || !foundProduct.variantLabel || variants.length > 0) return [];
+    const children = allProducts
+      .filter(p => p.parentProductId === foundProduct.id && p.variantLabel)
+      .map(c => ({
+        label: c.variantLabel as string,
+        price: c.price,
+        vendorCode: c.vendorCode,
+        available: c.available,
+        productId: c.id,
+        productName: c.name,
+      }));
+    if (children.length === 0) return [];
+    const all = [
+      {
+        label: foundProduct.variantLabel,
+        price: foundProduct.price,
+        vendorCode: foundProduct.vendorCode,
+        available: foundProduct.available,
+        productId: foundProduct.id,
+        productName: foundProduct.name,
+      },
+      ...children,
+    ];
+    return all.sort((a, b) => {
+      const na = parseFloat(a.label);
+      const nb = parseFloat(b.label);
+      if (!isNaN(na) && !isNaN(nb)) return na - nb;
+      return a.label.localeCompare(b.label);
+    });
+  }, [foundProduct, variants, allProducts]);
+
+  const selectedSibling = siblingVariants.length > 1 ? (siblingVariants[selectedSiblingIdx] ?? siblingVariants[0]) : null;
+
   const currentProduct  = foundProduct;
   const category        = displayProduct ? categories.find(c => c.id === displayProduct.category) : null;
   const categoryName     = category?.name;
@@ -539,12 +579,12 @@ const ProductPage = () => {
     .slice(0, 4);
 
   const images        = displayProduct!.images?.length ? displayProduct!.images : [];
-  const activePrice   = selectedVariant?.price ?? currentProduct!.price;
+  const activePrice   = selectedVariant?.price ?? selectedSibling?.price ?? currentProduct!.price;
   const hasDiscount   = currentProduct!.originalPrice && currentProduct!.originalPrice > activePrice;
   const discountPct   = hasDiscount
     ? Math.round((1 - activePrice / currentProduct!.originalPrice!) * 100)
     : 0;
-  const activeVendorCode = selectedVariant?.vendor_code || currentProduct!.vendorCode;
+  const activeVendorCode = selectedVariant?.vendor_code || selectedSibling?.vendorCode || currentProduct!.vendorCode;
   const bundleProduct = complementaryProducts[0] ?? null;
   const bundleTotal = bundleProduct ? Math.round((activePrice + bundleProduct.price) * 0.95) : 0;
 
@@ -557,6 +597,15 @@ const ProductPage = () => {
         price: selectedVariant.price,
         variantLabel: selectedVariant.label,
         vendorCode: selectedVariant.vendor_code || currentProduct!.vendorCode,
+      }, qty);
+    } else if (selectedSibling && selectedSibling.productId !== currentProduct!.id) {
+      addItem({
+        ...currentProduct!,
+        id: selectedSibling.productId,
+        name: selectedSibling.productName,
+        price: selectedSibling.price,
+        variantLabel: selectedSibling.label,
+        vendorCode: selectedSibling.vendorCode || currentProduct!.vendorCode,
       }, qty);
     } else {
       addItem(currentProduct!, qty);
@@ -747,6 +796,35 @@ const ProductPage = () => {
                     <span>⚠</span> Будь ласка, оберіть розмір перед замовленням
                   </p>
                 )}
+              </div>
+            )}
+
+            {/* Sibling size selector (parent-child DB structure) */}
+            {siblingVariants.length > 1 && (
+              <div className="space-y-2">
+                <p className="text-sm font-medium text-foreground">
+                  Розмір:{" "}
+                  <span className="text-primary font-semibold">{siblingVariants[selectedSiblingIdx]?.label}</span>
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {siblingVariants.map((v, i) => (
+                    <button
+                      key={v.label}
+                      onClick={() => setSelectedSiblingIdx(i)}
+                      aria-label={`Розмір ${v.label}`}
+                      disabled={!v.available}
+                      className={`min-w-[44px] h-10 px-3 rounded-xl border-2 text-sm font-medium transition-all ${
+                        i === selectedSiblingIdx
+                          ? "border-primary bg-primary text-white shadow-sm"
+                          : v.available
+                            ? "border-border bg-white hover:border-primary/60 text-foreground"
+                            : "border-border bg-secondary/50 text-muted-foreground opacity-50 cursor-not-allowed line-through"
+                      }`}
+                    >
+                      {v.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -1016,6 +1094,8 @@ const ProductPage = () => {
                     onClick={() => {
                       if (selectedVariant) {
                         addItem({ ...currentProduct!, id: `${currentProduct!.id}__${selectedVariant.label}`, name: `${displayProduct!.name} (${selectedVariant.label})`, price: selectedVariant.price, variantLabel: selectedVariant.label, vendorCode: selectedVariant.vendor_code || currentProduct!.vendorCode }, 1);
+                      } else if (selectedSibling && selectedSibling.productId !== currentProduct!.id) {
+                        addItem({ ...currentProduct!, id: selectedSibling.productId, name: selectedSibling.productName, price: selectedSibling.price, variantLabel: selectedSibling.label, vendorCode: selectedSibling.vendorCode || currentProduct!.vendorCode }, 1);
                       } else {
                         addItem(currentProduct!, 1);
                       }

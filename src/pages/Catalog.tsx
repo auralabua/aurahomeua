@@ -133,6 +133,12 @@ const Catalog = () => {
       ? `${activeCatName} в інтернет-магазині BodyHome — ${filtered.length} товарів. Доставка Новою Поштою по Україні, оплата при отриманні.`
       : `Каталог ортопедичних товарів BodyHome: подушки, устілки, бандажі, масажери — ${filtered.length} товарів. Доставка по Україні.`,
     url: selectedCategories.length === 1 ? `/catalog?category=${selectedCategories[0]}` : "/catalog",
+    breadcrumbs: [
+      { name: "Каталог", url: "/catalog" },
+      ...(activeCatName && selectedCategories.length === 1
+        ? [{ name: activeCatName, url: `/catalog?category=${selectedCategories[0]}` }]
+        : []),
+    ],
   });
 
   const Filters = () => (

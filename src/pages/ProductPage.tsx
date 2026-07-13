@@ -458,22 +458,30 @@ const ProductPage = () => {
     ? buildKeywords(displayProduct, categoryName)
     : undefined;
 
-  const seoFAQ = displayProduct && currentProduct
-    ? buildProductFAQ(displayProduct.name, currentProduct.price, currentProduct.available)
-    : undefined;
+  const seoFAQ = useMemo(() =>
+    displayProduct && currentProduct
+      ? buildProductFAQ(displayProduct.name, currentProduct.price, currentProduct.available)
+      : undefined,
+    [displayProduct, currentProduct]
+  );
 
-  const seoAggregateRating =
+  const seoAggregateRating = useMemo(() =>
     currentProduct && currentProduct.reviews > 0
       ? { ratingValue: currentProduct.rating, reviewCount: currentProduct.reviews }
-      : undefined;
+      : undefined,
+    [currentProduct]
+  );
 
-  const seoBreadcrumbs = displayProduct
-    ? [
-        { name: "Каталог", url: "/catalog" },
-        ...(category ? [{ name: category.name, url: `/catalog?category=${category.id}` }] : []),
-        { name: displayProduct.name, url: `/product/${displayProduct.slug ?? displayProduct.id}` },
-      ]
-    : undefined;
+  const seoBreadcrumbs = useMemo(() =>
+    displayProduct
+      ? [
+          { name: "Каталог", url: "/catalog" },
+          ...(category ? [{ name: category.name, url: `/catalog?category=${category.id}` }] : []),
+          { name: displayProduct.name, url: `/product/${displayProduct.slug ?? displayProduct.id}` },
+        ]
+      : undefined,
+    [displayProduct, category]
+  );
 
   useSEO({
     title:             displayProduct?.name,

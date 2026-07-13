@@ -436,18 +436,36 @@ const ProductPage = () => {
 
   // Products from complementary categories (different from this product's category)
   const complementaryProducts = useMemo(() => {
-    if (!complementaryCatSlugs.length) return [];
-    const validCatIds = new Set<string>(
-      categories.flatMap(c =>
-        complementaryCatSlugs.includes(c.id) || complementaryCatSlugs.includes(c.parentId as string)
-          ? [c.id]
-          : []
-      )
+    const mainCatId  = category?.id ?? "";
+    const parentId   = (category?.parentId as string | undefined) ?? "";
+
+    // Sibling sub-categories (same parent, different sub-category) — most relevant add-ons
+    const siblingIds = new Set<string>(
+      categories
+        .filter(c => c.parentId && c.parentId === parentId && c.id !== mainCatId)
+        .map(c => c.id)
     );
+
+    // Cross-category complementary map
+    const crossIds = new Set<string>(
+      complementaryCatSlugs.length
+        ? categories.flatMap(c =>
+            complementaryCatSlugs.includes(c.id) || complementaryCatSlugs.includes(c.parentId as string)
+              ? [c.id]
+              : []
+          )
+        : []
+    );
+
+    const candidateIds = new Set([...siblingIds, ...crossIds]);
+    if (!candidateIds.size) return [];
+
     return products
-      .filter(p => validCatIds.has(p.category) && p.id !== (foundProduct?.id ?? "") && p.available)
-      .slice(0, 4);
-  }, [products, categories, complementaryCatSlugs, foundProduct]);
+      .filter(p => candidateIds.has(p.category) && p.id !== (foundProduct?.id ?? "") && p.available)
+      // Sort by popularity so the best-reviewed products surface first
+      .sort((a, b) => b.reviews * b.rating - a.reviews * a.rating)
+      .slice(0, 8);
+  }, [products, categories, complementaryCatSlugs, category, foundProduct]);
 
   // ── SEO — always called unconditionally ──────────────────────────────────
   const seoDescription = displayProduct && currentProduct
@@ -529,7 +547,19 @@ const ProductPage = () => {
     ? Math.round((1 - activePrice / currentProduct!.originalPrice!) * 100)
     : 0;
   const activeVendorCode = selectedVariant?.vendor_code || currentProduct!.vendorCode;
-  const bundleProduct = complementaryProducts[0] ?? null;
+  // Pick the best bundle partner: prefer a cheaper add-on (5 %–70 % of main price)
+  // with the highest popularity signal, so the pairing feels intentional.
+  const bundleProduct = (() => {
+    if (!complementaryProducts.length) return null;
+    const scored = complementaryProducts.map(p => {
+      const ratio = p.price / (activePrice || 1);
+      // Cheap accessories score highest; similar-priced products score lower
+      const priceBonus = ratio >= 0.05 && ratio <= 0.7 ? 2 : ratio <= 1.5 ? 1 : 0.5;
+      return { p, score: priceBonus * Math.log1p(p.reviews + 1) * p.rating };
+    });
+    scored.sort((a, b) => b.score - a.score);
+    return scored[0]?.p ?? null;
+  })();
   const bundleTotal = bundleProduct ? Math.round((activePrice + bundleProduct.price) * 0.95) : 0;
 
   const handleAddToCart = () => {

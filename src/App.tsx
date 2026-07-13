@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@/lib/queryClient";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 
 function ScrollToTop() {
@@ -47,21 +48,6 @@ const PageLoader = () => (
     <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
   </div>
 );
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      // Data is fresh for 5 minutes — no refetch on every navigation
-      staleTime: 5 * 60 * 1000,
-      // Keep inactive queries in cache for 10 minutes
-      gcTime: 10 * 60 * 1000,
-      // Retry once on failure
-      retry: 1,
-      // Don't refetch when window gets focus (avoids surprise refetches)
-      refetchOnWindowFocus: false,
-    },
-  },
-});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

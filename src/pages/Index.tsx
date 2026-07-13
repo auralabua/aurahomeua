@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
+import { OptimizedImage } from "@/components/OptimizedImage";
 import { ArrowRight, ChevronLeft, ChevronRight, Truck, ShieldCheck, CreditCard, Headphones, Star, RotateCcw, Flame, Sparkles, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CategoryCard } from "@/components/CategoryCard";
@@ -142,11 +143,14 @@ const Index = () => {
       <section className="hero-bg relative overflow-hidden min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] flex items-center">
         {/* Photo — права половина */}
         <div className="absolute inset-y-0 right-0 w-full sm:w-[62%] lg:w-[55%]">
-          <img
+          <OptimizedImage
             src={HERO_IMG}
             alt="Масажний килимок для здоров'я стоп вдома"
             className="h-full w-full object-cover object-center"
             loading="eager"
+            fetchPriority="high"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 62vw, 55vw"
+            quality={85}
           />
           <div className="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-[#F5F0EA] via-[#F5F0EA]/85 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#F5F0EA]/50 to-transparent" />

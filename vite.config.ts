@@ -55,6 +55,7 @@ export default defineConfig({
         ],
       },
       workbox: {
+        skipWaiting: true,
         // Pre-cache all build assets
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
         // Don't pre-cache large chart vendor (admin-only)

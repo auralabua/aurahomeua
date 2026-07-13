@@ -12,6 +12,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CartProvider } from "@/context/CartContext";
+import { WishlistProvider } from "@/context/WishlistContext";
 import { Layout } from "@/components/Layout";
 import { PWAInstallPrompt } from "@/components/PWAInstallPrompt";
 
@@ -41,6 +42,7 @@ const AdminCustomers = lazy(() => import("./pages/admin/AdminCustomers.tsx"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings.tsx"));
 const AdminSupport  = lazy(() => import("./pages/admin/AdminSupport.tsx"));
 const OrderSuccess = lazy(() => import("./pages/OrderSuccess.tsx"));
+const Wishlist = lazy(() => import("./pages/Wishlist.tsx"));
 
 // Page loader skeleton (minimal flicker)
 const PageLoader = () => (
@@ -56,6 +58,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
+        <WishlistProvider>
         <CartProvider>
           <Suspense fallback={<PageLoader />}>
             <Routes>
@@ -66,6 +69,7 @@ const App = () => (
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/order-success" element={<OrderSuccess />} />
+                <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contacts" element={<Contacts />} />
                 <Route path="/delivery" element={<Delivery />} />
@@ -89,6 +93,7 @@ const App = () => (
           </Suspense>
           <PWAInstallPrompt />
         </CartProvider>
+        </WishlistProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

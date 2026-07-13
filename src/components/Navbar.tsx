@@ -2,6 +2,7 @@ import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { ShoppingCart, Menu, X, Phone, Sparkles, ChevronDown, ChevronRight, ArrowRight, BookOpen, Bone, Waves, Baby, Activity, Heart } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 import { useCategoriesAsLegacy } from "@/hooks/useShopData";
 import { Button } from "@/components/ui/button";
 import { SearchAutocomplete } from "@/components/SearchAutocomplete";
@@ -28,6 +29,7 @@ const ViberIcon = () => (
 
 export const Navbar = () => {
   const { totalCount } = useCart();
+  const { count: wishlistCount } = useWishlist();
   const { categories } = useCategoriesAsLegacy();
   const navigate = useNavigate();
   const location = useLocation();
@@ -181,6 +183,16 @@ export const Navbar = () => {
 
         {/* Cart + burger */}
         <div className="flex items-center gap-2 ml-auto md:ml-0">
+          <Button asChild variant="ghost" size="icon" className="relative rounded-full bg-white/75 text-primary hover:bg-secondary hover:text-primary">
+            <Link to="/wishlist" aria-label="Вибране">
+              <Heart className="h-5 w-5"/>
+              {wishlistCount > 0 && (
+                <span className="absolute -top-1 -right-1 grid h-5 min-w-5 px-1 place-items-center rounded-full bg-red-500 text-[10px] font-semibold text-white">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+          </Button>
           <Button asChild variant="ghost" size="icon" className="relative rounded-full bg-white/75 text-primary hover:bg-secondary hover:text-primary">
             <Link to="/cart" aria-label="Кошик">
               <ShoppingCart className="h-5 w-5"/>

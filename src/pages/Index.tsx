@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useRef, useState, useMemo } from "react";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { ArrowRight, ChevronLeft, ChevronRight, Truck, ShieldCheck, CreditCard, Headphones, Star, RotateCcw, Flame, Sparkles, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -119,6 +119,27 @@ const Index = () => {
   const { categories: allCats } = useCategoriesAsLegacy();
   const categories = allCats.filter(c => !c.parentId);
 
+  // Map sub-category → parent slug
+  const parentOf = useMemo(() => {
+    const m: Record<string, string> = {};
+    allCats.forEach(c => { if (c.parentId) m[c.id as string] = c.parentId as string; });
+    return m;
+  }, [allCats]);
+
+  // First available image per category (including from sub-categories)
+  const categoryImages = useMemo(() => {
+    const map: Record<string, string> = {};
+    products.forEach(p => {
+      const img = p.images?.[0];
+      if (!img) return;
+      const cat = p.category as string;
+      if (!map[cat]) map[cat] = img;
+      const parent = parentOf[cat];
+      if (parent && !map[parent]) map[parent] = img;
+    });
+    return map;
+  }, [products, parentOf]);
+
   const baseProducts = products.filter(p => !p.parentProductId && !p.isParent);
 
   const hits = baseProducts
@@ -225,7 +246,7 @@ const Index = () => {
           </Link>
         </div>
         <div className="grid grid-cols-3 gap-2 sm:gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7">
-          {categories.map(c => <CategoryCard key={c.id} category={c} />)}
+          {categories.map(c => <CategoryCard key={c.id} category={c} imageUrl={categoryImages[c.id]} />)}
         </div>
       </section>
       {/* ── ЩО ХОЧЕТЕ ПОКРАЩИТИ ── */}

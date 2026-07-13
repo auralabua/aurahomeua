@@ -148,9 +148,11 @@ export const ProductReviews = ({ productId }: { productId: string }) => {
             <div className="flex gap-1">
               {[1, 2, 3, 4, 5].map(i => (
                 <button key={i} type="button"
+                  aria-label={`Оцінити на ${i} ${i === 1 ? "зірку" : i < 5 ? "зірки" : "зірок"}`}
+                  aria-pressed={rating === i}
                   onMouseEnter={() => setHoverRating(i)} onMouseLeave={() => setHoverRating(0)}
                   onClick={() => setRating(i)} className="p-1 transition-transform hover:scale-110">
-                  <Star className={`h-8 w-8 transition-colors ${i <= (hoverRating || rating) ? "fill-amber-400 text-amber-400" : "text-muted-foreground/30"}`} />
+                  <Star aria-hidden="true" className={`h-8 w-8 transition-colors ${i <= (hoverRating || rating) ? "fill-amber-400 text-amber-400" : "text-muted-foreground/30"}`} />
                 </button>
               ))}
               <span className="self-center ml-2 text-sm text-muted-foreground">

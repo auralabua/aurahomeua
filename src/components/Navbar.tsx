@@ -151,7 +151,7 @@ export const Navbar = () => {
                       <item.icon className="h-4 w-4 text-primary" strokeWidth={1.5} />
                     </div>
                     <div>
-                      <p className="text-[10px] text-primary/60 uppercase tracking-wider">{item.tag}</p>
+                      <p className="text-[10px] text-primary/90 uppercase tracking-wider">{item.tag}</p>
                       <p className="text-sm font-light text-foreground leading-snug">{item.label}</p>
                     </div>
                   </Link>

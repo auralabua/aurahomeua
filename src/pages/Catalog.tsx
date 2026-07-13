@@ -145,7 +145,7 @@ const Catalog = () => {
     <div className="space-y-6">
       {/* Категорії — акордеон з іконками */}
       <div>
-        <h3 className="text-[10px] font-semibold text-muted-foreground mb-3 uppercase tracking-widest">Категорії</h3>
+        <p className="text-[10px] font-semibold text-muted-foreground mb-3 uppercase tracking-widest">Категорії</p>
         <div className="flex flex-col gap-1">
           {topCategories.map(c => {
             const subs = categories.filter(s => s.parentId === c.id);
@@ -206,7 +206,7 @@ const Catalog = () => {
 
       {/* Ціна */}
       <div className="border-t border-border/40 pt-5">
-        <h3 className="text-[10px] font-semibold text-muted-foreground mb-3 uppercase tracking-widest">Ціна (₴)</h3>
+        <p className="text-[10px] font-semibold text-muted-foreground mb-3 uppercase tracking-widest">Ціна (₴)</p>
         <div className="flex items-center gap-2">
           <Input
             type="number"

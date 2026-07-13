@@ -165,7 +165,7 @@ const ProductCardInner = ({ product, compact = false, categoryName }: ProductCar
           <WishlistButton productId={product.id} />
         </Link>
         <div className="flex flex-col flex-1 gap-1.5 p-3">
-          {categoryName && <span className="text-[9px] uppercase tracking-[0.15em] text-primary/60 font-medium line-clamp-1">{categoryName}</span>}
+          {categoryName && <span className="text-[9px] uppercase tracking-[0.15em] text-primary/80 font-medium line-clamp-1">{categoryName}</span>}
           <Link to={`/product/${product.slug ?? product.id}`} className="line-clamp-2 text-xs font-medium leading-snug text-foreground hover:text-primary transition-colors">
             {product.name}
           </Link>
@@ -219,7 +219,7 @@ const ProductCardInner = ({ product, compact = false, categoryName }: ProductCar
       </Link>
       <div className="flex flex-1 flex-col gap-2 p-3 sm:p-4">
         {categoryName && (
-          <span className="text-[10px] uppercase tracking-[0.18em] text-primary/70 font-medium line-clamp-1">{categoryName}</span>
+          <span className="text-[10px] uppercase tracking-[0.18em] text-primary/90 font-medium line-clamp-1">{categoryName}</span>
         )}
         <Link to={`/product/${product.slug ?? product.id}`} className="line-clamp-2 text-sm font-medium leading-snug text-foreground hover:text-primary transition-colors">
           {product.name}

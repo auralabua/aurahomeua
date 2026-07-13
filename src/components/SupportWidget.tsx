@@ -165,8 +165,8 @@ export const SupportWidget = () => {
             <div className="flex items-center justify-between px-4 py-3 bg-primary text-white shrink-0">
               <div className="flex items-center gap-2">
                 {(screen === "intro" || (screen === "chat" && customerName)) && (
-                  <button onClick={() => setScreen("choice")} className="rounded-full p-0.5 hover:bg-white/20 transition-colors mr-1">
-                    <ChevronLeft className="h-4 w-4" />
+                  <button onClick={() => setScreen("choice")} aria-label="Назад" className="rounded-full p-0.5 hover:bg-white/20 transition-colors mr-1">
+                    <ChevronLeft className="h-4 w-4" aria-hidden="true" />
                   </button>
                 )}
                 <div>
@@ -297,10 +297,11 @@ export const SupportWidget = () => {
                   />
                   <button
                     type="submit"
+                    aria-label="Надіслати повідомлення"
                     disabled={!input.trim() || busy}
                     className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-white hover:bg-primary/90 disabled:opacity-40 transition-all"
                   >
-                    {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+                    {busy ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Send className="h-4 w-4" aria-hidden="true" />}
                   </button>
                 </form>
 

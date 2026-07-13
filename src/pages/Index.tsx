@@ -86,13 +86,13 @@ const ProductCarousel = ({ products }: { products: any[] }) => {
   );
   return (
     <div className="relative px-4 sm:px-6 lg:px-8">
-      <button onClick={() => scroll("left")}
+      <button onClick={() => scroll("left")} aria-label="Прокрутити ліворуч"
         className="absolute left-0 sm:left-1 top-1/2 -translate-y-8 z-10 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
-        <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+        <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
       </button>
-      <button onClick={() => scroll("right")}
+      <button onClick={() => scroll("right")} aria-label="Прокрутити праворуч"
         className="absolute right-0 sm:right-1 top-1/2 -translate-y-8 z-10 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
-        <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
+        <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
       </button>
       <div ref={scrollRef} className="flex gap-3 overflow-x-auto pb-3 mx-6 sm:mx-8"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
@@ -467,7 +467,7 @@ const Index = () => {
       <section className="container py-10 sm:py-16 grid md:grid-cols-2 gap-4 sm:gap-5">
         <div className="rounded-2xl border border-border/40 bg-white p-8">
           <Truck className="h-6 w-6 text-primary mb-5" strokeWidth={1.5} />
-          <h3 className="text-xl font-light mb-4">Доставка</h3>
+          <h2 className="text-xl font-light mb-4">Доставка</h2>
           <ul className="space-y-2.5 text-sm font-light text-muted-foreground">
             {["Нова Пошта — відділення або кур'єром", "Meest Express — по Україні", "Укрпошта — по всій Україні"].map((item, i) => (
               <li key={i} className="flex items-center gap-2.5">
@@ -478,7 +478,7 @@ const Index = () => {
         </div>
         <div className="rounded-2xl border border-border/40 bg-white p-8">
           <CreditCard className="h-6 w-6 text-primary mb-5" strokeWidth={1.5} />
-          <h3 className="text-xl font-light mb-4">Оплата</h3>
+          <h2 className="text-xl font-light mb-4">Оплата</h2>
           <ul className="space-y-2.5 text-sm font-light text-muted-foreground">
             {["Накладений платіж — оплата при отриманні", "LiqPay — карткою онлайн", "Monobank та ПриватБанк"].map((item, i) => (
               <li key={i} className="flex items-center gap-2.5">

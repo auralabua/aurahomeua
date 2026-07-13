@@ -26,7 +26,7 @@
     --secondary: 38 28% 93%;
     --secondary-foreground: 220 20% 16%;
     --muted: 38 22% 91%;
-    --muted-foreground: 220 8% 50%;
+    --muted-foreground: 220 10% 40%;
     --destructive: 0 65% 52%;
     --destructive-foreground: 0 0% 100%;
     --border: 36 18% 88%;
@@ -118,10 +118,22 @@
 
 /* WCAG 2.5.5: minimum 44×44 px touch target on pointer:coarse devices */
 @media (pointer: coarse) {
-  button, [role="button"] {
+  button, [role="button"], a[href] {
     min-height: 44px;
     min-width: 44px;
   }
+  /* Don't force min-height on inline text links */
+  p a[href], li a[href], .prose a[href] {
+    min-height: unset;
+    min-width: unset;
+    display: inline;
+  }
+}
+
+/* Ensure placeholder text meets contrast requirements */
+::placeholder {
+  color: hsl(220 10% 45%);
+  opacity: 1;
 }
 
 @keyframes check-pop {

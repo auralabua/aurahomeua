@@ -107,10 +107,14 @@ export const Footer = () => (
           <Sparkles className="h-4 w-4 text-primary" />Зв'язок
         </h4>
         <div className="mb-6 flex gap-3">
-          {[Instagram, Facebook, Music2].map((Icon, i) => (
-            <a key={i} href="#" aria-label="Соціальні мережі BodyHome"
+          {([
+            [Instagram, "Instagram BodyHome"],
+            [Facebook, "Facebook BodyHome"],
+            [Music2, "TikTok BodyHome"],
+          ] as const).map(([Icon, label]) => (
+            <a key={label} href="#" aria-label={label}
               className="grid h-10 w-10 place-items-center rounded-full bg-white/[0.055] text-muted-foreground hover:bg-primary/15 hover:text-primary">
-              <Icon className="h-4 w-4" />
+              <Icon className="h-4 w-4" aria-hidden="true" />
             </a>
           ))}
         </div>

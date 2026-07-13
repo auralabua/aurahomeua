@@ -191,7 +191,12 @@ export const Navbar = () => {
               )}
             </Link>
           </Button>
-          <Button variant="ghost" size="icon" className="lg:hidden rounded-full bg-white/75" onClick={() => setMobileOpen(o => !o)}>
+          <Button variant="ghost" size="icon"
+            className="lg:hidden rounded-full bg-white/75 h-11 w-11"
+            onClick={() => setMobileOpen(o => !o)}
+            aria-label={mobileOpen ? "Закрити меню" : "Відкрити меню"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav-menu">
             {mobileOpen ? <X className="h-5 w-5"/> : <Menu className="h-5 w-5"/>}
           </Button>
         </div>
@@ -199,7 +204,7 @@ export const Navbar = () => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-border bg-background/95 animate-fade-in">
+        <div id="mobile-nav-menu" className="lg:hidden border-t border-border bg-background/95 animate-fade-in">
           <div className="container py-4 space-y-3">
             <SearchAutocomplete
               placeholder="Пошук товарів..."

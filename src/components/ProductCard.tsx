@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Star, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -113,7 +113,7 @@ const PriceBlock = ({ price, originalPrice, compact = false }: { price: number; 
   );
 };
 
-export const ProductCard = ({ product, compact = false, categoryName }: ProductCardProps) => {
+const ProductCardInner = ({ product, compact = false, categoryName }: ProductCardProps) => {
   const { addItem } = useCart();
   const [selectedVarIdx, setSelectedVarIdx] = useState(0);
 
@@ -222,3 +222,5 @@ export const ProductCard = ({ product, compact = false, categoryName }: ProductC
     </article>
   );
 };
+
+export const ProductCard = memo(ProductCardInner);

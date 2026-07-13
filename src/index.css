@@ -116,6 +116,14 @@
   }
 }
 
+/* WCAG 2.5.5: minimum 44×44 px touch target on pointer:coarse devices */
+@media (pointer: coarse) {
+  button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
 @keyframes check-pop {
   0%   { transform: scale(0); opacity: 0; }
   60%  { transform: scale(1.15); opacity: 1; }

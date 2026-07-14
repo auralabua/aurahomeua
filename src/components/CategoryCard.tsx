@@ -2,141 +2,297 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Category } from "@/data/products";
 
-/* ─── Premium minimalist illustrations ─────────────────────────────────── */
+/* ─── Realistic premium illustrations ──────────────────────────────────── */
 
 const PillowIllustration = () => (
-  <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    {/* shadow */}
-    <ellipse cx="100" cy="143" rx="60" ry="5" fill="#8A6440" opacity="0.1"/>
-    {/* main body — contoured orthopedic shape */}
-    <path d="M22 85 Q22 46 58 36 Q76 30 100 32 Q124 30 142 36 Q178 46 178 85 Q178 118 142 128 Q124 134 100 134 Q76 134 58 128 Q22 118 22 85Z" fill="#E2C9A4"/>
-    {/* inner surface */}
-    <path d="M38 85 Q38 56 68 48 Q82 43 100 44 Q118 43 132 48 Q162 56 162 85 Q162 110 132 118 Q118 122 100 122 Q82 122 68 118 Q38 110 38 85Z" fill="#F0DEBB"/>
+  <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="pg1" x1="100" y1="28" x2="100" y2="145" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#F5E0C0"/>
+        <stop offset="1" stopColor="#C8944A"/>
+      </linearGradient>
+      <linearGradient id="pg2" x1="100" y1="42" x2="100" y2="130" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#FFF5E6"/>
+        <stop offset="1" stopColor="#E0B870"/>
+      </linearGradient>
+      <radialGradient id="pg3" cx="50%" cy="40%" r="50%">
+        <stop stopColor="white" stopOpacity="0.35"/>
+        <stop offset="1" stopColor="white" stopOpacity="0"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="100" cy="150" rx="62" ry="6" fill="#8A6440" opacity="0.1"/>
+    {/* main body */}
+    <path d="M18 88 Q18 44 56 34 Q76 27 100 29 Q124 27 144 34 Q182 44 182 88 Q182 124 144 136 Q124 143 100 143 Q76 143 56 136 Q18 124 18 88Z" fill="url(#pg1)"/>
+    {/* inner recess */}
+    <path d="M33 88 Q33 56 64 47 Q80 42 100 43 Q120 42 136 47 Q167 56 167 88 Q167 114 136 123 Q120 128 100 128 Q80 128 64 123 Q33 114 33 88Z" fill="url(#pg2)"/>
     {/* cervical depression */}
-    <ellipse cx="100" cy="83" rx="30" ry="16" fill="#D4B080" opacity="0.32"/>
-    {/* stitch line */}
-    <path d="M40 85 Q100 75 160 85" stroke="#C4A070" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.4"/>
-    {/* left neck support */}
-    <path d="M22 72 Q17 55 32 48 Q36 55 38 68Z" fill="#D8BB94" opacity="0.7"/>
+    <ellipse cx="100" cy="86" rx="30" ry="17" fill="#C08840" opacity="0.18"/>
+    {/* left support lobe */}
+    <path d="M18 74 Q13 52 30 44 Q34 52 35 68Z" fill="#D4A055" opacity="0.65"/>
+    {/* right support lobe */}
+    <path d="M182 74 Q187 52 170 44 Q166 52 165 68Z" fill="#D4A055" opacity="0.65"/>
+    {/* stitching */}
+    <path d="M35 88 Q100 76 165 88" stroke="#A87030" strokeWidth="1.1" strokeDasharray="5,4" opacity="0.45"/>
+    <path d="M54 118 Q100 110 146 118" stroke="#A87030" strokeWidth="0.9" strokeDasharray="4,3" opacity="0.3"/>
+    {/* highlight */}
+    <ellipse cx="100" cy="62" rx="38" ry="14" fill="url(#pg3)"/>
   </svg>
 );
 
 const MatIllustration = () => (
-  <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <ellipse cx="100" cy="143" rx="56" ry="5" fill="#3D7A55" opacity="0.1"/>
+  <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="mg1" x1="100" y1="14" x2="100" y2="138" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#6DB87A"/>
+        <stop offset="1" stopColor="#2E6B3E"/>
+      </linearGradient>
+      <linearGradient id="mg2" x1="100" y1="22" x2="100" y2="130" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#90D4A0"/>
+        <stop offset="1" stopColor="#4A9660"/>
+      </linearGradient>
+      <radialGradient id="spike" cx="50%" cy="30%" r="60%">
+        <stop stopColor="#7ED898"/>
+        <stop offset="1" stopColor="#1E5030"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="100" cy="148" rx="58" ry="6" fill="#2A6040" opacity="0.12"/>
     {/* mat base */}
-    <rect x="26" y="18" width="148" height="112" rx="11" fill="#8EB88E"/>
-    <rect x="34" y="26" width="132" height="96" rx="8" fill="#A4CCA4"/>
-    {/* spike grid — perfectly aligned */}
-    {[50, 68, 86, 104, 122, 140, 158].map((x) =>
-      [36, 54, 72, 90, 106].map((y) => (
+    <rect x="22" y="14" width="156" height="124" rx="12" fill="url(#mg1)"/>
+    <rect x="30" y="22" width="140" height="108" rx="9" fill="url(#mg2)"/>
+    {/* spike grid 6×4 */}
+    {[46,68,90,112,134,156].map(x =>
+      [38,62,86,110].map(y => (
         <g key={`${x}-${y}`}>
-          <circle cx={x} cy={y} r="5" fill="#2A5E3A"/>
-          <circle cx={x} cy={y} r="3" fill="#3D7A55"/>
-          <circle cx={x} cy={y} r="1.4" fill="#60A870"/>
+          <ellipse cx={x} cy={y+4} rx="5.5" ry="2" fill="#1A4828" opacity="0.3"/>
+          <path d={`M${x-5} ${y+4} Q${x} ${y-10} ${x+5} ${y+4} Q${x} ${y+2} ${x-5} ${y+4}Z`} fill="url(#spike)"/>
+          <circle cx={x} cy={y-10} r="1.5" fill="#A0ECBA" opacity="0.8"/>
         </g>
       ))
     )}
-    <rect x="26" y="18" width="148" height="112" rx="11" stroke="#2A5E3A" stroke-width="1.5" opacity="0.25"/>
+    {/* border */}
+    <rect x="22" y="14" width="156" height="124" rx="12" stroke="#1E5030" strokeWidth="1.5" opacity="0.3"/>
+    {/* top highlight */}
+    <rect x="30" y="22" width="140" height="20" rx="9" fill="white" opacity="0.08"/>
   </svg>
 );
 
 const BandageIllustration = () => (
-  <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <ellipse cx="100" cy="143" rx="40" ry="5" fill="#3D5A8A" opacity="0.1"/>
-    {/* brace cylinder body */}
-    <rect x="72" y="14" width="56" height="116" rx="28" fill="#B8C8E0"/>
-    {/* highlight */}
-    <rect x="78" y="20" width="28" height="48" rx="14" fill="#D0DCEE" opacity="0.75"/>
-    {/* wrap bands */}
-    {[36, 56, 76, 96].map((y, i) => (
-      <g key={y}>
-        <rect x="62" y={y} width="76" height="13" rx="6.5" fill="#3D5A8A" opacity={0.72 - i * 0.07}/>
-        <rect x="62" y={y} width="76" height="5" rx="3" fill="#5A7AB0" opacity="0.4"/>
-        <rect x="102" y={y + 2} width="28" height="8" rx="4" fill="#2A406A" opacity="0.35"/>
-      </g>
-    ))}
-    <rect x="72" y="14" width="56" height="116" rx="28" stroke="#3D5A8A" stroke-width="1" opacity="0.25"/>
+  <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="br1" x1="60" y1="0" x2="140" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#C8D8EE"/>
+        <stop offset="0.5" stopColor="#E8F0FA"/>
+        <stop offset="1" stopColor="#B0C4E0"/>
+      </linearGradient>
+      <linearGradient id="br2" x1="0" y1="0" x2="0" y2="1">
+        <stop stopColor="#4A6EA0"/>
+        <stop offset="1" stopColor="#2A4A78"/>
+      </linearGradient>
+      <linearGradient id="br3" x1="0" y1="0" x2="1" y2="0">
+        <stop stopColor="#5A80B8"/>
+        <stop offset="1" stopColor="#3A5888"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="100" cy="152" rx="44" ry="5" fill="#2A4070" opacity="0.1"/>
+    {/* main brace cylinder */}
+    <rect x="66" y="10" width="68" height="130" rx="34" fill="url(#br1)"/>
+    {/* inner highlight */}
+    <rect x="74" y="18" width="34" height="60" rx="17" fill="white" opacity="0.5"/>
+    {/* strap 1 */}
+    <rect x="56" y="28" width="88" height="18" rx="9" fill="url(#br2)" opacity="0.82"/>
+    <rect x="56" y="28" width="88" height="7" rx="4" fill="url(#br3)" opacity="0.5"/>
+    <rect x="108" y="30" width="32" height="12" rx="6" fill="#1E3460" opacity="0.4"/>
+    {/* strap 2 */}
+    <rect x="56" y="58" width="88" height="18" rx="9" fill="url(#br2)" opacity="0.74"/>
+    <rect x="56" y="58" width="88" height="7" rx="4" fill="url(#br3)" opacity="0.45"/>
+    <rect x="108" y="60" width="32" height="12" rx="6" fill="#1E3460" opacity="0.35"/>
+    {/* strap 3 */}
+    <rect x="56" y="88" width="88" height="18" rx="9" fill="url(#br2)" opacity="0.66"/>
+    <rect x="56" y="88" width="88" height="7" rx="4" fill="url(#br3)" opacity="0.4"/>
+    <rect x="108" y="90" width="32" height="12" rx="6" fill="#1E3460" opacity="0.3"/>
+    {/* strap 4 */}
+    <rect x="56" y="118" width="88" height="16" rx="8" fill="url(#br2)" opacity="0.58"/>
+    <rect x="108" y="120" width="32" height="10" rx="5" fill="#1E3460" opacity="0.25"/>
+    {/* outline */}
+    <rect x="66" y="10" width="68" height="130" rx="34" stroke="#3A5888" strokeWidth="1" opacity="0.2"/>
   </svg>
 );
 
 const MassagerIllustration = () => (
-  <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <ellipse cx="100" cy="143" rx="40" ry="5" fill="#8A4040" opacity="0.1"/>
+  <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="mh1" x1="72" y1="0" x2="128" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#C0A090"/>
+        <stop offset="0.5" stopColor="#E8D0C0"/>
+        <stop offset="1" stopColor="#A88878"/>
+      </linearGradient>
+      <linearGradient id="mh2" x1="0" y1="0" x2="0" y2="1">
+        <stop stopColor="#E8C8B8"/>
+        <stop offset="1" stopColor="#B89080"/>
+      </linearGradient>
+      <radialGradient id="mh3" cx="40%" cy="35%" r="55%">
+        <stop stopColor="#F0E0D8"/>
+        <stop offset="1" stopColor="#C0948A"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="100" cy="152" rx="40" ry="5" fill="#804040" opacity="0.1"/>
     {/* handle */}
-    <rect x="80" y="80" width="40" height="56" rx="12" fill="#B08878"/>
-    {/* handle grip lines */}
-    <line x1="84" y1="96" x2="116" y2="96" stroke="#907060" stroke-width="1.5" opacity="0.45"/>
-    <line x1="84" y1="106" x2="116" y2="106" stroke="#907060" stroke-width="1.5" opacity="0.45"/>
-    <line x1="84" y1="116" x2="116" y2="116" stroke="#907060" stroke-width="1.5" opacity="0.45"/>
+    <rect x="76" y="88" width="48" height="60" rx="14" fill="url(#mh1)"/>
+    {/* grip texture */}
+    {[102,112,122].map(y => (
+      <g key={y}>
+        <rect x="80" y={y} width="40" height="4" rx="2" fill="#907060" opacity="0.3"/>
+      </g>
+    ))}
+    {/* handle highlight */}
+    <rect x="80" y="92" width="16" height="40" rx="8" fill="white" opacity="0.18"/>
     {/* neck */}
-    <rect x="86" y="60" width="28" height="24" rx="8" fill="#C89888"/>
-    {/* head */}
-    <circle cx="100" cy="42" r="28" fill="#D8A898"/>
-    <circle cx="100" cy="42" r="20" fill="#E8C0B0"/>
-    <circle cx="100" cy="42" r="10" fill="#D0A090"/>
-    <circle cx="100" cy="42" r="4" fill="#C09080"/>
-    {/* power dot */}
-    <circle cx="100" cy="73" r="5" fill="#8A4040" opacity="0.7"/>
-    <circle cx="100" cy="73" r="3" fill="#C06050"/>
+    <rect x="82" y="62" width="36" height="30" rx="10" fill="url(#mh2)"/>
+    <rect x="86" y="64" width="14" height="20" rx="7" fill="white" opacity="0.2"/>
+    {/* head - percussion ball */}
+    <circle cx="100" cy="38" r="32" fill="url(#mh3)"/>
+    {/* head inner rings */}
+    <circle cx="100" cy="38" r="24" fill="#D8A898" opacity="0.6"/>
+    <circle cx="100" cy="38" r="14" fill="#C09080"/>
+    <circle cx="100" cy="38" r="6" fill="#A87870"/>
+    {/* head sheen */}
+    <ellipse cx="90" cy="26" rx="10" ry="6" fill="white" opacity="0.3"/>
+    {/* power button */}
+    <circle cx="100" cy="76" r="6" fill="#6A3030" opacity="0.7"/>
+    <circle cx="100" cy="76" r="3.5" fill="#C05050" opacity="0.9"/>
+    {/* handle outline */}
+    <rect x="76" y="88" width="48" height="60" rx="14" stroke="#907060" strokeWidth="0.8" opacity="0.3"/>
   </svg>
 );
 
 const BeautyIllustration = () => (
-  <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <ellipse cx="100" cy="143" rx="40" ry="5" fill="#9A5080" opacity="0.1"/>
-    {/* face roller — two spheres on handle */}
+  <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="bv1" x1="88" y1="0" x2="112" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#D4A8C8"/>
+        <stop offset="0.5" stopColor="#EED0E8"/>
+        <stop offset="1" stopColor="#C090B8"/>
+      </linearGradient>
+      <linearGradient id="bv2" x1="0" y1="0" x2="0" y2="1">
+        <stop stopColor="#E0B8D8"/>
+        <stop offset="1" stopColor="#B888B0"/>
+      </linearGradient>
+      <radialGradient id="bv3" cx="40%" cy="35%" r="55%">
+        <stop stopColor="#F0D8EC"/>
+        <stop offset="1" stopColor="#C090B8"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="100" cy="152" rx="38" ry="5" fill="#904080" opacity="0.1"/>
     {/* handle */}
-    <rect x="88" y="60" width="24" height="72" rx="12" fill="#D0A8C0"/>
-    <rect x="92" y="66" width="10" height="38" rx="5" fill="#E0C0D4" opacity="0.55"/>
-    {/* top roller */}
-    <ellipse cx="100" cy="38" rx="24" ry="14" fill="#C890B8"/>
-    <ellipse cx="100" cy="38" rx="18" ry="10" fill="#DEB0D0"/>
-    <ellipse cx="100" cy="38" rx="8" ry="5" fill="#C488B0" opacity="0.6"/>
-    {/* bottom roller */}
-    <ellipse cx="100" cy="66" rx="18" ry="11" fill="#C890B8"/>
-    <ellipse cx="100" cy="66" rx="13" ry="8" fill="#DEB0D0"/>
-    <ellipse cx="100" cy="66" rx="6" ry="4" fill="#C488B0" opacity="0.6"/>
-    {/* gems / accents */}
-    <circle cx="86" cy="38" r="3.5" fill="#A06090" opacity="0.7"/>
-    <circle cx="114" cy="38" r="3.5" fill="#A06090" opacity="0.7"/>
+    <rect x="88" y="70" width="24" height="76" rx="12" fill="url(#bv1)"/>
+    <rect x="92" y="76" width="10" height="42" rx="5" fill="white" opacity="0.28"/>
+    {/* connector top */}
+    <rect x="90" y="54" width="20" height="20" rx="6" fill="url(#bv2)"/>
+    {/* top roller cylinder */}
+    <ellipse cx="100" cy="38" rx="28" ry="16" fill="url(#bv3)"/>
+    <ellipse cx="100" cy="38" rx="21" ry="11" fill="#DBAECE"/>
+    <ellipse cx="100" cy="38" rx="8" ry="5" fill="#C090B8" opacity="0.7"/>
+    {/* top roller axle */}
+    <ellipse cx="72" cy="38" rx="5" ry="8" fill="#B880B0"/>
+    <ellipse cx="128" cy="38" rx="5" ry="8" fill="#B880B0"/>
+    {/* top roller sheen */}
+    <ellipse cx="88" cy="30" rx="10" ry="5" fill="white" opacity="0.35"/>
+    {/* bottom roller - smaller */}
+    <ellipse cx="100" cy="62" rx="20" ry="11" fill="url(#bv3)"/>
+    <ellipse cx="100" cy="62" rx="14" ry="7" fill="#DBAECE"/>
+    <ellipse cx="100" cy="62" rx="5" ry="3.5" fill="#C090B8" opacity="0.7"/>
+    <ellipse cx="80" cy="62" rx="4" ry="7" fill="#B880B0"/>
+    <ellipse cx="120" cy="62" rx="4" ry="7" fill="#B880B0"/>
+    <ellipse cx="91" cy="56" rx="7" ry="3.5" fill="white" opacity="0.3"/>
+    {/* gem accents */}
+    <circle cx="72" cy="38" r="3" fill="#D4A0CC" opacity="0.8"/>
+    <circle cx="128" cy="38" r="3" fill="#D4A0CC" opacity="0.8"/>
+    {/* handle bottom curve */}
+    <rect x="88" y="70" width="24" height="76" rx="12" stroke="#C090B8" strokeWidth="0.8" opacity="0.25"/>
   </svg>
 );
 
 const ToysIllustration = () => (
-  <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <ellipse cx="100" cy="143" rx="56" ry="5" fill="#7A6A20" opacity="0.1"/>
-    {/* cube left */}
-    <rect x="24" y="70" width="54" height="54" rx="8" fill="#E8C840"/>
-    <rect x="24" y="70" width="26" height="26" rx="5" fill="#F5D840" opacity="0.8"/>
-    <rect x="50" y="70" width="28" height="26" rx="5" fill="#D0A820" opacity="0.6"/>
-    <circle cx="51" cy="66" r="8" fill="#E8C840" stroke="#D0A820" stroke-width="1"/>
-    <circle cx="79" cy="98" r="8" fill="#E8C840" stroke="#D0A820" stroke-width="1"/>
-    {/* cube right */}
-    <rect x="104" y="76" width="54" height="54" rx="8" fill="#E87840"/>
-    <rect x="104" y="76" width="26" height="26" rx="5" fill="#F09050" opacity="0.8"/>
-    <circle cx="131" cy="72" r="8" fill="#E87840" stroke="#C05820" stroke-width="1"/>
-    <circle cx="103" cy="103" r="8" fill="#E87840" stroke="#C05820" stroke-width="1"/>
-    {/* arch top */}
-    <rect x="34" y="46" width="52" height="42" rx="8" fill="#40A870"/>
-    <rect x="34" y="46" width="24" height="20" rx="5" fill="#58C888" opacity="0.8"/>
-    <circle cx="60" cy="42" r="7" fill="#40A870" stroke="#208050" stroke-width="1"/>
+  <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="ty1" x1="0" y1="0" x2="0" y2="1">
+        <stop stopColor="#F5D840"/>
+        <stop offset="1" stopColor="#C8A010"/>
+      </linearGradient>
+      <linearGradient id="ty2" x1="0" y1="0" x2="0" y2="1">
+        <stop stopColor="#F09858"/>
+        <stop offset="1" stopColor="#C06018"/>
+      </linearGradient>
+      <linearGradient id="ty3" x1="0" y1="0" x2="0" y2="1">
+        <stop stopColor="#58CC88"/>
+        <stop offset="1" stopColor="#208848"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="100" cy="152" rx="66" ry="6" fill="#604010" opacity="0.1"/>
+    {/* Left cube - yellow */}
+    <rect x="18" y="78" width="64" height="64" rx="8" fill="url(#ty1)"/>
+    {/* left cube top face */}
+    <path d="M18 78 L50 60 L82 78Z" fill="#F8E860" opacity="0.9"/>
+    {/* left cube right face */}
+    <path d="M82 78 L82 142 L50 142 L82 78Z" fill="#B89010" opacity="0.5"/>
+    {/* left cube letter A */}
+    <text x="42" y="118" fontFamily="Arial,sans-serif" fontWeight="800" fontSize="32" fill="#A07808" opacity="0.7" textAnchor="middle">A</text>
+    {/* Right cube - orange */}
+    <rect x="118" y="84" width="62" height="62" rx="8" fill="url(#ty2)"/>
+    {/* right cube top face */}
+    <path d="M118 84 L149 66 L180 84Z" fill="#F8B070" opacity="0.9"/>
+    {/* right cube right face */}
+    <path d="M180 84 L180 146 L149 146 L180 84Z" fill="#A84808" opacity="0.45"/>
+    {/* right cube letter B */}
+    <text x="149" y="124" fontFamily="Arial,sans-serif" fontWeight="800" fontSize="30" fill="#883808" opacity="0.7" textAnchor="middle">B</text>
+    {/* Top arch block - green */}
+    <rect x="38" y="36" width="60" height="52" rx="30" fill="url(#ty3)"/>
+    {/* arch top face */}
+    <path d="M38 56 L68 38 L98 56 L98 42 Q68 20 38 42Z" fill="#80E8A8" opacity="0.7"/>
+    {/* arch letter C */}
+    <text x="68" y="78" fontFamily="Arial,sans-serif" fontWeight="800" fontSize="22" fill="#186038" opacity="0.75" textAnchor="middle">C</text>
+    {/* highlights */}
+    <rect x="22" y="80" width="28" height="14" rx="4" fill="white" opacity="0.15"/>
+    <rect x="122" y="86" width="26" height="13" rx="4" fill="white" opacity="0.15"/>
   </svg>
 );
 
 const InsoleIllustration = () => (
-  <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <ellipse cx="100" cy="143" rx="68" ry="5" fill="#2A7070" opacity="0.1"/>
-    {/* insole outline — foot profile */}
-    <path d="M36 102 Q33 66 46 42 Q56 22 74 20 Q96 17 114 28 Q136 42 140 64 Q145 82 135 97 Q122 110 92 112 Q62 114 36 102Z" fill="#8AC4C0"/>
-    <path d="M44 98 Q42 66 53 46 Q62 28 76 26 Q96 23 112 33 Q132 46 136 66 Q140 82 131 95 Q118 106 90 108 Q64 110 44 98Z" fill="#A8D8D4"/>
-    {/* arch zone */}
-    <path d="M52 90 Q50 64 60 52 Q68 40 80 38 Q96 36 108 44 Q122 55 124 72 Q126 86 116 95 Q102 104 82 104 Q60 104 52 90Z" fill="#C4E8E4" opacity="0.7"/>
-    {/* arch highlight */}
-    <ellipse cx="84" cy="48" rx="20" ry="10" fill="#7EBAB6" opacity="0.45"/>
-    {/* arch support curve */}
-    <path d="M54 78 Q78 68 122 76" stroke="#2A7070" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.35"/>
-    <path d="M56 90 Q82 82 120 88" stroke="#2A7070" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.25"/>
+  <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="in1" x1="88" y1="18" x2="88" y2="145" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#7DC8C4"/>
+        <stop offset="1" stopColor="#2A7878"/>
+      </linearGradient>
+      <linearGradient id="in2" x1="88" y1="24" x2="88" y2="138" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#A8E0DC"/>
+        <stop offset="1" stopColor="#4A9A96"/>
+      </linearGradient>
+      <radialGradient id="in3" cx="45%" cy="30%" r="45%">
+        <stop stopColor="white" stopOpacity="0.35"/>
+        <stop offset="1" stopColor="white" stopOpacity="0"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="88" cy="150" rx="66" ry="6" fill="#1A6060" opacity="0.12"/>
+    {/* insole outer shape - realistic foot profile */}
+    <path d="M34 108 Q30 72 42 46 Q52 24 70 20 Q92 16 112 26 Q134 40 138 62 Q144 82 134 98 Q120 116 90 118 Q60 120 34 108Z" fill="url(#in1)"/>
+    {/* insole inner shape */}
+    <path d="M42 104 Q38 70 50 48 Q58 28 72 25 Q92 21 110 30 Q130 44 134 64 Q138 82 129 96 Q116 111 88 113 Q62 115 42 104Z" fill="url(#in2)"/>
+    {/* toe area bump */}
+    <ellipse cx="104" cy="32" rx="16" ry="10" fill="#7CBCB8" opacity="0.5"/>
+    {/* arch support zone */}
+    <path d="M48 90 Q52 68 64 58 Q76 48 90 46 Q108 46 118 56 Q128 66 126 80 Q124 92 110 100 Q94 108 76 106 Q56 102 48 90Z" fill="#C8ECEC" opacity="0.5"/>
+    {/* arch support curve highlight */}
+    <path d="M50 82 Q80 68 128 76" stroke="white" strokeWidth="2" strokeDasharray="5,4" opacity="0.5"/>
+    <path d="M52 94 Q82 82 126 90" stroke="white" strokeWidth="1.5" strokeDasharray="4,3" opacity="0.35"/>
+    {/* heel circle */}
+    <ellipse cx="64" cy="100" rx="18" ry="14" fill="#3A9090" opacity="0.3"/>
+    {/* top highlight */}
+    <path d="M34 108 Q30 72 42 46 Q52 24 70 20 Q92 16 112 26" fill="url(#in3)"/>
+    {/* size markings */}
+    <line x1="148" y1="36" x2="148" y2="112" stroke="#2A7878" strokeWidth="1" opacity="0.25"/>
+    <line x1="144" y1="36" x2="152" y2="36" stroke="#2A7878" strokeWidth="1" opacity="0.25"/>
+    <line x1="144" y1="112" x2="152" y2="112" stroke="#2A7878" strokeWidth="1" opacity="0.25"/>
   </svg>
 );
 
@@ -157,38 +313,38 @@ const categoryStyle: Record<string, {
   Illustration: () => JSX.Element;
 }> = {
   "ortopedychni-podushky": {
-    bg: "from-[#F7F0E6] to-[#EDE3D2]",
+    bg: "from-[#F7F0E4] to-[#EDE3CE]",
     accent: "#8A6440",
     Illustration: PillowIllustration,
   },
   "ortopedychni-masazhni-kylymky": {
-    bg: "from-[#EAF3E8] to-[#D6EBD2]",
-    accent: "#3D7A55",
+    bg: "from-[#E8F4E8] to-[#D2EAD4]",
+    accent: "#2E6B3E",
     Illustration: MatIllustration,
   },
   "ortezy-i-bandazhi": {
-    bg: "from-[#E8EEF7] to-[#D2DDEE]",
-    accent: "#3D5A8A",
+    bg: "from-[#E6EEF8] to-[#CCDAEE]",
+    accent: "#2A4A78",
     Illustration: BandageIllustration,
   },
   "masazhery": {
-    bg: "from-[#F5EAE8] to-[#EAD8D4]",
-    accent: "#8A4040",
+    bg: "from-[#F5EAE6] to-[#EAD6CE]",
+    accent: "#804040",
     Illustration: MassagerIllustration,
   },
   "tovary-dlia-krasy": {
-    bg: "from-[#F5E8F2] to-[#EAD4E8]",
-    accent: "#8A4070",
+    bg: "from-[#F5E6F4] to-[#EAD0EA]",
+    accent: "#904080",
     Illustration: BeautyIllustration,
   },
   "rozvyvaiuchi-ihrashky": {
-    bg: "from-[#F7F2E0] to-[#EDE8CC]",
-    accent: "#7A6A20",
+    bg: "from-[#F8F2DC] to-[#EEEACE]",
+    accent: "#7A6010",
     Illustration: ToysIllustration,
   },
   "ortopedychni-ustilky": {
-    bg: "from-[#E8F4F2] to-[#D2EAE8]",
-    accent: "#2A7070",
+    bg: "from-[#E6F4F4] to-[#CCEAEA]",
+    accent: "#2A7878",
     Illustration: InsoleIllustration,
   },
 };

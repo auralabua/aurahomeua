@@ -328,94 +328,106 @@ const Catalog = () => {
         </div>
       </header>
 
-      {/* Mobile category quick-switch strip */}
-      {(() => {
-        const activeParent = topCategories.find(c =>
-          selectedCategories.includes(c.id) ||
-          categories.some(s => s.parentId === c.id && selectedCategories.includes(s.id))
-        );
-        const subs = activeParent ? categories.filter(s => s.parentId === activeParent.id) : [];
-        return (
-          <div className="lg:hidden -mx-4 px-4 mb-6 space-y-2.5">
-            {/* Category icon chips */}
-            <div className="overflow-x-auto scrollbar-none">
-              <div className="flex gap-2 w-max pb-2 pt-0.5 px-0.5">
-                {/* Усі */}
+      {/* Mobile category list — vertical accordion, no horizontal scroll */}
+      <div className="lg:hidden mb-6 rounded-2xl border border-border overflow-hidden shadow-sm bg-white">
+        {/* Усі товари */}
+        <button
+          onClick={() => { setSelectedCategories([]); setPage(1); }}
+          className={`w-full flex items-center gap-3 px-4 py-3.5 border-b border-border/40 transition-colors active:opacity-80 ${
+            selectedCategories.length === 0 ? "bg-primary" : "hover:bg-secondary"
+          }`}
+        >
+          <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-lg transition-colors ${
+            selectedCategories.length === 0 ? "bg-white/20" : "bg-primary/10"
+          }`}>🛍️</span>
+          <span className={`text-sm font-semibold flex-1 text-left ${selectedCategories.length === 0 ? "text-white" : "text-foreground"}`}>
+            Усі товари
+          </span>
+          {selectedCategories.length === 0 && <span className="h-2 w-2 rounded-full bg-white/80 shrink-0" />}
+        </button>
+
+        {topCategories.map((c, idx) => {
+          const subs = categories.filter(s => s.parentId === c.id);
+          const parentSelected = selectedCategories.includes(c.id);
+          const anySubSelected = subs.some(s => selectedCategories.includes(s.id));
+          const isActive = parentSelected || anySubSelected;
+          const isOpen = openCategories.includes(c.id) || (isActive && subs.length > 0);
+          const Icon = categoryIcons[c.id] ?? BedDouble;
+          const isLast = idx === topCategories.length - 1;
+
+          return (
+            <div key={c.id}>
+              <div className={`flex items-stretch ${!isLast || isOpen ? "border-b border-border/40" : ""} transition-colors ${
+                isActive ? "bg-primary" : "bg-white hover:bg-secondary"
+              }`}>
+                {/* Main row tap area */}
                 <button
-                  onClick={() => { setSelectedCategories([]); setPage(1); }}
-                  className={`shrink-0 inline-flex items-center gap-2 px-3.5 py-2.5 rounded-2xl border-2 transition-all duration-200 active:scale-95 ${
-                    selectedCategories.length === 0
-                      ? "bg-primary text-white border-primary shadow-md"
-                      : "bg-white text-foreground/80 border-border/60 shadow-sm"
-                  }`}
+                  onClick={() => {
+                    setSelectedCategories([c.id]);
+                    setPage(1);
+                    if (subs.length > 0) toggleOpen(c.id);
+                  }}
+                  className="flex items-center gap-3 flex-1 px-4 py-3.5 text-left"
                 >
-                  <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-xl text-base transition-colors ${
-                    selectedCategories.length === 0 ? "bg-white/20" : "bg-primary/10"
-                  }`}>🛍️</span>
-                  <span className="text-xs font-semibold whitespace-nowrap">Усі товари</span>
+                  <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-colors ${
+                    isActive ? "bg-white/20" : "bg-primary/10"
+                  }`}>
+                    <Icon className={`h-5 w-5 ${isActive ? "text-white" : "text-primary"}`} strokeWidth={1.5} />
+                  </span>
+                  <span className={`text-sm font-semibold flex-1 leading-snug ${isActive ? "text-white" : "text-foreground"}`}>
+                    {c.name}
+                  </span>
                 </button>
-
-                {topCategories.map(c => {
-                  const isActive = c.id === activeParent?.id;
-                  const Icon = categoryIcons[c.id];
-                  return (
-                    <button
-                      key={c.id}
-                      onClick={() => { setSelectedCategories([c.id]); setPage(1); }}
-                      className={`shrink-0 inline-flex items-center gap-2 px-3.5 py-2.5 rounded-2xl border-2 transition-all duration-200 active:scale-95 ${
-                        isActive
-                          ? "bg-primary text-white border-primary shadow-md"
-                          : "bg-white text-foreground/80 border-border/60 shadow-sm"
-                      }`}
-                    >
-                      <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-xl transition-colors ${
-                        isActive ? "bg-white/20" : "bg-primary/10"
-                      }`}>
-                        {Icon
-                          ? <Icon className={`h-4 w-4 ${isActive ? "text-white" : "text-primary"}`} strokeWidth={1.5} />
-                          : <BedDouble className={`h-4 w-4 ${isActive ? "text-white" : "text-primary"}`} strokeWidth={1.5} />
-                        }
-                      </span>
-                      <span className="text-xs font-semibold whitespace-nowrap">{c.name}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Subcategory pills — appear animated when a parent is selected */}
-            {subs.length > 0 && (
-              <div className="overflow-x-auto scrollbar-none animate-in fade-in slide-in-from-top-1 duration-200">
-                <div className="flex gap-1.5 w-max pb-1">
+                {/* Expand toggle */}
+                {subs.length > 0 && (
                   <button
-                    onClick={() => { setSelectedCategories([activeParent!.id]); setPage(1); }}
-                    className={`shrink-0 px-3.5 py-2 rounded-full text-xs font-semibold border-2 transition-all duration-200 active:scale-95 ${
-                      selectedCategories.includes(activeParent!.id) && !subs.some(s => selectedCategories.includes(s.id))
-                        ? "bg-primary/15 text-primary border-primary/50"
-                        : "bg-white text-foreground/70 border-border"
+                    onClick={() => toggleOpen(c.id)}
+                    className={`px-4 flex items-center transition-colors ${isActive ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-primary"}`}
+                  >
+                    <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+                  </button>
+                )}
+              </div>
+
+              {/* Subcategory list */}
+              {isOpen && subs.length > 0 && (
+                <div className="animate-in fade-in slide-in-from-top-1 duration-150">
+                  <button
+                    onClick={() => { setSelectedCategories([c.id]); setPage(1); }}
+                    className={`w-full flex items-center gap-2.5 px-5 py-2.5 border-b border-border/30 text-xs font-semibold transition-colors ${
+                      parentSelected && !anySubSelected
+                        ? "text-primary bg-primary/6"
+                        : "text-foreground/55 hover:text-primary hover:bg-secondary"
                     }`}
                   >
-                    Усі {activeParent!.name.toLowerCase()}
+                    <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${parentSelected && !anySubSelected ? "bg-primary" : "bg-border"}`} />
+                    Усі {c.name.toLowerCase()}
                   </button>
-                  {subs.map(s => (
-                    <button
-                      key={s.id}
-                      onClick={() => { setSelectedCategories([s.id]); setPage(1); }}
-                      className={`shrink-0 px-3.5 py-2 rounded-full text-xs font-semibold border-2 transition-all duration-200 active:scale-95 ${
-                        selectedCategories.includes(s.id)
-                          ? "bg-primary text-white border-primary shadow-sm"
-                          : "bg-white text-foreground/70 border-border"
-                      }`}
-                    >
-                      {s.name}
-                    </button>
-                  ))}
+                  {subs.map((s, si) => {
+                    const subSelected = selectedCategories.includes(s.id);
+                    return (
+                      <button
+                        key={s.id}
+                        onClick={() => { setSelectedCategories([s.id]); setPage(1); }}
+                        className={`w-full flex items-center gap-2.5 px-5 py-2.5 text-xs font-medium transition-colors ${
+                          si < subs.length - 1 ? "border-b border-border/30" : ""
+                        } ${
+                          subSelected
+                            ? "text-primary bg-primary/8"
+                            : "text-foreground/65 hover:text-primary hover:bg-secondary"
+                        }`}
+                      >
+                        <ChevronRight className={`h-3.5 w-3.5 shrink-0 transition-colors ${subSelected ? "text-primary" : "text-border"}`} />
+                        {s.name}
+                      </button>
+                    );
+                  })}
                 </div>
-              </div>
-            )}
-          </div>
-        );
-      })()}
+              )}
+            </div>
+          );
+        })}
+      </div>
 
       <div className="grid lg:grid-cols-[280px_1fr] gap-8">
         <aside className="hidden lg:block">

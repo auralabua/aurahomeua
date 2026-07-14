@@ -39,13 +39,13 @@ const CATEGORY_ICONS: Record<string, React.ComponentType<{ className?: string; s
 };
 
 const PROBLEM_ITEMS = [
-  { Icon: Bone, label: "Спина і поперек", url: "/catalog?q=спина" },
-  { Icon: BedDouble, label: "Сон і шия", url: "/ortopedychni-podushky" },
-  { Icon: Monitor, label: "Офіс і постава", url: "/catalog?q=постава" },
-  { Icon: RotateCcw, label: "Реабілітація", url: "/catalog?category=ortezy-i-bandazhi" },
-  { Icon: Footprints, label: "Стопи і коліна", url: "/ortopedychni-ustilky-kuputy" },
-  { Icon: Zap, label: "Масаж і релакс", url: "/masazhery-dlya-spyny" },
-  { Icon: Baby, label: "Для дітей", url: "/tovary-dlya-ditey-ortopedychni" },
+  { Icon: Bone, label: "Спина і поперек", url: "/catalog?category=ortezy-i-bandazhi" },
+  { Icon: BedDouble, label: "Сон і шия", url: "/catalog?category=ortopedychni-podushky" },
+  { Icon: Footprints, label: "Стопи і коліна", url: "/catalog?category=ortopedychni-ustilky" },
+  { Icon: Zap, label: "Масаж і релакс", url: "/catalog?category=masazhery" },
+  { Icon: Waves, label: "Масажні килимки", url: "/catalog?category=ortopedychni-masazhni-kylymky" },
+  { Icon: Sparkles, label: "Краса і догляд", url: "/catalog?category=tovary-dlia-krasy" },
+  { Icon: Baby, label: "Для дітей", url: "/catalog?category=rozvyvaiuchi-ihrashky" },
 ];
 
 const blogItems = [
@@ -163,15 +163,7 @@ export const Navbar = () => {
                       <p className="text-[10px] uppercase tracking-[0.22em] text-primary font-semibold">За проблемою</p>
                     </div>
                     <div className="space-y-0.5">
-                      {[
-                        { Icon: Bone, label: "Спина і поперек", url: "/catalog?q=спина" },
-                        { Icon: BedDouble, label: "Сон і шия", url: "/ortopedychni-podushky" },
-                        { Icon: Monitor, label: "Офіс і постава", url: "/catalog?q=постава" },
-                        { Icon: RotateCcw, label: "Реабілітація", url: "/catalog?category=ortezy-i-bandazhi" },
-                        { Icon: Footprints, label: "Стопи і коліна", url: "/ortopedychni-ustilky-kuputy" },
-                        { Icon: Zap, label: "Масаж і релакс", url: "/masazhery-dlya-spyny" },
-                        { Icon: Baby, label: "Для дітей", url: "/tovary-dlya-ditey-ortopedychni" },
-                      ].map(({ Icon, label, url }) => (
+                      {PROBLEM_ITEMS.map(({ Icon, label, url }) => (
                         <Link key={label} to={url} onClick={() => setCatOpen(false)}
                           className="flex items-center gap-2.5 rounded-xl px-2.5 py-2 hover:bg-primary/8 group transition-colors">
                           <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">

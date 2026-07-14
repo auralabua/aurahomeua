@@ -337,17 +337,6 @@ export const Navbar = () => {
               />
             </div>
 
-            {/* Головна link */}
-            <div className="px-4 pt-3">
-              <NavLink to="/" end onClick={() => { setMobileOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                className={({ isActive }) => `flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-colors ${isActive ? "bg-secondary text-primary" : "text-foreground hover:bg-secondary hover:text-primary"}`}>
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                  <Star className="h-4 w-4 text-primary" strokeWidth={1.5} />
-                </span>
-                Головна
-              </NavLink>
-            </div>
-
             {/* За проблемою */}
             <div className="px-4 pt-4 pb-3">
               <div className="flex items-center gap-1.5 mb-3">
@@ -373,6 +362,17 @@ export const Navbar = () => {
                   <span className="text-sm font-medium text-primary leading-tight">AI-підбір Міла</span>
                 </button>
               </div>
+            </div>
+
+            {/* Головна link */}
+            <div className="px-4 pb-1">
+              <NavLink to="/" end onClick={() => { setMobileOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                className={({ isActive }) => `flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-colors ${isActive ? "bg-secondary text-primary" : "text-foreground hover:bg-secondary hover:text-primary"}`}>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                  <Star className="h-4 w-4 text-primary" strokeWidth={1.5} />
+                </span>
+                Головна
+              </NavLink>
             </div>
 
             {/* Категорії */}

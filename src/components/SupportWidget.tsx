@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { MessageCircle, X, Send, ChevronLeft, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-const TG_LINK = "https://t.me/BodyHome1";
+const TG_LINK = "https://t.me/BodyHomesupp_bot";
 
 const SESSION_KEY = "bh_chat_session";
 const NAME_KEY    = "bh_chat_name";

@@ -170,57 +170,73 @@ const Index = () => {
   return (
     <div>
       {/* ── HERO ── */}
-      <section className="hero-bg relative overflow-hidden min-h-[88svh] sm:min-h-[580px] lg:min-h-[640px] flex items-center">
-        {/* Photo */}
-        <div className="absolute inset-y-0 right-0 w-full sm:w-[62%] lg:w-[55%]">
-          <OptimizedImage
-            src={HERO_IMG}
-            alt="Товари для краси, здоров'я та догляду вдома — BodyHome"
-            className="h-full w-full object-cover object-[center_25%]"
-            loading="eager"
-            fetchPriority="high"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 62vw, 55vw"
-            quality={85}
-          />
-          {/* Desktop: warm cream gradient */}
-          <div className="hidden sm:block absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-[#F5F0EA] via-[#F5F0EA]/88 to-transparent" />
-          {/* Mobile: warm amber-tinted dark overlay */}
-          <div className="sm:hidden absolute inset-0" style={{ background: "linear-gradient(150deg, rgba(35,18,6,0.72) 0%, rgba(35,18,6,0.35) 55%, rgba(35,18,6,0.0) 100%)" }} />
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#F5F0EA]/60 to-transparent" />
+      <section className="relative overflow-hidden min-h-[88svh] sm:min-h-[580px] lg:min-h-[640px]">
+        {/* Full-bleed photo */}
+        <OptimizedImage
+          src={HERO_IMG}
+          alt="Товари для краси, здоров'я та догляду вдома — BodyHome"
+          className="absolute inset-0 h-full w-full object-cover object-[center_18%] sm:object-[68%_30%]"
+          loading="eager"
+          fetchPriority="high"
+          sizes="100vw"
+          quality={85}
+        />
+
+        {/* ── DESKTOP: white card on left ── */}
+        <div className="hidden sm:flex absolute inset-0 items-center">
+          <div className="container">
+            <div className="w-[46%] lg:w-[42%] rounded-3xl bg-white/96 backdrop-blur-md p-8 lg:p-12 shadow-2xl border border-white">
+              {/* Kicker */}
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary/8 border border-primary/15 px-3 py-1.5 mb-5">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                <span className="text-[11px] uppercase tracking-[0.2em] text-primary font-medium">Краса та здоров'я вдома</span>
+              </div>
+              {/* H1 */}
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground leading-[1.1] mb-4">
+                Краса та здоров'я — починаються вдома
+              </h1>
+              {/* Subtitle */}
+              <p className="text-base font-light text-foreground/65 leading-relaxed mb-7 max-w-sm">
+                Масажери для обличчя і тіла, ортопедичні подушки, устілки — для щоденного догляду та комфорту. Доставка Новою Поштою.
+              </p>
+              {/* CTAs */}
+              <div className="flex flex-wrap gap-3">
+                <Button asChild size="lg" className="h-12 rounded-xl btn-aura border-0 font-medium px-8">
+                  <Link to="/catalog">Переглянути каталог <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="h-12 rounded-xl font-light px-6 border-border/50 hover:bg-secondary">
+                  <a href="#featured">Популярні товари</a>
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Content */}
-        <div className="relative z-10 container py-12 sm:py-16 lg:py-20">
-          <div className="max-w-[520px] space-y-4 sm:space-y-5">
-
+        {/* ── MOBILE: white card pinned to bottom ── */}
+        <div className="sm:hidden absolute inset-x-0 bottom-0 z-10">
+          <div className="bg-white rounded-t-3xl px-5 pt-6 pb-8 shadow-2xl">
             {/* Kicker */}
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/25 sm:bg-primary/10 border border-white/40 sm:border-primary/20 px-3 py-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-white sm:bg-primary animate-pulse" />
-              <span className="text-[11px] uppercase tracking-[0.2em] text-white sm:text-primary font-medium">
-                Краса та здоров'я вдома
-              </span>
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/8 border border-primary/15 px-3 py-1 mb-4">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+              <span className="text-[11px] uppercase tracking-[0.18em] text-primary font-medium">Краса та здоров'я вдома</span>
             </div>
-
             {/* H1 */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.1] text-white sm:text-foreground [text-shadow:0_1px_4px_rgba(0,0,0,0.45)] sm:[text-shadow:none]">
+            <h1 className="text-[1.65rem] font-extrabold text-foreground leading-[1.15] mb-3">
               Краса та здоров'я — починаються вдома
             </h1>
-
             {/* Subtitle */}
-            <p className="text-base sm:text-lg font-light leading-relaxed text-white/90 sm:text-foreground/70 max-w-md">
-              Масажери для обличчя і тіла, ортопедичні подушки, устілки — для щоденного догляду та комфорту. Доставка Новою Поштою.
+            <p className="text-sm font-light text-foreground/65 leading-relaxed mb-5">
+              Масажери для обличчя і тіла, ортопедичні подушки, устілки — для щоденного догляду та комфорту.
             </p>
-
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-1">
-              <Button asChild size="lg" className="h-12 w-full sm:w-auto rounded-full btn-aura border-0 font-medium px-8">
+            <div className="flex flex-col gap-2.5">
+              <Button asChild size="lg" className="h-12 w-full rounded-xl btn-aura border-0 font-medium">
                 <Link to="/catalog">Переглянути каталог <ArrowRight className="ml-2 h-4 w-4" /></Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="h-12 w-full sm:w-auto rounded-full font-light px-8 border-white/50 sm:border-border/60 bg-white/15 sm:bg-white/70 hover:bg-white/25 sm:hover:bg-white text-white sm:text-foreground">
+              <Button asChild size="lg" variant="outline" className="h-12 w-full rounded-xl font-light border-border/50 hover:bg-secondary">
                 <a href="#featured">Популярні товари</a>
               </Button>
             </div>
-
           </div>
         </div>
       </section>

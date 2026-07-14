@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
-import { ShoppingCart, Menu, X, Phone, Sparkles, ChevronDown, ArrowRight, BookOpen, Bone, Waves, Baby, Activity, Heart, Zap, BedDouble, Monitor, RotateCcw, Footprints, Star } from "lucide-react";
+import { ShoppingCart, Menu, X, Phone, Sparkles, ChevronDown, ArrowRight, BookOpen, Bone, Waves, Baby, Activity, Heart, Zap, BedDouble, Monitor, RotateCcw, Footprints, Star, Info, MapPin } from "lucide-react";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
@@ -27,6 +27,27 @@ const PHONE = "+380956981124";
 const TELEGRAM = "https://t.me/BodyHome1";
 const VIBER = "viber://chat?number=%2B380956981124";
 
+const CATEGORY_ICONS: Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
+  "ortopedychni-podushky": BedDouble,
+  "ortopedychni-ustilky": Footprints,
+  "ortezy-i-bandazhi": Activity,
+  "masazhery": Zap,
+  "tovary-dlia-krasy": Sparkles,
+  "rozvyvaiuchi-ihrashky": Baby,
+  "tovary-dlia-domu": Monitor,
+  "reabilitatsiya": RotateCcw,
+};
+
+const PROBLEM_ITEMS = [
+  { Icon: Bone, label: "Спина і поперек", url: "/catalog?q=спина" },
+  { Icon: BedDouble, label: "Сон і шия", url: "/ortopedychni-podushky" },
+  { Icon: Monitor, label: "Офіс і постава", url: "/catalog?q=постава" },
+  { Icon: RotateCcw, label: "Реабілітація", url: "/catalog?category=ortezy-i-bandazhi" },
+  { Icon: Footprints, label: "Стопи і коліна", url: "/ortopedychni-ustilky-kuputy" },
+  { Icon: Zap, label: "Масаж і релакс", url: "/masazhery-dlya-spyny" },
+  { Icon: Baby, label: "Для дітей", url: "/tovary-dlya-ditey-ortopedychni" },
+];
+
 const blogItems = [
   { icon: Activity, label: "Остеохондроз шиї: симптоми і домашнє лікування", link: "/blog/osteokhondroz-shyiny-symptomy-i-domashnye-likuvannia", tag: "Здоров'я спини" },
   { icon: Bone, label: "Як обрати ортез на гомілковостопний суглоб", link: "/blog/yak-obraty-ortez-na-homilkovostopnyi-suhlyb", tag: "Ортези і бандажі" },
@@ -53,9 +74,7 @@ export const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [catOpen, setCatOpen] = useState(false);
   const [blogOpen, setBlogOpen] = useState(false);
-  const [mobileCatOpen, setMobileCatOpen] = useState(false);
   const [expandedCat, setExpandedCat] = useState<string | null>(null);
-  const [mobileBlogOpen, setMobileBlogOpen] = useState(false);
   const catRef = useRef<HTMLDivElement>(null);
   const blogRef = useRef<HTMLDivElement>(null);
 
@@ -70,6 +89,13 @@ export const Navbar = () => {
 
   // Close mobile menu on route change
   useEffect(() => { setMobileOpen(false); }, [location.pathname]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
 
   const goToCategory = (catId?: string) => {
     setCatOpen(false);
@@ -294,100 +320,170 @@ export const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile full-screen overlay menu — sits below sticky header, above BottomNav */}
       {mobileOpen && (
-        <div id="mobile-nav-menu" className="lg:hidden border-t border-border bg-background/95 animate-fade-in">
-          <div className="container py-4 space-y-3">
-            <SearchAutocomplete
-              placeholder="Пошук товарів..."
-              onNavigate={() => setMobileOpen(false)}
-            />
+        <div
+          id="mobile-nav-menu"
+          className="lg:hidden fixed inset-x-0 bottom-0 z-40 overflow-y-auto bg-background"
+          style={{ top: "4rem" }}
+        >
+          <div className="flex flex-col min-h-full pb-16">
 
-            <nav className="grid gap-1">
-              <NavLink to="/" end onClick={() => { setMobileOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className={({isActive}) => `rounded-2xl px-4 py-3 text-sm font-light ${isActive ? "bg-secondary text-primary" : "text-foreground"}`}>
+            {/* Search */}
+            <div className="px-4 pt-4 pb-3 border-b border-border">
+              <SearchAutocomplete
+                placeholder="Пошук товарів..."
+                onNavigate={() => setMobileOpen(false)}
+              />
+            </div>
+
+            {/* Головна link */}
+            <div className="px-4 pt-3">
+              <NavLink to="/" end onClick={() => { setMobileOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                className={({ isActive }) => `flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-colors ${isActive ? "bg-secondary text-primary" : "text-foreground hover:bg-secondary hover:text-primary"}`}>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                  <Star className="h-4 w-4 text-primary" strokeWidth={1.5} />
+                </span>
                 Головна
               </NavLink>
+            </div>
 
-              {/* Mobile Каталог */}
-              <div className="rounded-2xl overflow-hidden border border-border/30">
-                <button type="button" onClick={() => setMobileCatOpen(o => !o)}
-                  className={`w-full flex items-center justify-between px-4 py-3 text-sm font-light ${isCatalogActive ? "bg-secondary text-primary" : "text-foreground"}`}>
-                  <span>Каталог</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform ${mobileCatOpen ? "rotate-180" : ""}`} />
+            {/* За проблемою */}
+            <div className="px-4 pt-4 pb-3">
+              <div className="flex items-center gap-1.5 mb-3">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                <p className="text-[10px] uppercase tracking-[0.22em] text-primary font-semibold">За проблемою</p>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                {PROBLEM_ITEMS.map(({ Icon, label, url }) => (
+                  <Link key={label} to={url} onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 border border-border/50 bg-secondary/40 hover:bg-secondary hover:border-primary/30 active:scale-95 transition-all">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                      <Icon className="h-4 w-4 text-primary" strokeWidth={1.5} />
+                    </span>
+                    <span className="text-sm font-medium text-foreground leading-tight">{label}</span>
+                  </Link>
+                ))}
+                <button
+                  onClick={() => { setMobileOpen(false); document.querySelector<HTMLButtonElement>('[aria-label="Відкрити підтримку"]')?.click(); }}
+                  className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 border border-primary/30 bg-primary/5 hover:bg-primary/10 active:scale-95 transition-all">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/20">
+                    <Sparkles className="h-4 w-4 text-primary" strokeWidth={1.5} />
+                  </span>
+                  <span className="text-sm font-medium text-primary leading-tight">AI-підбір Міла</span>
                 </button>
-                <div className={`overflow-hidden transition-all duration-300 ease-in-out ${mobileCatOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}`}>
-                  <div className="bg-white/60 px-2 pb-2 pt-1 grid gap-0.5">
-                    <button onClick={() => goToCategory()} className="text-left rounded-xl px-4 py-2.5 text-sm font-light text-foreground/85 hover:bg-secondary hover:text-primary transition-colors">
-                      Усі товари
-                    </button>
-                    {categories.filter(c => !c.parentId).map(c => {
-                      const subs = categories.filter(s => s.parentId === c.id);
-                      const isExpanded = expandedCat === c.id;
-                      return (
-                        <div key={c.id}>
-                          <button
-                            onClick={() => subs.length > 0 ? setExpandedCat(isExpanded ? null : c.id) : goToCategory(c.id)}
-                            className={`w-full flex items-center justify-between rounded-xl px-4 py-2.5 text-sm font-light transition-colors ${isExpanded ? "bg-secondary text-primary" : "text-foreground/85 hover:bg-secondary hover:text-primary"}`}>
-                            <span>{c.name}</span>
-                            {subs.length > 0 && (
-                              <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
-                            )}
+              </div>
+            </div>
+
+            {/* Категорії */}
+            <div className="px-4 pt-4 pb-3 border-t border-border">
+              <div className="flex items-center gap-1.5 mb-3">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                <p className="text-[10px] uppercase tracking-[0.22em] text-primary font-semibold">Категорії</p>
+              </div>
+              <div className="space-y-0.5">
+                {categories.filter(c => !c.parentId).map(c => {
+                  const subs = categories.filter(s => s.parentId === c.id);
+                  const isExpanded = expandedCat === c.id;
+                  const CatIcon = CATEGORY_ICONS[c.id] ?? Heart;
+                  return (
+                    <div key={c.id}>
+                      <button
+                        onClick={() => subs.length > 0 ? setExpandedCat(isExpanded ? null : c.id) : goToCategory(c.id)}
+                        className={`w-full flex items-center gap-3 rounded-xl px-3 py-3 transition-colors ${isExpanded ? "bg-secondary text-primary" : "text-foreground hover:bg-secondary hover:text-primary"}`}>
+                        <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${isExpanded ? "bg-primary/20" : "bg-primary/10"}`}>
+                          <CatIcon className="h-4 w-4 text-primary" strokeWidth={1.5} />
+                        </span>
+                        <span className="text-sm font-medium flex-1 text-left">{c.name}</span>
+                        {subs.length > 0 && (
+                          <ChevronDown className={`h-4 w-4 shrink-0 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
+                        )}
+                      </button>
+                      {isExpanded && subs.length > 0 && (
+                        <div className="pl-14 pr-3 pb-1 space-y-0.5">
+                          <button onClick={() => goToCategory(c.id)}
+                            className="w-full text-left rounded-xl px-3 py-2 text-xs font-semibold text-primary hover:bg-primary/5 transition-colors">
+                            Всі в категорії →
                           </button>
-                          {/* Підкатегорії з анімацією */}
-                          <div className={`overflow-hidden transition-all duration-250 ease-in-out ${isExpanded ? "max-h-64 opacity-100" : "max-h-0 opacity-0"}`}>
-                            <div className="pl-3 pr-1 pb-1 grid gap-0.5 border-l-2 border-primary/20 ml-4 mt-1 mb-1">
-                              <button onClick={() => goToCategory(c.id)}
-                                className="w-full text-left rounded-xl px-3 py-2 text-xs font-medium text-primary/80 hover:bg-primary/5 transition-colors">
-                                Всі в категорії →
-                              </button>
-                              {subs.map(s => (
-                                <button key={s.id} onClick={() => goToCategory(s.id)}
-                                  className="w-full text-left rounded-xl px-3 py-2 text-xs font-light text-foreground/65 hover:bg-secondary hover:text-primary transition-colors">
-                                  {s.name}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
+                          {subs.map(s => (
+                            <button key={s.id} onClick={() => goToCategory(s.id)}
+                              className="w-full text-left rounded-xl px-3 py-2 text-sm text-foreground/70 hover:bg-secondary hover:text-primary transition-colors">
+                              {s.name}
+                            </button>
+                          ))}
                         </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-
-              {/* Mobile Блог */}
-              <div className="rounded-2xl overflow-hidden border border-border/30">
-                <button type="button" onClick={() => setMobileBlogOpen(o => !o)}
-                  className="w-full flex items-center justify-between px-4 py-3 text-sm font-light text-foreground">
-                  <span className="flex items-center gap-2"><BookOpen className="h-4 w-4 text-primary"/>Блог</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform ${mobileBlogOpen ? "rotate-180" : ""}`} />
+                      )}
+                    </div>
+                  );
+                })}
+                <button onClick={() => goToCategory()}
+                  className="w-full flex items-center justify-between gap-2 rounded-xl px-3 py-3 text-sm font-semibold text-primary hover:bg-primary/8 transition-colors group">
+                  <span>Усі товари</span>
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
                 </button>
-                {mobileBlogOpen && (
-                  <div className="bg-white/60 px-2 pb-2 pt-1 grid gap-0.5">
-                    {blogItems.map((item, i) => (
-                      <Link key={i} to={item.link} onClick={() => setMobileOpen(false)}
-                        className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-secondary transition-colors">
-                        <item.icon className="h-4 w-4 text-primary shrink-0" strokeWidth={1.5} />
-                        <span className="text-sm font-light text-foreground">{item.label}</span>
-                      </Link>
-                    ))}
-                  </div>
-                )}
               </div>
+            </div>
 
-              <NavLink to="/about" onClick={() => setMobileOpen(false)} className={({isActive}) => `rounded-2xl px-4 py-3 text-sm font-light ${isActive ? "bg-secondary text-primary" : "text-foreground"}`}>
-                Про нас
-              </NavLink>
+            {/* Блог */}
+            <div className="px-4 pt-4 pb-3 border-t border-border">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-primary font-semibold">Блог</p>
+                </div>
+                <Link to="/blog" onClick={() => setMobileOpen(false)} className="text-xs font-medium text-primary hover:underline">
+                  Всі статті →
+                </Link>
+              </div>
+              <div className="space-y-0.5">
+                {blogItems.slice(0, 3).map((item, i) => (
+                  <Link key={i} to={item.link} onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-secondary transition-colors">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                      <item.icon className="h-4 w-4 text-primary" strokeWidth={1.5} />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-[10px] text-primary/80 uppercase tracking-wider">{item.tag}</p>
+                      <p className="text-sm font-medium text-foreground leading-snug line-clamp-1">{item.label}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
 
-              <NavLink to="/contacts" onClick={() => setMobileOpen(false)} className={({isActive}) => `rounded-2xl px-4 py-3 text-sm font-light ${isActive ? "bg-secondary text-primary" : "text-foreground"}`}>
-                Контакти
-              </NavLink>
-            </nav>
+            {/* Про нас + Контакти */}
+            <div className="px-4 pt-3 pb-3 border-t border-border">
+              <div className="grid grid-cols-2 gap-2">
+                <NavLink to="/about" onClick={() => setMobileOpen(false)}
+                  className={({ isActive }) => `flex items-center gap-2.5 rounded-xl px-3 py-3 text-sm font-medium transition-colors ${isActive ? "bg-secondary text-primary" : "text-foreground hover:bg-secondary hover:text-primary"}`}>
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                    <Info className="h-4 w-4 text-primary" strokeWidth={1.5} />
+                  </span>
+                  Про нас
+                </NavLink>
+                <NavLink to="/contacts" onClick={() => setMobileOpen(false)}
+                  className={({ isActive }) => `flex items-center gap-2.5 rounded-xl px-3 py-3 text-sm font-medium transition-colors ${isActive ? "bg-secondary text-primary" : "text-foreground hover:bg-secondary hover:text-primary"}`}>
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                    <MapPin className="h-4 w-4 text-primary" strokeWidth={1.5} />
+                  </span>
+                  Контакти
+                </NavLink>
+              </div>
+            </div>
 
-            <div className="flex flex-wrap gap-3 border-t border-border pt-3 text-sm text-muted-foreground">
-              <a href={`tel:${PHONE}`} className="flex items-center gap-2 hover:text-primary"><Phone className="h-4 w-4 text-primary"/>{PHONE}</a>
-              <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary"><TelegramIcon/>Telegram</a>
-              <a href={VIBER} className="flex items-center gap-2 text-primary"><ViberIcon/>Viber</a>
+            {/* Contact info */}
+            <div className="px-4 py-4 border-t border-border bg-secondary/30 mt-auto">
+              <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                <a href={`tel:${PHONE}`} className="flex items-center gap-2 hover:text-primary transition-colors">
+                  <Phone className="h-4 w-4 text-primary" />{PHONE}
+                </a>
+                <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
+                  <TelegramIcon />Telegram
+                </a>
+                <a href={VIBER} className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
+                  <ViberIcon />Viber
+                </a>
+              </div>
             </div>
           </div>
         </div>

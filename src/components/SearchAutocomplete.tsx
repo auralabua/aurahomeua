@@ -239,7 +239,7 @@ export const SearchAutocomplete = ({
                             <Highlight text={product.name} query={query.trim()} />
                           </p>
                           {catName && (
-                            <p className="text-[10px] text-primary/60 uppercase tracking-wider mt-0.5 font-medium">
+                            <p className="text-[10px] text-primary/90 uppercase tracking-wider mt-0.5 font-medium">
                               {catName}
                             </p>
                           )}

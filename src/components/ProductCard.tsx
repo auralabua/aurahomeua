@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Star, ShoppingCart } from "lucide-react";
+import { Star, ShoppingCart, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Product, ProductVariant, formatUAH } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 import { OptimizedImage } from "@/components/OptimizedImage";
 
 interface ProductCardProps {
@@ -113,7 +114,22 @@ const PriceBlock = ({ price, originalPrice, compact = false }: { price: number; 
   );
 };
 
-export const ProductCard = ({ product, compact = false, categoryName }: ProductCardProps) => {
+const WishlistButton = ({ productId }: { productId: string }) => {
+  const { toggle, isWishlisted } = useWishlist();
+  const liked = isWishlisted(productId);
+  return (
+    <button
+      type="button"
+      aria-label={liked ? "Видалити з вибраного" : "Додати до вибраного"}
+      onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggle(productId); }}
+      className="absolute right-2 top-2 z-10 grid h-8 w-8 place-items-center rounded-full bg-white/80 shadow-sm backdrop-blur-sm transition-all hover:scale-110 hover:bg-white"
+    >
+      <Heart className={`h-4 w-4 transition-colors ${liked ? "fill-red-500 text-red-500" : "text-muted-foreground"}`} />
+    </button>
+  );
+};
+
+const ProductCardInner = ({ product, compact = false, categoryName }: ProductCardProps) => {
   const { addItem } = useCart();
   const [selectedVarIdx, setSelectedVarIdx] = useState(0);
 
@@ -151,9 +167,10 @@ export const ProductCard = ({ product, compact = false, categoryName }: ProductC
               </span>
             )}
           </div>
+          <WishlistButton productId={product.id} />
         </Link>
         <div className="flex flex-col flex-1 gap-1.5 p-3">
-          {categoryName && <span className="text-[9px] uppercase tracking-[0.15em] text-primary/60 font-medium line-clamp-1">{categoryName}</span>}
+          {categoryName && <span className="text-[9px] uppercase tracking-[0.15em] text-primary/80 font-medium line-clamp-1">{categoryName}</span>}
           <Link to={`/product/${product.slug ?? product.id}`} className="line-clamp-2 text-xs font-medium leading-snug text-foreground hover:text-primary transition-colors">
             {product.name}
           </Link>
@@ -208,10 +225,11 @@ export const ProductCard = ({ product, compact = false, categoryName }: ProductC
             );
           })()}
         </div>
+        <WishlistButton productId={product.id} />
       </Link>
       <div className="flex flex-1 flex-col gap-2 p-3 sm:p-4">
         {categoryName && (
-          <span className="text-[10px] uppercase tracking-[0.18em] text-primary/70 font-medium line-clamp-1">{categoryName}</span>
+          <span className="text-[10px] uppercase tracking-[0.18em] text-primary/90 font-medium line-clamp-1">{categoryName}</span>
         )}
         <Link to={`/product/${product.slug ?? product.id}`} className="line-clamp-2 text-sm font-medium leading-snug text-foreground hover:text-primary transition-colors">
           {product.name}
@@ -232,3 +250,5 @@ export const ProductCard = ({ product, compact = false, categoryName }: ProductC
     </article>
   );
 };
+
+export const ProductCard = memo(ProductCardInner);

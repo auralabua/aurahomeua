@@ -87,13 +87,13 @@ const ProductCarousel = ({ products }: { products: any[] }) => {
   );
   return (
     <div className="relative px-4 sm:px-6 lg:px-8">
-      <button onClick={() => scroll("left")}
+      <button onClick={() => scroll("left")} aria-label="Прокрутити ліворуч"
         className="absolute left-0 sm:left-1 top-1/2 -translate-y-8 z-10 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
-        <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+        <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
       </button>
-      <button onClick={() => scroll("right")}
+      <button onClick={() => scroll("right")} aria-label="Прокрутити праворуч"
         className="absolute right-0 sm:right-1 top-1/2 -translate-y-8 z-10 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
-        <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
+        <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
       </button>
       <div ref={scrollRef} className="flex gap-3 overflow-x-auto pb-3 mx-6 sm:mx-8"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
@@ -119,6 +119,27 @@ const Index = () => {
   const { products } = useProductsAsLegacy();
   const { categories: allCats } = useCategoriesAsLegacy();
   const categories = allCats.filter(c => !c.parentId);
+
+  // Map sub-category → parent slug
+  const parentOf = useMemo(() => {
+    const m: Record<string, string> = {};
+    allCats.forEach(c => { if (c.parentId) m[c.id as string] = c.parentId as string; });
+    return m;
+  }, [allCats]);
+
+  // First available image per category (including from sub-categories)
+  const categoryImages = useMemo(() => {
+    const map: Record<string, string> = {};
+    products.forEach(p => {
+      const img = p.images?.[0];
+      if (!img) return;
+      const cat = p.category as string;
+      if (!map[cat]) map[cat] = img;
+      const parent = parentOf[cat];
+      if (parent && !map[parent]) map[parent] = img;
+    });
+    return map;
+  }, [products, parentOf]);
 
   const baseProducts = products.filter(p => !p.parentProductId && !p.isParent);
 
@@ -152,12 +173,14 @@ const Index = () => {
       <section className="hero-bg relative overflow-hidden min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] flex items-center">
         {/* Photo */}
         <div className="absolute inset-y-0 right-0 w-full sm:w-[62%] lg:w-[55%]">
-          <img
+          <OptimizedImage
             src={HERO_IMG}
             alt="Масажери та товари для краси і здоров'я вдома — BodyHome"
             className="h-full w-full object-cover object-top"
             loading="eager"
             fetchPriority="high"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 62vw, 55vw"
+            quality={85}
           />
           {/* Desktop: beige gradient so dark text sits on light background */}
           <div className="hidden sm:block absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-[#F5F0EA] via-[#F5F0EA]/85 to-transparent" />
@@ -234,7 +257,7 @@ const Index = () => {
           </Link>
         </div>
         <div className="grid grid-cols-3 gap-2 sm:gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7">
-          {categories.map(c => <CategoryCard key={c.id} category={c} />)}
+          {categories.map(c => <CategoryCard key={c.id} category={c} imageUrl={categoryImages[c.id]} />)}
         </div>
       </section>
       {/* ── ЩО ХОЧЕТЕ ПОКРАЩИТИ ── */}
@@ -548,7 +571,7 @@ const Index = () => {
       <section className="container py-10 sm:py-16 grid md:grid-cols-2 gap-4 sm:gap-5">
         <div className="rounded-2xl border border-border/40 bg-white p-8">
           <Truck className="h-6 w-6 text-primary mb-5" strokeWidth={1.5} />
-          <h3 className="text-xl font-light mb-4">Доставка</h3>
+          <h2 className="text-xl font-light mb-4">Доставка</h2>
           <ul className="space-y-2.5 text-sm font-light text-muted-foreground">
             {["Нова Пошта — відділення або кур'єром", "Meest Express — по Україні", "Укрпошта — по всій Україні"].map((item, i) => (
               <li key={i} className="flex items-center gap-2.5">
@@ -559,7 +582,7 @@ const Index = () => {
         </div>
         <div className="rounded-2xl border border-border/40 bg-white p-8">
           <CreditCard className="h-6 w-6 text-primary mb-5" strokeWidth={1.5} />
-          <h3 className="text-xl font-light mb-4">Оплата</h3>
+          <h2 className="text-xl font-light mb-4">Оплата</h2>
           <ul className="space-y-2.5 text-sm font-light text-muted-foreground">
             {["Накладений платіж — оплата при отриманні", "LiqPay — карткою онлайн", "Monobank та ПриватБанк"].map((item, i) => (
               <li key={i} className="flex items-center gap-2.5">

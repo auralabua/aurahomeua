@@ -503,18 +503,36 @@ const ProductPage = () => {
 
   // Products from complementary categories (different from this product's category)
   const complementaryProducts = useMemo(() => {
-    if (!complementaryCatSlugs.length) return [];
-    const validCatIds = new Set<string>(
-      categories.flatMap(c =>
-        complementaryCatSlugs.includes(c.id) || complementaryCatSlugs.includes(c.parentId as string)
-          ? [c.id]
-          : []
-      )
+    const mainCatId  = category?.id ?? "";
+    const parentId   = (category?.parentId as string | undefined) ?? "";
+
+    // Sibling sub-categories (same parent, different sub-category) — most relevant add-ons
+    const siblingIds = new Set<string>(
+      categories
+        .filter(c => c.parentId && c.parentId === parentId && c.id !== mainCatId)
+        .map(c => c.id)
     );
+
+    // Cross-category complementary map
+    const crossIds = new Set<string>(
+      complementaryCatSlugs.length
+        ? categories.flatMap(c =>
+            complementaryCatSlugs.includes(c.id) || complementaryCatSlugs.includes(c.parentId as string)
+              ? [c.id]
+              : []
+          )
+        : []
+    );
+
+    const candidateIds = new Set([...siblingIds, ...crossIds]);
+    if (!candidateIds.size) return [];
+
     return products
-      .filter(p => validCatIds.has(p.category) && p.id !== (foundProduct?.id ?? "") && p.available)
-      .slice(0, 4);
-  }, [products, categories, complementaryCatSlugs, foundProduct]);
+      .filter(p => candidateIds.has(p.category) && p.id !== (foundProduct?.id ?? "") && p.available)
+      // Sort by popularity so the best-reviewed products surface first
+      .sort((a, b) => b.reviews * b.rating - a.reviews * a.rating)
+      .slice(0, 8);
+  }, [products, categories, complementaryCatSlugs, category, foundProduct]);
 
   // ── SEO — always called unconditionally ──────────────────────────────────
   const seoDescription = displayProduct && currentProduct
@@ -525,22 +543,30 @@ const ProductPage = () => {
     ? buildKeywords(displayProduct, categoryName)
     : undefined;
 
-  const seoFAQ = displayProduct && currentProduct
-    ? buildProductFAQ(displayProduct.name, currentProduct.price, currentProduct.available)
-    : undefined;
+  const seoFAQ = useMemo(() =>
+    displayProduct && currentProduct
+      ? buildProductFAQ(displayProduct.name, currentProduct.price, currentProduct.available)
+      : undefined,
+    [displayProduct, currentProduct]
+  );
 
-  const seoAggregateRating =
+  const seoAggregateRating = useMemo(() =>
     currentProduct && currentProduct.reviews > 0
       ? { ratingValue: currentProduct.rating, reviewCount: currentProduct.reviews }
-      : undefined;
+      : undefined,
+    [currentProduct]
+  );
 
-  const seoBreadcrumbs = displayProduct
-    ? [
-        { name: "Каталог", url: "/catalog" },
-        ...(category ? [{ name: category.name, url: `/catalog?category=${category.id}` }] : []),
-        { name: displayProduct.name, url: `/product/${displayProduct.slug ?? displayProduct.id}` },
-      ]
-    : undefined;
+  const seoBreadcrumbs = useMemo(() =>
+    displayProduct
+      ? [
+          { name: "Каталог", url: "/catalog" },
+          ...(category ? [{ name: category.name, url: `/catalog?category=${category.id}` }] : []),
+          { name: displayProduct.name, url: `/product/${displayProduct.slug ?? displayProduct.id}` },
+        ]
+      : undefined,
+    [displayProduct, category]
+  );
 
   useSEO({
     title:             displayProduct?.name,
@@ -588,7 +614,16 @@ const ProductPage = () => {
     ? Math.round((1 - activePrice / currentProduct!.originalPrice!) * 100)
     : 0;
   const activeVendorCode = selectedVariant?.vendor_code || selectedSibling?.vendorCode || currentProduct!.vendorCode;
-  const bundleProduct = complementaryProducts[0] ?? null;
+  const bundleProduct = (() => {
+    if (!complementaryProducts.length) return null;
+    const scored = complementaryProducts.map(p => {
+      const ratio = p.price / (activePrice || 1);
+      const priceBonus = ratio >= 0.05 && ratio <= 0.7 ? 2 : ratio <= 1.5 ? 1 : 0.5;
+      return { p, score: priceBonus * Math.log1p(p.reviews + 1) * p.rating };
+    });
+    scored.sort((a, b) => b.score - a.score);
+    return scored[0]?.p ?? null;
+  })();
   const bundleTotal = bundleProduct ? Math.round((activePrice + bundleProduct.price) * 0.95) : 0;
 
   const handleAddToCart = () => {

@@ -2,6 +2,7 @@ import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { ShoppingCart, Menu, X, Phone, Sparkles, ChevronDown, ChevronRight, ArrowRight, BookOpen, Bone, Waves, Baby, Activity, Heart } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 import { useCategoriesAsLegacy } from "@/hooks/useShopData";
 import { Button } from "@/components/ui/button";
 import { SearchAutocomplete } from "@/components/SearchAutocomplete";
@@ -28,6 +29,7 @@ const ViberIcon = () => (
 
 export const Navbar = () => {
   const { totalCount } = useCart();
+  const { count: wishlistCount } = useWishlist();
   const { categories } = useCategoriesAsLegacy();
   const navigate = useNavigate();
   const location = useLocation();
@@ -154,7 +156,7 @@ export const Navbar = () => {
                       <item.icon className="h-4 w-4 text-primary" strokeWidth={1.5} />
                     </div>
                     <div>
-                      <p className="text-[10px] text-primary/60 uppercase tracking-wider">{item.tag}</p>
+                      <p className="text-[10px] text-primary/90 uppercase tracking-wider">{item.tag}</p>
                       <p className="text-sm font-light text-foreground leading-snug">{item.label}</p>
                     </div>
                   </Link>
@@ -187,6 +189,16 @@ export const Navbar = () => {
         {/* Cart + burger */}
         <div className="flex items-center gap-2 ml-auto md:ml-0">
           <Button asChild variant="ghost" size="icon" className="relative rounded-full bg-white/75 text-primary hover:bg-secondary hover:text-primary">
+            <Link to="/wishlist" aria-label="Вибране">
+              <Heart className="h-5 w-5"/>
+              {wishlistCount > 0 && (
+                <span className="absolute -top-1 -right-1 grid h-5 min-w-5 px-1 place-items-center rounded-full bg-red-500 text-[10px] font-semibold text-white">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+          </Button>
+          <Button asChild variant="ghost" size="icon" className="relative rounded-full bg-white/75 text-primary hover:bg-secondary hover:text-primary">
             <Link to="/cart" aria-label="Кошик">
               <ShoppingCart className="h-5 w-5"/>
               {totalCount > 0 && (
@@ -196,7 +208,12 @@ export const Navbar = () => {
               )}
             </Link>
           </Button>
-          <Button variant="ghost" size="icon" className="lg:hidden rounded-full bg-white/75" onClick={() => setMobileOpen(o => !o)}>
+          <Button variant="ghost" size="icon"
+            className="lg:hidden rounded-full bg-white/75 h-11 w-11"
+            onClick={() => setMobileOpen(o => !o)}
+            aria-label={mobileOpen ? "Закрити меню" : "Відкрити меню"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav-menu">
             {mobileOpen ? <X className="h-5 w-5"/> : <Menu className="h-5 w-5"/>}
           </Button>
         </div>
@@ -204,7 +221,7 @@ export const Navbar = () => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-border bg-background/95 animate-fade-in">
+        <div id="mobile-nav-menu" className="lg:hidden border-t border-border bg-background/95 animate-fade-in">
           <div className="container py-4 space-y-3">
             <SearchAutocomplete
               placeholder="Пошук товарів..."

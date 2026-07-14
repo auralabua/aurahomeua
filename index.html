@@ -123,8 +123,12 @@
     <link rel="preconnect" href="https://gpaeevehxwrczhdozifd.supabase.co" crossorigin />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://images.pexels.com" crossorigin />
-    <!-- Preload hero image для покращення LCP -->
-    <link rel="preload" as="image" href="https://images.pexels.com/photos/5927933/pexels-photo-5927933.jpeg?auto=compress&cs=tinysrgb&w=1400" fetchpriority="high" />
+    <!-- Preload hero image для покращення LCP (через Vercel Image Optimization → AVIF/WebP) -->
+    <link rel="preload" as="image"
+      href="/_vercel/image?url=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F5927933%2Fpexels-photo-5927933.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D1400&w=1200&q=85"
+      imagesrcset="/_vercel/image?url=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F5927933%2Fpexels-photo-5927933.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D1400&w=320&q=85 320w, /_vercel/image?url=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F5927933%2Fpexels-photo-5927933.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D1400&w=640&q=85 640w, /_vercel/image?url=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F5927933%2Fpexels-photo-5927933.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D1400&w=960&q=85 960w, /_vercel/image?url=https%3A%2F%2Fimages.pexels.com%2Fphotos%2F5927933%2Fpexels-photo-5927933.jpeg%3Fauto%3Dcompress%26cs%3Dtinysrgb%26w%3D1400&w=1200&q=85 1200w"
+      imagesizes="(max-width: 640px) 100vw, (max-width: 1024px) 62vw, 55vw"
+      fetchpriority="high" />
   </head>
   <body>
     <div id="root"></div>

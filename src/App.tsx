@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, Component } from "react";
 import type { ReactNode } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@/lib/queryClient";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 
 function ScrollToTop() {
@@ -12,6 +13,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CartProvider } from "@/context/CartContext";
+import { WishlistProvider } from "@/context/WishlistContext";
 import { Layout } from "@/components/Layout";
 import { PWAInstallPrompt } from "@/components/PWAInstallPrompt";
 
@@ -41,6 +43,7 @@ const AdminCustomers = lazy(() => import("./pages/admin/AdminCustomers.tsx"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings.tsx"));
 const AdminSupport  = lazy(() => import("./pages/admin/AdminSupport.tsx"));
 const OrderSuccess = lazy(() => import("./pages/OrderSuccess.tsx"));
+const Wishlist = lazy(() => import("./pages/Wishlist.tsx"));
 const LandingPillows   = lazy(() => import("./pages/landing/LandingPillows.tsx"));
 const LandingMassagers = lazy(() => import("./pages/landing/LandingMassagers.tsx"));
 const LandingInsoles   = lazy(() => import("./pages/landing/LandingInsoles.tsx"));
@@ -82,21 +85,6 @@ const PageLoader = () => (
   </div>
 );
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      // Data is fresh for 5 minutes — no refetch on every navigation
-      staleTime: 5 * 60 * 1000,
-      // Keep inactive queries in cache for 10 minutes
-      gcTime: 10 * 60 * 1000,
-      // Retry once on failure
-      retry: 1,
-      // Don't refetch when window gets focus (avoids surprise refetches)
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -104,6 +92,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
+        <WishlistProvider>
         <CartProvider>
           <ErrorBoundary>
           <Suspense fallback={<PageLoader />}>
@@ -115,6 +104,7 @@ const App = () => (
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/order-success" element={<OrderSuccess />} />
+                <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contacts" element={<Contacts />} />
                 <Route path="/delivery" element={<Delivery />} />
@@ -145,6 +135,7 @@ const App = () => (
           </ErrorBoundary>
           <PWAInstallPrompt />
         </CartProvider>
+        </WishlistProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

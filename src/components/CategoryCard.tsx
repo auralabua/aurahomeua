@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Category } from "@/data/products";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 const PillowIllustration = () => (
   <svg viewBox="0 0 180 130" xmlns="http://www.w3.org/2000/svg">
@@ -124,7 +125,7 @@ const landingUrlMap: Record<string, string> = {
   "rozvyvaiuchi-ihrashky":        "/tovary-dlya-ditey-ortopedychni",
 };
 
-const categoryConfig: Record<string, {
+const categoryStyle: Record<string, {
   bg: string;
   accent: string;
   Illustration: () => JSX.Element;
@@ -166,28 +167,46 @@ const categoryConfig: Record<string, {
   },
 };
 
-export const CategoryCard = ({ category }: { category: Category }) => {
-  const cfg = categoryConfig[category.id] ?? {
-    bg: "from-[#F5F0EA] to-[#EDE3D5]",
-    accent: "#3D7A55",
-    Illustration: PillowIllustration,
-  };
-  const { Illustration } = cfg;
+interface CategoryCardProps {
+  category: Category;
+  imageUrl?: string;
+}
+
+export const CategoryCard = ({ category, imageUrl }: CategoryCardProps) => {
+  const cfg = categoryStyle[category.id] ?? { bg: "from-[#F5F0EA] to-[#EDE3D5]", accent: "#3D7A55", Illustration: null };
+  const { Illustration } = cfg as { Illustration?: () => JSX.Element };
+  const Icon = category.icon;
 
   return (
     <Link
       to={landingUrlMap[category.id] ?? `/catalog?category=${category.id}`}
       className={`group relative flex flex-col overflow-hidden rounded-2xl bg-gradient-to-br ${cfg.bg} border border-white/70 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card active:scale-95`}
     >
-      {/* Illustration */}
-      <div className="flex items-center justify-center pt-3 pb-1 px-2 sm:pt-5 sm:pb-2">
-        <div className="w-full transition-transform duration-300 group-hover:scale-105">
-          <Illustration />
-        </div>
+      {/* Photo or icon fallback */}
+      <div className="relative overflow-hidden flex items-center justify-center bg-white/50" style={{ aspectRatio: "4/3" }}>
+        {imageUrl ? (
+          <OptimizedImage
+            src={imageUrl}
+            alt={category.name}
+            className="h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 640px) 33vw, (max-width: 1024px) 25vw, 200px"
+            quality={80}
+          />
+        ) : Illustration ? (
+          <div className="h-full w-full transition-transform duration-300 group-hover:scale-105">
+            <Illustration />
+          </div>
+        ) : (
+          <Icon
+            className="h-12 w-12 sm:h-14 sm:w-14 opacity-30 transition-transform duration-300 group-hover:scale-105"
+            style={{ color: cfg.accent }}
+            strokeWidth={1.2}
+          />
+        )}
       </div>
 
       {/* Text */}
-      <div className="flex flex-col px-2 pb-3 sm:px-4 sm:pb-4">
+      <div className="flex flex-col px-2 pb-3 sm:px-3 sm:pb-4 pt-2">
         <h3 className="font-medium text-[11px] sm:text-sm leading-snug text-foreground line-clamp-2">
           {category.name}
         </h3>

@@ -22,23 +22,26 @@ const SIZE_ORDER = ["XS", "S", "M", "L", "XL", "XXL", "XXXL", "XXXXL"];
 const buildDescription = (
   product: Product,
   categoryName: string | undefined,
-  price: number
+  price: number,
+  categorySlug?: string
 ): string => {
   const base = product.description?.trim();
-  // Use first meaningful sentence if description exists
   const firstSentence = base
-    ? base.split(/(?<=[.!?])\s+/).find(s => s.length > 30) ?? base.slice(0, 120)
+    ? base.replace(/([.!?])\s+/g, "$1\n").split("\n").find(s => s.length > 30) ?? base.slice(0, 120)
     : null;
+  const beautyNote = categorySlug === "krasota-i-doglyad"
+    ? " Купити в Україні з доставкою Новою Поштою. Салонний ефект вдома."
+    : "";
 
   if (firstSentence && firstSentence.length >= 60) {
-    // Trim to 155 chars and add price hint
     const trimmed = firstSentence.slice(0, 120).replace(/[,.]?\s*$/, "");
-    return `${trimmed}. Купити за ${formatUAH(price)} з доставкою по Україні.`;
+    return categorySlug === "krasota-i-doglyad"
+      ? `${trimmed}.${beautyNote}`
+      : `${trimmed}. Купити за ${formatUAH(price)} з доставкою по Україні.`;
   }
 
-  // Fallback: synthetic description
   const cat = categoryName ? `${categoryName.toLowerCase()} ` : "";
-  return `${product.name} — ${cat}від BodyHome. Ціна ${formatUAH(price)}, доставка Новою Поштою, оплата при отриманні. Гарантія якості 14 днів.`;
+  return `${product.name} — ${cat}від BodyHome. Ціна ${formatUAH(price)}, доставка Новою Поштою, оплата при отриманні.${beautyNote}`;
 };
 
 /** Build keyword string for product */
@@ -385,19 +388,47 @@ const ProductPage = () => {
   const [added, setAdded] = useState(false);
   const [activeTab, setActiveTab] = useState<"desc" | "reviews" | "questions">("desc");
   const [selectedVarIdx, setSelectedVarIdx] = useState(-1);
+  const [selectedSiblingIdx, setSelectedSiblingIdx] = useState(0);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const cartBtnRef = useRef<HTMLButtonElement>(null);
   const isMobile = useIsMobile();
   const recentIds = useRecentlyViewed(id ?? "");
 
+  // Reset sibling selection when URL changes (different product)
+  useEffect(() => { setSelectedSiblingIdx(0); }, [id]);
+
+  // ── Sticky bar effect — must stay here (before early returns) to respect Rules of Hooks ──
+  useEffect(() => {
+    if (!isMobile || !cartBtnRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowStickyBar(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(cartBtnRef.current);
+    return () => observer.disconnect();
+  }, [isMobile]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // ── Resolve product data (before any conditional returns so hooks stay stable) ──
-  // Try filtered list first (legacy_id or UUID), then all products (raw UUID).
-  // allProducts uses raw UUIDs as id so it handles old UUID-based URLs and child variants.
+  // Lookup order:
+  //   1. legacy_id / UUID exact match
+  //   2. exact slug match
+  //   3. raw UUID match (allProducts)
+  //   4. exact slug match (allProducts)
+  //   5. UUID hex-suffix fallback — handles stale Google Ads slugs where the
+  //      URL ends with an older/shorter UUID suffix (e.g. "sm-85649a") but the
+  //      DB slug was later regenerated with a longer suffix ("sm-bd85649a").
+  //      Slugs are always generated as <name>-<last-N-hex-chars-of-uuid>.
+  const idSuffix = typeof id === "string" ? id.split("-").pop()?.toLowerCase() : undefined;
+  const isHexSuffix = idSuffix ? /^[0-9a-f]{4,}$/.test(idSuffix) : false;
   const foundProduct =
     products.find(p => p.id === id) ??
     products.find(p => p.slug === id) ??
     allProducts.find(p => p.id === id) ??
-    allProducts.find(p => p.slug === id);
+    allProducts.find(p => p.slug === id) ??
+    (isHexSuffix
+      ? products.find(p => p.id.replace(/-/g, "").endsWith(idSuffix!)) ??
+        allProducts.find(p => p.id.replace(/-/g, "").endsWith(idSuffix!))
+      : undefined);
   const displayProduct = foundProduct;
 
   // JSONB variants from the product itself, sorted by size
@@ -417,6 +448,42 @@ const ProductPage = () => {
   }, [foundProduct]);
 
   const selectedVariant = variants[selectedVarIdx] ?? null;
+
+  // Sibling variants from parent-child DB structure (active when JSONB variants absent)
+  const siblingVariants = useMemo(() => {
+    if (!foundProduct?.isParent || !foundProduct.variantLabel || variants.length > 0) return [];
+    const children = allProducts
+      .filter(p => p.parentProductId === foundProduct.id && p.variantLabel)
+      .map(c => ({
+        label: c.variantLabel as string,
+        price: c.price,
+        vendorCode: c.vendorCode,
+        available: c.available,
+        productId: c.id,
+        productName: c.name,
+      }));
+    if (children.length === 0) return [];
+    const all = [
+      {
+        label: foundProduct.variantLabel,
+        price: foundProduct.price,
+        vendorCode: foundProduct.vendorCode,
+        available: foundProduct.available,
+        productId: foundProduct.id,
+        productName: foundProduct.name,
+      },
+      ...children,
+    ];
+    return all.sort((a, b) => {
+      const na = parseFloat(a.label);
+      const nb = parseFloat(b.label);
+      if (!isNaN(na) && !isNaN(nb)) return na - nb;
+      return a.label.localeCompare(b.label);
+    });
+  }, [foundProduct, variants, allProducts]);
+
+  const selectedSibling = siblingVariants.length > 1 ? (siblingVariants[selectedSiblingIdx] ?? siblingVariants[0]) : null;
+
   const currentProduct  = foundProduct;
   const category        = displayProduct ? categories.find(c => c.id === displayProduct.category) : null;
   const categoryName     = category?.name;
@@ -469,7 +536,7 @@ const ProductPage = () => {
 
   // ── SEO — always called unconditionally ──────────────────────────────────
   const seoDescription = displayProduct && currentProduct
-    ? buildDescription(displayProduct, categoryName, currentProduct.price)
+    ? buildDescription(displayProduct, categoryName, currentProduct.price, category?.id)
     : undefined;
 
   const seoKeywords = displayProduct
@@ -541,19 +608,16 @@ const ProductPage = () => {
     .slice(0, 4);
 
   const images        = displayProduct!.images?.length ? displayProduct!.images : [];
-  const activePrice   = selectedVariant?.price ?? currentProduct!.price;
+  const activePrice   = selectedVariant?.price ?? selectedSibling?.price ?? currentProduct!.price;
   const hasDiscount   = currentProduct!.originalPrice && currentProduct!.originalPrice > activePrice;
   const discountPct   = hasDiscount
     ? Math.round((1 - activePrice / currentProduct!.originalPrice!) * 100)
     : 0;
-  const activeVendorCode = selectedVariant?.vendor_code || currentProduct!.vendorCode;
-  // Pick the best bundle partner: prefer a cheaper add-on (5 %–70 % of main price)
-  // with the highest popularity signal, so the pairing feels intentional.
+  const activeVendorCode = selectedVariant?.vendor_code || selectedSibling?.vendorCode || currentProduct!.vendorCode;
   const bundleProduct = (() => {
     if (!complementaryProducts.length) return null;
     const scored = complementaryProducts.map(p => {
       const ratio = p.price / (activePrice || 1);
-      // Cheap accessories score highest; similar-priced products score lower
       const priceBonus = ratio >= 0.05 && ratio <= 0.7 ? 2 : ratio <= 1.5 ? 1 : 0.5;
       return { p, score: priceBonus * Math.log1p(p.reviews + 1) * p.rating };
     });
@@ -572,6 +636,15 @@ const ProductPage = () => {
         variantLabel: selectedVariant.label,
         vendorCode: selectedVariant.vendor_code || currentProduct!.vendorCode,
       }, qty);
+    } else if (selectedSibling && selectedSibling.productId !== currentProduct!.id) {
+      addItem({
+        ...currentProduct!,
+        id: selectedSibling.productId,
+        name: selectedSibling.productName,
+        price: selectedSibling.price,
+        variantLabel: selectedSibling.label,
+        vendorCode: selectedSibling.vendorCode || currentProduct!.vendorCode,
+      }, qty);
     } else {
       addItem(currentProduct!, qty);
     }
@@ -579,19 +652,10 @@ const ProductPage = () => {
     setTimeout(() => setAdded(false), 2000);
   };
 
-  useEffect(() => {
-    if (!isMobile || !cartBtnRef.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setShowStickyBar(!entry.isIntersecting),
-      { threshold: 0 }
-    );
-    observer.observe(cartBtnRef.current);
-    return () => observer.disconnect();
-  }, [isMobile]); // eslint-disable-line react-hooks/exhaustive-deps
-
   const descParagraphs = displayProduct!.description
     ? displayProduct!.description
-        .split(/(?<=\. )(?=[А-ЯІЇЄA-Z])/)
+        .split(/\. (?=[А-ЯІЇЄA-Z])/)
+        .map((p, i, arr) => (i < arr.length - 1 ? p + "." : p))
         .filter(p => p.trim().length > 20)
     : [];
 
@@ -770,6 +834,35 @@ const ProductPage = () => {
                     <span>⚠</span> Будь ласка, оберіть розмір перед замовленням
                   </p>
                 )}
+              </div>
+            )}
+
+            {/* Sibling size selector (parent-child DB structure) */}
+            {siblingVariants.length > 1 && (
+              <div className="space-y-2">
+                <p className="text-sm font-medium text-foreground">
+                  Розмір:{" "}
+                  <span className="text-primary font-semibold">{siblingVariants[selectedSiblingIdx]?.label}</span>
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {siblingVariants.map((v, i) => (
+                    <button
+                      key={v.label}
+                      onClick={() => setSelectedSiblingIdx(i)}
+                      aria-label={`Розмір ${v.label}`}
+                      disabled={!v.available}
+                      className={`min-w-[44px] h-10 px-3 rounded-xl border-2 text-sm font-medium transition-all ${
+                        i === selectedSiblingIdx
+                          ? "border-primary bg-primary text-white shadow-sm"
+                          : v.available
+                            ? "border-border bg-white hover:border-primary/60 text-foreground"
+                            : "border-border bg-secondary/50 text-muted-foreground opacity-50 cursor-not-allowed line-through"
+                      }`}
+                    >
+                      {v.label}
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -1039,6 +1132,8 @@ const ProductPage = () => {
                     onClick={() => {
                       if (selectedVariant) {
                         addItem({ ...currentProduct!, id: `${currentProduct!.id}__${selectedVariant.label}`, name: `${displayProduct!.name} (${selectedVariant.label})`, price: selectedVariant.price, variantLabel: selectedVariant.label, vendorCode: selectedVariant.vendor_code || currentProduct!.vendorCode }, 1);
+                      } else if (selectedSibling && selectedSibling.productId !== currentProduct!.id) {
+                        addItem({ ...currentProduct!, id: selectedSibling.productId, name: selectedSibling.productName, price: selectedSibling.price, variantLabel: selectedSibling.label, vendorCode: selectedSibling.vendorCode || currentProduct!.vendorCode }, 1);
                       } else {
                         addItem(currentProduct!, 1);
                       }

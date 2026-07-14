@@ -85,7 +85,7 @@ const categoryNameOverrides: Record<string, string> = {
   "tovary-dlia-krasy": "Домашні девайси",
 };
 
-const categoryOrder = ["tovary-dlia-krasy"];
+const categoryOrder = ["tovary-dlia-krasy", "krasota-i-doglyad"];
 
 export const useCategoriesAsLegacy = () => {
   const q = useDBCategories();

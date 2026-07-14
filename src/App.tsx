@@ -1,4 +1,5 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, Component } from "react";
+import type { ReactNode } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
@@ -43,6 +44,39 @@ const AdminSettings = lazy(() => import("./pages/admin/AdminSettings.tsx"));
 const AdminSupport  = lazy(() => import("./pages/admin/AdminSupport.tsx"));
 const OrderSuccess = lazy(() => import("./pages/OrderSuccess.tsx"));
 const Wishlist = lazy(() => import("./pages/Wishlist.tsx"));
+const LandingPillows   = lazy(() => import("./pages/landing/LandingPillows.tsx"));
+const LandingMassagers = lazy(() => import("./pages/landing/LandingMassagers.tsx"));
+const LandingInsoles   = lazy(() => import("./pages/landing/LandingInsoles.tsx"));
+const LandingBandages  = lazy(() => import("./pages/landing/LandingBandages.tsx"));
+const LandingMats      = lazy(() => import("./pages/landing/LandingMats.tsx"));
+const LandingKids      = lazy(() => import("./pages/landing/LandingKids.tsx"));
+
+class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() { return { hasError: true }; }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4 text-center px-4">
+          <p className="text-lg font-medium text-foreground">Щось пішло не так</p>
+          <p className="text-sm text-muted-foreground max-w-sm">
+            Спробуйте оновити сторінку. Якщо проблема залишається — напишіть нам.
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-2 px-6 py-2.5 rounded-full bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors"
+          >
+            Оновити сторінку
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 // Page loader skeleton (minimal flicker)
 const PageLoader = () => (
@@ -60,6 +94,7 @@ const App = () => (
         <ScrollToTop />
         <WishlistProvider>
         <CartProvider>
+          <ErrorBoundary>
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route element={<Layout />}>
@@ -75,6 +110,12 @@ const App = () => (
                 <Route path="/delivery" element={<Delivery />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/public-offer" element={<PublicOffer />} />
+                <Route path="/ortopedychni-podushky" element={<LandingPillows />} />
+                <Route path="/masazhery-dlya-spyny" element={<LandingMassagers />} />
+                <Route path="/ortopedychni-ustilky-kuputy" element={<LandingInsoles />} />
+                <Route path="/bandazhi-ta-ortezy" element={<LandingBandages />} />
+                <Route path="/masazhni-kylymky" element={<LandingMats />} />
+                <Route path="/tovary-dlya-ditey-ortopedychni" element={<LandingKids />} />
               </Route>
               <Route path="/blog" element={<BlogList />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
@@ -91,6 +132,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
+          </ErrorBoundary>
           <PWAInstallPrompt />
         </CartProvider>
         </WishlistProvider>

@@ -82,11 +82,16 @@ export const Navbar = () => {
       {/* Main nav */}
       <div className="container flex h-16 items-center gap-4 lg:gap-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 shrink-0">
-          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/12 ring-1 ring-primary/25 shadow-glow text-primary font-light text-lg">B</span>
-          <span className="leading-none">
-            <span className="block text-xl font-light tracking-[0.2em] uppercase">BodyHome</span>
-          </span>
+        <Link to="/" className="flex items-center shrink-0" aria-label="BodyHome — головна">
+          <svg viewBox="0 20 490 120" className="h-9 w-auto" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="90" cy="90" r="65" fill="#3d7a55"/>
+            <polyline points="35,90 53.8,90 63.8,61.2 73.8,118.8 83.8,73.8 93.8,106.2 103.8,90 152.5,90"
+              fill="none" stroke="white" strokeWidth="3.8" strokeLinecap="round" strokeLinejoin="round"/>
+            <circle cx="90" cy="90" r="5" fill="white"/>
+            <text x="185" y="95" fontFamily="Arial,sans-serif" fontWeight="700" fontSize="52" fill="#1a2420">Body</text>
+            <text x="323" y="95" fontFamily="Arial,sans-serif" fontWeight="300" fontSize="52" fill="#3d7a55">Home</text>
+            <line x1="185" y1="107" x2="487" y2="107" stroke="#3d7a55" strokeWidth="0.8" opacity="0.35"/>
+          </svg>
         </Link>
 
         {/* Desktop nav */}

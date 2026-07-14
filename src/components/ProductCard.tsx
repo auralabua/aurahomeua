@@ -161,6 +161,11 @@ const ProductCardInner = ({ product, compact = false, categoryName }: ProductCar
                 {product.badge === "Хіт продажів" ? "Хіт" : product.badge}
               </span>
             )}
+            {!product.badge && product.category === "krasota-i-doglyad" && (
+              <span className="rounded-md px-1.5 py-0.5 text-[9px] font-semibold tracking-wide text-white" style={{ background: "linear-gradient(135deg,#c9716e,#a0509a)" }}>
+                ✨ Краса
+              </span>
+            )}
           </div>
           <WishlistButton productId={product.id} />
         </Link>
@@ -206,6 +211,11 @@ const ProductCardInner = ({ product, compact = false, categoryName }: ProductCar
           {product.badge && (
             <span className="rounded-md bg-primary/90 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm">
               {product.badge === "Хіт продажів" ? "Хіт" : product.badge}
+            </span>
+          )}
+          {!product.badge && product.category === "krasota-i-doglyad" && (
+            <span className="rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wide text-white shadow-sm" style={{ background: "linear-gradient(135deg,#c9716e,#a0509a)" }}>
+              ✨ Краса
             </span>
           )}
           {hasDiscount && (() => {

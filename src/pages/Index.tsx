@@ -170,12 +170,12 @@ const Index = () => {
   return (
     <div>
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden min-h-[88svh] sm:min-h-[580px] lg:min-h-[640px]">
+      <section className="relative overflow-hidden min-h-[68svh] sm:min-h-[460px] lg:min-h-[520px]">
         {/* Full-bleed photo */}
         <OptimizedImage
           src={HERO_IMG}
           alt="Товари для краси, здоров'я та догляду вдома — BodyHome"
-          className="absolute inset-0 h-full w-full object-cover object-top sm:object-[55%_15%]"
+          className="absolute inset-0 h-full w-full object-cover object-[center_5%] sm:object-[60%_10%]"
           loading="eager"
           fetchPriority="high"
           sizes="100vw"

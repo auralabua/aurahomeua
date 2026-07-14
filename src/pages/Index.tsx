@@ -11,7 +11,7 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 import { formatUAH } from "@/data/products";
 
 // Жінка — домашній самодогляд, теплі тони
-const HERO_IMG = "https://i.ibb.co/MDWYYnRF/Gemini-Generated-Image-cgz3hxcgz3hxcgz3-1.png";
+const HERO_IMG = "https://i.ibb.co/qMS30Cgv/Gemini-Generated-Image-9p27ep9p27ep9p27.png";
 
 
 
@@ -175,7 +175,7 @@ const Index = () => {
         <OptimizedImage
           src={HERO_IMG}
           alt="Товари для краси, здоров'я та догляду вдома — BodyHome"
-          className="absolute inset-0 h-full w-full object-cover object-[center_18%] sm:object-[68%_30%]"
+          className="absolute inset-0 h-full w-full object-cover object-top sm:object-[55%_15%]"
           loading="eager"
           fetchPriority="high"
           sizes="100vw"

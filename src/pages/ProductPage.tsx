@@ -378,7 +378,7 @@ const WHY_BODYHOME = [
 
 const ProductPage = () => {
   const { id } = useParams();
-  const { products, isLoading } = useProductsAsLegacy();
+  const { products, isLoading, isError } = useProductsAsLegacy();
   const { products: allProducts } = useAllProductsAsLegacy();
   const { categories } = useCategoriesAsLegacy();
   const { addItem } = useCart();
@@ -590,6 +590,19 @@ const ProductPage = () => {
     return (
       <div className="container py-20 text-center">
         <div className="inline-block h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+      </div>
+    );
+  }
+  if (isError) {
+    return (
+      <div className="container py-20 text-center space-y-4">
+        <p className="text-muted-foreground">Не вдалося завантажити товар. Перевірте з'єднання з інтернетом.</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="rounded-full bg-primary text-white px-6 py-2.5 text-sm font-medium hover:bg-primary/90 transition-colors"
+        >
+          Оновити сторінку
+        </button>
       </div>
     );
   }

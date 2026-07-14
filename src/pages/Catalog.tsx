@@ -32,8 +32,10 @@ const Catalog = () => {
   const initialCategory = (searchParams.get("category") as CategoryId) || null;
   const initialQuery = searchParams.get("q") || "";
 
-  const { products } = useProductsAsLegacy();
-  const { categories } = useCategoriesAsLegacy();
+  const { products, isLoading: productsLoading, isError: productsError } = useProductsAsLegacy();
+  const { categories, isLoading: catsLoading } = useCategoriesAsLegacy();
+  const isLoading = productsLoading || catsLoading;
+  const isError = productsError;
 
   const [selectedCategories, setSelectedCategories] = useState<CategoryId[]>(initialCategory ? [initialCategory] : []);
   const [minPrice, setMinPrice] = useState("");
@@ -295,7 +297,9 @@ const Catalog = () => {
             {activeCatName ? `${activeCatName} — купити в Україні` : "Каталог товарів"}
           </h1>
           <p className="text-muted-foreground mt-2 font-light text-sm">
-            {query ? `Результати пошуку: "${query}" — ` : ""}Знайдено: {filtered.length} товарів
+            {isLoading
+              ? "Завантаження товарів..."
+              : `${query ? `Результати пошуку: "${query}" — ` : ""}Знайдено: ${filtered.length} товарів`}
           </p>
         </div>
         <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
@@ -426,7 +430,30 @@ const Catalog = () => {
           </div>
         </aside>
         <div>
-          {paginated.length > 0 ? (
+          {isLoading ? (
+            <div className="grid grid-cols-2 xl:grid-cols-4 gap-5">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className="rounded-2xl overflow-hidden animate-pulse">
+                  <div className="aspect-square bg-secondary" />
+                  <div className="p-3 space-y-2.5">
+                    <div className="h-3 bg-secondary rounded-full w-4/5" />
+                    <div className="h-3 bg-secondary rounded-full w-3/5" />
+                    <div className="h-5 bg-secondary/70 rounded-full w-2/5 mt-1" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : isError ? (
+            <div className="text-center py-20 rounded-2xl bg-white/[0.035] border border-white/10">
+              <p className="text-muted-foreground font-light mb-4">Не вдалося завантажити товари. Перевірте з'єднання.</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="rounded-full bg-primary text-white px-6 py-2 text-sm font-medium hover:bg-primary/90 transition-colors"
+              >
+                Оновити сторінку
+              </button>
+            </div>
+          ) : paginated.length > 0 ? (
             <>
               <div className="grid grid-cols-2 xl:grid-cols-4 gap-5">
                 {paginated.map(p => (

@@ -82,7 +82,7 @@ export const Navbar = () => {
       {/* Main nav */}
       <div className="container flex h-16 items-center gap-4 lg:gap-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center shrink-0" aria-label="BodyHome — головна">
+        <Link to="/" className="flex items-center shrink-0" aria-label="BodyHome — головна" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           <svg viewBox="0 20 490 120" className="h-9 w-auto" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <circle cx="90" cy="90" r="65" fill="#3d7a55"/>
             <polyline points="35,90 53.8,90 63.8,61.2 73.8,118.8 83.8,73.8 93.8,106.2 103.8,90 152.5,90"
@@ -229,7 +229,7 @@ export const Navbar = () => {
             />
 
             <nav className="grid gap-1">
-              <NavLink to="/" end onClick={() => setMobileOpen(false)} className={({isActive}) => `rounded-2xl px-4 py-3 text-sm font-light ${isActive ? "bg-secondary text-primary" : "text-foreground"}`}>
+              <NavLink to="/" end onClick={() => { setMobileOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className={({isActive}) => `rounded-2xl px-4 py-3 text-sm font-light ${isActive ? "bg-secondary text-primary" : "text-foreground"}`}>
                 Головна
               </NavLink>
 

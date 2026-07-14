@@ -8,11 +8,22 @@ import { formatUAH } from "@/data/products";
 const POPULAR_QUERIES = [
   "ортопедична подушка",
   "масажер для спини",
-  "масажний м'яч",
-  "для сну",
+  "устілки",
   "для офісу",
-  "для стоп",
   "подушка для шиї",
+  "наколінник",
+];
+
+// Symptom → catalog URL mapping
+const SYMPTOM_MAP: { keywords: string[]; label: string; url: string; emoji: string }[] = [
+  { keywords: ["біль у спині", "спина", "поперек", "біль в спині", "спини"], label: "Товари при болі в спині", url: "/catalog?q=спина", emoji: "🦴" },
+  { keywords: ["біль у шиї", "шия", "шийний", "остеохондроз", "шиї"], label: "Товари для шиї", url: "/ortopedychni-podushky", emoji: "😮" },
+  { keywords: ["плоскостопість", "стопи", "п'яти", "ноги", "п'яткова"], label: "Ортопедичні устілки", url: "/ortopedychni-ustilky-kuputy", emoji: "👣" },
+  { keywords: ["коліно", "колін", "суглоб", "бандаж", "ортез"], label: "Ортези і бандажі", url: "/bandazhi-ta-ortezy", emoji: "🦵" },
+  { keywords: ["масаж", "розслабитися", "розслаблення", "спазм", "напруження"], label: "Масажери та килимки", url: "/masazhery-dlya-spyny", emoji: "💆" },
+  { keywords: ["постава", "сколіоз", "хребет", "сидіти", "офіс"], label: "Товари для постави", url: "/catalog?q=постава", emoji: "🧍" },
+  { keywords: ["дитина", "дітей", "дитині", "малюк", "дошкільник"], label: "Товари для дітей", url: "/tovary-dlya-ditey-ortopedychni", emoji: "👶" },
+  { keywords: ["краса", "догляд", "шкіра", "обличчя", "масажер обличчя"], label: "Товари для краси", url: "/catalog?category=tovary-dlia-krasy", emoji: "✨" },
 ];
 
 function Highlight({ text, query }: { text: string; query: string }) {
@@ -57,6 +68,12 @@ export const SearchAutocomplete = ({
     return m;
   }, [categories]);
 
+  const symptomMatch = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q || q.length < 3) return null;
+    return SYMPTOM_MAP.find(s => s.keywords.some(k => k.includes(q) || q.includes(k))) ?? null;
+  }, [query]);
+
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return [];
@@ -67,7 +84,7 @@ export const SearchAutocomplete = ({
         const desc = (p.description ?? "").toLowerCase();
         return name.includes(q) || cat.includes(q) || desc.includes(q);
       })
-      .slice(0, 7);
+      .slice(0, 6);
   }, [query, products, categoryNameById]);
 
   // Close on outside click
@@ -201,6 +218,25 @@ export const SearchAutocomplete = ({
                   переглянути весь каталог
                 </button>
               </p>
+            </div>
+          )}
+
+          {/* Symptom match */}
+          {showResults && symptomMatch && (
+            <div className="px-3 pt-3 pb-1">
+              <button
+                type="button"
+                onMouseDown={e => e.preventDefault()}
+                onClick={() => doNavigate(symptomMatch.url)}
+                className="w-full flex items-center gap-3 rounded-xl bg-primary/6 hover:bg-primary/12 border border-primary/15 px-3 py-2.5 text-left transition-colors"
+              >
+                <span className="text-xl shrink-0">{symptomMatch.emoji}</span>
+                <div>
+                  <p className="text-[10px] text-primary uppercase tracking-wider font-medium">Рекомендуємо</p>
+                  <p className="text-sm text-foreground font-light">{symptomMatch.label}</p>
+                </div>
+                <ArrowRight className="h-4 w-4 text-primary ml-auto shrink-0" />
+              </button>
             </div>
           )}
 

@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
-import { ShoppingCart, Menu, X, Phone, Sparkles, ChevronDown, ChevronRight, ArrowRight, BookOpen, Bone, Waves, Baby, Activity, Heart } from "lucide-react";
+import { ShoppingCart, Menu, X, Phone, Sparkles, ChevronDown, ArrowRight, BookOpen, Bone, Waves, Baby, Activity, Heart, Zap, BedDouble, Monitor, RotateCcw, Footprints, Star } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
@@ -100,41 +100,77 @@ export const Navbar = () => {
             Головна
           </NavLink>
 
-          {/* Каталог dropdown */}
+          {/* Каталог mega-menu */}
           <div className="relative" ref={catRef}>
             <button type="button" onClick={() => { setCatOpen(o => !o); setBlogOpen(false); }}
               className={`inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-light transition-smooth ${isCatalogActive || catOpen ? "bg-secondary text-primary" : "text-foreground/78 hover:bg-secondary hover:text-primary"}`}>
               Каталог <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${catOpen ? "rotate-180" : ""}`} />
             </button>
             {catOpen && (
-              <div className="absolute left-0 top-full mt-2 w-64 rounded-2xl border border-border bg-white/95 backdrop-blur-xl shadow-elevated z-50 p-2">
-                <button onClick={() => goToCategory()}
-                  className="w-full text-left rounded-xl px-3 py-2 text-sm font-light text-foreground/80 hover:bg-secondary hover:text-primary">
-                  Усі товари
-                </button>
-                <div className="my-1 h-px bg-border" />
-                {categories.filter(c => !c.parentId).map(c => {
-                  const subs = categories.filter(s => s.parentId === c.id);
-                  return (
-                    <div key={c.id} className="group relative">
-                      <button onClick={() => goToCategory(c.id)}
-                        className="w-full text-left rounded-xl px-3 py-2 text-sm font-light text-foreground/80 hover:bg-secondary hover:text-primary flex items-center justify-between">
-                        <span>{c.name}</span>
-                        {subs.length > 0 && <ChevronRight className="h-3.5 w-3.5 opacity-40" />}
+              <div className="absolute left-0 top-full mt-2 w-[640px] rounded-2xl border border-border bg-white/96 backdrop-blur-xl shadow-elevated z-50 p-4">
+                <div className="grid grid-cols-3 gap-4">
+                  {/* Col 1: За проблемою */}
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-medium px-2 mb-2">За проблемою</p>
+                    {[
+                      { Icon: Bone, label: "Спина і поперек", url: "/catalog?q=спина" },
+                      { Icon: BedDouble, label: "Сон і шия", url: "/ortopedychni-podushky" },
+                      { Icon: Monitor, label: "Офіс і постава", url: "/catalog?q=постава" },
+                      { Icon: RotateCcw, label: "Реабілітація", url: "/catalog?category=ortezy-i-bandazhi" },
+                      { Icon: Footprints, label: "Стопи і коліна", url: "/ortopedychni-ustilky-kuputy" },
+                      { Icon: Zap, label: "Масаж і релакс", url: "/masazhery-dlya-spyny" },
+                      { Icon: Baby, label: "Для дітей", url: "/tovary-dlya-ditey-ortopedychni" },
+                    ].map(({ Icon, label, url }) => (
+                      <Link key={label} to={url} onClick={() => setCatOpen(false)}
+                        className="flex items-center gap-2.5 rounded-xl px-2 py-1.5 hover:bg-secondary group transition-colors">
+                        <Icon className="h-3.5 w-3.5 text-primary shrink-0" strokeWidth={1.5} />
+                        <span className="text-sm font-light text-foreground/80 group-hover:text-primary">{label}</span>
+                      </Link>
+                    ))}
+                  </div>
+                  {/* Col 2: Категорії */}
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-medium px-2 mb-2">Категорії</p>
+                    {categories.filter(c => !c.parentId).map(c => (
+                      <button key={c.id} onClick={() => goToCategory(c.id)}
+                        className="w-full text-left flex items-center gap-2 rounded-xl px-2 py-1.5 text-sm font-light text-foreground/80 hover:bg-secondary hover:text-primary transition-colors">
+                        {c.name}
                       </button>
-                      {subs.length > 0 && (
-                        <div className="absolute left-full top-0 ml-1 w-52 rounded-2xl border border-border bg-white/95 backdrop-blur-xl shadow-elevated p-2 hidden group-hover:block z-50">
-                          {subs.map(s => (
-                            <button key={s.id} onClick={() => goToCategory(s.id)}
-                              className="w-full text-left rounded-xl px-3 py-2 text-xs font-light text-foreground/70 hover:bg-secondary hover:text-primary">
-                              {s.name}
-                            </button>
-                          ))}
-                        </div>
-                      )}
+                    ))}
+                    <div className="mt-2 pt-2 border-t border-border/40">
+                      <button onClick={() => goToCategory()}
+                        className="w-full text-left flex items-center gap-1.5 rounded-xl px-2 py-1.5 text-sm font-medium text-primary hover:bg-secondary transition-colors">
+                        Усі товари <ArrowRight className="h-3.5 w-3.5" />
+                      </button>
                     </div>
-                  );
-                })}
+                  </div>
+                  {/* Col 3: Швидко знайти */}
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-medium px-2 mb-2">Швидко знайти</p>
+                    <div className="space-y-1">
+                      {[
+                        { Icon: Star, label: "Хіти продажів", url: "/catalog?q=хіт" },
+                        { Icon: Zap, label: "Новинки", url: "/catalog?q=новинка" },
+                        { Icon: Heart, label: "Зі знижкою", url: "/catalog" },
+                      ].map(({ Icon, label, url }) => (
+                        <Link key={label} to={url} onClick={() => setCatOpen(false)}
+                          className="flex items-center gap-2.5 rounded-xl px-2 py-1.5 hover:bg-secondary group transition-colors">
+                          <Icon className="h-3.5 w-3.5 text-primary/70 shrink-0" strokeWidth={1.5} />
+                          <span className="text-sm font-light text-foreground/80 group-hover:text-primary">{label}</span>
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="mt-4 rounded-xl bg-primary/6 border border-primary/12 p-3">
+                      <p className="text-xs font-medium text-foreground mb-0.5">Не знаєте що обрати?</p>
+                      <p className="text-[11px] text-muted-foreground mb-2">Міла підбере товар під ваш запит</p>
+                      <button
+                        onClick={() => { setCatOpen(false); document.querySelector<HTMLButtonElement>('[aria-label="Відкрити підтримку"]')?.click(); }}
+                        className="text-xs font-semibold text-primary hover:underline">
+                        Запитати AI →
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
           </div>

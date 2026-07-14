@@ -261,10 +261,8 @@ const Index = () => {
                 badge: "ХІТ",
                 count: "86 товарів",
                 link: "/catalog?category=ortopedychni-podushky",
-                accentColor: "#3D7A55",
-                iconBg: "#3D7A55",
-                iconColor: "#ffffff",
-                badgeColor: "#3D7A55",
+                accent: "#3D7A55",
+                rgb: "61,122,85",
               },
               {
                 Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M3 12h18M3 6h18M3 18h18"/><rect x="6" y="3" width="12" height="18" rx="2"/></svg>,
@@ -273,10 +271,8 @@ const Index = () => {
                 badge: "ТОП",
                 count: "78 товарів",
                 link: "/catalog?category=ortopedychni-podushky",
-                accentColor: "#3D5A8A",
-                iconBg: "#3D5A8A",
-                iconColor: "#ffffff",
-                badgeColor: "#3D5A8A",
+                accent: "#3D5A8A",
+                rgb: "61,90,138",
               },
               {
                 Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>,
@@ -285,10 +281,8 @@ const Index = () => {
                 badge: null,
                 count: "54 товари",
                 link: "/catalog?category=ortezy-i-bandazhi",
-                accentColor: "#2A7070",
-                iconBg: "#2A7070",
-                iconColor: "#ffffff",
-                badgeColor: null,
+                accent: "#2A7070",
+                rgb: "42,112,112",
               },
               {
                 Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/><path d="M12 12v10M8 18l4 4 4-4"/><path d="M6 14c-2 1-3 3-2 5M18 14c2 1 3 3 2 5"/></svg>,
@@ -297,10 +291,8 @@ const Index = () => {
                 badge: "ТОП",
                 count: "43 товари",
                 link: "/catalog?category=masazhery",
-                accentColor: "#8A4040",
-                iconBg: "#8A4040",
-                iconColor: "#ffffff",
-                badgeColor: "#8A4040",
+                accent: "#8A4040",
+                rgb: "138,64,64",
               },
               {
                 Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 22V12M12 12C10 8 6 7 4 9M12 12C14 8 18 7 20 9"/><path d="M4 4h16"/><circle cx="12" cy="4" r="1" fill="currentColor"/></svg>,
@@ -309,10 +301,8 @@ const Index = () => {
                 badge: null,
                 count: "91 товар",
                 link: "/catalog?category=ortopedychni-masazhni-kylymky",
-                accentColor: "#3D7A55",
-                iconBg: "#EAF2E8",
-                iconColor: "#3D7A55",
-                badgeColor: null,
+                accent: "#3D7A55",
+                rgb: "61,122,85",
               },
               {
                 Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
@@ -321,25 +311,38 @@ const Index = () => {
                 badge: null,
                 count: "67 товарів",
                 link: "/catalog?category=tovary-dlia-krasy",
-                accentColor: "#7A6A20",
-                iconBg: "#7A6A20",
-                iconColor: "#ffffff",
-                badgeColor: null,
+                accent: "#7A6A20",
+                rgb: "122,106,32",
+              },
+              {
+                Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><path d="M15 11l2 3-2 1"/><path d="M9 11l-2 3 2 1"/></svg>,
+                title: "Для розвитку дітей",
+                desc: "Іграшки, ортопедія для малюків",
+                badge: "НОВО",
+                count: "38 товарів",
+                link: "/tovary-dlya-ditey-ortopedychni",
+                accent: "#7A3D8A",
+                rgb: "122,61,138",
               },
             ].map((item, i) => (
               <Link key={i} to={item.link}
-                className="group relative flex flex-col gap-3 rounded-2xl border border-border/40 bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.10)] active:scale-[0.98]"
-                style={{ borderLeftColor: item.accentColor, borderLeftWidth: "4px" }}>
+                className="group relative flex flex-col gap-3 rounded-2xl border p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.10)] active:scale-[0.98] backdrop-blur-sm"
+                style={{
+                  background: `linear-gradient(135deg, rgba(255,255,255,0.88) 0%, rgba(${item.rgb},0.08) 100%)`,
+                  borderColor: `rgba(${item.rgb},0.22)`,
+                  borderLeftColor: item.accent,
+                  borderLeftWidth: "4px",
+                }}>
 
                 {/* Top row: icon + badge */}
                 <div className="flex items-start justify-between">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
-                    style={{ backgroundColor: item.iconBg, color: item.iconColor }}>
+                    style={{ backgroundColor: `rgba(${item.rgb},0.12)`, color: item.accent }}>
                     <item.Icon />
                   </div>
                   {item.badge && (
-                    <span className="rounded-full px-2 py-0.5 text-[10px] font-bold text-white uppercase tracking-wide"
-                      style={{ backgroundColor: item.badgeColor! }}>
+                    <span className="rounded-full px-2.5 py-0.5 text-[10px] font-bold text-white uppercase tracking-wide"
+                      style={{ backgroundColor: item.accent }}>
                       {item.badge}
                     </span>
                   )}
@@ -352,12 +355,16 @@ const Index = () => {
                 </div>
 
                 {/* Footer */}
-                <div className="flex items-center justify-between pt-2 border-t border-border/30">
+                <div className="flex items-center justify-between pt-2" style={{ borderTop: `1px solid rgba(${item.rgb},0.15)` }}>
                   <span className="text-xs text-muted-foreground font-medium">{item.count}</span>
-                  <span className="text-xs font-semibold text-primary flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-200">
+                  <span className="text-xs font-semibold flex items-center gap-0.5 group-hover:gap-1.5 transition-all duration-200" style={{ color: item.accent }}>
                     Переглянути <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
                   </span>
                 </div>
+
+                {/* hover glow */}
+                <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: `radial-gradient(circle at 20% 50%, rgba(${item.rgb},0.06) 0%, transparent 70%)` }} />
               </Link>
             ))}
           </div>

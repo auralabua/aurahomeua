@@ -107,66 +107,88 @@ export const Navbar = () => {
               Каталог <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${catOpen ? "rotate-180" : ""}`} />
             </button>
             {catOpen && (
-              <div className="absolute left-0 top-full mt-2 w-[640px] rounded-2xl border border-border bg-white/96 backdrop-blur-xl shadow-elevated z-50 p-4">
-                <div className="grid grid-cols-3 gap-4">
+              <div className="absolute left-0 top-full mt-2 w-[660px] rounded-2xl border border-border/60 bg-white shadow-2xl ring-1 ring-black/[0.06] z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="grid grid-cols-3 divide-x divide-border/50">
                   {/* Col 1: За проблемою */}
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-medium px-2 mb-2">За проблемою</p>
-                    {[
-                      { Icon: Bone, label: "Спина і поперек", url: "/catalog?q=спина" },
-                      { Icon: BedDouble, label: "Сон і шия", url: "/ortopedychni-podushky" },
-                      { Icon: Monitor, label: "Офіс і постава", url: "/catalog?q=постава" },
-                      { Icon: RotateCcw, label: "Реабілітація", url: "/catalog?category=ortezy-i-bandazhi" },
-                      { Icon: Footprints, label: "Стопи і коліна", url: "/ortopedychni-ustilky-kuputy" },
-                      { Icon: Zap, label: "Масаж і релакс", url: "/masazhery-dlya-spyny" },
-                      { Icon: Baby, label: "Для дітей", url: "/tovary-dlya-ditey-ortopedychni" },
-                    ].map(({ Icon, label, url }) => (
-                      <Link key={label} to={url} onClick={() => setCatOpen(false)}
-                        className="flex items-center gap-2.5 rounded-xl px-2 py-1.5 hover:bg-secondary group transition-colors">
-                        <Icon className="h-3.5 w-3.5 text-primary shrink-0" strokeWidth={1.5} />
-                        <span className="text-sm font-light text-foreground/80 group-hover:text-primary">{label}</span>
-                      </Link>
-                    ))}
-                  </div>
-                  {/* Col 2: Категорії */}
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-medium px-2 mb-2">Категорії</p>
-                    {categories.filter(c => !c.parentId).map(c => (
-                      <button key={c.id} onClick={() => goToCategory(c.id)}
-                        className="w-full text-left flex items-center gap-2 rounded-xl px-2 py-1.5 text-sm font-light text-foreground/80 hover:bg-secondary hover:text-primary transition-colors">
-                        {c.name}
-                      </button>
-                    ))}
-                    <div className="mt-2 pt-2 border-t border-border/40">
-                      <button onClick={() => goToCategory()}
-                        className="w-full text-left flex items-center gap-1.5 rounded-xl px-2 py-1.5 text-sm font-medium text-primary hover:bg-secondary transition-colors">
-                        Усі товари <ArrowRight className="h-3.5 w-3.5" />
-                      </button>
+                  <div className="p-4">
+                    <div className="flex items-center gap-1.5 mb-3">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-primary font-semibold">За проблемою</p>
                     </div>
-                  </div>
-                  {/* Col 3: Швидко знайти */}
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-medium px-2 mb-2">Швидко знайти</p>
-                    <div className="space-y-1">
+                    <div className="space-y-0.5">
                       {[
-                        { Icon: Star, label: "Хіти продажів", url: "/catalog?q=хіт" },
-                        { Icon: Zap, label: "Новинки", url: "/catalog?q=новинка" },
-                        { Icon: Heart, label: "Зі знижкою", url: "/catalog" },
+                        { Icon: Bone, label: "Спина і поперек", url: "/catalog?q=спина" },
+                        { Icon: BedDouble, label: "Сон і шия", url: "/ortopedychni-podushky" },
+                        { Icon: Monitor, label: "Офіс і постава", url: "/catalog?q=постава" },
+                        { Icon: RotateCcw, label: "Реабілітація", url: "/catalog?category=ortezy-i-bandazhi" },
+                        { Icon: Footprints, label: "Стопи і коліна", url: "/ortopedychni-ustilky-kuputy" },
+                        { Icon: Zap, label: "Масаж і релакс", url: "/masazhery-dlya-spyny" },
+                        { Icon: Baby, label: "Для дітей", url: "/tovary-dlya-ditey-ortopedychni" },
                       ].map(({ Icon, label, url }) => (
                         <Link key={label} to={url} onClick={() => setCatOpen(false)}
-                          className="flex items-center gap-2.5 rounded-xl px-2 py-1.5 hover:bg-secondary group transition-colors">
-                          <Icon className="h-3.5 w-3.5 text-primary/70 shrink-0" strokeWidth={1.5} />
-                          <span className="text-sm font-light text-foreground/80 group-hover:text-primary">{label}</span>
+                          className="flex items-center gap-2.5 rounded-xl px-2.5 py-2 hover:bg-primary/8 group transition-colors">
+                          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                            <Icon className="h-3.5 w-3.5 text-primary" strokeWidth={1.5} />
+                          </span>
+                          <span className="text-sm font-normal text-foreground group-hover:text-primary transition-colors">{label}</span>
                         </Link>
                       ))}
                     </div>
-                    <div className="mt-4 rounded-xl bg-primary/6 border border-primary/12 p-3">
-                      <p className="text-xs font-medium text-foreground mb-0.5">Не знаєте що обрати?</p>
-                      <p className="text-[11px] text-muted-foreground mb-2">Міла підбере товар під ваш запит</p>
+                  </div>
+
+                  {/* Col 2: Категорії */}
+                  <div className="p-4">
+                    <div className="flex items-center gap-1.5 mb-3">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-primary font-semibold">Категорії</p>
+                    </div>
+                    <div className="space-y-0.5">
+                      {categories.filter(c => !c.parentId).map(c => (
+                        <button key={c.id} onClick={() => goToCategory(c.id)}
+                          className="w-full text-left flex items-center justify-between gap-2 rounded-xl px-2.5 py-2 text-sm font-normal text-foreground hover:bg-primary/8 hover:text-primary group transition-colors">
+                          <span>{c.name}</span>
+                          <ArrowRight className="h-3 w-3 text-primary/0 group-hover:text-primary/70 transition-all group-hover:translate-x-0.5" />
+                        </button>
+                      ))}
+                    </div>
+                    <div className="mt-3 pt-3 border-t border-border/50">
+                      <button onClick={() => goToCategory()}
+                        className="w-full text-left flex items-center gap-1.5 rounded-xl px-2.5 py-2 text-sm font-semibold text-primary hover:bg-primary/8 transition-colors group">
+                        Усі товари <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Col 3: Швидко знайти */}
+                  <div className="p-4 flex flex-col">
+                    <div className="flex items-center gap-1.5 mb-3">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-primary font-semibold">Швидко знайти</p>
+                    </div>
+                    <div className="space-y-0.5">
+                      {[
+                        { Icon: Star, label: "Хіти продажів", url: "/catalog?q=хіт", badge: "🔥" },
+                        { Icon: Zap, label: "Новинки", url: "/catalog?q=новинка", badge: "✨" },
+                        { Icon: Heart, label: "Зі знижкою", url: "/catalog", badge: "%" },
+                      ].map(({ Icon, label, url, badge }) => (
+                        <Link key={label} to={url} onClick={() => setCatOpen(false)}
+                          className="flex items-center gap-2.5 rounded-xl px-2.5 py-2 hover:bg-primary/8 group transition-colors">
+                          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-secondary group-hover:bg-primary/15 transition-colors text-sm">
+                            {badge}
+                          </span>
+                          <span className="text-sm font-normal text-foreground group-hover:text-primary transition-colors">{label}</span>
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="mt-4 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 p-3.5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <p className="text-xs font-semibold text-foreground mb-1">Не знаєте що обрати?</p>
+                        <p className="text-[11px] text-muted-foreground leading-relaxed">Міла — AI-консультант підбере товар під ваш запит безкоштовно</p>
+                      </div>
                       <button
                         onClick={() => { setCatOpen(false); document.querySelector<HTMLButtonElement>('[aria-label="Відкрити підтримку"]')?.click(); }}
-                        className="text-xs font-semibold text-primary hover:underline">
-                        Запитати AI →
+                        className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-white bg-primary hover:bg-primary/90 transition-colors rounded-lg px-3 py-1.5 w-fit">
+                        Запитати AI <ArrowRight className="h-3 w-3" />
                       </button>
                     </div>
                   </div>

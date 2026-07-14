@@ -93,14 +93,11 @@ async function tgAction(chatId: number) {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // Always respond 200 quickly so Telegram doesn't retry
-  res.status(200).json({ ok: true });
-
-  if (req.method !== 'POST') return;
+  if (req.method !== 'POST') return res.status(200).json({ ok: true });
 
   const update = req.body;
   const msg = update?.message;
-  if (!msg?.text || !msg?.chat?.id) return;
+  if (!msg?.text || !msg?.chat?.id) return res.status(200).json({ ok: true });
 
   const chatId: number = msg.chat.id;
   const userText: string = msg.text.trim();
@@ -111,13 +108,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     await tgSend(chatId,
       'Привіт! Я Міла — консультант BodyHome 👋\n\nДопоможу підібрати ортопедичні подушки, масажери, устілки, бандажі та інші товари для здоров\'я і краси.\n\nЗапитуйте — відповім одразу!',
     );
-    return;
+    return res.status(200).json({ ok: true });
   }
 
   // /catalog command
   if (userText === '/catalog') {
     await tgSend(chatId, 'Перегляньте весь каталог на сайті:', [[{ text: '🛍 Відкрити каталог', url: `${SITE}/catalog` }]]);
-    return;
+    return res.status(200).json({ ok: true });
   }
 
   // /help command
@@ -125,26 +122,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     await tgSend(chatId,
       'Що я вмію:\n\n• Підібрати товар під ваш запит\n• Розповісти про ціни та наявність\n• Відповісти про доставку та оплату\n• Допомогти з поверненням\n\nПросто напишіть своє питання! 💬\n\nДля зв\'язку з менеджером: t.me/BodyHome1',
     );
-    return;
+    return res.status(200).json({ ok: true });
   }
 
   try {
     await tgAction(chatId);
 
-    // Save user message to Supabase
     await supabase.from('chat_messages').insert({ session_id: sessionId, sender: 'customer', text: userText });
 
-    // Load recent history
-    const { data: rows } = await supabase
-      .from('chat_messages')
-      .select('sender, text')
-      .eq('session_id', sessionId)
-      .order('created_at', { ascending: true })
-      .limit(20);
+    const [{ data: rows }, { text: productContext, productMap }] = await Promise.all([
+      supabase.from('chat_messages').select('sender, text').eq('session_id', sessionId).order('created_at', { ascending: true }).limit(20),
+      buildProductContext(),
+    ]);
 
-    const { text: productContext, productMap } = await buildProductContext();
-
-    // Build Gemini history (alternating user/model turns)
     type Turn = { role: 'user' | 'model'; text: string };
     const turns: Turn[] = [];
     for (const r of (rows ?? []) as any[]) {
@@ -158,7 +148,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
     }
 
-    if (!turns.length || turns[turns.length - 1].role !== 'user') return;
+    if (!turns.length || turns[turns.length - 1].role !== 'user') return res.status(200).json({ ok: true });
 
     const history = turns.slice(0, -1).map(t => ({ role: t.role, parts: [{ text: t.text }] }));
 
@@ -167,27 +157,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const result = await chat.sendMessage(turns[turns.length - 1].text);
     const aiRaw = result.response.text().trim();
 
-    if (!aiRaw) return;
+    if (!aiRaw) return res.status(200).json({ ok: true });
 
-    // Parse [REFS:slug1,slug2]
     const refsMatch = aiRaw.match(/\[REFS:([^\]]+)\]/);
     const cleanText = aiRaw.replace(/\[REFS:[^\]]*\]/g, '').trim();
     const slugs = refsMatch ? refsMatch[1].split(',').map(s => s.trim()).filter(Boolean) : [];
     const refProducts = slugs.map(s => productMap.get(s)).filter(Boolean) as ProductInfo[];
 
-    // Save AI response to Supabase
     await supabase.from('chat_messages').insert({ session_id: sessionId, sender: 'admin', text: cleanText });
 
-    // Build inline keyboard with product links (one per row)
     const keyboard: object[][] = refProducts.map(p => {
       const priceLabel = p.original_price ? `${p.price}₴ (було ${p.original_price}₴)` : `${p.price}₴`;
       return [{ text: `🛍 ${p.name} — ${priceLabel}`, url: `${SITE}/product/${p.slug}` }];
     });
 
     await tgSend(chatId, cleanText, keyboard);
+    return res.status(200).json({ ok: true });
 
   } catch (err) {
     console.error('Telegram bot error:', err);
     await tgSend(chatId, 'Вибачте, виникла технічна помилка. Будь ласка, напишіть нам напряму: t.me/BodyHome1');
+    return res.status(200).json({ ok: true });
   }
 }

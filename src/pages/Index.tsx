@@ -77,7 +77,7 @@ const ProductCarousel = ({ products }: { products: any[] }) => {
   const scroll = (dir: "left" | "right") => {
     if (!scrollRef.current) return;
     const card = scrollRef.current.querySelector("article");
-    const w = card ? card.offsetWidth + 16 : 240;
+    const w = card ? card.offsetWidth + 12 : 200;
     scrollRef.current.scrollBy({ left: dir === "right" ? w * 2 : -w * 2, behavior: "smooth" });
   };
   if (products.length === 0) return (
@@ -86,22 +86,43 @@ const ProductCarousel = ({ products }: { products: any[] }) => {
     </div>
   );
   return (
-    <div className="relative px-4 sm:px-6 lg:px-8">
+    <div className="relative">
+      {/* Desktop scroll buttons */}
       <button onClick={() => scroll("left")} aria-label="Прокрутити ліворуч"
-        className="absolute left-0 sm:left-1 top-1/2 -translate-y-8 z-10 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
-        <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
+        className="hidden sm:flex absolute left-0 sm:left-2 top-1/2 -translate-y-8 z-10 h-10 w-10 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
+        <ChevronLeft className="h-4 w-4" aria-hidden="true" />
       </button>
       <button onClick={() => scroll("right")} aria-label="Прокрутити праворуч"
-        className="absolute right-0 sm:right-1 top-1/2 -translate-y-8 z-10 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
-        <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
+        className="hidden sm:flex absolute right-0 sm:right-2 top-1/2 -translate-y-8 z-10 h-10 w-10 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
+        <ChevronRight className="h-4 w-4" aria-hidden="true" />
       </button>
-      <div ref={scrollRef} className="flex gap-3 overflow-x-auto pb-3 mx-6 sm:mx-8"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
+      {/* Mobile: full-bleed snap scroll; Desktop: padded */}
+      <div
+        ref={scrollRef}
+        className="flex gap-3 overflow-x-auto pb-2 sm:mx-10 px-4 sm:px-0"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          scrollSnapType: "x mandatory",
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
         {products.map(p => (
-          <div key={p.id} className="shrink-0 w-[calc(25%-10px)] min-w-[160px] max-w-[240px]">
+          <div
+            key={p.id}
+            className="shrink-0"
+            style={{
+              width: "calc(50% - 8px)",
+              minWidth: "152px",
+              maxWidth: "220px",
+              scrollSnapAlign: "start",
+            }}
+          >
             <ProductCard product={p} compact />
           </div>
         ))}
+        {/* Trailing spacer for mobile edge padding */}
+        <div className="sm:hidden shrink-0 w-1" aria-hidden="true" />
       </div>
     </div>
   );
@@ -149,7 +170,7 @@ const Index = () => {
   return (
     <div>
       {/* ── HERO ── */}
-      <section className="hero-bg relative overflow-hidden min-h-[500px] sm:min-h-[580px] lg:min-h-[640px] flex items-center">
+      <section className="hero-bg relative overflow-hidden min-h-[88svh] sm:min-h-[580px] lg:min-h-[640px] flex items-center">
         {/* Photo */}
         <div className="absolute inset-y-0 right-0 w-full sm:w-[62%] lg:w-[55%]">
           <OptimizedImage
@@ -224,7 +245,7 @@ const Index = () => {
       </section>
 
       {/* ── CATEGORIES ── */}
-      <section className="container py-12 sm:py-20">
+      <section className="container py-8 sm:py-20">
         <div className="mb-6 sm:mb-10 flex items-end justify-between gap-4">
           <div>
             <p className="aura-kicker mb-3">каталог</p>
@@ -235,7 +256,19 @@ const Index = () => {
             Усі товари <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
-        <div className="grid grid-cols-3 gap-2 sm:gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7">
+        {/* Mobile: snap scroll; Desktop: grid */}
+        <div
+          className="sm:hidden flex gap-3 overflow-x-auto pb-2 -mx-4 px-4"
+          style={{ scrollbarWidth: "none", scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}
+        >
+          {categories.map(c => (
+            <div key={c.id} className="shrink-0" style={{ width: "calc(33vw - 16px)", minWidth: "96px", maxWidth: "140px", scrollSnapAlign: "start" }}>
+              <CategoryCard category={c} />
+            </div>
+          ))}
+          <div className="shrink-0 w-1" />
+        </div>
+        <div className="hidden sm:grid grid-cols-3 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-7">
           {categories.map(c => <CategoryCard key={c.id} category={c} />)}
         </div>
       </section>
@@ -252,7 +285,7 @@ const Index = () => {
               Оберіть свій запит — підберемо відповідні товари
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {[
               {
                 Icon: () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M12 2C9.5 2 7 4.5 7 7v10c0 2.5 2.5 5 5 5s5-2.5 5-5V7c0-2.5-2.5-5-5-5z"/><path d="M9 10h6M9 14h6"/></svg>,
@@ -326,7 +359,7 @@ const Index = () => {
               },
             ].map((item, i) => (
               <Link key={i} to={item.link}
-                className="group relative flex flex-col gap-3 rounded-2xl border p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.10)] active:scale-[0.98] backdrop-blur-sm"
+                className="group relative flex flex-col gap-2 sm:gap-3 rounded-2xl border p-3.5 sm:p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.10)] active:scale-[0.98] backdrop-blur-sm"
                 style={{
                   background: `linear-gradient(135deg, rgba(255,255,255,0.88) 0%, rgba(${item.rgb},0.08) 100%)`,
                   borderColor: `rgba(${item.rgb},0.22)`,
@@ -336,9 +369,9 @@ const Index = () => {
 
                 {/* Top row: icon + badge */}
                 <div className="flex items-start justify-between">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
+                  <div className="flex h-9 w-9 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl"
                     style={{ backgroundColor: `rgba(${item.rgb},0.12)`, color: item.accent }}>
-                    <item.Icon />
+                    <span className="scale-75 sm:scale-100"><item.Icon /></span>
                   </div>
                   {item.badge && (
                     <span className="rounded-full px-2.5 py-0.5 text-[10px] font-bold text-white uppercase tracking-wide"
@@ -350,8 +383,8 @@ const Index = () => {
 
                 {/* Content */}
                 <div className="flex-1">
-                  <p className="font-semibold text-foreground text-sm sm:text-base">{item.title}</p>
-                  <p className="hidden sm:block text-xs text-muted-foreground mt-0.5 font-light">{item.desc}</p>
+                  <p className="font-semibold text-foreground text-xs sm:text-base leading-tight">{item.title}</p>
+                  <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 font-light leading-tight line-clamp-2">{item.desc}</p>
                 </div>
 
                 {/* Footer */}
@@ -525,7 +558,30 @@ const Index = () => {
               Всі статті <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Mobile: horizontal snap scroll; Desktop: grid */}
+          <div
+            className="sm:hidden flex gap-3 overflow-x-auto pb-2 -mx-4 px-4"
+            style={{ scrollbarWidth: "none", scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch" }}
+          >
+            {articles.map((a, i) => (
+              <Link key={i} to={a.link}
+                className={`group shrink-0 flex flex-col overflow-hidden rounded-2xl bg-gradient-to-br ${a.bg} border border-white/60 transition-all duration-300 active:scale-[0.98]`}
+                style={{ width: "72vw", maxWidth: "280px", scrollSnapAlign: "start" }}>
+                <div className="flex items-center justify-center py-7">
+                  <span className="text-5xl">{a.emoji}</span>
+                </div>
+                <div className="flex flex-col flex-1 bg-white/70 p-4">
+                  <span className="text-[9px] uppercase tracking-[0.2em] font-medium mb-1.5" style={{ color: a.accent }}>{a.tag}</span>
+                  <h3 className="text-sm font-medium leading-snug text-foreground mb-2 line-clamp-2">{a.title}</h3>
+                  <div className="mt-auto flex items-center gap-1 text-xs font-medium" style={{ color: a.accent }}>
+                    Читати <ArrowRight size={11} />
+                  </div>
+                </div>
+              </Link>
+            ))}
+            <div className="shrink-0 w-1" />
+          </div>
+          <div className="hidden sm:grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {articles.map((a, i) => (
               <Link key={i} to={a.link}
                 className={`group flex flex-col overflow-hidden rounded-2xl bg-gradient-to-br ${a.bg} border border-white/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-card`}>

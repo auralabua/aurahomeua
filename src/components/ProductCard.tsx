@@ -186,8 +186,8 @@ const ProductCardInner = ({ product, compact = false, categoryName }: ProductCar
           <div className="mt-auto pt-2 space-y-2">
             <PriceBlock price={displayPrice} originalPrice={product.originalPrice} compact />
             <Button onClick={() => addItem(product, 1, selectedVar)} size="sm"
-              className="w-full h-8 rounded-full btn-aura border-0 text-[10px] font-medium gap-1 touch-manipulation">
-              <ShoppingCart className="h-3 w-3 shrink-0" />
+              className="w-full h-9 rounded-full btn-aura border-0 text-[11px] font-medium gap-1 touch-manipulation">
+              <ShoppingCart className="h-3.5 w-3.5 shrink-0" />
               До кошика
             </Button>
           </div>

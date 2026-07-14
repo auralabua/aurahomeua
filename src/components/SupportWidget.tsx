@@ -170,7 +170,7 @@ export const SupportWidget = () => {
     <>
       {/* ── Popup ─────────────────────────────────────────── */}
       {open && (
-        <div className="fixed z-50 left-4 right-4 bottom-24 sm:left-auto sm:right-6 sm:w-80 animate-in slide-in-from-bottom-4 fade-in duration-200">
+        <div className="fixed z-50 left-4 right-4 bottom-[8.5rem] sm:bottom-24 sm:left-auto sm:right-6 sm:w-80 animate-in slide-in-from-bottom-4 fade-in duration-200">
           <div className="bg-white rounded-2xl shadow-xl border border-border/30 overflow-hidden flex flex-col max-h-[520px]">
 
             {/* Header */}
@@ -366,7 +366,7 @@ export const SupportWidget = () => {
       )}
 
       {/* ── Floating button ──────────────────────────────── */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-[4.5rem] right-4 sm:bottom-6 sm:right-6 z-50">
         {!open && (
           <span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-25 pointer-events-none" />
         )}

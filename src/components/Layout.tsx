@@ -3,6 +3,7 @@ import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { SupportWidget } from "./SupportWidget";
 import { TelegramPopup } from "./TelegramPopup";
+import { BottomNav } from "./BottomNav";
 
 export const Layout = () => (
   <div className="flex min-h-screen flex-col bg-background">
@@ -13,11 +14,14 @@ export const Layout = () => (
       Перейти до основного вмісту
     </a>
     <Navbar />
-    <main id="main-content" className="flex-1">
+    <main id="main-content" className="flex-1 pb-14 lg:pb-0">
       <Outlet />
     </main>
-    <Footer />
+    <div className="pb-14 lg:pb-0">
+      <Footer />
+    </div>
     <SupportWidget />
     <TelegramPopup />
+    <BottomNav />
   </div>
 );

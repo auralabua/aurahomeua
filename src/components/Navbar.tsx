@@ -1,11 +1,27 @@
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { ShoppingCart, Menu, X, Phone, Sparkles, ChevronDown, ArrowRight, BookOpen, Bone, Waves, Baby, Activity, Heart, Zap, BedDouble, Monitor, RotateCcw, Footprints, Star } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCategoriesAsLegacy } from "@/hooks/useShopData";
 import { Button } from "@/components/ui/button";
 import { SearchAutocomplete } from "@/components/SearchAutocomplete";
+
+function useHideOnScroll() {
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
+  const handler = useCallback(() => {
+    const y = window.scrollY;
+    if (y < 60) { setHidden(false); lastY.current = y; return; }
+    setHidden(y > lastY.current);
+    lastY.current = y;
+  }, []);
+  useEffect(() => {
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, [handler]);
+  return hidden;
+}
 
 const PHONE = "+380956981124";
 const TELEGRAM = "https://t.me/BodyHome1";
@@ -33,6 +49,7 @@ export const Navbar = () => {
   const { categories } = useCategoriesAsLegacy();
   const navigate = useNavigate();
   const location = useLocation();
+  const navHidden = useHideOnScroll();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [catOpen, setCatOpen] = useState(false);
   const [blogOpen, setBlogOpen] = useState(false);
@@ -64,7 +81,7 @@ export const Navbar = () => {
   const isCatalogActive = location.pathname.startsWith("/catalog");
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/82 backdrop-blur-2xl">
+    <header className={`sticky top-0 z-50 w-full border-b border-border bg-background/82 backdrop-blur-2xl transition-transform duration-300 lg:translate-y-0 ${navHidden && !mobileOpen ? "-translate-y-full" : "translate-y-0"}`}>
       {/* Top bar */}
       <div className="hidden lg:block border-b border-border bg-white/55">
         <div className="container flex h-9 items-center justify-between text-[11px] text-muted-foreground">

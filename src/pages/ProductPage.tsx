@@ -1167,7 +1167,7 @@ const ProductPage = () => {
 
         {/* Sticky mobile add-to-cart bar — always rendered, slides in/out */}
         <div
-          className={`md:hidden fixed bottom-0 left-0 right-0 z-50 transition-transform duration-300 ease-out ${
+          className={`md:hidden fixed bottom-14 left-0 right-0 z-50 transition-transform duration-300 ease-out ${
             showStickyBar ? "translate-y-0" : "translate-y-full"
           }`}
           aria-hidden={!showStickyBar}
@@ -1264,8 +1264,8 @@ const ProductPage = () => {
           );
         })()}
 
-        {/* Mobile spacer — keeps content above sticky add-to-cart bar */}
-        <div className="h-24 md:hidden" aria-hidden="true" />
+        {/* Mobile spacer — keeps content above sticky add-to-cart bar + bottom nav */}
+        <div className="h-32 md:hidden" aria-hidden="true" />
       </div>
     </div>
   );

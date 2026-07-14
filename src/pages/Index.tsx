@@ -11,7 +11,7 @@ import { OptimizedImage } from "@/components/OptimizedImage";
 import { formatUAH } from "@/data/products";
 
 // Жінка — домашній самодогляд, теплі тони
-const HERO_IMG = "https://images.pexels.com/photos/3985163/pexels-photo-3985163.jpeg?auto=compress&cs=tinysrgb&w=1400";
+const HERO_IMG = "https://i.ibb.co/MDWYYnRF/Gemini-Generated-Image-cgz3hxcgz3hxcgz3-1.png";
 
 
 

@@ -97,10 +97,14 @@ export const Navbar = () => {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  const closeMenu = useCallback(() => {
+    setMobileOpen(false);
+    document.body.style.overflow = "";
+  }, []);
+
   const goToCategory = (catId?: string) => {
     setCatOpen(false);
-    setMobileCatOpen(false);
-    setMobileOpen(false);
+    closeMenu();
     navigate(catId ? `/catalog?category=${catId}` : "/catalog");
   };
 
@@ -333,7 +337,7 @@ export const Navbar = () => {
             <div className="px-4 pt-4 pb-3 border-b border-border">
               <SearchAutocomplete
                 placeholder="Пошук товарів..."
-                onNavigate={() => setMobileOpen(false)}
+                onNavigate={closeMenu}
               />
             </div>
 
@@ -354,7 +358,7 @@ export const Navbar = () => {
                   </Link>
                 ))}
                 <button
-                  onClick={() => { setMobileOpen(false); document.querySelector<HTMLButtonElement>('[aria-label="Відкрити підтримку"]')?.click(); }}
+                  onClick={() => { closeMenu(); document.querySelector<HTMLButtonElement>('[aria-label="Відкрити підтримку"]')?.click(); }}
                   className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 border border-primary/30 bg-primary/5 hover:bg-primary/10 active:scale-95 transition-all">
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/20">
                     <Sparkles className="h-4 w-4 text-primary" strokeWidth={1.5} />
@@ -366,7 +370,7 @@ export const Navbar = () => {
 
             {/* Головна link */}
             <div className="px-4 pb-1">
-              <NavLink to="/" end onClick={() => { setMobileOpen(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              <NavLink to="/" end onClick={() => { closeMenu(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                 className={({ isActive }) => `flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-colors ${isActive ? "bg-secondary text-primary" : "text-foreground hover:bg-secondary hover:text-primary"}`}>
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                   <Star className="h-4 w-4 text-primary" strokeWidth={1.5} />
@@ -431,13 +435,13 @@ export const Navbar = () => {
                   <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
                   <p className="text-[10px] uppercase tracking-[0.22em] text-primary font-semibold">Блог</p>
                 </div>
-                <Link to="/blog" onClick={() => setMobileOpen(false)} className="text-xs font-medium text-primary hover:underline">
+                <Link to="/blog" onClick={closeMenu} className="text-xs font-medium text-primary hover:underline">
                   Всі статті →
                 </Link>
               </div>
               <div className="space-y-0.5">
                 {blogItems.slice(0, 3).map((item, i) => (
-                  <Link key={i} to={item.link} onClick={() => setMobileOpen(false)}
+                  <Link key={i} to={item.link} onClick={closeMenu}
                     className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-secondary transition-colors">
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                       <item.icon className="h-4 w-4 text-primary" strokeWidth={1.5} />
@@ -454,14 +458,14 @@ export const Navbar = () => {
             {/* Про нас + Контакти */}
             <div className="px-4 pt-3 pb-3 border-t border-border">
               <div className="grid grid-cols-2 gap-2">
-                <NavLink to="/about" onClick={() => setMobileOpen(false)}
+                <NavLink to="/about" onClick={closeMenu}
                   className={({ isActive }) => `flex items-center gap-2.5 rounded-xl px-3 py-3 text-sm font-medium transition-colors ${isActive ? "bg-secondary text-primary" : "text-foreground hover:bg-secondary hover:text-primary"}`}>
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                     <Info className="h-4 w-4 text-primary" strokeWidth={1.5} />
                   </span>
                   Про нас
                 </NavLink>
-                <NavLink to="/contacts" onClick={() => setMobileOpen(false)}
+                <NavLink to="/contacts" onClick={closeMenu}
                   className={({ isActive }) => `flex items-center gap-2.5 rounded-xl px-3 py-3 text-sm font-medium transition-colors ${isActive ? "bg-secondary text-primary" : "text-foreground hover:bg-secondary hover:text-primary"}`}>
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                     <MapPin className="h-4 w-4 text-primary" strokeWidth={1.5} />

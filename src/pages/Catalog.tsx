@@ -336,46 +336,63 @@ const Catalog = () => {
         );
         const subs = activeParent ? categories.filter(s => s.parentId === activeParent.id) : [];
         return (
-          <div className="lg:hidden -mx-4 px-4 mb-6 space-y-2">
+          <div className="lg:hidden -mx-4 px-4 mb-6 space-y-2.5">
+            {/* Category icon chips */}
             <div className="overflow-x-auto scrollbar-none">
-              <div className="flex gap-2 w-max pb-1">
+              <div className="flex gap-2 w-max pb-2 pt-0.5 px-0.5">
+                {/* Усі */}
                 <button
                   onClick={() => { setSelectedCategories([]); setPage(1); }}
-                  className={`shrink-0 px-4 py-2 rounded-full text-xs font-light border transition-all ${
+                  className={`shrink-0 inline-flex items-center gap-2 px-3.5 py-2.5 rounded-2xl border-2 transition-all duration-200 active:scale-95 ${
                     selectedCategories.length === 0
-                      ? "bg-primary text-white border-primary"
-                      : "bg-white/70 text-foreground/80 border-border hover:border-primary/40"
+                      ? "bg-primary text-white border-primary shadow-md"
+                      : "bg-white text-foreground/80 border-border/60 shadow-sm"
                   }`}
                 >
-                  Усі
+                  <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-xl text-base transition-colors ${
+                    selectedCategories.length === 0 ? "bg-white/20" : "bg-primary/10"
+                  }`}>🛍️</span>
+                  <span className="text-xs font-semibold whitespace-nowrap">Усі товари</span>
                 </button>
+
                 {topCategories.map(c => {
                   const isActive = c.id === activeParent?.id;
+                  const Icon = categoryIcons[c.id];
                   return (
                     <button
                       key={c.id}
                       onClick={() => { setSelectedCategories([c.id]); setPage(1); }}
-                      className={`shrink-0 px-4 py-2 rounded-full text-xs font-light border transition-all ${
+                      className={`shrink-0 inline-flex items-center gap-2 px-3.5 py-2.5 rounded-2xl border-2 transition-all duration-200 active:scale-95 ${
                         isActive
-                          ? "bg-primary text-white border-primary"
-                          : "bg-white/70 text-foreground/80 border-border hover:border-primary/40"
+                          ? "bg-primary text-white border-primary shadow-md"
+                          : "bg-white text-foreground/80 border-border/60 shadow-sm"
                       }`}
                     >
-                      {c.name}
+                      <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-xl transition-colors ${
+                        isActive ? "bg-white/20" : "bg-primary/10"
+                      }`}>
+                        {Icon
+                          ? <Icon className={`h-4 w-4 ${isActive ? "text-white" : "text-primary"}`} strokeWidth={1.5} />
+                          : <BedDouble className={`h-4 w-4 ${isActive ? "text-white" : "text-primary"}`} strokeWidth={1.5} />
+                        }
+                      </span>
+                      <span className="text-xs font-semibold whitespace-nowrap">{c.name}</span>
                     </button>
                   );
                 })}
               </div>
             </div>
+
+            {/* Subcategory pills — appear animated when a parent is selected */}
             {subs.length > 0 && (
-              <div className="overflow-x-auto scrollbar-none">
-                <div className="flex gap-2 w-max pb-1">
+              <div className="overflow-x-auto scrollbar-none animate-in fade-in slide-in-from-top-1 duration-200">
+                <div className="flex gap-1.5 w-max pb-1">
                   <button
                     onClick={() => { setSelectedCategories([activeParent!.id]); setPage(1); }}
-                    className={`shrink-0 px-3 py-1.5 rounded-full text-[11px] font-light border transition-all ${
+                    className={`shrink-0 px-3.5 py-2 rounded-full text-xs font-semibold border-2 transition-all duration-200 active:scale-95 ${
                       selectedCategories.includes(activeParent!.id) && !subs.some(s => selectedCategories.includes(s.id))
-                        ? "bg-primary/15 text-primary border-primary/40"
-                        : "bg-white/60 text-foreground/70 border-border hover:border-primary/40"
+                        ? "bg-primary/15 text-primary border-primary/50"
+                        : "bg-white text-foreground/70 border-border"
                     }`}
                   >
                     Усі {activeParent!.name.toLowerCase()}
@@ -384,10 +401,10 @@ const Catalog = () => {
                     <button
                       key={s.id}
                       onClick={() => { setSelectedCategories([s.id]); setPage(1); }}
-                      className={`shrink-0 px-3 py-1.5 rounded-full text-[11px] font-light border transition-all ${
+                      className={`shrink-0 px-3.5 py-2 rounded-full text-xs font-semibold border-2 transition-all duration-200 active:scale-95 ${
                         selectedCategories.includes(s.id)
-                          ? "bg-primary text-white border-primary"
-                          : "bg-white/60 text-foreground/70 border-border hover:border-primary/40"
+                          ? "bg-primary text-white border-primary shadow-sm"
+                          : "bg-white text-foreground/70 border-border"
                       }`}
                     >
                       {s.name}

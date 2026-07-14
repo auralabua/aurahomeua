@@ -10,8 +10,8 @@ import { useSEO } from "@/hooks/useSEO";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { formatUAH } from "@/data/products";
 
-// Жінка з масажером вдома — домашній комфорт
-const HERO_IMG = "https://images.pexels.com/photos/5927933/pexels-photo-5927933.jpeg?auto=compress&cs=tinysrgb&w=1400";
+// Жінка — домашній самодогляд, теплі тони
+const HERO_IMG = "https://images.pexels.com/photos/3985163/pexels-photo-3985163.jpeg?auto=compress&cs=tinysrgb&w=1400";
 
 
 
@@ -175,18 +175,18 @@ const Index = () => {
         <div className="absolute inset-y-0 right-0 w-full sm:w-[62%] lg:w-[55%]">
           <OptimizedImage
             src={HERO_IMG}
-            alt="Масажери та товари для краси і здоров'я вдома — BodyHome"
-            className="h-full w-full object-cover object-top"
+            alt="Товари для краси, здоров'я та догляду вдома — BodyHome"
+            className="h-full w-full object-cover object-[center_25%]"
             loading="eager"
             fetchPriority="high"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 62vw, 55vw"
             quality={85}
           />
-          {/* Desktop: beige gradient so dark text sits on light background */}
-          <div className="hidden sm:block absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-[#F5F0EA] via-[#F5F0EA]/85 to-transparent" />
-          {/* Mobile: dark overlay so white text is readable over the photo */}
-          <div className="sm:hidden absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.0) 100%)" }} />
-          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#F5F0EA]/50 to-transparent" />
+          {/* Desktop: warm cream gradient */}
+          <div className="hidden sm:block absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-[#F5F0EA] via-[#F5F0EA]/88 to-transparent" />
+          {/* Mobile: warm amber-tinted dark overlay */}
+          <div className="sm:hidden absolute inset-0" style={{ background: "linear-gradient(150deg, rgba(35,18,6,0.72) 0%, rgba(35,18,6,0.35) 55%, rgba(35,18,6,0.0) 100%)" }} />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#F5F0EA]/60 to-transparent" />
         </div>
 
         {/* Content */}

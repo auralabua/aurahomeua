@@ -25,7 +25,7 @@ const categoryIcons: Record<string, LucideIcon> = {
 
 const PAGE_SIZE = 24;
 
-type SortOption = "default" | "price_asc" | "price_desc" | "name_asc";
+type SortOption = "default" | "price_asc" | "price_desc" | "name_asc" | "rating_desc";
 
 const Catalog = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -93,6 +93,7 @@ const Catalog = () => {
     if (sort === "price_asc") list = [...list].sort((a, b) => a.price - b.price);
     if (sort === "price_desc") list = [...list].sort((a, b) => b.price - a.price);
     if (sort === "name_asc") list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+    if (sort === "rating_desc") list = [...list].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
     return list;
   }, [selectedCategories, minPrice, maxPrice, query, sort, products, childrenBySlug]);
 
@@ -141,8 +142,41 @@ const Catalog = () => {
     ],
   });
 
+  const PROBLEM_FILTERS: { label: string; emoji: string; category: CategoryId }[] = [
+    { label: "Шия і спина", emoji: "🦴", category: "ortopedychni-podushky" as CategoryId },
+    { label: "Ноги і стопи", emoji: "👣", category: "ortopedychni-ustilky" as CategoryId },
+    { label: "Суглоби", emoji: "🦵", category: "ortezy-i-bandazhi" as CategoryId },
+    { label: "Масаж", emoji: "💆", category: "masazhery" as CategoryId },
+    { label: "Краса", emoji: "✨", category: "tovary-dlia-krasy" as CategoryId },
+    { label: "Дітям", emoji: "👶", category: "rozvyvaiuchi-ihrashky" as CategoryId },
+  ];
+
   const Filters = () => (
     <div className="space-y-6">
+      {/* За проблемою — швидкі чіпси */}
+      <div>
+        <p className="text-[10px] font-semibold text-muted-foreground mb-3 uppercase tracking-widest">За проблемою</p>
+        <div className="flex flex-wrap gap-1.5">
+          {PROBLEM_FILTERS.map(pf => {
+            const isActive = selectedCategories.includes(pf.category);
+            return (
+              <button
+                key={pf.category}
+                onClick={() => { toggleCategory(pf.category); }}
+                className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-light transition-all ${
+                  isActive
+                    ? "bg-primary text-white border-primary shadow-sm"
+                    : "border-border text-foreground/70 hover:border-primary/50 hover:text-primary hover:bg-primary/5"
+                }`}
+              >
+                <span>{pf.emoji}</span>
+                {pf.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Категорії — акордеон з іконками */}
       <div>
         <p className="text-[10px] font-semibold text-muted-foreground mb-3 uppercase tracking-widest">Категорії</p>
@@ -288,6 +322,7 @@ const Catalog = () => {
               <SelectItem value="price_asc" className="font-light">Ціна: від низької</SelectItem>
               <SelectItem value="price_desc" className="font-light">Ціна: від високої</SelectItem>
               <SelectItem value="name_asc" className="font-light">Назва А-Я</SelectItem>
+              <SelectItem value="rating_desc" className="font-light">За рейтингом</SelectItem>
             </SelectContent>
           </Select>
         </div>

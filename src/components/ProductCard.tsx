@@ -161,7 +161,12 @@ const ProductCardInner = ({ product, compact = false, categoryName }: ProductCar
                 {product.badge === "Хіт продажів" ? "Хіт" : product.badge}
               </span>
             )}
-            {!product.badge && product.category === "krasota-i-doglyad" && (
+            {!product.badge && (product.reviews ?? 0) >= 50 && (
+              <span className="rounded-md px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-white" style={{ background: "linear-gradient(135deg,#f59e0b,#ef4444)" }}>
+                ХІТ
+              </span>
+            )}
+            {!product.badge && (product.reviews ?? 0) < 50 && product.category === "krasota-i-doglyad" && (
               <span className="rounded-md px-1.5 py-0.5 text-[9px] font-semibold tracking-wide text-white" style={{ background: "linear-gradient(135deg,#c9716e,#a0509a)" }}>
                 ✨ Краса
               </span>
@@ -213,7 +218,12 @@ const ProductCardInner = ({ product, compact = false, categoryName }: ProductCar
               {product.badge === "Хіт продажів" ? "Хіт" : product.badge}
             </span>
           )}
-          {!product.badge && product.category === "krasota-i-doglyad" && (
+          {!product.badge && (product.reviews ?? 0) >= 50 && (
+            <span className="rounded-md px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm" style={{ background: "linear-gradient(135deg,#f59e0b,#ef4444)" }}>
+              ХІТ
+            </span>
+          )}
+          {!product.badge && (product.reviews ?? 0) < 50 && product.category === "krasota-i-doglyad" && (
             <span className="rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wide text-white shadow-sm" style={{ background: "linear-gradient(135deg,#c9716e,#a0509a)" }}>
               ✨ Краса
             </span>

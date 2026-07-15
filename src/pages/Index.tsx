@@ -306,27 +306,30 @@ const Index = () => {
 
           <div className="grid grid-cols-4 sm:grid-cols-7 gap-2 sm:gap-3">
             {([
-              { emoji: "🦴", label: "Спина і поперек",   link: "/catalog?category=ortezy-i-bandazhi",             bg: "#EAF2E8", anim: "tile-anim-wiggle" },
-              { emoji: "🌙", label: "Сон і шия",          link: "/catalog?category=ortopedychni-podushky",         bg: "#E8EDF5", anim: "tile-anim-float" },
-              { emoji: "👣", label: "Стопи і коліна",     link: "/catalog?category=ortopedychni-ustilky",          bg: "#EAF0F0", anim: "tile-anim-pulse" },
-              { emoji: "💆", label: "Масаж і релакс",     link: "/catalog?category=masazhery",                     bg: "#F5EFE6", anim: "tile-anim-heartbeat" },
-              { emoji: "🌊", label: "Масажні килимки",    link: "/catalog?category=ortopedychni-masazhni-kylymky", bg: "#F0EAF5", anim: "tile-anim-sway" },
-              { emoji: "✨", label: "Краса і догляд",     link: "/catalog?category=tovary-dlia-krasy",             bg: "#F5F0E0", anim: "tile-anim-float2" },
-              { emoji: "🧸", label: "Для дітей",          link: "/catalog?category=rozvyvaiuchi-ihrashky",         bg: "#F5E8F0", anim: "tile-anim-bounce" },
-            ] as { emoji: string; label: string; link: string; bg: string; anim: string }[]).map(({ emoji, label, link, bg, anim }) => (
+              { emoji: "🦴", label: "Спина і поперек",   desc: "Болі, постава, бандажі",        link: "/catalog?category=ortezy-i-bandazhi",             bg: "#EAF2E8", anim: "tile-anim-wiggle" },
+              { emoji: "🌙", label: "Сон і шия",          desc: "Ортопедичні подушки",           link: "/catalog?category=ortopedychni-podushky",         bg: "#E8EDF5", anim: "tile-anim-float" },
+              { emoji: "👣", label: "Стопи і коліна",     desc: "Устілки, плоскостопість",       link: "/catalog?category=ortopedychni-ustilky",          bg: "#EAF0F0", anim: "tile-anim-pulse" },
+              { emoji: "💆", label: "Масаж і релакс",     desc: "Зняти напругу вдома",           link: "/catalog?category=masazhery",                     bg: "#F5EFE6", anim: "tile-anim-heartbeat" },
+              { emoji: "🌊", label: "Масажні килимки",    desc: "Рефлексотерапія для ніг",       link: "/catalog?category=ortopedychni-masazhni-kylymky", bg: "#F0EAF5", anim: "tile-anim-sway" },
+              { emoji: "✨", label: "Краса і догляд",     desc: "Домашні SPA-процедури",         link: "/catalog?category=tovary-dlia-krasy",             bg: "#F5F0E0", anim: "tile-anim-float2" },
+              { emoji: "🧸", label: "Для дітей",          desc: "Розвиток і здоров'я малюка",    link: "/catalog?category=rozvyvaiuchi-ihrashky",         bg: "#F5E8F0", anim: "tile-anim-bounce" },
+            ] as { emoji: string; label: string; desc: string; link: string; bg: string; anim: string }[]).map(({ emoji, label, desc, link, bg, anim }) => (
               <Link
                 key={label}
                 to={link}
-                className="need-tile group flex flex-col items-center gap-2 rounded-2xl p-3 sm:p-4 border border-transparent hover:border-border/60 hover:bg-white hover:-translate-y-1 hover:shadow-card transition-all duration-200 active:scale-95"
+                className="need-tile group flex flex-col items-center gap-1.5 rounded-2xl p-3 sm:p-4 border border-transparent hover:border-border/60 hover:bg-white hover:-translate-y-1 hover:shadow-card transition-all duration-200 active:scale-95"
               >
                 <div
-                  className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl text-2xl sm:text-3xl shrink-0 transition-all duration-200 group-hover:scale-105"
+                  className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl text-2xl sm:text-3xl shrink-0 transition-all duration-200 group-hover:scale-105 mb-0.5"
                   style={{ background: bg }}
                 >
                   <span className={`need-tile-icon ${anim}`}>{emoji}</span>
                 </div>
-                <span className="text-[11px] sm:text-xs font-medium text-foreground/75 text-center leading-tight group-hover:text-primary transition-colors">
+                <span className="text-[11px] sm:text-xs font-semibold text-foreground/80 text-center leading-tight group-hover:text-primary transition-colors">
                   {label}
+                </span>
+                <span className="hidden sm:block text-[10px] text-foreground/45 text-center leading-tight group-hover:text-primary/60 transition-colors">
+                  {desc}
                 </span>
               </Link>
             ))}

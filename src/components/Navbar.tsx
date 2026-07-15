@@ -90,10 +90,14 @@ export const Navbar = () => {
   // Close mobile menu on route change
   useEffect(() => { setMobileOpen(false); }, [location.pathname]);
 
-  // Lock body scroll when mobile menu is open
+  // Lock body scroll + reset expanded category when mobile menu toggles
   useEffect(() => {
-    if (mobileOpen) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "";
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      setExpandedCat(null); // скидаємо розкриту категорію щоразу при закритті
+    }
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
@@ -341,7 +345,7 @@ export const Navbar = () => {
               </div>
               <div className="grid grid-cols-2 gap-2">
                 {PROBLEM_ITEMS.map(({ Icon, label, url }) => (
-                  <Link key={label} to={url} onClick={() => setMobileOpen(false)}
+                  <Link key={label} to={url} onClick={closeMenu}
                     className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 border border-border/50 bg-secondary/40 hover:bg-secondary hover:border-primary/30 active:scale-95 transition-all">
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                       <Icon className="h-4 w-4 text-primary" strokeWidth={1.5} />

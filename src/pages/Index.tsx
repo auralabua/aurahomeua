@@ -306,14 +306,14 @@ const Index = () => {
 
           <div className="grid grid-cols-4 sm:grid-cols-7 gap-2 sm:gap-3">
             {([
-              { emoji: "🩻", label: "Спина",       link: "/catalog?category=ortopedychni-podushky",    bg: "#EAF2E8", anim: "tile-anim-wiggle" },
-              { emoji: "🌙", label: "Сон і шия",   link: "/catalog?category=ortopedychni-podushky",    bg: "#E8EDF5", anim: "tile-anim-float" },
-              { emoji: "💼", label: "Офіс",         link: "/catalog?category=ortezy-i-bandazhi",        bg: "#EAF0F0", anim: "tile-anim-pulse" },
-              { emoji: "❤️‍🩹", label: "Відновлення", link: "/catalog?category=masazhery",               bg: "#F5EFE6", anim: "tile-anim-heartbeat" },
-              { emoji: "💆", label: "Напруга",      link: "/catalog?category=ortopedychni-masazhni-kylymky", bg: "#F0EAF5", anim: "tile-anim-sway" },
-              { emoji: "🏠", label: "Вдома",        link: "/catalog?category=tovary-dlia-krasy",        bg: "#F5F0E0", anim: "tile-anim-float2" },
-              { emoji: "🧸", label: "Дітям",        link: "/tovary-dlya-ditey-ortopedychni",            bg: "#F5E8F0", anim: "tile-anim-bounce" },
-            ] as const).map(({ emoji, label, link, bg, anim }) => (
+              { emoji: "🦴", label: "Спина і поперек",   link: "/catalog?category=ortezy-i-bandazhi",             bg: "#EAF2E8", anim: "tile-anim-wiggle" },
+              { emoji: "🌙", label: "Сон і шия",          link: "/catalog?category=ortopedychni-podushky",         bg: "#E8EDF5", anim: "tile-anim-float" },
+              { emoji: "👣", label: "Стопи і коліна",     link: "/catalog?category=ortopedychni-ustilky",          bg: "#EAF0F0", anim: "tile-anim-pulse" },
+              { emoji: "💆", label: "Масаж і релакс",     link: "/catalog?category=masazhery",                     bg: "#F5EFE6", anim: "tile-anim-heartbeat" },
+              { emoji: "🌊", label: "Масажні килимки",    link: "/catalog?category=ortopedychni-masazhni-kylymky", bg: "#F0EAF5", anim: "tile-anim-sway" },
+              { emoji: "✨", label: "Краса і догляд",     link: "/catalog?category=tovary-dlia-krasy",             bg: "#F5F0E0", anim: "tile-anim-float2" },
+              { emoji: "🧸", label: "Для дітей",          link: "/catalog?category=rozvyvaiuchi-ihrashky",         bg: "#F5E8F0", anim: "tile-anim-bounce" },
+            ] as { emoji: string; label: string; link: string; bg: string; anim: string }[]).map(({ emoji, label, link, bg, anim }) => (
               <Link
                 key={label}
                 to={link}

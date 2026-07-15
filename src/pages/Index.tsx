@@ -10,10 +10,11 @@ import { useSEO } from "@/hooks/useSEO";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { formatUAH } from "@/data/products";
 
-// Desktop: жінка з масажним роликом
-const HERO_IMG = "https://i.ibb.co/zHZyKCZb/2026-07-15-124714.png";
-// Mobile: портретний кадр
-const HERO_IMG_MOBILE = "https://i.ibb.co/bjHSZ7P1/Gemini-Generated-Image-yn245qyn245qyn24.png";
+// High-quality Unsplash photos downloaded at build time → public/images/
+// Desktop: Karolina Grabowska – woman on yoga mat, bright living room
+const HERO_IMG = "/images/hero-desktop.jpg";
+// Mobile: Vitaly Gariev – woman yoga in modern living room (portrait crop)
+const HERO_IMG_MOBILE = "/images/hero-mobile.jpg";
 
 
 

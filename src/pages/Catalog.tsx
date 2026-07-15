@@ -340,13 +340,12 @@ const Catalog = () => {
         );
         const subs = activeParent ? categories.filter(s => s.parentId === activeParent.id) : [];
 
-        const chipBase = "shrink-0 flex flex-col items-center gap-1.5 w-[72px] transition-all duration-200 active:scale-95 group";
+        const chipBase = "flex flex-col items-center gap-1.5 transition-all duration-200 active:scale-95 group";
 
         return (
-          <div className="lg:hidden -mx-4 px-4 mb-6 space-y-2.5">
-            {/* Icon chips row */}
-            <div className="overflow-x-auto scrollbar-none">
-              <div className="flex gap-3 w-max pb-1 pt-0.5 px-0.5">
+          <div className="lg:hidden -mx-4 px-4 mb-6 space-y-3">
+            {/* Icon chips grid — all visible, no horizontal scroll */}
+            <div className="grid grid-cols-4 gap-x-3 gap-y-4 pt-0.5">
                 {/* Усі */}
                 <button
                   onClick={() => { setSelectedCategories([]); setPage(1); }}
@@ -386,13 +385,11 @@ const Catalog = () => {
                     </button>
                   );
                 })}
-              </div>
             </div>
 
-            {/* Subcategory pills */}
+            {/* Subcategory pills — flex-wrap, no scroll */}
             {subs.length > 0 && (
-              <div className="overflow-x-auto scrollbar-none animate-in fade-in slide-in-from-top-1 duration-200">
-                <div className="flex gap-1.5 w-max pb-1">
+              <div className="flex flex-wrap gap-1.5 animate-in fade-in slide-in-from-top-1 duration-200">
                   <button
                     onClick={() => { setSelectedCategories([activeParent!.id]); setPage(1); }}
                     className={`shrink-0 px-3 py-1 rounded-full text-[11px] font-medium border transition-all duration-200 active:scale-95 ${
@@ -416,7 +413,6 @@ const Catalog = () => {
                       {s.name}
                     </button>
                   ))}
-                </div>
               </div>
             )}
           </div>

@@ -10,8 +10,10 @@ import { useSEO } from "@/hooks/useSEO";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { formatUAH } from "@/data/products";
 
-// Жінка з масажним роликом — домашній самодогляд
+// Desktop: жінка з масажним роликом
 const HERO_IMG = "https://i.ibb.co/zHZyKCZb/2026-07-15-124714.png";
+// Mobile: портретний кадр
+const HERO_IMG_MOBILE = "https://i.ibb.co/bjHSZ7P1/Gemini-Generated-Image-yn245qyn245qyn24.png";
 
 
 
@@ -171,11 +173,21 @@ const Index = () => {
     <div>
       {/* ── HERO ── */}
       <section className="relative overflow-hidden min-h-[68svh] sm:min-h-[460px] lg:min-h-[520px]">
-        {/* Full-bleed photo */}
+        {/* Mobile photo */}
+        <OptimizedImage
+          src={HERO_IMG_MOBILE}
+          alt="Товари для краси, здоров'я та догляду вдома — BodyHome"
+          className="sm:hidden absolute inset-0 h-full w-full object-cover object-[50%_15%]"
+          loading="eager"
+          fetchPriority="high"
+          sizes="100vw"
+          quality={85}
+        />
+        {/* Desktop photo */}
         <OptimizedImage
           src={HERO_IMG}
           alt="Товари для краси, здоров'я та догляду вдома — BodyHome"
-          className="absolute inset-0 h-full w-full object-cover object-[45%_30%] sm:object-[50%_25%]"
+          className="hidden sm:block absolute inset-0 h-full w-full object-cover object-[50%_25%]"
           loading="eager"
           fetchPriority="high"
           sizes="100vw"

@@ -177,6 +177,7 @@ const Index = () => {
         {/* Mobile photo */}
         <OptimizedImage
           src={HERO_IMG_MOBILE}
+          fallbackSrc="https://i.ibb.co/bjHSZ7P1/Gemini-Generated-Image-yn245qyn245qyn24.png"
           alt="Товари для краси, здоров'я та догляду вдома — BodyHome"
           className="sm:hidden absolute inset-0 h-full w-full object-cover object-[50%_15%]"
           loading="eager"
@@ -187,6 +188,7 @@ const Index = () => {
         {/* Desktop photo */}
         <OptimizedImage
           src={HERO_IMG}
+          fallbackSrc="https://i.ibb.co/zHZyKCZb/2026-07-15-124714.png"
           alt="Товари для краси, здоров'я та догляду вдома — BodyHome"
           className="hidden sm:block absolute inset-0 h-full w-full object-cover object-[50%_25%]"
           loading="eager"

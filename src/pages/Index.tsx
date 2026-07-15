@@ -197,7 +197,7 @@ const Index = () => {
         {/* ── DESKTOP: white card on left ── */}
         <div className="hidden sm:flex absolute inset-0 items-center">
           <div className="container">
-            <div className="w-[46%] lg:w-[42%] rounded-3xl bg-white/96 backdrop-blur-md p-8 lg:p-12 shadow-2xl border border-white">
+            <div className="w-[46%] lg:w-[42%] rounded-3xl bg-white p-8 lg:p-12 shadow-2xl border border-white/80">
               {/* Kicker */}
               <div className="inline-flex items-center gap-2 rounded-full bg-primary/8 border border-primary/15 px-3 py-1.5 mb-5">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />

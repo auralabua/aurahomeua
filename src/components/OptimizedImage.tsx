@@ -12,7 +12,7 @@
 const IS_VERCEL = typeof window !== "undefined" && !window.location.hostname.includes("localhost");
 
 /** Widths we generate srcset entries for */
-const SRCSET_WIDTHS = [320, 480, 640, 960, 1200] as const;
+const SRCSET_WIDTHS = [320, 480, 640, 960, 1200, 1440, 1920, 2560] as const;
 
 /** Build a single Vercel optimized URL */
 export const vercelImg = (src: string, width: number, quality = 80): string => {
@@ -76,7 +76,7 @@ export const OptimizedImage = ({
     );
   }
 
-  const defaultSrc = vercelImg(src, 800, quality);
+  const defaultSrc = vercelImg(src, 1200, quality);
 
   const handleError: React.ReactEventHandler<HTMLImageElement> = (e) => {
     // Fallback to original URL if Vercel optimization fails

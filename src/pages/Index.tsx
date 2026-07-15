@@ -10,11 +10,12 @@ import { useSEO } from "@/hooks/useSEO";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { formatUAH } from "@/data/products";
 
-// High-quality Unsplash photos downloaded at build time → public/images/
-// Desktop: Karolina Grabowska – woman on yoga mat, bright living room
-const HERO_IMG = "/images/hero-desktop.jpg";
-// Mobile: Vitaly Gariev – woman yoga in modern living room (portrait crop)
-const HERO_IMG_MOBILE = "/images/hero-mobile.jpg";
+// Pexels stock photos — served via Vercel image optimization (/_vercel/image)
+// Vercel fetches and caches these server-side; browser never hits Pexels directly.
+// Desktop: woman stretching on yoga mat, bright home living room (landscape 16:9)
+const HERO_IMG = "https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1";
+// Mobile: woman on yoga mat, portrait crop (9:16)
+const HERO_IMG_MOBILE = "https://images.pexels.com/photos/6740753/pexels-photo-6740753.jpeg?auto=compress&cs=tinysrgb&w=1080&h=1920&dpr=1";
 
 
 
@@ -177,7 +178,6 @@ const Index = () => {
         {/* Mobile photo */}
         <OptimizedImage
           src={HERO_IMG_MOBILE}
-          fallbackSrc="https://i.ibb.co/bjHSZ7P1/Gemini-Generated-Image-yn245qyn245qyn24.png"
           alt="Товари для краси, здоров'я та догляду вдома — BodyHome"
           className="sm:hidden absolute inset-0 h-full w-full object-cover object-[50%_15%]"
           loading="eager"
@@ -188,7 +188,6 @@ const Index = () => {
         {/* Desktop photo */}
         <OptimizedImage
           src={HERO_IMG}
-          fallbackSrc="https://i.ibb.co/zHZyKCZb/2026-07-15-124714.png"
           alt="Товари для краси, здоров'я та догляду вдома — BodyHome"
           className="hidden sm:block absolute inset-0 h-full w-full object-cover object-[50%_25%]"
           loading="eager"

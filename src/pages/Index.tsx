@@ -10,12 +10,21 @@ import { useSEO } from "@/hooks/useSEO";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { formatUAH } from "@/data/products";
 
-// Pexels stock photos — served via Vercel image optimization (/_vercel/image)
-// Vercel fetches and caches these server-side; browser never hits Pexels directly.
-// Desktop: woman stretching on yoga mat, bright home living room (landscape 16:9)
-const HERO_IMG = "https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1";
-// Mobile: woman on yoga mat, portrait crop (9:16)
-const HERO_IMG_MOBILE = "https://images.pexels.com/photos/6740753/pexels-photo-6740753.jpeg?auto=compress&cs=tinysrgb&w=1080&h=1920&dpr=1";
+const HERO_PRODUCTS = [
+  {
+    src: "https://images.prom.ua/6735125980_ortopedicheskaya-podushka-dlya.jpg",
+    alt: "Ортопедична подушка з ефектом пам'яті",
+    badge: "Хіт продажів",
+  },
+  {
+    src: "https://images.prom.ua/6988727235_massazhnyj-kovrik-ortek.jpg",
+    alt: "Масажний килимок Ортек",
+  },
+  {
+    src: "https://images.prom.ua/6735201816_svetodiodnaya-led-maska-dlya.jpg",
+    alt: "LED маска для обличчя",
+  },
+];
 
 
 
@@ -174,75 +183,117 @@ const Index = () => {
   return (
     <div>
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden min-h-[68svh] sm:min-h-[460px] lg:min-h-[520px]">
-        {/* Mobile photo */}
-        <OptimizedImage
-          src={HERO_IMG_MOBILE}
-          alt="Товари для краси, здоров'я та догляду вдома — BodyHome"
-          className="sm:hidden absolute inset-0 h-full w-full object-cover object-[50%_15%]"
-          loading="eager"
-          fetchPriority="high"
-          sizes="100vw"
-          quality={85}
-        />
-        {/* Desktop photo */}
-        <OptimizedImage
-          src={HERO_IMG}
-          alt="Товари для краси, здоров'я та догляду вдома — BodyHome"
-          className="hidden sm:block absolute inset-0 h-full w-full object-cover object-[50%_25%]"
-          loading="eager"
-          fetchPriority="high"
-          sizes="100vw"
-          quality={85}
-        />
+      <section className="relative overflow-hidden min-h-[68svh] sm:min-h-[460px] lg:min-h-[520px] bg-gradient-to-br from-emerald-50 via-white to-green-50/70">
+        {/* Decorative blobs */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -top-28 -right-28 h-80 w-80 rounded-full bg-primary/8" />
+          <div className="absolute bottom-0 right-1/4 h-56 w-56 translate-y-1/3 rounded-full bg-primary/5" />
+          <div className="absolute -bottom-10 -left-10 h-44 w-44 rounded-full bg-primary/6" />
+        </div>
 
-        {/* ── DESKTOP: white card on left ── */}
+        {/* ── DESKTOP ── */}
         <div className="hidden sm:flex absolute inset-0 items-center">
-          <div className="container">
-            <div className="w-[46%] lg:w-[42%] rounded-3xl bg-white p-8 lg:p-12 shadow-2xl border border-white/80">
-              {/* Kicker */}
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary/8 border border-primary/15 px-3 py-1.5 mb-5">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                <span className="text-[11px] uppercase tracking-[0.2em] text-primary font-medium">Краса та здоров'я вдома</span>
-              </div>
-              {/* H1 */}
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground leading-[1.1] mb-4">
-                Краса та здоров'я — починаються вдома
-              </h1>
-              {/* Subtitle */}
-              <p className="text-base font-light text-foreground/65 leading-relaxed mb-7 max-w-sm">
-                Масажери для обличчя і тіла, ортопедичні подушки, устілки — для щоденного догляду та комфорту. Доставка Новою Поштою.
-              </p>
-              {/* CTAs */}
-              <div className="flex flex-wrap gap-3">
-                <Button asChild size="lg" className="h-12 rounded-xl btn-aura border-0 font-medium px-8">
-                  <Link to="/catalog">Переглянути каталог <ArrowRight className="ml-2 h-4 w-4" /></Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="h-12 rounded-xl font-light px-6 border-border/50 hover:bg-secondary">
-                  <a href="#featured">Популярні товари</a>
-                </Button>
+          <div className="container flex items-center gap-10 lg:gap-14">
+
+            {/* left — text card */}
+            <div className="w-[44%] lg:w-[40%] shrink-0">
+              <div className="rounded-3xl bg-white p-8 lg:p-12 shadow-2xl border border-white/80">
+                <div className="inline-flex items-center gap-2 rounded-full bg-primary/8 border border-primary/15 px-3 py-1.5 mb-5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                  <span className="text-[11px] uppercase tracking-[0.2em] text-primary font-medium">Краса та здоров'я вдома</span>
+                </div>
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground leading-[1.1] mb-4">
+                  Краса та здоров'я — починаються вдома
+                </h1>
+                <p className="text-base font-light text-foreground/65 leading-relaxed mb-7 max-w-sm">
+                  Масажери для обличчя і тіла, ортопедичні подушки, устілки — для щоденного догляду та комфорту. Доставка Новою Поштою.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Button asChild size="lg" className="h-12 rounded-xl btn-aura border-0 font-medium px-8">
+                    <Link to="/catalog">Переглянути каталог <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="h-12 rounded-xl font-light px-6 border-border/50 hover:bg-secondary">
+                    <a href="#featured">Популярні товари</a>
+                  </Button>
+                </div>
               </div>
             </div>
+
+            {/* right — product showcase */}
+            <div className="flex-1 flex items-center justify-center gap-5 py-10">
+              {/* main product */}
+              <div className="relative">
+                <div className="w-56 h-56 lg:w-[17rem] lg:h-[17rem] bg-white rounded-3xl shadow-xl border border-gray-100 flex items-center justify-center p-5">
+                  <OptimizedImage
+                    src={HERO_PRODUCTS[0].src}
+                    alt={HERO_PRODUCTS[0].alt}
+                    className="w-full h-full object-contain"
+                    loading="eager"
+                    sizes="272px"
+                  />
+                </div>
+                <span className="absolute -top-3 -right-3 bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md whitespace-nowrap">
+                  {HERO_PRODUCTS[0].badge}
+                </span>
+              </div>
+
+              {/* secondary products stacked */}
+              <div className="hidden lg:flex flex-col gap-4">
+                <div className="w-[7.5rem] h-[7.5rem] bg-white rounded-2xl shadow-lg border border-gray-100 flex items-center justify-center p-3 rotate-2 hover:rotate-0 transition-transform">
+                  <OptimizedImage
+                    src={HERO_PRODUCTS[1].src}
+                    alt={HERO_PRODUCTS[1].alt}
+                    className="w-full h-full object-contain"
+                    sizes="120px"
+                  />
+                </div>
+                <div className="w-[7.5rem] h-[7.5rem] bg-white rounded-2xl shadow-lg border border-gray-100 flex items-center justify-center p-3 -rotate-1 hover:rotate-0 transition-transform">
+                  <OptimizedImage
+                    src={HERO_PRODUCTS[2].src}
+                    alt={HERO_PRODUCTS[2].alt}
+                    className="w-full h-full object-contain"
+                    sizes="120px"
+                  />
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        {/* ── MOBILE: white card pinned to bottom ── */}
-        <div className="sm:hidden absolute inset-x-0 bottom-0 z-10">
+        {/* ── MOBILE ── */}
+        <div className="sm:hidden absolute inset-0 flex flex-col">
+          {/* product image top-right */}
+          <div className="flex justify-end px-5 pt-6">
+            <div className="relative">
+              <div className="w-36 h-36 bg-white rounded-3xl shadow-xl border border-gray-100 flex items-center justify-center p-3">
+                <OptimizedImage
+                  src={HERO_PRODUCTS[0].src}
+                  alt={HERO_PRODUCTS[0].alt}
+                  className="w-full h-full object-contain"
+                  loading="eager"
+                  sizes="144px"
+                />
+              </div>
+              <span className="absolute -top-2 -left-2 bg-primary text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-md">Хіт</span>
+            </div>
+          </div>
+
+          {/* spacer */}
+          <div className="flex-1" />
+
+          {/* white card at bottom */}
           <div className="bg-white rounded-t-3xl px-5 pt-6 pb-8 shadow-2xl">
-            {/* Kicker */}
             <div className="inline-flex items-center gap-2 rounded-full bg-primary/8 border border-primary/15 px-3 py-1 mb-4">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               <span className="text-[11px] uppercase tracking-[0.18em] text-primary font-medium">Краса та здоров'я вдома</span>
             </div>
-            {/* H1 */}
             <h1 className="text-[1.65rem] font-extrabold text-foreground leading-[1.15] mb-3">
               Краса та здоров'я — починаються вдома
             </h1>
-            {/* Subtitle */}
             <p className="text-sm font-light text-foreground/65 leading-relaxed mb-5">
               Масажери для обличчя і тіла, ортопедичні подушки, устілки — для щоденного догляду та комфорту.
             </p>
-            {/* CTAs */}
             <div className="flex flex-col gap-2.5">
               <Button asChild size="lg" className="h-12 w-full rounded-xl btn-aura border-0 font-medium">
                 <Link to="/catalog">Переглянути каталог <ArrowRight className="ml-2 h-4 w-4" /></Link>

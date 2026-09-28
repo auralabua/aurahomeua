@@ -63,7 +63,7 @@ body {
   body { font-weight: 400; }
   h1 { letter-spacing: -0.035em; }
   ::selection { background: hsl(var(--primary) / .18); color: hsl(var(--foreground)); }
-}
+
 
 @layer utilities {
   .shadow-soft { box-shadow: var(--shadow-soft); }

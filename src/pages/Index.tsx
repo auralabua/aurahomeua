@@ -101,7 +101,7 @@ const ProductCarousel = ({ products }: { products: any[] }) => {
       {/* Mobile: full-bleed snap scroll; Desktop: padded */}
       <div
         ref={scrollRef}
-        className="flex gap-3 overflow-x-auto pb-2 sm:mx-10 px-4 sm:px-0"
+        className="flex gap-3 overflow-x-auto pb-2 px-4 sm:px-0"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",

@@ -226,3 +226,6 @@ body {
     animation: none;
   }
 }
+section {
+  overflow-x: hidden;
+}

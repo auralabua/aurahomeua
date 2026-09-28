@@ -324,8 +324,8 @@ export const Navbar = () => {
       {mobileOpen && (
         <div
           id="mobile-nav-menu"
-          className="lg:hidden fixed inset-x-0 bottom-0 z-40 overflow-y-auto bg-background"
-          style={{ top: "4rem" }}
+          className="lg:hidden fixed inset-x-0 z-40 overflow-y-auto bg-background"
+         style={{ top: "4rem", height: "calc(100dvh - 4rem)" }}
         >
           <div className="flex flex-col min-h-full pb-16">
 

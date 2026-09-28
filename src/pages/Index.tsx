@@ -88,7 +88,7 @@ const ProductCarousel = ({ products }: { products: any[] }) => {
     </div>
   );
   return (
-    <div className="relative">
+    <div className="relative overflow-hidden">
       {/* Desktop scroll buttons */}
       <button onClick={() => scroll("left")} aria-label="Прокрутити ліворуч"
         className="hidden sm:flex absolute left-0 sm:left-2 top-1/2 -translate-y-8 z-10 h-10 w-10 items-center justify-center rounded-full bg-white shadow-md border border-border/40 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">

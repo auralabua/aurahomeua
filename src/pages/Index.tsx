@@ -12,8 +12,8 @@ import { formatUAH } from "@/data/products";
 
 // Unsplash photo yntOHdVoIJg — woman on yoga mat in front of mirror
 // Served via Vercel /_vercel/image (images.unsplash.com is in vercel.json domains)
-const HERO_IMG = "https://images.unsplash.com/photo-yntOHdVoIJg?auto=format&fit=crop&w=1920&h=1080&q=85";
-const HERO_IMG_MOBILE = "https://images.unsplash.com/photo-yntOHdVoIJg?auto=format&fit=crop&w=900&h=1600&q=85";
+const HERO_IMG = "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1920&h=1080&q=85";
+const HERO_IMG_MOBILE = "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=900&h=1600&q=85";
 
 
 

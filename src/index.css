@@ -43,14 +43,13 @@
 
 @layer base {
   * { @apply border-border; }
- html { 
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-body {
-  overflow-x: hidden;
-  max-width: 100%;
-}
+  html { 
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
     @apply bg-background text-foreground antialiased;
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
     background-color: hsl(40 30% 97%);
@@ -225,7 +224,4 @@ body {
   .tile-anim-sway,.tile-anim-bounce,.tile-anim-pulse,.tile-anim-float2 {
     animation: none;
   }
-}
-section {
-  overflow-x: hidden;
 }
